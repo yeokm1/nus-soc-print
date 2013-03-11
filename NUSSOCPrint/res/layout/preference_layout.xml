@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <EditTextPreference
+        android:key="@string/username_preference"
+        android:summary="@string/default_username"
+        android:title="Username" 
+        android:hint="@string/default_username"/>
+
+    <EditTextPreference
+        android:key="@string/password_preference"
+        android:inputType="textPassword"
+        android:summary="@string/default_password"
+        android:title="Password" 
+        android:hint="@string/default_password"/>
+    
+    
+        <EditTextPreference
+        android:key="@string/custom_printer_preference"
+        android:summary="Use a printer not in app database"
+        android:title="Custom Printer" 
+        android:hint="@string/default_printer"/>
+        
+        
+       <EditTextPreference
+        android:key="@string/custom_server_preference"
+        android:summary="Specify your own server"
+        android:title="Custom Server" 
+        android:hint="@string/server_IP"/>
+       
+
+</PreferenceScreen>

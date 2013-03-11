@@ -1,0 +1,39 @@
+<resources>
+
+    <string name="app_name">NUS SOC Print</string>
+    <string name="title_activity_action_bar_main">NUS SOC Print</string>
+
+    <string-array name="printer_name">
+        <item>psts</item>
+        <item>psts-sx</item>
+        <item>pstsb</item>
+        <item>pstsb-sx</item>
+        <item>pstsc</item>
+        <item>pstsc-sx</item>
+        <item>psc008</item>
+        <item>psc008-sx</item>
+        <item>psc011</item>
+        <item>psc011-sx</item>
+    </string-array>
+    
+    <string-array name="pages">
+        <item>1</item>
+        <item>2</item>
+        <item>4</item>
+        <item>6</item>
+        <item>8</item>
+    </string-array>
+
+    <string name="select_file_to_print">Choose pdf file to print</string>
+    <string name="default_username">Enter your UNIX username</string>
+    <string name="default_password">Enter your UNIX password</string>
+    <string name="default_printer">Enter your custom printer here</string>
+    <string name="username_preference">username_preference</string>
+    <string name="password_preference">password_preference</string>
+    <string name="custom_printer_preference">custom_printer_preference</string>
+    <string name="custom_server_preference">custom_server_preference</string>
+    <string name="server_IP">sunfire.comp.nus.edu.sg</string>
+    <string name="server_temp_dir">socPrint</string>
+    <string name="credentials_not_set">Username/password not entered, set them in the Settings page.</string>
+
+</resources>
