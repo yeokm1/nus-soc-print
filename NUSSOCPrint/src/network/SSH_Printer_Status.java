@@ -23,12 +23,14 @@ public class SSH_Printer_Status extends SSHManager {
 		String[] printerArray = params;
 		progressIncrement = (float) 100 / printerArray.length;
 
-		String[] status = {"", "Refresh Command Started"};
+		String[] status = {"", "Refresh Command Started, \"no entries\" means printer is free."};
 		
 		super.publishProgress(status);
 		try{
 			for(int i = 0; i < printerArray.length; i++){
-				output.append(printerArray[i] + ": " + super.sendCommand("lpq -P " + printerArray[i]));
+				String printerStatus = super.sendCommand("lpq -P " + printerArray[i]);
+				
+				output.append(printerArray[i] + ": " + printerStatus);
 				output.append("\n");
 				currentValue += progressIncrement;
 				super.publishProgress(output.toString());
