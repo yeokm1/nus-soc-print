@@ -16,11 +16,18 @@ import android.os.AsyncTask;
 import com.jcraft.jsch.*;
 import com.yeokm1.nussocprint.R;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.security.PublicKey;
+import java.util.LinkedList;
+import java.util.List;
 
 import ui.MainActivity;
 
@@ -117,6 +124,59 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 
 
 		return outputBuffer.toString();
+	}
+	
+	protected static synchronized List<String> sendShellCommand(String command)throws IOException, JSchException
+	{
+		if(connectionStatus == false){
+			connect();
+		}
+
+
+
+		if(sesConnection == null){
+			throw new JSchException("Connection not set up yet");
+		}
+		Channel channel = sesConnection.openChannel("shell");
+		
+		
+        InputStream inStream = channel.getInputStream();
+        BufferedReader fromChannel = new BufferedReader(new InputStreamReader(inStream));
+        OutputStream outStream = channel.getOutputStream();
+        PrintWriter toChannel = new PrintWriter(outStream);
+        channel.connect();
+
+
+        
+
+ //       fromChannel.skip(1000);
+
+        
+
+        byte[] buffer = new byte[15000];
+        inStream.read(buffer);
+        toChannel.write(command);
+        
+  //      String string = new String(buffer);
+
+//        String input;
+        List<String> outputStrings = new LinkedList<String>();
+//        while((input = fromChannel.readLine()) != null){
+//        	outputStrings.add(input);
+//        }
+//  
+  //      fromChannel.read(buf);
+    //    String tmp = new String(buf);
+        
+        buffer = new byte[15000];
+        inStream.read(buffer);
+        outputStrings.add(new String(buffer));
+
+		channel.disconnect();
+
+
+
+		return outputStrings;
 	}
 
 	protected static synchronized void uploadFile(File toBePrinted) throws FileNotFoundException, SftpException, JSchException{

@@ -1,6 +1,7 @@
 package network;
 
 import java.io.IOException;
+import java.util.List;
 
 import ui.MainActivity;
 
@@ -21,12 +22,16 @@ public class SSH_Print_Quota extends SSHManager {
 		String fileName = "quotaUsage.txt";
 		
 		try {
-			publishProgress(super.sendCommand("pusage > " + fileName));
-			publishProgress("pusage > " + fileName);
-			String quota = super.sendCommand("cat " + fileName);
+			List<String> stringList= super.sendShellCommand("pusage");
+//			publishProgress("pusage > " + fileName);
+
 	//		super.sendCommand("rm -f " + fileName);
 			
-			return quota;
+			for(String entry : stringList){
+				publishProgress(entry);
+			}
+			
+			return "";
 		} catch (JSchException e) {
 			return "Jsch exception " + e.getMessage();
 		} catch (IOException e) {

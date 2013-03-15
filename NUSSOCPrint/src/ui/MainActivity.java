@@ -11,6 +11,7 @@ import java.util.List;
 import network.SSHManager;
 import network.SSH_Clear_Cache;
 import network.SSH_Delete_All_Jobs;
+import network.SSH_Print_Quota;
 import network.SSH_Printer_Status;
 import network.SSH_Upload_Print;
 
@@ -223,16 +224,16 @@ public class MainActivity extends Activity implements TabListener {
 				showToast(invalidPageRange);
 				return;
 			}
-			
+
 			Integer startRange = null;
 			Integer endRange = null;
-			
+
 			try{
 				startRange = Integer.parseInt(startRangeText);
 			} catch (NumberFormatException e){
 				startRangeText = null;
 			}
-			
+
 			try{
 				endRange = Integer.parseInt(endRangeText);
 			} catch (NumberFormatException e){
@@ -248,7 +249,7 @@ public class MainActivity extends Activity implements TabListener {
 
 
 		}
-		
+
 		CheckBox lineBorderBox = (CheckBox) findViewById(R.id.checkbox_page_line_border);
 		if(lineBorderBox.isChecked()){
 			lineBorder = "lineBorder";
@@ -274,12 +275,12 @@ public class MainActivity extends Activity implements TabListener {
 	}
 
 	public void getPrintQuota(View view){
-		showToast("Feature not implemented yet");
-		return;
-		//	SSH_Print_Quota getQuota = new SSH_Print_Quota(this);
-		//	getQuota.execute("");
+		//		showToast("Feature not implemented yet");
+		//		return;
+		SSH_Print_Quota getQuota = new SSH_Print_Quota(this);
+		getQuota.execute("");
 	}
-	
+
 	public void forceDisconnectAndReinit(View view){
 		SSHManager.close();
 		setSSHManager();
