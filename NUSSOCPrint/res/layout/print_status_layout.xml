@@ -29,21 +29,12 @@
         android:max="100" />
 
     <Button
-        android:id="@+id/button_print_quota"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/refreshProgressBar"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/button_delete_all"
-        android:onClick="getPrintQuota"
-        android:text="Print Quota" />
-
-    <Button
         android:id="@+id/button_delete_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/refreshProgressBar"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/refresh_print_queue"
+        android:layout_alignParentRight="true"
         android:onClick="deleteAllJobs"
         android:text="Delete Pending Jobs" />
 
@@ -51,7 +42,7 @@
         android:id="@+id/refresh_print_queue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button_print_quota"
+        android:layout_above="@+id/button_delete_all"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:onClick="refreshPrintQueue"

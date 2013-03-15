@@ -19,19 +19,16 @@ public class SSH_Print_Quota extends SSHManager {
 	@Override
 	protected String doInBackground(String... params) {
 		
-		String fileName = "quotaUsage.txt";
+
 		
 		try {
-			List<String> stringList= super.sendShellCommand("pusage");
+			String stringList= super.sendCommand("pusage");
 //			publishProgress("pusage > " + fileName);
 
 	//		super.sendCommand("rm -f " + fileName);
+
 			
-			for(String entry : stringList){
-				publishProgress(entry);
-			}
-			
-			return "";
+			return stringList;
 		} catch (JSchException e) {
 			return "Jsch exception " + e.getMessage();
 		} catch (IOException e) {

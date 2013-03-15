@@ -31,10 +31,10 @@ public final class R {
     }
     public static final class id {
         public static final int button_clear_cache=0x7f0a001e;
-        public static final int button_delete_all=0x7f0a0025;
+        public static final int button_delete_all=0x7f0a0024;
         public static final int button_force_disconnect=0x7f0a001d;
         public static final int button_print=0x7f0a0020;
-        public static final int button_print_quota=0x7f0a0024;
+        public static final int button_print_quota=0x7f0a0025;
         public static final int button_select_file=0x7f0a000e;
         public static final int checkbox_custom_printer=0x7f0a001f;
         public static final int checkbox_page_line_border=0x7f0a0016;
@@ -50,7 +50,7 @@ public final class R {
         public static final int fdrowtext=0x7f0a000d;
         public static final int file_path_view=0x7f0a0010;
         public static final int mainLayout=0x7f0a0000;
-        public static final int menu_settings=0x7f0a0026;
+        public static final int menu_settings=0x7f0a0027;
         public static final int num_page_end=0x7f0a001a;
         public static final int num_page_start=0x7f0a0018;
         public static final int num_pages_per_sheet=0x7f0a001c;
@@ -69,6 +69,7 @@ public final class R {
         public static final int textView4=0x7f0a0011;
         public static final int textView5=0x7f0a0019;
         public static final int textViewFilename=0x7f0a0007;
+        public static final int webView_qouta=0x7f0a0026;
     }
     public static final class layout {
         public static final int activity_action_bar_main=0x7f030000;
@@ -77,6 +78,7 @@ public final class R {
         public static final int preference_layout=0x7f030003;
         public static final int print_layout=0x7f030004;
         public static final int print_status_layout=0x7f030005;
+        public static final int quota_layout=0x7f030006;
     }
     public static final class menu {
         public static final int action_bar=0x7f090000;

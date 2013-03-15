@@ -49,7 +49,8 @@ public class MainActivity extends Activity implements TabListener {
 
 	final String tab1Text = "Print";
 	final String tab2Text = "Status";
-	final String tab3Text = "Settings";
+	final String tab3Text = "Quota";
+	final String tab4Text = "Settings";
 
 	final String fileNotSelected = "Please select a file to print";
 	final String invalidPageRange = "Invalid page range given";
@@ -76,6 +77,7 @@ public class MainActivity extends Activity implements TabListener {
 			bar.addTab(bar.newTab().setText(tab1Text).setTabListener(this));
 			bar.addTab(bar.newTab().setText(tab2Text).setTabListener(this));
 			bar.addTab(bar.newTab().setText(tab3Text).setTabListener(this));
+			bar.addTab(bar.newTab().setText(tab4Text).setTabListener(this));
 
 			//			bar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM
 			//					| ActionBar.DISPLAY_USE_LOGO);
@@ -94,7 +96,8 @@ public class MainActivity extends Activity implements TabListener {
 	FragmentTransaction fragMentTra = null;
 	PrintingFragment fram1;	
 	StatusFragment fram2;
-	SettingsFragment fram3;
+	QuotaFragment fram3;
+	SettingsFragment fram4;
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.action_bar, menu);
@@ -128,16 +131,26 @@ public class MainActivity extends Activity implements TabListener {
 			fragMentTra = getFragmentManager().beginTransaction();
 			fragMentTra.add(rl.getId(), fram2);
 			fragMentTra.commit();
-		} else if (tab.getText().equals(tab3Text)) {
+		}else if (tab.getText().equals(tab3Text)) {
 			try {
 				rl.removeAllViews();
 			} catch (Exception e) {
 			}
-			fram3 = new SettingsFragment();
-			fram3.setCallingActivity(this);
+			fram3 = new QuotaFragment();
 			fragMentTra.addToBackStack(null);
 			fragMentTra = getFragmentManager().beginTransaction();
 			fragMentTra.add(rl.getId(), fram3);
+			fragMentTra.commit();
+		}  else if (tab.getText().equals(tab3Text)) {
+			try {
+				rl.removeAllViews();
+			} catch (Exception e) {
+			}
+			fram4 = new SettingsFragment();
+			fram4.setCallingActivity(this);
+			fragMentTra.addToBackStack(null);
+			fragMentTra = getFragmentManager().beginTransaction();
+			fragMentTra.add(rl.getId(), fram4);
 			fragMentTra.commit();
 		}
 

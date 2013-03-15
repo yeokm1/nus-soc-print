@@ -126,58 +126,6 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 		return outputBuffer.toString();
 	}
 	
-	protected static synchronized List<String> sendShellCommand(String command)throws IOException, JSchException
-	{
-		if(connectionStatus == false){
-			connect();
-		}
-
-
-
-		if(sesConnection == null){
-			throw new JSchException("Connection not set up yet");
-		}
-		Channel channel = sesConnection.openChannel("shell");
-		
-		
-        InputStream inStream = channel.getInputStream();
-        BufferedReader fromChannel = new BufferedReader(new InputStreamReader(inStream));
-        OutputStream outStream = channel.getOutputStream();
-        PrintWriter toChannel = new PrintWriter(outStream);
-        channel.connect();
-
-
-        
-
- //       fromChannel.skip(1000);
-
-        
-
-        byte[] buffer = new byte[15000];
-        inStream.read(buffer);
-        toChannel.write(command);
-        
-  //      String string = new String(buffer);
-
-//        String input;
-        List<String> outputStrings = new LinkedList<String>();
-//        while((input = fromChannel.readLine()) != null){
-//        	outputStrings.add(input);
-//        }
-//  
-  //      fromChannel.read(buf);
-    //    String tmp = new String(buf);
-        
-        buffer = new byte[15000];
-        inStream.read(buffer);
-        outputStrings.add(new String(buffer));
-
-		channel.disconnect();
-
-
-
-		return outputStrings;
-	}
 
 	protected static synchronized void uploadFile(File toBePrinted) throws FileNotFoundException, SftpException, JSchException{
 		if(connectionStatus == false){
