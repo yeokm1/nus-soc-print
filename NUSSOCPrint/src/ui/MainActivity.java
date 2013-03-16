@@ -141,7 +141,7 @@ public class MainActivity extends Activity implements TabListener {
 			fragMentTra = getFragmentManager().beginTransaction();
 			fragMentTra.add(rl.getId(), fram3);
 			fragMentTra.commit();
-		}  else if (tab.getText().equals(tab3Text)) {
+		}  else if (tab.getText().equals(tab4Text)) {
 			try {
 				rl.removeAllViews();
 			} catch (Exception e) {
