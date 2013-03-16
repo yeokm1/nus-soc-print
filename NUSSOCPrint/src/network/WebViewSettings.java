@@ -27,14 +27,14 @@ public class WebViewSettings extends WebViewClient{
 	public void onPageFinished(WebView view, String url)
 	{
 
-		String nusUsername = userDetails.getString(context.getString(R.string.username_nus_preference), "");
+		String nusUsername = userDetails.getString(context.getString(R.string.username_preference), "");
 
 		if(!nusUsername.isEmpty()){
 			view.loadUrl("javascript: {" + 
 					"document.mysoc_login.credential_0.value = '" + nusUsername + "'; };");
 		}
 
-		String nusPassword = userDetails.getString(context.getString(R.string.password_nus_preference), "");
+		String nusPassword = userDetails.getString(context.getString(R.string.password_preference), "");
 
 		if(!nusPassword.isEmpty()){
 			view.loadUrl("javascript: {" + 

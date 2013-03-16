@@ -3,12 +3,11 @@ package network;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.security.PublicKey;
+
 
 import ui.MainActivity;
 
-import android.util.Log;
-import android.widget.Toast;
+
 
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.SftpException;

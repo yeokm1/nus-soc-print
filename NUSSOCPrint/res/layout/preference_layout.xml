@@ -13,20 +13,7 @@
         android:summary="@string/default_password"
         android:title="UNIX Password" 
         android:hint="@string/default_password"/>
-    
-    <EditTextPreference
-        android:key="@string/username_nus_preference"
-        android:summary="@string/nus_username_summary"
-        android:title="NUSNET Username"
-		android:hint="@string/default_nus_username"/>
-
-    <EditTextPreference
-        android:key="@string/password_nus_preference"
-        android:inputType="textPassword"
-        android:summary="@string/nus_password_summary"
-        android:title="NUSNET Password"
-        android:hint="@string/default_nus_password"/>
-    
+       
     
         <EditTextPreference
         android:key="@string/custom_printer_preference"
