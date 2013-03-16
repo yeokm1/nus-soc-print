@@ -132,9 +132,12 @@ public class MainActivity extends Activity implements TabListener {
 			
 			if(!fileName.endsWith("pdf")){
 				showToast(fileName + " is not a pdf file");
-				return;
 			}
-			setFilePathView(fileName);
+			else {
+				setFilePathView(fileName);
+			}
+			
+			fileName = null;
 		}
 
 	}
