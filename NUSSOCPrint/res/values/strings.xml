@@ -27,13 +27,25 @@
     <string name="select_file_to_print">Choose pdf file to print</string>
     <string name="default_username">Enter your UNIX username</string>
     <string name="default_password">Enter your UNIX password</string>
+    
+    <string name="default_nus_username">NUSNET username (no domain and last alphabet)</string>
+    <string name="default_nus_password">NUSNET password</string>
+    
+    <string name="nus_username_summary">To auto-fill quota checking site. (Optional)</string>
+    <string name="nus_password_summary">To auto-fill quota checking site. (Optional)</string>
+    
     <string name="default_printer">Enter your custom printer here</string>
     <string name="username_preference">username_preference</string>
     <string name="password_preference">password_preference</string>
+    <string name="username_nus_preference">username_nus_preference</string>
+    <string name="password_nus_preference">password_nus_preference</string>
     <string name="custom_printer_preference">custom_printer_preference</string>
     <string name="custom_server_preference">custom_server_preference</string>
     <string name="server_IP">sunfire.comp.nus.edu.sg</string>
     <string name="server_temp_dir">socPrint</string>
-    <string name="credentials_not_set">Username/password not entered, set them in the Settings page.</string>
+    <string name="credentials_not_set">UNIX Username/password not entered, set them in the Settings page.</string>
 
+    
+    <string name="quota_url">https://mysoc.nus.edu.sg/~eprint/forms/quota.php</string>
+    
 </resources>

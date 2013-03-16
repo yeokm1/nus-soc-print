@@ -16,8 +16,8 @@
 
     <WebView
         android:id="@+id/webView_qouta"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_above="@+id/button_print_quota"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true" />

@@ -2,8 +2,6 @@ package ui;
 
 
 
-
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,9 +9,9 @@ import java.util.List;
 import network.SSHManager;
 import network.SSH_Clear_Cache;
 import network.SSH_Delete_All_Jobs;
-import network.SSH_Print_Quota;
 import network.SSH_Printer_Status;
 import network.SSH_Upload_Print;
+import network.WebViewSettings;
 
 import com.lamerman.FileDialog;
 import com.lamerman.SelectionMode;
@@ -21,6 +19,7 @@ import com.yeokm1.nussocprint.R;
 
 
 
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
@@ -35,6 +34,7 @@ import android.preference.PreferenceManager;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -287,11 +287,19 @@ public class MainActivity extends Activity implements TabListener {
 		deleteAll.execute(printerArray);
 	}
 
+	@SuppressLint("SetJavaScriptEnabled")
 	public void getPrintQuota(View view){
-		//		showToast("Feature not implemented yet");
-		//		return;
-		SSH_Print_Quota getQuota = new SSH_Print_Quota(this);
-		getQuota.execute("");
+		
+		showToast("Loading Quota Check page");
+		
+		WebView webView = (WebView) findViewById(R.id.webView_qouta);
+		webView.getSettings().setJavaScriptEnabled(true);
+		
+		webView.setWebViewClient(new WebViewSettings(getApplicationContext(), PreferenceManager.getDefaultSharedPreferences(this)));
+
+		webView.getSettings().setBuiltInZoomControls(true);
+		webView.getSettings().setSupportZoom(true);
+		webView.loadUrl(getString(R.string.quota_url));
 	}
 
 	public void forceDisconnectAndReinit(View view){
