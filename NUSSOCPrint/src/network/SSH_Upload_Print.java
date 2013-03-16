@@ -43,11 +43,11 @@ public class SSH_Upload_Print extends SSHManager {
 		String formattedPsFileName = fileName.substring(0, fileName.length() - 4) + "psf\"";  
 
 		try {
-			currentProgress += progressIncrement;
+			
 			publishProgress("Uploading File");
 			super.uploadFile(toBePrinted);
 
-			currentProgress += progressIncrement;
+			
 			publishProgress("Upload Complete, converting to Postscript");
 			
 			
@@ -63,12 +63,12 @@ public class SSH_Upload_Print extends SSHManager {
 					
 			convertToPSCommand += " " + fileName + " "  + psFileName;	
 			
-			currentProgress += progressIncrement;
+			
 			publishProgress("Convert command used: " + convertToPSCommand);
 			
 			String conversionMessage = super.sendCommand(convertToPSCommand);
 
-			currentProgress += progressIncrement;
+			
 			if(conversionMessage.isEmpty()){
 				publishProgress("Conversion to Postscript Complete");
 			} else {
@@ -87,12 +87,12 @@ public class SSH_Upload_Print extends SSHManager {
 			psformatCommand += " -" + pagesPerSheet;
 			psformatCommand += " " + psFileName + " " + formattedPsFileName;
 			
-			currentProgress += progressIncrement;
+			
 			publishProgress("PS format command used: " + psformatCommand);
 			
 			String psFormatMessage = super.sendCommand(psformatCommand);
 			
-			currentProgress += progressIncrement;
+			
 			if(psFormatMessage.isEmpty()){
 				publishProgress("Formatting of Postscript file Complete");
 			} else {
@@ -107,10 +107,8 @@ public class SSH_Upload_Print extends SSHManager {
 
 			printCommand += formattedPsFileName;
 			
-			currentProgress += progressIncrement;
 			publishProgress("Sending print command : \n" + printCommand);
 			
-			currentProgress += progressIncrement;
 			publishProgress(super.sendCommand(printCommand));
 
 			return "Print command sent";
@@ -132,7 +130,7 @@ public class SSH_Upload_Print extends SSHManager {
 
 	@Override
 	protected void onProgressUpdate(String... progress){
-		
+		currentProgress += progressIncrement;
 		String soFar = progress[0];
 		callingActivity.updatePrintingStatusProgressBar(soFar, currentProgress.intValue());
 	}

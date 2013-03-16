@@ -8,6 +8,9 @@ import com.jcraft.jsch.JSchException;
 
 public class SSH_Delete_All_Jobs extends SSHManager {
 
+	Float progressIncrement;
+	Float currentProgress = (float) 0;
+	
 	public SSH_Delete_All_Jobs(MainActivity caller) {
 		super(caller);
 		// TODO Auto-generated constructor stub
@@ -16,13 +19,22 @@ public class SSH_Delete_All_Jobs extends SSHManager {
 	@Override
 	protected String doInBackground(String... params) {
 		try {
-			publishProgress("Deletion Command Started");
+			StringBuffer outputBuffer = new StringBuffer();
+			progressIncrement = (float) 100 / params.length;
+			
+			outputBuffer.append("Deletion Command Started");
+			outputBuffer.append("\n");
+			
+			publishProgress(outputBuffer.toString());
 			for(String printer : params){
 				super.sendCommand("lprm -P " + printer + " -");
-				publishProgress("Deletion command sent to " + printer);
+				outputBuffer.append("Deletion command sent to " + printer);
+				outputBuffer.append("\n");
+				publishProgress(outputBuffer.toString());
+				
 			}
-			
-			return "Mass deletion command completed";
+			outputBuffer.append("Mass deletion command completed");
+			return outputBuffer.toString();
 		} catch (JSchException e) {
 			return "Jsch exception " + e.getMessage();
 		} catch (IOException e) {
@@ -32,14 +44,17 @@ public class SSH_Delete_All_Jobs extends SSHManager {
 		}
 	}
 	@Override
-	protected void onProgressUpdate(String... update){
-		callingActivity.showToast(update[0]);
+	protected void onProgressUpdate(String... progress){
+		currentProgress += progressIncrement;
+		String soFar = progress[0];
+		callingActivity.updateRefreshStatusProgressBar(soFar, currentProgress.intValue());
 	}
 	
 	
 	@Override
 	protected void onPostExecute(String output){
-		callingActivity.showToast(output);
+		
+		callingActivity.updateRefreshStatusProgressBar(output, currentProgress.intValue());
 	}
 
 }
