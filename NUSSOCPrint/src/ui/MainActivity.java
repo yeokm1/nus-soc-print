@@ -28,9 +28,12 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 
+import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
@@ -38,9 +41,12 @@ import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
 import android.text.util.Linkify;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -69,11 +75,28 @@ public class MainActivity extends Activity implements TabListener {
 	Spinner printerSpinner;
 	
 	Fragment currentFragment;
+	
+	String fileName = null;
 
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		Bundle intentBundle = getIntent().getExtras();
+		
+
+		if(intentBundle != null) {
+
+			Uri fileNameUri = (Uri) intentBundle.get(Intent.EXTRA_STREAM);
+			fileName = fileNameUri.getPath();
+		}
+		
+			
+
+	
+
+		
 		setContentView(R.layout.activity_action_bar_main);
 		try {
 			rl = (RelativeLayout) findViewById(R.id.mainLayout);
@@ -98,6 +121,21 @@ public class MainActivity extends Activity implements TabListener {
 		}
 
 		setSSHManager();
+	
+	
+	}
+	
+	@Override
+	public void onStart() {
+		super.onStart();
+		if(fileName != null) {
+			
+			if(!fileName.endsWith("pdf")){
+				showToast(fileName + " is not a pdf file");
+				return;
+			}
+			setFilePathView(fileName);
+		}
 
 	}
 
@@ -155,6 +193,7 @@ public class MainActivity extends Activity implements TabListener {
 			} catch (Exception e) {
 			}
 			fragMentTra.remove(currentFragment);
+			fram3.setCallingActivity(this);
 			fragMentTra.addToBackStack(null);
 			fragMentTra = getFragmentManager().beginTransaction();
 			fragMentTra.replace(rl.getId(), fram3);
