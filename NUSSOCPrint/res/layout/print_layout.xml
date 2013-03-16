@@ -16,14 +16,6 @@
             android:text="Browse" />
 
         <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:text="by YKM" />
-
-        <TextView
             android:id="@+id/file_path_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -121,17 +113,6 @@
             android:layout_toRightOf="@+id/printer_list"
             android:entries="@array/pages" />
 
-        <Button
-            android:id="@+id/button_force_disconnect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/button_clear_cache"
-            android:layout_toRightOf="@+id/num_page_start"
-            android:onClick="forceDisconnectAndReinit"
-            android:text="Force Disconnect" />
-
         <CheckBox
             android:id="@+id/checkbox_page_line_border"
             android:layout_width="wrap_content"
@@ -150,26 +131,6 @@
             android:text="Use Custom Printer (Overrides Printer List)"
             android:textSize="@dimen/Medium12" />
 
-        <Button
-            android:id="@+id/button_print"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/button_force_disconnect"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:onClick="printButtonPress"
-            android:text="PRINT" />
-
-        <Button
-            android:id="@+id/button_clear_cache"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignRight="@+id/num_page_start"
-            android:onClick="clearServerCache"
-            android:text="Clear Server Cache" />
-
         <TextView
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
@@ -179,4 +140,58 @@
             android:layout_centerHorizontal="true"
             android:text=" to "
             android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/print_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/progressBar_print"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:text="Printing Status:" />
+
+        <Button
+            android:id="@+id/button_clear_cache"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/button_force_disconnect"
+            android:layout_toLeftOf="@+id/num_pages_per_sheet"
+            android:onClick="clearServerCache"
+            android:text="Clear Server Cache"
+            android:textSize="@dimen/Medium12" />
+
+        <ProgressBar
+            android:id="@+id/progressBar_print"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/button_print"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:indeterminate="false"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/button_force_disconnect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/button_clear_cache"
+            android:onClick="forceDisconnectAndReinit"
+            android:text="Reset Connection"
+            android:textSize="@dimen/Medium12" />
+
+        <Button
+            android:id="@+id/button_print"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/button_clear_cache"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:onClick="printButtonPress"
+            android:text="PRINT" />
+
     </RelativeLayout>

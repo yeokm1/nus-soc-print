@@ -446,8 +446,29 @@ public class MainActivity extends Activity implements TabListener {
 	public void showToastSetLength(String message, int length){
 		Toast.makeText(getApplicationContext(), message, length).show();
 	}
+	
+	public void updatePrintingStatusProgressBar(String text, int progress){
+		ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar_print);
 
-	public void updateProgressBar(String text, int progress){
+		//If the user switches screens while updating halfway, the progress bar will be destroyed
+		if(progressBar == null){
+			return;
+		}
+
+		progressBar.setProgress(progress);
+		showToPrintingStatus(text);
+	}
+
+	
+	public void showToPrintingStatus(String data){
+		TextView statusView = (TextView) findViewById(R.id.print_status);
+		if(statusView == null){
+			return;
+		}
+		statusView.setText(data);
+	}
+	
+	public void updateRefreshStatusProgressBar(String text, int progress){
 		ProgressBar progressBar = (ProgressBar) findViewById(R.id.refreshProgressBar);
 
 		//If the user switches screens while updating halfway, the progress bar will be destroyed
@@ -456,10 +477,12 @@ public class MainActivity extends Activity implements TabListener {
 		}
 
 		progressBar.setProgress(progress);
-		showToPrinterStatus(text);
+		showToPrinterQueueStatus(text);
 	}
-	public void showToPrinterStatus(String data){
-		TextView statusView = (TextView) findViewById(R.id.printer_status_output);
+	
+	
+	public void showToPrinterQueueStatus(String data){
+		TextView statusView = (TextView) findViewById(R.id.printer_queue_status_output);
 
 		if(statusView == null){
 			return;

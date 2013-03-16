@@ -10,7 +10,7 @@ import com.jcraft.jsch.JSchException;
 public class SSH_Printer_Status extends SSHManager {
 
 	Float progressIncrement;
-	Float currentValue = (float) 0;
+	Float currentProgress = (float) 0;
 
 	public SSH_Printer_Status(MainActivity caller) {
 		super(caller);
@@ -32,7 +32,7 @@ public class SSH_Printer_Status extends SSHManager {
 				
 				output.append(printerArray[i] + ": " + printerStatus);
 				output.append("\n");
-				currentValue += progressIncrement;
+				currentProgress += progressIncrement;
 				super.publishProgress(output.toString());
 			}
 		} catch (IOException e){
@@ -54,12 +54,12 @@ public class SSH_Printer_Status extends SSHManager {
 		}
 		
 		String soFar = progress[0];
-		callingActivity.updateProgressBar(soFar, currentValue.intValue());
+		callingActivity.updateRefreshStatusProgressBar(soFar, currentProgress.intValue());
 	}
 
 	@Override
 	protected void onPostExecute(String output){
-		callingActivity.showToPrinterStatus(output);
+		callingActivity.showToPrinterQueueStatus(output);
 
 	}
 

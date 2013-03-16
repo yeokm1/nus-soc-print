@@ -4,7 +4,7 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/printer_status_output"
+        android:id="@+id/printer_queue_status_output"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/refresh_print_queue"

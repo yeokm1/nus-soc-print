@@ -16,6 +16,9 @@ import com.yeokm1.nussocprint.R;
 
 public class SSH_Upload_Print extends SSHManager {
 
+	Float progressIncrement;
+	Float currentProgress = (float) 0;
+	
 	public SSH_Upload_Print(MainActivity caller) {
 		super(caller);
 	}
@@ -23,6 +26,8 @@ public class SSH_Upload_Print extends SSHManager {
 	@Override
 	protected String doInBackground(String... params) {
 
+		progressIncrement = (float) 100 / 8;
+		
 		String filePath = params[0];
 		String printerName = params[1];
 		String pagesPerSheet = params[2];
@@ -38,10 +43,13 @@ public class SSH_Upload_Print extends SSHManager {
 		String formattedPsFileName = fileName.substring(0, fileName.length() - 4) + "psf\"";  
 
 		try {
+			currentProgress += progressIncrement;
 			publishProgress("Uploading File");
 			super.uploadFile(toBePrinted);
 
+			currentProgress += progressIncrement;
 			publishProgress("Upload Complete, converting to Postscript");
+			
 			
 			String convertToPSCommand = "pdftops";
 			
@@ -54,15 +62,21 @@ public class SSH_Upload_Print extends SSHManager {
 			}
 					
 			convertToPSCommand += " " + fileName + " "  + psFileName;	
+			
+			currentProgress += progressIncrement;
 			publishProgress("Convert command used: " + convertToPSCommand);
+			
 			String conversionMessage = super.sendCommand(convertToPSCommand);
 
+			currentProgress += progressIncrement;
 			if(conversionMessage.isEmpty()){
 				publishProgress("Conversion to Postscript Complete");
 			} else {
 				publishProgress(conversionMessage);
 				return "Cannot convert file";
 			}
+			
+
 			
 			String psformatCommand = "psnup -pa4";
 			
@@ -73,16 +87,18 @@ public class SSH_Upload_Print extends SSHManager {
 			psformatCommand += " -" + pagesPerSheet;
 			psformatCommand += " " + psFileName + " " + formattedPsFileName;
 			
+			currentProgress += progressIncrement;
 			publishProgress("PS format command used: " + psformatCommand);
+			
 			String psFormatMessage = super.sendCommand(psformatCommand);
 			
+			currentProgress += progressIncrement;
 			if(psFormatMessage.isEmpty()){
 				publishProgress("Formatting of Postscript file Complete");
 			} else {
 				publishProgress(psFormatMessage);
 				return "Cannot format file";
 			}
-			
 
 			String printCommand = "lpr -P ";
 			
@@ -90,7 +106,11 @@ public class SSH_Upload_Print extends SSHManager {
 			printCommand += printerName + " ";
 
 			printCommand += formattedPsFileName;
-			publishProgress("Sending print command : \n" + printCommand, "long");
+			
+			currentProgress += progressIncrement;
+			publishProgress("Sending print command : \n" + printCommand);
+			
+			currentProgress += progressIncrement;
 			publishProgress(super.sendCommand(printCommand));
 
 			return "Print command sent";
@@ -112,17 +132,15 @@ public class SSH_Upload_Print extends SSHManager {
 
 	@Override
 	protected void onProgressUpdate(String... progress){
-		if(progress.length > 1){
-			callingActivity.showToastSetLength(progress[0], Toast.LENGTH_LONG);
-		} else {
-			callingActivity.showToast(progress[0]);
-		}
+		
+		String soFar = progress[0];
+		callingActivity.updatePrintingStatusProgressBar(soFar, currentProgress.intValue());
 	}
 
 
 	@Override
 	protected void onPostExecute(String output){
-		callingActivity.showToast(output);
+		callingActivity.updatePrintingStatusProgressBar(output, 100);
 	}
 
 }
