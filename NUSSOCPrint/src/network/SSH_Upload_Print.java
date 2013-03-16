@@ -109,9 +109,17 @@ public class SSH_Upload_Print extends SSHManager {
 			
 			publishProgress("Sending print command : \n" + printCommand);
 			
-			publishProgress(super.sendCommand(printCommand));
 
-			return "Print command sent";
+			
+			String printReply = super.sendCommand(printCommand);
+			
+			if(printReply.isEmpty()){
+				return "Print command sent";
+			} else {
+				return printReply;
+			}
+
+			
 		} catch (FileNotFoundException e) {
 			return "file not found exception " + e.getMessage();
 		} catch (SftpException e) {
