@@ -15,6 +15,7 @@
         android:scrollbarStyle="insideInset"
         android:scrollbars="vertical"
         android:text="Nothing to show yet"
+        android:freezesText="true"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <ProgressBar

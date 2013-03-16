@@ -25,9 +25,9 @@ import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.Context;
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -66,8 +66,9 @@ public class MainActivity extends Activity implements TabListener {
 
 	RelativeLayout rl;
 
-
 	Spinner printerSpinner;
+	
+	Fragment currentFragment;
 
 
 	@Override
@@ -101,10 +102,12 @@ public class MainActivity extends Activity implements TabListener {
 	}
 
 	FragmentTransaction fragMentTra = null;
-	PrintingFragment fram1;	
-	StatusFragment fram2;
-	QuotaFragment fram3;
-	SettingsFragment fram4;
+	Fragment fram1 = new PrintingFragment();
+	Fragment fram2 = new StatusFragment();
+	QuotaFragment fram3 = new QuotaFragment();
+	SettingsFragment fram4 = new SettingsFragment();
+	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.action_bar, menu);
@@ -123,43 +126,54 @@ public class MainActivity extends Activity implements TabListener {
 				rl.removeAllViews();
 			} catch (Exception e) {
 			}
-			fram1 = new PrintingFragment();
+
+
+
 			fragMentTra.addToBackStack(null);
 			fragMentTra = getFragmentManager().beginTransaction();
-			fragMentTra.add(rl.getId(), fram1);
+
+			fragMentTra.replace(rl.getId(), fram1);
+			
 			fragMentTra.commit();
+			
+			currentFragment = fram1;
 		} else if (tab.getText().equals(tab2Text)) {
 			try {
 				rl.removeAllViews();
 			} catch (Exception e) {
 			}
-			fram2 = new StatusFragment();
+			fragMentTra.remove(currentFragment);
 			fragMentTra.addToBackStack(null);
 			fragMentTra = getFragmentManager().beginTransaction();
-			fragMentTra.add(rl.getId(), fram2);
+			fragMentTra.replace(rl.getId(), fram2);
 			fragMentTra.commit();
+			
+			
 		}else if (tab.getText().equals(tab3Text)) {
 			try {
 				rl.removeAllViews();
 			} catch (Exception e) {
 			}
-			fram3 = new QuotaFragment();
+			fragMentTra.remove(currentFragment);
 			fragMentTra.addToBackStack(null);
 			fragMentTra = getFragmentManager().beginTransaction();
-			fragMentTra.add(rl.getId(), fram3);
+			fragMentTra.replace(rl.getId(), fram3);
 			fragMentTra.commit();
 		}  else if (tab.getText().equals(tab4Text)) {
 			try {
 				rl.removeAllViews();
 			} catch (Exception e) {
 			}
-			fram4 = new SettingsFragment();
+			fragMentTra.remove(currentFragment);
 			fram4.setCallingActivity(this);
 			fragMentTra.addToBackStack(null);
 			fragMentTra = getFragmentManager().beginTransaction();
-			fragMentTra.add(rl.getId(), fram4);
+			fragMentTra.replace(rl.getId(), fram4);
 			fragMentTra.commit();
+			
 		}
+		
+
 
 	}
 

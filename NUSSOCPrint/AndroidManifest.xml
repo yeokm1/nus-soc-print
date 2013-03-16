@@ -15,7 +15,7 @@
         
         <activity
             android:name="ui.MainActivity"
-            android:screenOrientation="portrait"
+
             android:label="@string/title_activity_action_bar_main"
             android:uiOptions="splitActionBarWhenNarrow" >
             <intent-filter>

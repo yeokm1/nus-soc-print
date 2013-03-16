@@ -24,6 +24,7 @@
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/button_select_file"
             android:text="@string/select_file_to_print"
+            android:freezesText="true"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
