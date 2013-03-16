@@ -17,7 +17,7 @@ public class SSH_Upload_Print extends SSHManager {
 
 	Float progressIncrement;
 	Float currentProgress = (float) 0;
-	
+
 	public SSH_Upload_Print(MainActivity caller) {
 		super(caller);
 	}
@@ -26,7 +26,7 @@ public class SSH_Upload_Print extends SSHManager {
 	protected String doInBackground(String... params) {
 
 		progressIncrement = (float) 100 / 8;
-		
+
 		String filePath = params[0];
 		String printerName = params[1];
 		String pagesPerSheet = params[2];
@@ -38,87 +38,105 @@ public class SSH_Upload_Print extends SSHManager {
 
 		String tempDir = callingActivity.getString(R.string.server_temp_dir) + "/";
 		String fileName = tempDir + "\"" + toBePrinted.getName() + "\"";
-		String psFileName =  fileName.substring(0, fileName.length() - 4) + "ps\"";  //-4 to remove pdf"
-		String formattedPsFileName = fileName.substring(0, fileName.length() - 4) + "psf\"";  
+		String psFileName;
+		String formattedPsFileName;
+
+		if(toBePrinted.getName().endsWith("pdf")){
+			psFileName =  fileName.substring(0, fileName.length() - 4) + "ps\"";  //-4 to remove pdf"
+			formattedPsFileName = fileName.substring(0, fileName.length() - 4) + "psf\"";
+		} else {
+			psFileName = fileName;
+			formattedPsFileName = fileName.substring(0, fileName.length() - 3) + "psf\"";
+		}
+
+
+
 
 		try {
-			
+
 			publishProgress("Uploading File");
 			super.uploadFile(toBePrinted);
 
-			
-			publishProgress("Upload Complete, converting to Postscript");
-			
-			
-			String convertToPSCommand = "pdftops";
-			
-			if(startRange != null){
-				convertToPSCommand += " -f " + startRange;
-			}
-			
-			if(endRange != null){
-				convertToPSCommand += " -l " + endRange;
-			}
-					
-			convertToPSCommand += " " + fileName + " "  + psFileName;	
-			
-			
-			publishProgress("Convert command used: " + convertToPSCommand);
-			
-			String conversionMessage = super.sendCommand(convertToPSCommand);
 
-			
-			if(conversionMessage.isEmpty()){
-				publishProgress("Conversion to Postscript Complete");
+			publishProgress("Upload Complete");
+
+			if(toBePrinted.getName().endsWith("pdf")){
+
+				String convertToPSCommand = "pdftops";
+
+				if(startRange != null){
+					convertToPSCommand += " -f " + startRange;
+				}
+
+				if(endRange != null){
+					convertToPSCommand += " -l " + endRange;
+				}
+
+				convertToPSCommand += " " + fileName + " "  + psFileName;	
+
+
+				publishProgress("Converting to PostScript using: " + convertToPSCommand);
+
+				String conversionMessage = super.sendCommand(convertToPSCommand);
+
+
+				if(conversionMessage.isEmpty()){
+					publishProgress("Conversion to Postscript Complete");
+				} else {
+					publishProgress(conversionMessage);
+					return "Cannot convert file";
+				}
+
+			}
+
+			//if no special parameters, we just send the ps file direct to printer
+			if((lineBorder == null) && (Integer.parseInt(pagesPerSheet) == 1)){
+				formattedPsFileName = psFileName;
 			} else {
-				publishProgress(conversionMessage);
-				return "Cannot convert file";
-			}
-			
 
-			
-			String psformatCommand = "psnup -pa4";
-			
-			if(lineBorder != null){
-				psformatCommand += " -d";
-			}
-			
-			psformatCommand += " -" + pagesPerSheet;
-			psformatCommand += " " + psFileName + " " + formattedPsFileName;
-			
-			
-			publishProgress("PS format command used: " + psformatCommand);
-			
-			String psFormatMessage = super.sendCommand(psformatCommand);
-			
-			
-			if(psFormatMessage.isEmpty()){
-				publishProgress("Formatting of Postscript file Complete");
-			} else {
-				publishProgress(psFormatMessage);
-				return "Cannot format file";
-			}
+				String psformatCommand = "psnup -pa4";
 
+				if(lineBorder != null){
+					psformatCommand += " -d";
+				}
+
+				psformatCommand += " -" + pagesPerSheet;
+				psformatCommand += " " + psFileName + " " + formattedPsFileName;
+
+
+				publishProgress("PS format command used: " + psformatCommand);
+
+				String psFormatMessage = super.sendCommand(psformatCommand);
+
+
+				if(psFormatMessage.isEmpty()){
+					publishProgress("Formatting of Postscript file Complete");
+				} else {
+					publishProgress(psFormatMessage);
+					return "Cannot format file";
+				}
+
+			}
 			String printCommand = "lpr -P ";
-			
-			
+
+
 			printCommand += printerName + " ";
 
 			printCommand += formattedPsFileName;
-			
-			publishProgress("Sending print command : \n" + printCommand);
-			
 
-			
+			publishProgress("Sending print command : \n" + printCommand);
+
+
+
 			String printReply = super.sendCommand(printCommand);
-			
+
 			if(printReply.isEmpty()){
 				return "Print command sent successfully";
 			} else {
 				return printReply;
 			}
 
-			
+
 		} catch (FileNotFoundException e) {
 			return "file not found exception " + e.getMessage();
 		} catch (SftpException e) {

@@ -38,7 +38,7 @@
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/print_status" >
+        android:layout_above="@+id/textView1" >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_below="@+id/printer_list"
-                android:text="Page Range:"
+                android:text="*Page Range:"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <RadioGroup
@@ -140,7 +140,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/button_select_file"
-                android:text="Page(s) per Sheet:"
+                android:text="*+Page(s) per Sheet:"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Spinner
@@ -158,7 +158,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_below="@+id/radioGroup_page_range"
-                android:text="Draw Page Border Line"
+                android:text="*Draw Page Border Line"
                 android:textSize="@dimen/Medium12" />
 
             <CheckBox
@@ -179,9 +179,10 @@
                 android:layout_centerHorizontal="true"
                 android:text=" to "
                 android:textAppearance="?android:attr/textAppearanceMedium" />
+
         </RelativeLayout>
     </ScrollView>
-
+    
     <ProgressBar
         android:id="@+id/progressBar_print"
         style="?android:attr/progressBarStyleHorizontal"
@@ -201,5 +202,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:text="Printing Status:" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/print_status"
+        android:layout_alignParentLeft="true"
+        android:text="* options only for pdf files.\n+ 6/8 pgs/sheet may have issues" />
 
 </RelativeLayout>

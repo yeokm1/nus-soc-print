@@ -28,8 +28,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 
-import android.content.ClipData;
-import android.content.Context;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -130,8 +129,8 @@ public class MainActivity extends Activity implements TabListener {
 		super.onStart();
 		if(fileName != null) {
 			
-			if(!fileName.endsWith("pdf")){
-				showToast(fileName + " is not a pdf file");
+			if(!(fileName.endsWith("pdf") || fileName.endsWith("ps"))){
+				showToast(fileName + " is not a ps/pdf file");
 			}
 			else {
 				setFilePathView(fileName);
@@ -387,7 +386,7 @@ public class MainActivity extends Activity implements TabListener {
 		intent.putExtra(FileDialog.CAN_SELECT_DIR, false);
 
 		//alternatively you can set file filter
-		intent.putExtra(FileDialog.FORMAT_FILTER, new String[] { "pdf" });
+		intent.putExtra(FileDialog.FORMAT_FILTER, new String[] { "pdf", "ps" });
 		intent.putExtra(FileDialog.SELECTION_MODE, SelectionMode.MODE_OPEN);
 		startActivityForResult(intent, REQUEST_OPEN);
 		showToastSetLength("Press the back button to return if no file is selected", Toast.LENGTH_LONG);
