@@ -46,6 +46,8 @@ public class WebViewSettings extends WebViewClient{
 					"var frms = document.getElementsByName('mysoc_login');" +
 					"frms[0].submit(); };");
 		}
+		
+		view.getSettings().setJavaScriptEnabled(false);
 
 
 	}

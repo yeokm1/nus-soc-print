@@ -50,7 +50,7 @@ public final class R {
         public static final int fdrowtext=0x7f0a000d;
         public static final int file_path_view=0x7f0a0010;
         public static final int mainLayout=0x7f0a0000;
-        public static final int menu_settings=0x7f0a0027;
+        public static final int menu_about=0x7f0a0027;
         public static final int num_page_end=0x7f0a001a;
         public static final int num_page_start=0x7f0a0018;
         public static final int num_pages_per_sheet=0x7f0a001c;
@@ -84,6 +84,7 @@ public final class R {
         public static final int action_bar=0x7f090000;
     }
     public static final class string {
+        public static final int about_box_text=0x7f04001d;
         public static final int app_name=0x7f040000;
         public static final int cancel=0x7f040006;
         public static final int cant_read_folder=0x7f040002;

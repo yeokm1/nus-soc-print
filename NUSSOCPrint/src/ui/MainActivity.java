@@ -24,15 +24,22 @@ import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.text.SpannableString;
+import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
+import android.text.util.Linkify;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.CheckBox;
@@ -327,6 +334,31 @@ public class MainActivity extends Activity implements TabListener {
 		intent.putExtra(FileDialog.SELECTION_MODE, SelectionMode.MODE_OPEN);
 		startActivityForResult(intent, REQUEST_OPEN);
 		showToastSetLength("Press the back button to return if no file is selected", Toast.LENGTH_LONG);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		
+		if(item.getItemId() == R.id.menu_about){
+			
+			final TextView message = new TextView(this);
+			  final SpannableString s = new SpannableString(getString(R.string.about_box_text));
+			  Linkify.addLinks(s, Linkify.WEB_URLS);
+			  message.setText(s);
+			  message.setMovementMethod(LinkMovementMethod.getInstance());
+
+			  AlertDialog dialog = new AlertDialog.Builder(this)
+			   .setTitle("About")
+			   .setCancelable(true)
+			   .setIcon(android.R.drawable.ic_dialog_info)
+			   .setPositiveButton("OK", null)
+			   .setView(message)
+			   .create();
+			  
+			  dialog.show();
+		}
+
+	    return true;
 	}
 
 	public synchronized void onActivityResult(final int requestCode,

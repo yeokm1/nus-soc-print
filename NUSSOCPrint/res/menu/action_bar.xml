@@ -2,8 +2,9 @@
     >
 
     <item
-        android:id="@+id/menu_settings"
+        android:id="@+id/menu_about"
         android:orderInCategory="100"
-        android:title="Action Bar1"/>
+        android:title="About"
+        android:visible="true"/>
 
 </menu>
