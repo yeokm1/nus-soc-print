@@ -24,7 +24,7 @@
         
        <EditTextPreference
         android:key="@string/custom_server_preference"
-        android:summary="Specify your own server"
+        android:summary="Specify your own server (overrides Sunfire)"
         android:title="Custom Server" 
         android:hint="@string/server_IP"/>
        

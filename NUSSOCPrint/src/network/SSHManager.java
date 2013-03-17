@@ -66,32 +66,32 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 
 
 
-	protected static String connect()
+	protected static String connect() throws JSchException
 	{
 		if(connectionStatus){
 			close();
 		}
 
 		String returnMessage = "Login Success";
+		try{
 
-		try
-		{
 			if((strUserName == null) || (strPassword == null) || (strConnectionIP == null)){
 				throw new JSchException("Username/password not set");
 			}
 			sesConnection = jschSSHChannel.getSession(strUserName, 
 					strConnectionIP, intConnectionPort);
 			sesConnection.setPassword(strPassword);
-			// UNCOMMENT THIS FOR TESTING PURPOSES, BUT DO NOT USE IN PRODUCTION
+			// To make things easier for user, I skip key check
 			sesConnection.setConfig("StrictHostKeyChecking", "no");
 			sesConnection.connect(intTimeOut);
 			connectionStatus = true;
+		} catch(JSchException e){
+			if(e.getMessage().equals("Auth fail")){
+				throw new JSchException("Username/Password incorrect");
+			} else {
+				throw e;
+			}
 		}
-		catch(JSchException jschX)
-		{
-			returnMessage = jschX.getMessage();
-		}
-
 		return returnMessage;
 	}
 
@@ -105,7 +105,7 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 		StringBuilder outputBuffer = new StringBuilder();
 
 		if(sesConnection == null){
-			throw new JSchException("Connection not set up yet");
+			throw new JSchException("Connection not set up yet, check username/password");
 		}
 		Channel channel = sesConnection.openChannel("exec");
 		((ChannelExec)channel).setCommand(command);
@@ -125,13 +125,13 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 
 		return outputBuffer.toString();
 	}
-	
+
 
 	protected static synchronized void uploadFile(File toBePrinted) throws FileNotFoundException, SftpException, JSchException{
 		if(connectionStatus == false){
 			connect();
 		}
-		
+
 		if(sesConnection == null){
 			throw new JSchException("Connection not set up yet");
 		}
