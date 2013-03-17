@@ -18,8 +18,9 @@
         <activity
             android:name="ui.MainActivity"
             android:label="@string/title_activity_action_bar_main"
-            android:uiOptions="splitActionBarWhenNarrow" >
-            <intent-filter>
+            android:uiOptions="splitActionBarWhenNarrow" 
+            android:windowSoftInputMode="stateAlwaysHidden">
+                       <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
