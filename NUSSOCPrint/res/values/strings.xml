@@ -24,6 +24,9 @@
         <item>8</item>
     </string-array>
 
+    <string name="multivalent_filename">Multivalent.jar</string>
+    
+    
     <string name="select_file_to_print">Choose pdf file to print</string>
     <string name="default_username">Enter your UNIX username</string>
     <string name="default_password">Enter your UNIX password</string>
@@ -37,6 +40,8 @@
     <string name="server_temp_dir">socPrint</string>
     <string name="credentials_not_set">UNIX Username/password not entered, set them in the Settings page.</string>
 
+    
+    
     
     <string name="quota_url">http://mysoc.nus.edu.sg/~eprint/forms/quota.php</string>
     

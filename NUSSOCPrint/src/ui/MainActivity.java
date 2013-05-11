@@ -63,6 +63,7 @@ public class MainActivity extends Activity implements TabListener {
 
 	final String fileNotSelected = "Please select a file to print";
 	final String invalidPageRange = "Invalid page range given";
+	final String invalidPageLayout = "Invalid page layout given";
 
 	final int REQUEST_OPEN = 123456;
 
@@ -255,8 +256,6 @@ public class MainActivity extends Activity implements TabListener {
 		}
 
 
-
-
 		CheckBox customPrinter = (CheckBox) findViewById(R.id.checkbox_custom_printer);
 		Spinner printerList = (Spinner) findViewById(R.id.printer_list);
 
@@ -274,12 +273,29 @@ public class MainActivity extends Activity implements TabListener {
 			printerName = printerList.getSelectedItem().toString();
 		}
 
-		Spinner pagesList = (Spinner) findViewById(R.id.num_pages_per_sheet);
-		String numPagesPerSheet = pagesList.getSelectedItem().toString();
-
+	
+		EditText colsTextField = (EditText) findViewById(R.id.num_cols);
+		EditText rowsTextField = (EditText) findViewById(R.id.num_rows);
+		
+		String numColsText = colsTextField.getText().toString();
+		String numRowsText = rowsTextField.getText().toString();
+		
+		
+		try{
+			int numCols = Integer.parseInt(numColsText);
+			int numRows = Integer.parseInt(numRowsText);
+			
+			if((numCols == 0) || (numRows == 0)){
+				showToast(invalidPageLayout);
+				return;
+			}
+			
+		} catch (NumberFormatException e){
+			showToast(invalidPageLayout);
+			return;
+		}
 
 		RadioButton radioRange = (RadioButton) findViewById(R.id.radio_range_page);
-
 
 
 		if(radioRange.isChecked()){
@@ -329,7 +345,7 @@ public class MainActivity extends Activity implements TabListener {
 
 
 
-		String[] settings = {filePath, printerName, numPagesPerSheet, startRangeText, endRangeText, lineBorder};
+		String[] settings = {filePath, printerName, numColsText, numRowsText, startRangeText, endRangeText, lineBorder};
 
 		SSH_Upload_Print printing = new SSH_Upload_Print(this);
 		printing.execute(settings);
@@ -382,7 +398,7 @@ public class MainActivity extends Activity implements TabListener {
 		//can user select directories or not
 		intent.putExtra(FileDialog.CAN_SELECT_DIR, false);
 
-		//alternatively you can set file filter
+		//File Filter
 		intent.putExtra(FileDialog.FORMAT_FILTER, new String[] { "pdf"});
 		intent.putExtra(FileDialog.SELECTION_MODE, SelectionMode.MODE_OPEN);
 		startActivityForResult(intent, REQUEST_OPEN);

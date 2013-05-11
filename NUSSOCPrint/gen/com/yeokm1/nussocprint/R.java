@@ -31,13 +31,13 @@ public final class R {
     }
     public static final class id {
         public static final int button_clear_cache=0x7f0a000e;
-        public static final int button_delete_all=0x7f0a0027;
+        public static final int button_delete_all=0x7f0a0029;
         public static final int button_force_disconnect=0x7f0a0010;
         public static final int button_print=0x7f0a000f;
-        public static final int button_print_quota=0x7f0a0028;
+        public static final int button_print_quota=0x7f0a002a;
         public static final int button_select_file=0x7f0a0013;
         public static final int checkbox_custom_printer=0x7f0a0021;
-        public static final int checkbox_page_line_border=0x7f0a001a;
+        public static final int checkbox_page_line_border=0x7f0a001c;
         public static final int fdButtonCancel=0x7f0a0009;
         public static final int fdButtonCreate=0x7f0a000a;
         public static final int fdButtonNew=0x7f0a0004;
@@ -50,29 +50,31 @@ public final class R {
         public static final int fdrowtext=0x7f0a000d;
         public static final int file_path_view=0x7f0a0014;
         public static final int mainLayout=0x7f0a0000;
-        public static final int menu_about=0x7f0a002a;
+        public static final int menu_about=0x7f0a002c;
+        public static final int num_cols=0x7f0a0022;
         public static final int num_page_end=0x7f0a001e;
-        public static final int num_page_start=0x7f0a001c;
-        public static final int num_pages_per_sheet=0x7f0a0020;
+        public static final int num_page_start=0x7f0a001a;
+        public static final int num_rows=0x7f0a001f;
         public static final int path=0x7f0a000b;
-        public static final int print_status=0x7f0a0023;
+        public static final int print_status=0x7f0a0025;
         public static final int printer_list=0x7f0a0016;
-        public static final int printer_queue_status_output=0x7f0a0024;
-        public static final int progressBar_print=0x7f0a0022;
+        public static final int printer_queue_status_output=0x7f0a0026;
+        public static final int progressBar_print=0x7f0a0024;
         public static final int radioGroup_page_range=0x7f0a0017;
         public static final int radio_all_page=0x7f0a0018;
         public static final int radio_range_page=0x7f0a0019;
-        public static final int refreshProgressBar=0x7f0a0026;
-        public static final int refresh_print_queue=0x7f0a0025;
+        public static final int refreshProgressBar=0x7f0a0028;
+        public static final int refresh_print_queue=0x7f0a0027;
         public static final int relativeLayout01=0x7f0a0001;
         public static final int scrollView1=0x7f0a0011;
         public static final int textView1=0x7f0a0012;
-        public static final int textView2=0x7f0a001f;
+        public static final int textView2=0x7f0a0020;
         public static final int textView3=0x7f0a001b;
         public static final int textView4=0x7f0a0015;
         public static final int textView5=0x7f0a001d;
+        public static final int textView6=0x7f0a0023;
         public static final int textViewFilename=0x7f0a0007;
-        public static final int webView_qouta=0x7f0a0029;
+        public static final int webView_qouta=0x7f0a002b;
     }
     public static final class layout {
         public static final int activity_action_bar_main=0x7f030000;
@@ -87,30 +89,31 @@ public final class R {
         public static final int action_bar=0x7f090000;
     }
     public static final class string {
-        public static final int about_box_text=0x7f040017;
+        public static final int about_box_text=0x7f040018;
         public static final int app_name=0x7f040000;
         public static final int cancel=0x7f040006;
         public static final int cant_read_folder=0x7f040002;
         public static final int create=0x7f040007;
-        public static final int credentials_not_set=0x7f040015;
-        public static final int custom_printer_preference=0x7f040011;
-        public static final int custom_server_preference=0x7f040012;
-        public static final int default_password=0x7f04000d;
-        public static final int default_printer=0x7f04000e;
-        public static final int default_username=0x7f04000c;
+        public static final int credentials_not_set=0x7f040016;
+        public static final int custom_printer_preference=0x7f040012;
+        public static final int custom_server_preference=0x7f040013;
+        public static final int default_password=0x7f04000e;
+        public static final int default_printer=0x7f04000f;
+        public static final int default_username=0x7f04000d;
         public static final int err=0x7f040009;
         public static final int file_name=0x7f040005;
         public static final int location=0x7f040001;
+        public static final int multivalent_filename=0x7f04000b;
         public static final int nnew=0x7f040003;
         public static final int no_data=0x7f040008;
-        public static final int password_preference=0x7f040010;
-        public static final int quota_url=0x7f040016;
+        public static final int password_preference=0x7f040011;
+        public static final int quota_url=0x7f040017;
         public static final int select=0x7f040004;
-        public static final int select_file_to_print=0x7f04000b;
-        public static final int server_IP=0x7f040013;
-        public static final int server_temp_dir=0x7f040014;
+        public static final int select_file_to_print=0x7f04000c;
+        public static final int server_IP=0x7f040014;
+        public static final int server_temp_dir=0x7f040015;
         public static final int title_activity_action_bar_main=0x7f04000a;
-        public static final int username_preference=0x7f04000f;
+        public static final int username_preference=0x7f040010;
     }
     public static final class style {
         public static final int AppTheme=0x7f080000;

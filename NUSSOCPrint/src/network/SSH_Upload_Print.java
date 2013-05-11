@@ -1,12 +1,15 @@
 package network;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 
 import ui.MainActivity;
 
+import android.content.res.AssetManager;
 
 
 import com.jcraft.jsch.JSchException;
@@ -15,115 +18,88 @@ import com.yeokm1.nussocprint.R;
 
 public class SSH_Upload_Print extends SSHManager {
 
+	//f.pdf for shortfileName as multivalent seems to have issue with long file names
+	final String dummyServerFileName = "f.pdf";
 	Float progressIncrement;
 	Float currentProgress = (float) 0;
+	InputStream multiVal = null;
+	String multivalentFilename;
 
 	public SSH_Upload_Print(MainActivity caller) {
 		super(caller);
 	}
 
 	@Override
+	protected void onPreExecute(){
+
+		multivalentFilename = SSHManager.callingActivity.getString(R.string.multivalent_filename);
+
+		AssetManager assetMgr = SSHManager.callingActivity.getAssets();
+		try {
+			multiVal = assetMgr.open(multivalentFilename);
+		} catch (IOException e) {
+			//Nothing
+		}
+
+	}
+
+	@Override
 	protected String doInBackground(String... params) {
 
-		progressIncrement = (float) 100 / 8;
+		if(multiVal == null){
+			return "Cannot open multival jar";
+		}
 
 		String filePath = params[0];
 		String printerName = params[1];
-		String pagesPerSheet = params[2];
-		String startRange = params[3];
-		String endRange = params[4];
-		String lineBorder = params[5];
-
-		File toBePrinted = new File(filePath);
-
-		String tempDir = callingActivity.getString(R.string.server_temp_dir) + "/";
-		String fileName = tempDir + "\"" + toBePrinted.getName() + "\"";
-		String psFileName;
-		String formattedPsFileName;
+		String numCols = params[2];
+		String numRows = params[3];
+		String startRange = params[4];
+		String endRange = params[5];
+		String lineBorder = params[6];
 
 
-		psFileName =  fileName.substring(0, fileName.length() - 4) + "ps\"";  //-4 to remove pdf"
-		formattedPsFileName = fileName.substring(0, fileName.length() - 4) + "psf\"";
-
-
-
-
+		progressIncrement = (float) 100 / 8;
 
 		try {
-
-			publishProgress("Uploading File");
-			super.uploadFile(toBePrinted);
-
-
-			publishProgress("Upload Complete");
-
-			if(toBePrinted.getName().endsWith("pdf")){
-
-				String convertToPSCommand = "pdftops";
-
-				if(startRange != null){
-					convertToPSCommand += " -f " + startRange;
-				}
-
-				if(endRange != null){
-					convertToPSCommand += " -l " + endRange;
-				}
-
-				convertToPSCommand += " " + fileName + " "  + psFileName;	
+			publishProgress("Uploading MultiValent.jar");
+			super.uploadFile(multiVal, multivalentFilename);
 
 
-				publishProgress("Converting to PostScript using: " + convertToPSCommand);
-
-				String conversionMessage = super.sendCommand(convertToPSCommand);
-
-
-				if(conversionMessage.isEmpty()){
-					publishProgress("Conversion to Postscript Complete");
-				} else {
-					publishProgress(conversionMessage);
-					return "Cannot convert file";
-				}
-
-			}
-
-			//if no special parameters, we just send the ps file direct to printer
-			if((lineBorder == null) && (Integer.parseInt(pagesPerSheet) == 1)){
-				formattedPsFileName = psFileName;
-			} else {
-
-				String psformatCommand = "psnup -pa4";
-
-				if(lineBorder != null){
-					psformatCommand += " -d";
-				}
-
-				psformatCommand += " -" + pagesPerSheet;
-				psformatCommand += " " + psFileName + " " + formattedPsFileName;
+			File toBePrinted = new File(filePath);
+			InputStream fileStream = new FileInputStream(toBePrinted);
 
 
-				publishProgress("PS format command used: " + psformatCommand);
-
-				String psFormatMessage = super.sendCommand(psformatCommand);
+			String tempDir = callingActivity.getString(R.string.server_temp_dir) + "/";
 
 
-				if(psFormatMessage.isEmpty()){
-					publishProgress("Formatting of Postscript file Complete");
-				} else {
-					publishProgress(psFormatMessage);
-					return "Cannot format file";
-				}
+			String onServerFileName = tempDir + "\"" + dummyServerFileName + "\"";
+			String pdfUpFilename = onServerFileName.substring(0, onServerFileName.length() - 5) + "-up.pdf\"";  //-5 to remove .pdf";
+			String psFilename = onServerFileName.substring(0, onServerFileName.length() - 4) + "ps\"";
 
-			}
+			publishProgress("Uploading Document...");
+			super.uploadFile(fileStream, dummyServerFileName);
+
+			String imposeCommand = generateMultivalentCommand(onServerFileName, numRows, numCols, startRange, endRange, lineBorder);
+
+			publishProgress("Formatting PDF using: " + imposeCommand);
+			super.sendCommand(imposeCommand);
+
+			String convertToPSCommand = "pdftops";
+
+			convertToPSCommand += " " + pdfUpFilename + " "  + psFilename;	
+
+			publishProgress("Converting to PostScript using: " + convertToPSCommand);
+			
+			super.sendCommand(convertToPSCommand);
+
 			String printCommand = "lpr -P ";
-
 
 			printCommand += printerName + " ";
 
-			printCommand += formattedPsFileName;
+			printCommand += psFilename;
 
 			publishProgress("Sending print command : \n" + printCommand);
-
-
 
 			String printReply = super.sendCommand(printCommand);
 
@@ -132,7 +108,6 @@ public class SSH_Upload_Print extends SSHManager {
 			} else {
 				return printReply;
 			}
-
 
 		} catch (FileNotFoundException e) {
 			return "file not found exception " + e.getMessage();
@@ -145,9 +120,44 @@ public class SSH_Upload_Print extends SSHManager {
 		} finally {
 			super.close();
 		}
+	}
+
+
+	public String generateMultivalentCommand(String filePath, String numRows, String numCols, 
+			String startRange, String endRange, String lineBorder ){
+
+		String command = "java -classpath socPrint/Multivalent.jar tool.pdf.Impose -paper a4";
+		
+		command += " -dim " + numCols + "x" + numRows;
+
+		if(!(startRange == null && endRange == null)){
+
+			command += " -page ";
+			if(startRange != null){
+				command += startRange;
+			}
+
+			command += "-";
+
+
+			if(endRange != null){
+				command += endRange;
+			}
+		}
+
+		command += " -sep ";
+
+		if(lineBorder == null){
+			command += "0";
+		} else {
+			command += "1";
+		}
+
+		command += " " + filePath;
 
 
 
+		return command;
 	}
 
 	@Override

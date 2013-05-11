@@ -41,7 +41,7 @@
         android:layout_above="@+id/textView1" >
 
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
             <Button
@@ -83,16 +83,18 @@
 
                 <RadioButton
                     android:id="@+id/radio_all_page"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:text="All" />
-
+                
                 <RadioButton
-                    android:id="@+id/radio_range_page"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Range: " />
+                android:id="@+id/radio_range_page"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/num_page_start"
+                android:layout_toRightOf="@+id/textView3"
+                android:text="Range: " />
             </RadioGroup>
 
             <Spinner
@@ -110,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/radioGroup_page_range"
                 android:layout_toLeftOf="@+id/textView5"
-                android:layout_toRightOf="@+id/radioGroup_page_range"
+                android:layout_toRightOf="@+id/printer_list"
                 android:ems="10"
                 android:inputType="number" />
 
@@ -120,8 +122,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/num_page_start"
                 android:layout_alignBottom="@+id/num_page_start"
+                android:layout_alignLeft="@+id/num_rows"
                 android:layout_alignParentRight="true"
-                android:layout_toRightOf="@+id/textView5"
                 android:ems="10"
                 android:inputType="number" />
 
@@ -140,17 +142,57 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/button_select_file"
-                android:text="Page(s) per Sheet:"
+                android:layout_toRightOf="@+id/radio_range_page"
+                android:text="*Layout: Cols x Rows"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <Spinner
-                android:id="@+id/num_pages_per_sheet"
+            <EditText
+                android:id="@+id/num_rows"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/textView2"
+                android:layout_alignTop="@+id/printer_list"
+                android:layout_toRightOf="@+id/checkbox_custom_printer"
+                android:ems="10"
+                android:inputType="number"
+                android:text="1" >
+
+                <requestFocus />
+            </EditText>
+
+            <EditText
+                android:id="@+id/num_cols"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/num_rows"
+                android:layout_alignBottom="@+id/num_rows"
+                android:layout_alignRight="@+id/num_page_start"
                 android:layout_toRightOf="@+id/printer_list"
-                android:entries="@array/pages" />
+                android:ems="10"
+                android:inputType="number"
+                android:text="1" />
+
+
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/num_cols"
+                android:layout_alignBottom="@+id/num_cols"
+                android:layout_alignRight="@+id/textView5"
+                android:layout_toRightOf="@+id/num_cols"
+                android:text="  x"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/num_page_start"
+                android:layout_alignBottom="@+id/num_page_start"
+                android:layout_alignRight="@+id/checkbox_custom_printer"
+                android:text=" to "
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <CheckBox
                 android:id="@+id/checkbox_page_line_border"
@@ -167,18 +209,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_below="@+id/checkbox_page_line_border"
-                android:text="Use Custom Printer (Overrides Printer List)"
+                android:text="Use Custom Printer (Configure in Settings)"
                 android:textSize="@dimen/Medium12" />
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/num_page_end"
-                android:layout_alignBottom="@+id/num_page_end"
-                android:layout_centerHorizontal="true"
-                android:text=" to "
-                android:textAppearance="?android:attr/textAppearanceMedium" />
 
         </RelativeLayout>
     </ScrollView>
@@ -209,6 +241,6 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/print_status"
         android:layout_alignParentLeft="true"
-        android:text="*6/8 pgs/sheet may have issues" />
+        android:text="*Portrait/Landscape auto selected" />
 
 </RelativeLayout>
