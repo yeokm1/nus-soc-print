@@ -1,7 +1,7 @@
 package network;
 
 /* 
- * SSHManager
+ * SSHManager originally from stackoverflow
  * 
  * @author cabbott
  * @version 1.0
