@@ -47,7 +47,7 @@ public class WebViewSettings extends WebViewClient{
 					"frms[0].submit(); };");
 		}
 		
-		view.getSettings().setJavaScriptEnabled(false);
+	//	view.getSettings().setJavaScriptEnabled(false);
 
 
 	}
