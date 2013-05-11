@@ -41,13 +41,10 @@ public class SSH_Upload_Print extends SSHManager {
 		String psFileName;
 		String formattedPsFileName;
 
-		if(toBePrinted.getName().endsWith("pdf")){
-			psFileName =  fileName.substring(0, fileName.length() - 4) + "ps\"";  //-4 to remove pdf"
-			formattedPsFileName = fileName.substring(0, fileName.length() - 4) + "psf\"";
-		} else {
-			psFileName = fileName;
-			formattedPsFileName = fileName.substring(0, fileName.length() - 3) + "psf\"";
-		}
+
+		psFileName =  fileName.substring(0, fileName.length() - 4) + "ps\"";  //-4 to remove pdf"
+		formattedPsFileName = fileName.substring(0, fileName.length() - 4) + "psf\"";
+
 
 
 

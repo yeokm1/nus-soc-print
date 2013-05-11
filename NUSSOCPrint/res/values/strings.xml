@@ -24,7 +24,7 @@
         <item>8</item>
     </string-array>
 
-    <string name="select_file_to_print">Choose ps/pdf file to print</string>
+    <string name="select_file_to_print">Choose pdf file to print</string>
     <string name="default_username">Enter your UNIX username</string>
     <string name="default_password">Enter your UNIX password</string>
  
@@ -40,7 +40,7 @@
     
     <string name="quota_url">http://mysoc.nus.edu.sg/~eprint/forms/quota.php</string>
     
-    <string name="about_box_text">NUS SOC Print v0.22\nGNU GPL v3\nBuild Date: 17 Mar 2013\nBy: Yeo Kheng Meng\nWith thanks to Yong Quan, Kai Yao, Gabriel and Jason\n\nWhere to check for updates?\nhttps://code.google.com/p/nus-soc-print/\n\nhttp://yeokhengmeng.com/2013/03/nus-soc-print-android-app</string>
+    <string name="about_box_text">NUS SOC Print v0.3\nGNU GPL v3\nBuild Date: 17 Mar 2013\nBy: Yeo Kheng Meng\nWith thanks to Yong Quan, Kai Yao, Gabriel and Jason\n\nWhere to check for updates?\nhttps://code.google.com/p/nus-soc-print/\n\nhttp://yeokhengmeng.com/2013/03/nus-soc-print-android-app</string>
     
     
     
