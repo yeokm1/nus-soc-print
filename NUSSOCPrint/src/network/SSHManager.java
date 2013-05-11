@@ -123,6 +123,10 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 
 
 	protected static synchronized void uploadFile(File toBePrinted) throws FileNotFoundException, SftpException, JSchException{
+		uploadFile(new FileInputStream(toBePrinted), toBePrinted.getName());
+	}
+	
+	protected static synchronized void uploadFile(InputStream toBePrinted, String fileName) throws FileNotFoundException, SftpException, JSchException{
 		if(connectionStatus == false){
 			connect();
 		}
@@ -144,7 +148,7 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 			//If cannot make directory, means directory already created
 		}
 		channelSftp.cd(tempDir);
-		channelSftp.put(new FileInputStream(toBePrinted), toBePrinted.getName());
+		channelSftp.put(toBePrinted, fileName);
 
 
 	}
