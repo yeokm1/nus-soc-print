@@ -87,8 +87,7 @@
             android:layout_above="@+id/sepeaator2"
             android:layout_alignParentLeft="true"
             android:layout_alignRight="@+id/tv_pages_per_sheet"
-            android:layout_below="@+id/tv_pages_per_sheet"
-            android:entries="@array/pagesForM1" />
+            android:layout_below="@+id/tv_pages_per_sheet"/>
 
         <EditText
             android:id="@+id/numRows"
@@ -260,13 +259,13 @@
                 android:id="@+id/radio_method2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="M3" />
+                android:text="M2" />
 
             <RadioButton
                 android:id="@+id/radio_method3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="M2" />
+                android:text="M3" />
         </RadioGroup>
 
         <TextView

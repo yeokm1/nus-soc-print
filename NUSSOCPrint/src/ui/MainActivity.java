@@ -2,6 +2,7 @@ package ui;
 
 
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,15 +11,7 @@ import network.SSHManager;
 import network.SSH_Clear_Cache;
 import network.SSH_Delete_All_Jobs;
 import network.SSH_Printer_Status;
-import network.SSH_Upload_Print;
 import network.WebViewSettings;
-
-import com.lamerman.FileDialog;
-import com.lamerman.SelectionMode;
-import com.yeokm1.nussocprint.R;
-
-
-
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
@@ -27,8 +20,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -36,6 +27,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.support.v4.view.PagerTitleStrip;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
@@ -45,14 +37,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.lamerman.FileDialog;
+import com.lamerman.SelectionMode;
+import com.yeokm1.nussocprint.R;
 
 
 public class MainActivity extends Activity implements TabListener {
@@ -66,35 +61,40 @@ public class MainActivity extends Activity implements TabListener {
 	final String invalidPageRange = "Invalid page range given";
 	final String invalidPageLayout = "Invalid page layout given";
 
+	final int METHOD_1 = 1;
+	final int METHOD_2 = 2;
+	final int METHOD_3 = 3;
+
 	final int REQUEST_OPEN = 123456;
 
 	RelativeLayout rl;
 
 	Spinner printerSpinner;
-	
+
 	Fragment currentFragment;
-	
+
 	String fileName = null;
 
+	private int currentMethod = 1;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		Bundle intentBundle = getIntent().getExtras();
-		
+
 
 		if(intentBundle != null) {
 
 			Uri fileNameUri = (Uri) intentBundle.get(Intent.EXTRA_STREAM);
 			fileName = fileNameUri.getPath();
 		}
-		
-			
 
-	
 
-		
+
+
+
+
 		setContentView(R.layout.activity_action_bar_main);
 		try {
 			rl = (RelativeLayout) findViewById(R.id.mainLayout);
@@ -119,26 +119,120 @@ public class MainActivity extends Activity implements TabListener {
 		}
 
 		setSSHManager();
-	
-	
+
+
+
 	}
-	
+
 	@Override
 	public void onStart() {
 		super.onStart();
 		if(fileName != null) {
-			
+
 			if(!(fileName.endsWith("pdf"))){
 				showToast(fileName + " is not a pdf file");
 			}
 			else {
 				setFilePathView(fileName);
 			}
-			
+
 			fileName = null;
 		}
-		
+
+		disableAndAdjustSomeUiOptionsBasedOnMethods(METHOD_1);
+
+		RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio_group_method);        
+		radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() 
+		{
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+				int method;
+				switch(checkedId){
+				case R.id.radio_method1: method = METHOD_1;
+				break;
+				case R.id.radio_method2: method = METHOD_2;
+				break;
+				case R.id.radio_method3: method = METHOD_3;
+				break;
+				default : method = METHOD_1;
+				}
+
+				currentMethod = method;
+
+				disableAndAdjustSomeUiOptionsBasedOnMethods(method);
+			}
+		});
+
 		updatePrinterSpinner();
+
+	}
+
+	public void disableAndAdjustSomeUiOptionsBasedOnMethods(int method){
+
+		View pagesPerSheetTitle = findViewById(R.id.tv_pages_per_sheet); pagesPerSheetTitle.setVisibility(View.INVISIBLE);
+		View pagesPerSheetSpinner = findViewById(R.id.num_pages_per_sheet);	pagesPerSheetSpinner.setVisibility(View.INVISIBLE);
+
+		View colsXRowsTitle = findViewById(R.id.tv_cols_x_rows); colsXRowsTitle.setVisibility(View.INVISIBLE);
+		View colsXRows_cols = findViewById(R.id.numCols); colsXRows_cols.setVisibility(View.INVISIBLE);
+		View colsXRows_x = findViewById(R.id.tv_x); colsXRows_x.setVisibility(View.INVISIBLE);
+		View colsXRows_rows = findViewById(R.id.numRows); colsXRows_rows.setVisibility(View.INVISIBLE);
+
+		View pageRangeTitle = findViewById(R.id.tv_page_range); pageRangeTitle.setVisibility(View.INVISIBLE);
+		View pageRangeRadios = findViewById(R.id.radioGroup_page_range); pageRangeRadios.setVisibility(View.INVISIBLE);
+		View pageRangeStart = findViewById(R.id.num_start_range); pageRangeStart.setVisibility(View.INVISIBLE);
+		View pageRangeTo = findViewById(R.id.tv_to); pageRangeTo.setVisibility(View.INVISIBLE);
+		View pageRangeEnd = findViewById(R.id.num_end_range); pageRangeEnd.setVisibility(View.INVISIBLE);
+
+
+
+
+
+
+		switch(method){
+		case METHOD_1 : {
+			pagesPerSheetTitle.setVisibility(View.VISIBLE);
+			pagesPerSheetSpinner.setVisibility(View.VISIBLE);
+
+			pageRangeTitle.setVisibility(View.VISIBLE);
+			pageRangeRadios.setVisibility(View.VISIBLE);
+			pageRangeStart.setVisibility(View.VISIBLE);
+			pageRangeTo.setVisibility(View.VISIBLE);
+			pageRangeEnd.setVisibility(View.VISIBLE);
+
+
+			Spinner numPagesSpinner = (Spinner) pagesPerSheetSpinner;
+			String[] pagesArray = getResources().getStringArray(R.array.pagesForM1);
+			ArrayAdapter<String> pagesAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, pagesArray);
+			numPagesSpinner.setAdapter(pagesAdapter);
+
+		} break;
+		case METHOD_2 :	{
+			pagesPerSheetTitle.setVisibility(View.VISIBLE);
+			pagesPerSheetSpinner.setVisibility(View.VISIBLE);
+
+			Spinner numPagesSpinner = (Spinner) pagesPerSheetSpinner;
+			String[] pagesArray = getResources().getStringArray(R.array.pagesForM2);
+			ArrayAdapter<String> pagesAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, pagesArray);
+			numPagesSpinner.setAdapter(pagesAdapter);
+
+		} break;
+		case METHOD_3 : {
+			colsXRowsTitle.setVisibility(View.VISIBLE);
+			colsXRows_cols.setVisibility(View.VISIBLE);
+			colsXRows_x.setVisibility(View.VISIBLE);
+			colsXRows_rows.setVisibility(View.VISIBLE);
+
+			pageRangeTitle.setVisibility(View.VISIBLE);
+			pageRangeRadios.setVisibility(View.VISIBLE);
+			pageRangeStart.setVisibility(View.VISIBLE);
+			pageRangeTo.setVisibility(View.VISIBLE);
+			pageRangeEnd.setVisibility(View.VISIBLE);
+			
+		} break;
+
+		}
+
+
 
 	}
 
@@ -154,7 +248,7 @@ public class MainActivity extends Activity implements TabListener {
 	Fragment fram2 = new StatusFragment();
 	QuotaFragment fram3 = new QuotaFragment();
 	SettingsFragment fram4 = new SettingsFragment();
-	
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -182,9 +276,9 @@ public class MainActivity extends Activity implements TabListener {
 			fram1.setCallingActivity(this);
 
 			fragMentTra.replace(rl.getId(), fram1);
-			
+
 			fragMentTra.commit();
-			
+
 			currentFragment = fram1;
 		} else if (tab.getText().equals(tab2Text)) {
 			try {
@@ -196,10 +290,10 @@ public class MainActivity extends Activity implements TabListener {
 			fragMentTra = getFragmentManager().beginTransaction();
 			fragMentTra.replace(rl.getId(), fram2);
 			fragMentTra.commit();
-			
+
 			currentFragment = fram2;
-			
-			
+
+
 		}else if (tab.getText().equals(tab3Text)) {
 			try {
 				rl.removeAllViews();
@@ -211,7 +305,7 @@ public class MainActivity extends Activity implements TabListener {
 			fragMentTra = getFragmentManager().beginTransaction();
 			fragMentTra.replace(rl.getId(), fram3);
 			fragMentTra.commit();
-			
+
 			currentFragment = fram3;
 		}  else if (tab.getText().equals(tab4Text)) {
 			try {
@@ -224,11 +318,11 @@ public class MainActivity extends Activity implements TabListener {
 			fragMentTra = getFragmentManager().beginTransaction();
 			fragMentTra.replace(rl.getId(), fram4);
 			fragMentTra.commit();
-			
+
 			currentFragment = fram4;
-			
+
 		}
-		
+
 
 
 	}
@@ -255,117 +349,117 @@ public class MainActivity extends Activity implements TabListener {
 	}
 
 	public void printButtonPress(View view){
-//		if(obtainCredentials() == null){
-//			showToast(getString(R.string.credentials_not_set));
-//			return;
-//		}
-//
-//		TextView filePathviewer = (TextView) findViewById(R.id.file_path_view);
-//		String filePath = (String) filePathviewer.getText();
-//		String printerName;
-//		String startRangeText = null;
-//		String endRangeText = null;
-//		String lineBorder = null;
-//
-//		if(filePath.equals(getString(R.string.select_file_to_print))){
-//			showToast(fileNotSelected);
-//			return;
-//		}
-//
-//
-//		CheckBox customPrinter = (CheckBox) findViewById(R.id.checkbox_custom_printer);
-//		Spinner printerList = (Spinner) findViewById(R.id.printer_list);
-//
-//
-//
-//
-//
-//		if(customPrinter.isChecked()){
-//			printerName = getPreference(getString(R.string.custom_printer_preference));
-//			if(printerName.isEmpty()){
-//				showToast("Custom printer not set");
-//				return;
-//			}
-//		} else {
-//			printerName = printerList.getSelectedItem().toString();
-//		}
-//
-//	
-//		EditText colsTextField = (EditText) findViewById(R.id.num_cols);
-//		EditText rowsTextField = (EditText) findViewById(R.id.num_rows);
-//		
-//		String numColsText = colsTextField.getText().toString();
-//		String numRowsText = rowsTextField.getText().toString();
-//		
-//		
-//		try{
-//			int numCols = Integer.parseInt(numColsText);
-//			int numRows = Integer.parseInt(numRowsText);
-//			
-//			if((numCols == 0) || (numRows == 0)){
-//				showToast(invalidPageLayout);
-//				return;
-//			}
-//			
-//		} catch (NumberFormatException e){
-//			showToast(invalidPageLayout);
-//			return;
-//		}
-//
-//		RadioButton radioRange = (RadioButton) findViewById(R.id.radio_range_page);
-//
-//
-//		if(radioRange.isChecked()){
-//
-//
-//			EditText startRangeField = (EditText) findViewById(R.id.num_page_start);
-//			EditText endRangeField = (EditText) findViewById(R.id.num_page_end);
-//
-//
-//			startRangeText = startRangeField.getText().toString();
-//			endRangeText = endRangeField.getText().toString();
-//
-//			if(startRangeText.isEmpty() && endRangeText.isEmpty()){
-//				showToast(invalidPageRange);
-//				return;
-//			}
-//
-//			Integer startRange = null;
-//			Integer endRange = null;
-//
-//			try{
-//				startRange = Integer.parseInt(startRangeText);
-//			} catch (NumberFormatException e){
-//				startRangeText = null;
-//			}
-//
-//			try{
-//				endRange = Integer.parseInt(endRangeText);
-//			} catch (NumberFormatException e){
-//				endRangeText = null;
-//			}
-//
-//
-//			if(((startRange != null) && (endRange != null)) 
-//					&& ((startRange <= 0) || (startRange > endRange))){
-//				showToast(invalidPageRange);
-//				return;
-//			}
-//
-//
-//		}
-//
-//		CheckBox lineBorderBox = (CheckBox) findViewById(R.id.checkbox_page_line_border);
-//		if(lineBorderBox.isChecked()){
-//			lineBorder = "lineBorder";
-//		}
-//
-//
-//
-//		String[] settings = {filePath, printerName, numColsText, numRowsText, startRangeText, endRangeText, lineBorder};
-//
-//		SSH_Upload_Print printing = new SSH_Upload_Print(this);
-//		printing.execute(settings);
+		//		if(obtainCredentials() == null){
+		//			showToast(getString(R.string.credentials_not_set));
+		//			return;
+		//		}
+		//
+		//		TextView filePathviewer = (TextView) findViewById(R.id.file_path_view);
+		//		String filePath = (String) filePathviewer.getText();
+		//		String printerName;
+		//		String startRangeText = null;
+		//		String endRangeText = null;
+		//		String lineBorder = null;
+		//
+		//		if(filePath.equals(getString(R.string.select_file_to_print))){
+		//			showToast(fileNotSelected);
+		//			return;
+		//		}
+		//
+		//
+		//		CheckBox customPrinter = (CheckBox) findViewById(R.id.checkbox_custom_printer);
+		//		Spinner printerList = (Spinner) findViewById(R.id.printer_list);
+		//
+		//
+		//
+		//
+		//
+		//		if(customPrinter.isChecked()){
+		//			printerName = getPreference(getString(R.string.custom_printer_preference));
+		//			if(printerName.isEmpty()){
+		//				showToast("Custom printer not set");
+		//				return;
+		//			}
+		//		} else {
+		//			printerName = printerList.getSelectedItem().toString();
+		//		}
+		//
+		//	
+		//		EditText colsTextField = (EditText) findViewById(R.id.num_cols);
+		//		EditText rowsTextField = (EditText) findViewById(R.id.num_rows);
+		//		
+		//		String numColsText = colsTextField.getText().toString();
+		//		String numRowsText = rowsTextField.getText().toString();
+		//		
+		//		
+		//		try{
+		//			int numCols = Integer.parseInt(numColsText);
+		//			int numRows = Integer.parseInt(numRowsText);
+		//			
+		//			if((numCols == 0) || (numRows == 0)){
+		//				showToast(invalidPageLayout);
+		//				return;
+		//			}
+		//			
+		//		} catch (NumberFormatException e){
+		//			showToast(invalidPageLayout);
+		//			return;
+		//		}
+		//
+		//		RadioButton radioRange = (RadioButton) findViewById(R.id.radio_range_page);
+		//
+		//
+		//		if(radioRange.isChecked()){
+		//
+		//
+		//			EditText startRangeField = (EditText) findViewById(R.id.num_page_start);
+		//			EditText endRangeField = (EditText) findViewById(R.id.num_page_end);
+		//
+		//
+		//			startRangeText = startRangeField.getText().toString();
+		//			endRangeText = endRangeField.getText().toString();
+		//
+		//			if(startRangeText.isEmpty() && endRangeText.isEmpty()){
+		//				showToast(invalidPageRange);
+		//				return;
+		//			}
+		//
+		//			Integer startRange = null;
+		//			Integer endRange = null;
+		//
+		//			try{
+		//				startRange = Integer.parseInt(startRangeText);
+		//			} catch (NumberFormatException e){
+		//				startRangeText = null;
+		//			}
+		//
+		//			try{
+		//				endRange = Integer.parseInt(endRangeText);
+		//			} catch (NumberFormatException e){
+		//				endRangeText = null;
+		//			}
+		//
+		//
+		//			if(((startRange != null) && (endRange != null)) 
+		//					&& ((startRange <= 0) || (startRange > endRange))){
+		//				showToast(invalidPageRange);
+		//				return;
+		//			}
+		//
+		//
+		//		}
+		//
+		//		CheckBox lineBorderBox = (CheckBox) findViewById(R.id.checkbox_page_line_border);
+		//		if(lineBorderBox.isChecked()){
+		//			lineBorder = "lineBorder";
+		//		}
+		//
+		//
+		//
+		//		String[] settings = {filePath, printerName, numColsText, numRowsText, startRangeText, endRangeText, lineBorder};
+		//
+		//		SSH_Upload_Print printing = new SSH_Upload_Print(this);
+		//		printing.execute(settings);
 
 	}
 
@@ -381,12 +475,12 @@ public class MainActivity extends Activity implements TabListener {
 
 	@SuppressLint("SetJavaScriptEnabled")
 	public void getPrintQuota(View view){
-		
+
 		showToast("Loading Quota Check page");
-		
+
 		WebView webView = (WebView) findViewById(R.id.webView_qouta);
 		webView.getSettings().setJavaScriptEnabled(true);
-		
+
 		webView.setWebViewClient(new WebViewSettings(getApplicationContext(), PreferenceManager.getDefaultSharedPreferences(this)));
 
 		webView.getSettings().setBuiltInZoomControls(true);
@@ -421,30 +515,30 @@ public class MainActivity extends Activity implements TabListener {
 		startActivityForResult(intent, REQUEST_OPEN);
 		showToastSetLength("Press the back button to return if no file is selected", Toast.LENGTH_LONG);
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		
-		if(item.getItemId() == R.id.menu_about){
-			
-			final TextView message = new TextView(this);
-			  final SpannableString s = new SpannableString(getString(R.string.about_box_text));
-			  Linkify.addLinks(s, Linkify.WEB_URLS);
-			  message.setText(s);
-			  message.setMovementMethod(LinkMovementMethod.getInstance());
 
-			  AlertDialog dialog = new AlertDialog.Builder(this)
-			   .setTitle("About")
-			   .setCancelable(true)
-			   .setIcon(android.R.drawable.ic_dialog_info)
-			   .setPositiveButton("OK", null)
-			   .setView(message)
-			   .create();
-			  
-			  dialog.show();
+		if(item.getItemId() == R.id.menu_about){
+
+			final TextView message = new TextView(this);
+			final SpannableString s = new SpannableString(getString(R.string.about_box_text));
+			Linkify.addLinks(s, Linkify.WEB_URLS);
+			message.setText(s);
+			message.setMovementMethod(LinkMovementMethod.getInstance());
+
+			AlertDialog dialog = new AlertDialog.Builder(this)
+			.setTitle("About")
+			.setCancelable(true)
+			.setIcon(android.R.drawable.ic_dialog_info)
+			.setPositiveButton("OK", null)
+			.setView(message)
+			.create();
+
+			dialog.show();
 		}
 
-	    return true;
+		return true;
 	}
 
 	public synchronized void onActivityResult(final int requestCode,
@@ -532,7 +626,7 @@ public class MainActivity extends Activity implements TabListener {
 	public void showToastSetLength(String message, int length){
 		Toast.makeText(getApplicationContext(), message, length).show();
 	}
-	
+
 	public void updatePrintingStatusProgressBar(String text, int progress){
 		ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar_print);
 
@@ -545,7 +639,7 @@ public class MainActivity extends Activity implements TabListener {
 		showToPrintingStatus(text);
 	}
 
-	
+
 	public void showToPrintingStatus(String data){
 		TextView statusView = (TextView) findViewById(R.id.print_status);
 		if(statusView == null){
@@ -553,7 +647,7 @@ public class MainActivity extends Activity implements TabListener {
 		}
 		statusView.setText(data);
 	}
-	
+
 	public void updateRefreshStatusProgressBar(String text, int progress){
 		ProgressBar progressBar = (ProgressBar) findViewById(R.id.refreshProgressBar);
 
@@ -565,8 +659,8 @@ public class MainActivity extends Activity implements TabListener {
 		progressBar.setProgress(progress);
 		showToPrinterQueueStatus(text);
 	}
-	
-	
+
+
 	public void showToPrinterQueueStatus(String data){
 		TextView statusView = (TextView) findViewById(R.id.printer_queue_status_output);
 
