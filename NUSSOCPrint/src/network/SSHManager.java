@@ -40,6 +40,13 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 	private static boolean connectionStatus = false;
 
 	protected static MainActivity callingActivity = null;
+	
+	protected final String FILE_NOT_FOUND_EXCEPTION_FORMAT = "File not found exception: " + "%1$s";
+	protected final String SFTP_EXCEPTION_FORMAT = "Sftp exception: " + "%1$s";
+	protected final String JSCH_EXCEPTION_FORMAT = "Jsch exception: " + "%1$s";
+	protected final String IO_EXCEPTION_FORMAT = "IO exception: " + "%1$s";
+	
+	
 
 	public SSHManager(MainActivity caller){
 		SSHManager.callingActivity = caller;

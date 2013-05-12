@@ -17,9 +17,6 @@ import com.jcraft.jsch.SftpException;
 import com.yeokm1.nussocprint.R;
 
 public class SSH_Upload_Print_Method_3 extends SSHManager {
-
-	//f.pdf for shortfileName as multivalent seems to have issue with long file names
-//	final String dummyServerFileName = "t.pdf";
 	Float progressIncrement;
 	Float currentProgress = (float) 0;
 	InputStream multiVal = null;
@@ -110,13 +107,13 @@ public class SSH_Upload_Print_Method_3 extends SSHManager {
 			}
 
 		} catch (FileNotFoundException e) {
-			return "file not found exception " + e.getMessage();
+			return String.format(FILE_NOT_FOUND_EXCEPTION_FORMAT, e.getMessage());
 		} catch (SftpException e) {
-			return "sftp exception " + e.getMessage();
+			return String.format(SFTP_EXCEPTION_FORMAT, e.getMessage());
 		} catch (JSchException e) {
-			return "Jsch exception " + e.getMessage();
+			return String.format(JSCH_EXCEPTION_FORMAT, e.getMessage());
 		} catch (IOException e) {
-			return "IO exception " + e.getMessage();
+			return String.format(IO_EXCEPTION_FORMAT, e.getMessage());
 		} finally {
 			super.close();
 		}

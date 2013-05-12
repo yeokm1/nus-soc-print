@@ -24,9 +24,9 @@ public class SSH_Clear_Cache extends SSHManager {
 			super.close();
 			return message;
 		} catch (JSchException e) {
-			return "Jsch exception " + e.getMessage();
+			return String.format(JSCH_EXCEPTION_FORMAT, e.getMessage());
 		} catch (IOException e) {
-			return "IO exception " + e.getMessage();
+			return String.format(IO_EXCEPTION_FORMAT, e.getMessage());
 		} finally {
 			super.close();
 		}

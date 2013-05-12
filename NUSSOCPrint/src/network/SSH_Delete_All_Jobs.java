@@ -36,9 +36,9 @@ public class SSH_Delete_All_Jobs extends SSHManager {
 			outputBuffer.append("Mass deletion command completed");
 			return outputBuffer.toString();
 		} catch (JSchException e) {
-			return "Jsch exception " + e.getMessage();
+			return String.format(JSCH_EXCEPTION_FORMAT, e.getMessage());
 		} catch (IOException e) {
-			return "IO exception " + e.getMessage();
+			return String.format(IO_EXCEPTION_FORMAT, e.getMessage());
 		} finally {
 			super.close();
 		}

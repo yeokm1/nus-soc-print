@@ -36,9 +36,9 @@ public class SSH_Printer_Status extends SSHManager {
 				super.publishProgress(output.toString());
 			}
 		} catch (IOException e){
-			return e.getMessage();
+			return String.format(IO_EXCEPTION_FORMAT, e.getMessage());
 		} catch (JSchException e) {
-			return e.getMessage();
+			return String.format(JSCH_EXCEPTION_FORMAT, e.getMessage());
 		} finally {
 			super.close();
 		}
