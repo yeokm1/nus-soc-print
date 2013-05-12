@@ -16,7 +16,7 @@ import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.SftpException;
 import com.yeokm1.nussocprint.R;
 
-public class SSH_Upload_Print extends SSHManager {
+public class SSH_Upload_Print_Method_3 extends SSHManager {
 
 	//f.pdf for shortfileName as multivalent seems to have issue with long file names
 //	final String dummyServerFileName = "t.pdf";
@@ -25,7 +25,7 @@ public class SSH_Upload_Print extends SSHManager {
 	InputStream multiVal = null;
 	String multivalentFilename;
 
-	public SSH_Upload_Print(MainActivity caller) {
+	public SSH_Upload_Print_Method_3(MainActivity caller) {
 		super(caller);
 	}
 
