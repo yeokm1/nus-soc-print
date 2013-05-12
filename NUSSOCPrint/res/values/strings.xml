@@ -16,12 +16,18 @@
         <item>psc011-sx</item>
     </string-array>
     
-    <string-array name="pages">
+    <string-array name="pagesForM1">
+        <item>1</item>
+        <item>2</item>
+        <item>4</item>
+        <item>8</item>
+    </string-array>
+    
+     <string-array name="pagesForM2">
         <item>1</item>
         <item>2</item>
         <item>4</item>
         <item>6</item>
-        <item>8</item>
     </string-array>
 
     <string name="multivalent_filename">Multivalent.jar</string>

@@ -14,11 +14,25 @@ import android.view.ViewGroup;
 public class PrintingFragment extends Fragment {
 
 
+	
+    private MainActivity caller;
+    
+    public void setCallingActivity(MainActivity caller){
+		this.caller = caller;
+	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		View result = inflater.inflate(R.layout.print_layout, container, false);
+		
+		
 		return result;
+	}
+	
+	@Override
+	public void onStart(){
+		super.onStart();
+		caller.updatePrinterSpinner();
 	}
 }

@@ -34,187 +34,6 @@
         android:text="Reset Connection"
         android:textSize="@dimen/Medium12" />
 
-    <ScrollView
-        android:id="@+id/scrollView1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/textView1" >
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <Button
-                android:id="@+id/button_select_file"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:onClick="browseFile"
-                android:text="Browse" />
-
-            <TextView
-                android:id="@+id/file_path_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/button_select_file"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_toLeftOf="@+id/button_select_file"
-                android:freezesText="true"
-                android:text="@string/select_file_to_print"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/printer_list"
-                android:text="Page Range:"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <RadioGroup
-                android:id="@+id/radioGroup_page_range"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/textView4" >
-
-                <RadioButton
-                    android:id="@+id/radio_all_page"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="All" />
-                
-                <RadioButton
-                android:id="@+id/radio_range_page"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/num_page_start"
-                android:layout_toRightOf="@+id/textView3"
-                android:text="Range: " />
-            </RadioGroup>
-
-            <Spinner
-                android:id="@+id/printer_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignRight="@+id/checkbox_page_line_border"
-                android:layout_below="@+id/textView3"
-                android:entries="@array/printer_name" />
-
-            <EditText
-                android:id="@+id/num_page_start"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/radioGroup_page_range"
-                android:layout_toLeftOf="@+id/textView5"
-                android:layout_toRightOf="@+id/printer_list"
-                android:ems="10"
-                android:inputType="number" />
-
-            <EditText
-                android:id="@+id/num_page_end"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/num_page_start"
-                android:layout_alignBottom="@+id/num_page_start"
-                android:layout_alignLeft="@+id/num_rows"
-                android:layout_alignParentRight="true"
-                android:ems="10"
-                android:inputType="number" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/file_path_view"
-                android:text="Printer: "
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/button_select_file"
-                android:layout_toRightOf="@+id/radio_range_page"
-                android:text="*Layout: Cols x Rows"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <EditText
-                android:id="@+id/num_rows"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/printer_list"
-                android:layout_toRightOf="@+id/checkbox_custom_printer"
-                android:ems="10"
-                android:inputType="number"
-                android:text="1" >
-
-                <requestFocus />
-            </EditText>
-
-            <EditText
-                android:id="@+id/num_cols"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/num_rows"
-                android:layout_alignBottom="@+id/num_rows"
-                android:layout_alignRight="@+id/num_page_start"
-                android:layout_toRightOf="@+id/printer_list"
-                android:ems="10"
-                android:inputType="number"
-                android:text="1" />
-
-
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/num_cols"
-                android:layout_alignBottom="@+id/num_cols"
-                android:layout_alignRight="@+id/textView5"
-                android:layout_toRightOf="@+id/num_cols"
-                android:text="  x"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/num_page_start"
-                android:layout_alignBottom="@+id/num_page_start"
-                android:layout_alignRight="@+id/checkbox_custom_printer"
-                android:text=" to "
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <CheckBox
-                android:id="@+id/checkbox_page_line_border"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/radioGroup_page_range"
-                android:text="Draw Page Border Line"
-                android:textSize="@dimen/Medium12" />
-
-            <CheckBox
-                android:id="@+id/checkbox_custom_printer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/checkbox_page_line_border"
-                android:text="Use Custom Printer (Configure in Settings)"
-                android:textSize="@dimen/Medium12" />
-
-        </RelativeLayout>
-    </ScrollView>
-    
     <ProgressBar
         android:id="@+id/progressBar_print"
         style="?android:attr/progressBarStyleHorizontal"
@@ -235,12 +54,241 @@
         android:layout_alignParentRight="true"
         android:text="Printing Status:" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/print_status"
-        android:layout_alignParentLeft="true"
-        android:text="*Portrait/Landscape auto selected" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/print_status" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/file_path_view"
+            android:layout_width="393dp"
+            android:layout_height="42dp"
+            android:freezesText="true"
+            android:text="@string/select_file_to_print"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Button
+            android:id="@+id/button_select_file"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:onClick="browseFile"
+            android:text="Browse" />
+
+        <Spinner
+            android:id="@+id/num_pages_per_sheet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/progressBar2"
+            android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/textView2"
+            android:layout_below="@+id/textView2"
+            android:entries="@array/pagesForM1" />
+
+        <EditText
+            android:id="@+id/numRows"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/button_select_file"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/textView2"
+            android:ems="10"
+            android:inputType="number"
+            android:text="1" >
+
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/numRows"
+            android:layout_alignBottom="@+id/numRows"
+            android:layout_toLeftOf="@+id/numRows"
+            android:text="x"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/numCols"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView1"
+            android:layout_below="@+id/textView4"
+            android:layout_toLeftOf="@+id/textView5"
+            android:ems="10"
+            android:inputType="number"
+            android:text="1" />
+
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/numRows"
+            android:progress="100" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup_page_range"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/textView6"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/radio_all_page"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="All" />
+
+            <RadioButton
+                android:id="@+id/radio_range_page"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Range" />
+
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/num_end_range"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/numRows"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/radioGroup_page_range"
+            android:ems="10"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/num_start_range"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/num_end_range"
+            android:layout_alignLeft="@+id/numCols"
+            android:layout_toLeftOf="@+id/textView7"
+            android:ems="10"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/progressBar1"
+            android:text="Pages/Sheet:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/progressBar1"
+            android:text="Cols x Rows"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Spinner
+            android:id="@+id/printer_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/textView6"
+            android:layout_below="@+id/textView3" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/button_select_file"
+            android:text="Printer: "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/printer_list"
+            android:progress="100" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/progressBar2"
+            android:text="Page Range:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/checkbox_page_line_border"
+            android:layout_toLeftOf="@+id/button_select_file"
+            android:text="Print Method:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView1"
+            android:layout_below="@+id/textView1"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/radio_method1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="M1 " />
+
+            <RadioButton
+                android:id="@+id/radio_method2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="M3" />
+
+            <RadioButton
+                android:id="@+id/radio_method3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="M2" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/radioGroup_page_range"
+            android:layout_alignLeft="@+id/textView4"
+            android:text="to"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <CheckBox
+            android:id="@+id/checkbox_page_line_border"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/textView3"
+            android:text="Draw Page Border  "
+            android:textSize="@dimen/Medium12" />
+
+    </RelativeLayout>
+    
+    </ScrollView>
 
 </RelativeLayout>
