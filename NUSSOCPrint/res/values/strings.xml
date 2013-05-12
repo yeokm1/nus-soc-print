@@ -31,6 +31,7 @@
 
 
     <string name="multivalent_filename">Multivalent.jar</string>
+    <string name="nup_pdf_filename">nup_pdf.jar</string>
     
     
     <string name="select_file_to_print">Choose pdf file to print</string>

@@ -2,7 +2,6 @@ package ui;
 
 
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +26,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.support.v4.view.PagerTitleStrip;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
@@ -38,8 +36,6 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
-import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -75,7 +71,7 @@ public class MainActivity extends Activity implements TabListener {
 
 	String fileName = null;
 
-	private int currentMethod = 1;
+	int currentMethod = 1;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -141,28 +137,6 @@ public class MainActivity extends Activity implements TabListener {
 
 		disableAndAdjustSomeUiOptionsBasedOnMethods(METHOD_1);
 
-		RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio_group_method);        
-		radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() 
-		{
-			public void onCheckedChanged(RadioGroup group, int checkedId) {
-
-				int method;
-				switch(checkedId){
-				case R.id.radio_method1: method = METHOD_1;
-				break;
-				case R.id.radio_method2: method = METHOD_2;
-				break;
-				case R.id.radio_method3: method = METHOD_3;
-				break;
-				default : method = METHOD_1;
-				}
-
-				currentMethod = method;
-
-				disableAndAdjustSomeUiOptionsBasedOnMethods(method);
-			}
-		});
-
 		updatePrinterSpinner();
 
 	}
@@ -227,7 +201,7 @@ public class MainActivity extends Activity implements TabListener {
 			pageRangeStart.setVisibility(View.VISIBLE);
 			pageRangeTo.setVisibility(View.VISIBLE);
 			pageRangeEnd.setVisibility(View.VISIBLE);
-			
+
 		} break;
 
 		}
@@ -280,6 +254,7 @@ public class MainActivity extends Activity implements TabListener {
 			fragMentTra.commit();
 
 			currentFragment = fram1;
+
 		} else if (tab.getText().equals(tab2Text)) {
 			try {
 				rl.removeAllViews();
