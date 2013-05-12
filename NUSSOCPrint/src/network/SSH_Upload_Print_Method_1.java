@@ -12,7 +12,7 @@ import com.yeokm1.nussocprint.R;
 
 public class SSH_Upload_Print_Method_1 extends SSHManager {
 
-	Float progressIncrement;
+	final Float progressIncrement = (float) 100 / 8;
 	Float currentProgress = (float) 0;
 
 	public SSH_Upload_Print_Method_1(MainActivity caller) {
@@ -22,7 +22,6 @@ public class SSH_Upload_Print_Method_1 extends SSHManager {
 	@Override
 	protected String doInBackground(String... params) {
 
-		progressIncrement = (float) 100 / 8;
 
 		String filePath = params[0];
 		String printerName = params[1];
@@ -38,13 +37,10 @@ public class SSH_Upload_Print_Method_1 extends SSHManager {
 		String psFileName;
 		String formattedPsFileName;
 
-		if(toBePrinted.getName().endsWith("pdf")){
-			psFileName =  fileName.substring(0, fileName.length() - 4) + "ps\"";  //-4 to remove pdf"
-			formattedPsFileName = fileName.substring(0, fileName.length() - 4) + "psf\"";
-		} else {
-			psFileName = fileName;
-			formattedPsFileName = fileName.substring(0, fileName.length() - 3) + "psf\"";
-		}
+
+		psFileName =  fileName.substring(0, fileName.length() - 4) + "ps\"";  //-4 to remove pdf"
+		formattedPsFileName = fileName.substring(0, fileName.length() - 4) + "psf\"";
+
 
 
 
@@ -55,36 +51,32 @@ public class SSH_Upload_Print_Method_1 extends SSHManager {
 			super.uploadFile(toBePrinted);
 
 
-			publishProgress("Upload Complete");
+			String convertToPSCommand = "pdftops";
 
-			if(toBePrinted.getName().endsWith("pdf")){
-
-				String convertToPSCommand = "pdftops";
-
-				if(startRange != null){
-					convertToPSCommand += " -f " + startRange;
-				}
-
-				if(endRange != null){
-					convertToPSCommand += " -l " + endRange;
-				}
-
-				convertToPSCommand += " " + fileName + " "  + psFileName;	
-
-
-				publishProgress("Converting to PostScript using: " + convertToPSCommand);
-
-				String conversionMessage = super.sendCommand(convertToPSCommand);
-
-
-				if(conversionMessage.isEmpty()){
-					publishProgress("Conversion to Postscript Complete");
-				} else {
-					publishProgress(conversionMessage);
-					return "Cannot convert file";
-				}
-
+			if(startRange != null){
+				convertToPSCommand += " -f " + startRange;
 			}
+
+			if(endRange != null){
+				convertToPSCommand += " -l " + endRange;
+			}
+
+			convertToPSCommand += " " + fileName + " "  + psFileName;	
+
+
+			publishProgress("Converting to PostScript using: " + convertToPSCommand);
+
+			String conversionMessage = super.sendCommand(convertToPSCommand);
+
+
+			if(conversionMessage.isEmpty()){
+				publishProgress("Conversion to Postscript Complete");
+			} else {
+				publishProgress(conversionMessage);
+				return "Cannot convert file";
+			}
+
+
 
 			//if no special parameters, we just send the ps file direct to printer
 			if((lineBorder == null) && (Integer.parseInt(pagesPerSheet) == 1)){
