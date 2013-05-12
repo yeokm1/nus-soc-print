@@ -157,11 +157,6 @@ public class MainActivity extends Activity implements TabListener {
 		View pageRangeTo = findViewById(R.id.tv_to); pageRangeTo.setVisibility(View.INVISIBLE);
 		View pageRangeEnd = findViewById(R.id.num_end_range); pageRangeEnd.setVisibility(View.INVISIBLE);
 
-
-
-
-
-
 		switch(method){
 		case METHOD_1 : {
 			pagesPerSheetTitle.setVisibility(View.VISIBLE);

@@ -19,10 +19,6 @@ public class PrintingFragment extends Fragment {
 
 	private MainActivity caller;
 
-	final int METHOD_1 = 1;
-	final int METHOD_2 = 2;
-	final int METHOD_3 = 3;
-
 
 	public void setCallingActivity(MainActivity caller){
 		this.caller = caller;
@@ -30,7 +26,6 @@ public class PrintingFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		View result = inflater.inflate(R.layout.print_layout, container, false);
 
 
@@ -50,13 +45,13 @@ public class PrintingFragment extends Fragment {
 
 				int method;
 				switch(checkedId){
-				case R.id.radio_method1: method = METHOD_1;
+				case R.id.radio_method1: method = caller.METHOD_1;
 				break;
-				case R.id.radio_method2: method = METHOD_2;
+				case R.id.radio_method2: method = caller.METHOD_2;
 				break;
-				case R.id.radio_method3: method = METHOD_3;
+				case R.id.radio_method3: method = caller.METHOD_3;
 				break;
-				default : method = METHOD_1;
+				default : method = caller.METHOD_1;
 				}
 
 				caller.currentMethod = method;
