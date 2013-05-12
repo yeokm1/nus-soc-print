@@ -43,8 +43,6 @@ public class SSH_Upload_Print_Method_1 extends SSHManager {
 
 
 
-
-
 		try {
 
 			publishProgress("Uploading File");
@@ -106,24 +104,8 @@ public class SSH_Upload_Print_Method_1 extends SSHManager {
 				}
 
 			}
-			String printCommand = "lpr -P ";
-
-
-			printCommand += printerName + " ";
-
-			printCommand += formattedPsFileName;
-
-			publishProgress("Sending print command : \n" + printCommand);
-
-
-
-			String printReply = super.sendCommand(printCommand);
-
-			if(printReply.isEmpty()){
-				return "Print command sent successfully";
-			} else {
-				return printReply;
-			}
+			
+			return super.printThisPSFile(formattedPsFileName, printerName);
 
 
 		} catch (FileNotFoundException e) {

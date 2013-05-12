@@ -6,34 +6,37 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-
-import ui.MainActivity;
-
 import android.content.res.AssetManager;
-
 
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.SftpException;
 import com.yeokm1.nussocprint.R;
 
-public class SSH_Upload_Print_Method_3 extends SSHManager {
+import ui.MainActivity;
+
+public class SSH_Upload_Print_Method_2 extends SSHManager {
+
 	final Float progressIncrement = (float) 100 / 8;
 	Float currentProgress = (float) 0;
-	InputStream multiValStream = null;
-	String multivalentFilename;
 
-	public SSH_Upload_Print_Method_3(MainActivity caller) {
+	InputStream nup_pdf_stream = null;
+	String nup_pdf_Filename;
+
+
+
+	public SSH_Upload_Print_Method_2(MainActivity caller) {
 		super(caller);
 	}
+
 
 	@Override
 	protected void onPreExecute(){
 
-		multivalentFilename = SSHManager.callingActivity.getString(R.string.multivalent_filename);
+		nup_pdf_Filename = SSHManager.callingActivity.getString(R.string.nup_pdf_filename);
 
 		AssetManager assetMgr = SSHManager.callingActivity.getAssets();
 		try {
-			multiValStream = assetMgr.open(multivalentFilename);
+			nup_pdf_stream = assetMgr.open(nup_pdf_Filename);
 		} catch (IOException e) {
 			//Nothing
 		}
@@ -42,24 +45,15 @@ public class SSH_Upload_Print_Method_3 extends SSHManager {
 
 	@Override
 	protected String doInBackground(String... params) {
-
-		if(multiValStream == null){
-			return "Cannot open multival jar";
-		}
-
 		String filePath = params[0];
 		String printerName = params[1];
-		String numCols = params[2];
-		String numRows = params[3];
-		String startRange = params[4];
-		String endRange = params[5];
-		String lineBorder = params[6];
+		String pagesPerSheet = params[2];
+		String lineBorder = params[3];
 
 
 		try {
-			publishProgress("Uploading " + multivalentFilename);
-			super.uploadFile(multiValStream, multivalentFilename);
-
+			publishProgress("Uploading " + nup_pdf_Filename);
+			super.uploadFile(nup_pdf_stream, nup_pdf_Filename);
 
 			File toBePrinted = new File(filePath);
 			InputStream fileStream = new FileInputStream(toBePrinted);
@@ -74,11 +68,12 @@ public class SSH_Upload_Print_Method_3 extends SSHManager {
 
 			publishProgress("Uploading Document...");
 			super.uploadFile(fileStream, toBePrinted.getName());
+			
+			
+			String nupCommand = generateNupCommand(onServerFileName, pdfUpFilename, pagesPerSheet, lineBorder);
 
-			String imposeCommand = generateMultivalentCommand(onServerFileName, numRows, numCols, startRange, endRange, lineBorder);
-
-			publishProgress("Formatting PDF using: " + imposeCommand);
-			super.sendCommand(imposeCommand);
+			publishProgress("Formatting PDF using: " + nupCommand);
+			super.sendCommand(nupCommand);
 
 			String convertToPSCommand = "pdftops";
 
@@ -89,6 +84,7 @@ public class SSH_Upload_Print_Method_3 extends SSHManager {
 			super.sendCommand(convertToPSCommand);
 
 			return super.printThisPSFile(psFilename, printerName);
+
 
 		} catch (FileNotFoundException e) {
 			return String.format(FILE_NOT_FOUND_EXCEPTION_FORMAT, e.getMessage());
@@ -101,57 +97,30 @@ public class SSH_Upload_Print_Method_3 extends SSHManager {
 		} finally {
 			super.close();
 		}
+
+
+
+
 	}
 
 
-	public String generateMultivalentCommand(String filePath, String numRows, String numCols, 
-			String startRange, String endRange, String lineBorder ){
 
-		String command = "java -classpath socPrint/Multivalent.jar tool.pdf.Impose -paper a4";
+
+
+	public String generateNupCommand(String inputFilePath, String outputFilePath, String pagesPerSheet, String lineBorder ){
 		
-		command += " -dim " + numCols + "x" + numRows;
-
-		if(!(startRange == null && endRange == null)){
-
-			command += " -page ";
-			if(startRange != null){
-				command += startRange;
-			}
-
-			command += "-";
-
-
-			if(endRange != null){
-				command += endRange;
-			}
+		String command = "java -jar nup_pdf.jar";
+		command += " " + inputFilePath;
+		command += " " + outputFilePath;
+		
+		command += " " + pagesPerSheet;
+		
+		if(lineBorder != null){
+			command += " -b";
 		}
-
-		command += " -sep ";
-
-		if(lineBorder == null){
-			command += "0";
-		} else {
-			command += "1";
-		}
-
-		command += " " + filePath;
-
-
-
+		
 		return command;
-	}
 
-	@Override
-	protected void onProgressUpdate(String... progress){
-		currentProgress += progressIncrement;
-		String soFar = progress[0];
-		callingActivity.updatePrintingStatusProgressBar(soFar, currentProgress.intValue());
-	}
-
-
-	@Override
-	protected void onPostExecute(String output){
-		callingActivity.updatePrintingStatusProgressBar(output, 100);
 	}
 
 }

@@ -171,6 +171,25 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 	protected static boolean getConnectionStatus(){
 		return connectionStatus;
 	}
+	
+	
+	protected String printThisPSFile(String psFilename, String printerName) throws IOException, JSchException{
+		String printCommand = "lpr -P ";
+
+		printCommand += printerName + " ";
+
+		printCommand += psFilename;
+
+		publishProgress("Sending print command : \n" + printCommand);
+
+		String printReply = sendCommand(printCommand);
+
+		if(printReply.isEmpty()){
+			return "Print command sent successfully";
+		} else {
+			return printReply;
+		}
+	}
 
 
 }
