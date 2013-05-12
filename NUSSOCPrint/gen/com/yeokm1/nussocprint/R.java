@@ -60,12 +60,10 @@ public final class R {
         public static final int print_status=0x7f0a0012;
         public static final int printer_list=0x7f0a0025;
         public static final int printer_queue_status_output=0x7f0a002c;
-        public static final int progressBar1=0x7f0a0024;
-        public static final int progressBar2=0x7f0a0016;
         public static final int progressBar_print=0x7f0a0011;
-        public static final int radioGroup1=0x7f0a0028;
         public static final int radioGroup_page_range=0x7f0a001d;
         public static final int radio_all_page=0x7f0a001f;
+        public static final int radio_group_method=0x7f0a0028;
         public static final int radio_method1=0x7f0a0029;
         public static final int radio_method2=0x7f0a002a;
         public static final int radio_method3=0x7f0a002b;
@@ -73,14 +71,16 @@ public final class R {
         public static final int refreshProgressBar=0x7f0a002e;
         public static final int refresh_print_queue=0x7f0a002d;
         public static final int relativeLayout01=0x7f0a0001;
-        public static final int textView1=0x7f0a001b;
-        public static final int textView2=0x7f0a0017;
-        public static final int textView3=0x7f0a0026;
-        public static final int textView4=0x7f0a001c;
-        public static final int textView5=0x7f0a0019;
-        public static final int textView6=0x7f0a001e;
-        public static final int textView7=0x7f0a0023;
+        public static final int separator1=0x7f0a0024;
+        public static final int sepeaator2=0x7f0a0016;
         public static final int textViewFilename=0x7f0a0007;
+        public static final int tv_cols_x_rows=0x7f0a001c;
+        public static final int tv_page_range=0x7f0a001e;
+        public static final int tv_pages_per_sheet=0x7f0a0017;
+        public static final int tv_print_method=0x7f0a001b;
+        public static final int tv_printer=0x7f0a0026;
+        public static final int tv_to=0x7f0a0023;
+        public static final int tv_x=0x7f0a0019;
         public static final int webView_qouta=0x7f0a0031;
     }
     public static final class layout {

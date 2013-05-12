@@ -84,10 +84,10 @@
             android:id="@+id/num_pages_per_sheet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/progressBar2"
+            android:layout_above="@+id/sepeaator2"
             android:layout_alignParentLeft="true"
-            android:layout_alignRight="@+id/textView2"
-            android:layout_below="@+id/textView2"
+            android:layout_alignRight="@+id/tv_pages_per_sheet"
+            android:layout_below="@+id/tv_pages_per_sheet"
             android:entries="@array/pagesForM1" />
 
         <EditText
@@ -96,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/button_select_file"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/textView2"
+            android:layout_below="@+id/tv_pages_per_sheet"
             android:ems="10"
             android:inputType="number"
             android:text="1" >
@@ -105,7 +105,7 @@
         </EditText>
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/tv_x"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/numRows"
@@ -118,15 +118,15 @@
             android:id="@+id/numCols"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/textView1"
-            android:layout_below="@+id/textView4"
-            android:layout_toLeftOf="@+id/textView5"
+            android:layout_alignLeft="@+id/tv_print_method"
+            android:layout_below="@+id/tv_cols_x_rows"
+            android:layout_toLeftOf="@+id/tv_x"
             android:ems="10"
             android:inputType="number"
             android:text="1" />
 
         <ProgressBar
-            android:id="@+id/progressBar2"
+            android:id="@+id/sepeaator2"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -140,7 +140,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/textView6"
+            android:layout_below="@+id/tv_page_range"
             android:orientation="horizontal" >
 
             <RadioButton
@@ -173,26 +173,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/num_end_range"
-            android:layout_alignLeft="@+id/numCols"
-            android:layout_toLeftOf="@+id/textView7"
+            android:layout_toLeftOf="@+id/tv_to"
+            android:layout_toRightOf="@+id/radioGroup_page_range"
             android:ems="10"
             android:inputType="number" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tv_pages_per_sheet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/progressBar1"
+            android:layout_below="@+id/separator1"
             android:text="Pages/Sheet:"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/tv_cols_x_rows"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/progressBar1"
+            android:layout_below="@+id/separator1"
             android:text="Cols x Rows"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -201,11 +201,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignRight="@+id/textView6"
-            android:layout_below="@+id/textView3" />
+            android:layout_alignRight="@+id/tv_page_range"
+            android:layout_below="@+id/tv_printer" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/tv_printer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -214,7 +214,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <ProgressBar
-            android:id="@+id/progressBar1"
+            android:id="@+id/separator1"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -224,16 +224,16 @@
             android:progress="100" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/tv_page_range"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/progressBar2"
+            android:layout_below="@+id/sepeaator2"
             android:text="Page Range:"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/tv_print_method"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/checkbox_page_line_border"
@@ -242,11 +242,11 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <RadioGroup
-            android:id="@+id/radioGroup1"
+            android:id="@+id/radio_group_method"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/textView1"
-            android:layout_below="@+id/textView1"
+            android:layout_alignLeft="@+id/tv_print_method"
+            android:layout_below="@+id/tv_print_method"
             android:orientation="horizontal" >
 
             <RadioButton
@@ -270,11 +270,11 @@
         </RadioGroup>
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/tv_to"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/radioGroup_page_range"
-            android:layout_alignLeft="@+id/textView4"
+            android:layout_alignLeft="@+id/tv_cols_x_rows"
             android:text="to"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -283,7 +283,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/textView3"
+            android:layout_alignTop="@+id/tv_printer"
             android:text="Draw Page Border  "
             android:textSize="@dimen/Medium12" />
 
