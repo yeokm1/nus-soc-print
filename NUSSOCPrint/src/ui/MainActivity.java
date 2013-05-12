@@ -186,6 +186,8 @@ public class MainActivity extends Activity implements TabListener {
 			fragMentTra.replace(rl.getId(), fram2);
 			fragMentTra.commit();
 			
+			currentFragment = fram2;
+			
 			
 		}else if (tab.getText().equals(tab3Text)) {
 			try {
@@ -198,6 +200,8 @@ public class MainActivity extends Activity implements TabListener {
 			fragMentTra = getFragmentManager().beginTransaction();
 			fragMentTra.replace(rl.getId(), fram3);
 			fragMentTra.commit();
+			
+			currentFragment = fram3;
 		}  else if (tab.getText().equals(tab4Text)) {
 			try {
 				rl.removeAllViews();
@@ -209,6 +213,8 @@ public class MainActivity extends Activity implements TabListener {
 			fragMentTra = getFragmentManager().beginTransaction();
 			fragMentTra.replace(rl.getId(), fram4);
 			fragMentTra.commit();
+			
+			currentFragment = fram4;
 			
 		}
 		

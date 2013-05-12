@@ -19,7 +19,7 @@ import com.yeokm1.nussocprint.R;
 public class SSH_Upload_Print extends SSHManager {
 
 	//f.pdf for shortfileName as multivalent seems to have issue with long file names
-	final String dummyServerFileName = "f.pdf";
+//	final String dummyServerFileName = "t.pdf";
 	Float progressIncrement;
 	Float currentProgress = (float) 0;
 	InputStream multiVal = null;
@@ -73,12 +73,12 @@ public class SSH_Upload_Print extends SSHManager {
 			String tempDir = callingActivity.getString(R.string.server_temp_dir) + "/";
 
 
-			String onServerFileName = tempDir + "\"" + dummyServerFileName + "\"";
+			String onServerFileName = tempDir + "\"" + toBePrinted.getName() + "\"";
 			String pdfUpFilename = onServerFileName.substring(0, onServerFileName.length() - 5) + "-up.pdf\"";  //-5 to remove .pdf";
 			String psFilename = onServerFileName.substring(0, onServerFileName.length() - 4) + "ps\"";
 
 			publishProgress("Uploading Document...");
-			super.uploadFile(fileStream, dummyServerFileName);
+			super.uploadFile(fileStream, toBePrinted.getName());
 
 			String imposeCommand = generateMultivalentCommand(onServerFileName, numRows, numCols, startRange, endRange, lineBorder);
 
