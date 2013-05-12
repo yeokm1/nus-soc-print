@@ -40,11 +40,17 @@ public class SSH_Upload_Print_Method_2 extends SSHManager {
 		} catch (IOException e) {
 			//Nothing
 		}
+		
+
 
 	}
 
 	@Override
 	protected String doInBackground(String... params) {
+		if(nup_pdf_stream == null){
+			return "Cannot open multival jar";
+		}
+		
 		String filePath = params[0];
 		String printerName = params[1];
 		String pagesPerSheet = params[2];

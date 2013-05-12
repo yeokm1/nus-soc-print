@@ -57,7 +57,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/print_status" >
+        android:layout_above="@+id/print_status"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbarStyle="outsideOverlay" >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -67,7 +69,11 @@
             android:id="@+id/file_path_view"
             android:layout_width="393dp"
             android:layout_height="42dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/tv_to"
             android:freezesText="true"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="vertical"
             android:text="@string/select_file_to_print"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 

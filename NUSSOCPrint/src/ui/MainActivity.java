@@ -10,6 +10,9 @@ import network.SSHManager;
 import network.SSH_Clear_Cache;
 import network.SSH_Delete_All_Jobs;
 import network.SSH_Printer_Status;
+import network.SSH_Upload_Print_Method_1;
+import network.SSH_Upload_Print_Method_2;
+import network.SSH_Upload_Print_Method_3;
 import network.WebViewSettings;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
@@ -35,7 +38,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -319,117 +325,124 @@ public class MainActivity extends Activity implements TabListener {
 	}
 
 	public void printButtonPress(View view){
-		//		if(obtainCredentials() == null){
-		//			showToast(getString(R.string.credentials_not_set));
-		//			return;
-		//		}
-		//
-		//		TextView filePathviewer = (TextView) findViewById(R.id.file_path_view);
-		//		String filePath = (String) filePathviewer.getText();
-		//		String printerName;
-		//		String startRangeText = null;
-		//		String endRangeText = null;
-		//		String lineBorder = null;
-		//
-		//		if(filePath.equals(getString(R.string.select_file_to_print))){
-		//			showToast(fileNotSelected);
-		//			return;
-		//		}
-		//
-		//
-		//		CheckBox customPrinter = (CheckBox) findViewById(R.id.checkbox_custom_printer);
-		//		Spinner printerList = (Spinner) findViewById(R.id.printer_list);
-		//
-		//
-		//
-		//
-		//
-		//		if(customPrinter.isChecked()){
-		//			printerName = getPreference(getString(R.string.custom_printer_preference));
-		//			if(printerName.isEmpty()){
-		//				showToast("Custom printer not set");
-		//				return;
-		//			}
-		//		} else {
-		//			printerName = printerList.getSelectedItem().toString();
-		//		}
-		//
-		//	
-		//		EditText colsTextField = (EditText) findViewById(R.id.num_cols);
-		//		EditText rowsTextField = (EditText) findViewById(R.id.num_rows);
-		//		
-		//		String numColsText = colsTextField.getText().toString();
-		//		String numRowsText = rowsTextField.getText().toString();
-		//		
-		//		
-		//		try{
-		//			int numCols = Integer.parseInt(numColsText);
-		//			int numRows = Integer.parseInt(numRowsText);
-		//			
-		//			if((numCols == 0) || (numRows == 0)){
-		//				showToast(invalidPageLayout);
-		//				return;
-		//			}
-		//			
-		//		} catch (NumberFormatException e){
-		//			showToast(invalidPageLayout);
-		//			return;
-		//		}
-		//
-		//		RadioButton radioRange = (RadioButton) findViewById(R.id.radio_range_page);
-		//
-		//
-		//		if(radioRange.isChecked()){
-		//
-		//
-		//			EditText startRangeField = (EditText) findViewById(R.id.num_page_start);
-		//			EditText endRangeField = (EditText) findViewById(R.id.num_page_end);
-		//
-		//
-		//			startRangeText = startRangeField.getText().toString();
-		//			endRangeText = endRangeField.getText().toString();
-		//
-		//			if(startRangeText.isEmpty() && endRangeText.isEmpty()){
-		//				showToast(invalidPageRange);
-		//				return;
-		//			}
-		//
-		//			Integer startRange = null;
-		//			Integer endRange = null;
-		//
-		//			try{
-		//				startRange = Integer.parseInt(startRangeText);
-		//			} catch (NumberFormatException e){
-		//				startRangeText = null;
-		//			}
-		//
-		//			try{
-		//				endRange = Integer.parseInt(endRangeText);
-		//			} catch (NumberFormatException e){
-		//				endRangeText = null;
-		//			}
-		//
-		//
-		//			if(((startRange != null) && (endRange != null)) 
-		//					&& ((startRange <= 0) || (startRange > endRange))){
-		//				showToast(invalidPageRange);
-		//				return;
-		//			}
-		//
-		//
-		//		}
-		//
-		//		CheckBox lineBorderBox = (CheckBox) findViewById(R.id.checkbox_page_line_border);
-		//		if(lineBorderBox.isChecked()){
-		//			lineBorder = "lineBorder";
-		//		}
-		//
-		//
-		//
-		//		String[] settings = {filePath, printerName, numColsText, numRowsText, startRangeText, endRangeText, lineBorder};
-		//
-		//		SSH_Upload_Print printing = new SSH_Upload_Print(this);
-		//		printing.execute(settings);
+		if(obtainCredentials() == null){
+			showToast(getString(R.string.credentials_not_set));
+			return;
+		}
+
+		TextView filePathviewer = (TextView) findViewById(R.id.file_path_view);
+		String filePath = filePathviewer.getText().toString();
+		String printerName;
+		String pagesPerSheetText = null;
+		String startRangeText = null;
+		String endRangeText = null;
+		String lineBorder = null;
+
+		if(filePath.equals(getString(R.string.select_file_to_print))){
+			showToast(fileNotSelected);
+			return;
+		}
+
+		Spinner printerList = (Spinner) findViewById(R.id.printer_list);
+
+		printerName = printerList.getSelectedItem().toString();
+
+
+		CheckBox lineBorderBox = (CheckBox) findViewById(R.id.checkbox_page_line_border);
+		if(lineBorderBox.isChecked()){
+			lineBorder = "lineBorder";
+		}
+
+
+		Spinner pagesPerSheetSpinner = (Spinner) findViewById(R.id.num_pages_per_sheet);
+
+		EditText colsTextField = (EditText) findViewById(R.id.numCols);
+		EditText rowsTextField = (EditText) findViewById(R.id.numRows);
+
+		RadioButton radioRange = (RadioButton) findViewById(R.id.radio_range_page);
+		EditText startRangeField = (EditText) findViewById(R.id.num_start_range);
+		EditText endRangeField = (EditText) findViewById(R.id.num_end_range);
+
+
+		if((currentMethod == METHOD_1) || (currentMethod == METHOD_3)){
+			if(radioRange.isChecked()){
+
+				startRangeText = startRangeField.getText().toString();
+				endRangeText = endRangeField.getText().toString();
+
+				if(startRangeText.isEmpty() && endRangeText.isEmpty()){
+					showToast(invalidPageRange);
+					return;
+				}
+
+				Integer startRange = null;
+				Integer endRange = null;
+
+				try{
+					startRange = Integer.parseInt(startRangeText);
+				} catch (NumberFormatException e){
+					startRangeText = null;
+				}
+
+				try{
+					endRange = Integer.parseInt(endRangeText);
+				} catch (NumberFormatException e){
+					endRangeText = null;
+				}
+
+
+				if(((startRange != null) && (endRange != null)) 
+						&& ((startRange <= 0) || (startRange > endRange))){
+					showToast(invalidPageRange);
+					return;
+				}
+			}
+
+			if(currentMethod == METHOD_1){
+				pagesPerSheetText =  pagesPerSheetSpinner.getSelectedItem().toString();
+				SSH_Upload_Print_Method_1 action = new SSH_Upload_Print_Method_1(this);
+				action.execute(filePath, printerName,pagesPerSheetText, startRangeText, endRangeText, lineBorder);
+				return;
+			}
+
+			if(currentMethod == METHOD_3){
+
+				String numColsText = colsTextField.getText().toString();
+				String numRowsText = rowsTextField.getText().toString();
+
+
+				try{
+					int numCols = Integer.parseInt(numColsText);
+					int numRows = Integer.parseInt(numRowsText);
+
+					if((numCols == 0) || (numRows == 0)){
+						showToast(invalidPageLayout);
+						return;
+					}
+
+				} catch (NumberFormatException e){
+					showToast(invalidPageLayout);
+					return;
+				}
+
+
+				SSH_Upload_Print_Method_3 printing = new SSH_Upload_Print_Method_3(this);
+				printing.execute(filePath, printerName, numColsText, numRowsText, startRangeText, endRangeText, lineBorder);
+				return;
+			}
+
+
+		}
+		
+		
+		if(currentMethod == METHOD_2){
+			pagesPerSheetText =  pagesPerSheetSpinner.getSelectedItem().toString();
+			SSH_Upload_Print_Method_2 action = new SSH_Upload_Print_Method_2(this);
+			action.execute(filePath, printerName, pagesPerSheetText, lineBorder);
+			return;
+		}
+		
+		
 
 	}
 
@@ -531,6 +544,7 @@ public class MainActivity extends Activity implements TabListener {
 	public void setFilePathView(String filePath){
 		TextView viewer = (TextView) findViewById(R.id.file_path_view);
 		viewer.setText(filePath);
+		viewer.setMovementMethod(new ScrollingMovementMethod());
 	}
 
 	private List<String> getPrinterList(){
