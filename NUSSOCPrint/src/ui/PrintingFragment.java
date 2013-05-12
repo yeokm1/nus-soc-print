@@ -36,7 +36,9 @@ public class PrintingFragment extends Fragment {
 	public void onStart(){
 		super.onStart();
 		caller.updatePrinterSpinner();
-
+		
+		
+		caller.disableAndAdjustSomeUiOptionsBasedOnMethods(caller.currentMethod);
 		//Put this listener here to renew it across tab changes
 		RadioGroup radioGroup = (RadioGroup) caller.findViewById(R.id.radio_group_method);        
 		radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() 
