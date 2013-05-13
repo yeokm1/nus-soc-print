@@ -70,7 +70,7 @@ public class SSH_Upload_Print_Method_3 extends SSHManager {
 
 			String onServerFileName = tempDir + "\"" + toBePrinted.getName() + "\"";
 			String pdfUpFilename = onServerFileName.substring(0, onServerFileName.length() - 5) + "-up.pdf\"";  //-5 to remove .pdf";
-			String psFilename = onServerFileName.substring(0, onServerFileName.length() - 4) + "ps\"";
+			String psFilename = pdfUpFilename.substring(0, pdfUpFilename.length() - 4) + "ps\"";
 
 			publishProgress("Uploading Document...");
 			super.uploadFile(fileStream, toBePrinted.getName());

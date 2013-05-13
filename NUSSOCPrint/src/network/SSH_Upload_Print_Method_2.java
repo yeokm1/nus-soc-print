@@ -21,6 +21,7 @@ public class SSH_Upload_Print_Method_2 extends SSHManager {
 
 	InputStream nup_pdf_stream = null;
 	String nup_pdf_Filename;
+	String tempDir;
 
 
 
@@ -33,6 +34,8 @@ public class SSH_Upload_Print_Method_2 extends SSHManager {
 	protected void onPreExecute(){
 
 		nup_pdf_Filename = SSHManager.callingActivity.getString(R.string.nup_pdf_filename);
+		
+		tempDir = callingActivity.getString(R.string.server_temp_dir) + "/";
 
 		AssetManager assetMgr = SSHManager.callingActivity.getAssets();
 		try {
@@ -66,12 +69,12 @@ public class SSH_Upload_Print_Method_2 extends SSHManager {
 			InputStream fileStream = new FileInputStream(toBePrinted);
 
 
-			String tempDir = callingActivity.getString(R.string.server_temp_dir) + "/";
+			
 
 
 			String onServerFileName = tempDir + "\"" + toBePrinted.getName() + "\"";
 			String pdfUpFilename = onServerFileName.substring(0, onServerFileName.length() - 5) + "-up.pdf\"";  //-5 to remove .pdf";
-			String psFilename = onServerFileName.substring(0, onServerFileName.length() - 4) + "ps\"";
+			String psFilename = pdfUpFilename.substring(0, pdfUpFilename.length() - 4) + "ps\"";
 
 			publishProgress("Uploading Document...");
 			super.uploadFile(fileStream, toBePrinted.getName());
@@ -116,7 +119,7 @@ public class SSH_Upload_Print_Method_2 extends SSHManager {
 
 	public String generateNupCommand(String inputFilePath, String outputFilePath, String pagesPerSheet, String lineBorder ){
 		
-		String command = "java -jar nup_pdf.jar";
+		String command = "java -jar " +  tempDir + nup_pdf_Filename;
 		command += " " + inputFilePath;
 		command += " " + outputFilePath;
 		
@@ -136,6 +139,11 @@ public class SSH_Upload_Print_Method_2 extends SSHManager {
 		currentProgress += progressIncrement;
 		String soFar = progress[0];
 		callingActivity.updatePrintingStatusProgressBar(soFar, currentProgress.intValue());
+	}
+	
+	@Override
+	protected void onPostExecute(String output){
+		callingActivity.updatePrintingStatusProgressBar(output, 100);
 	}
 
 }
