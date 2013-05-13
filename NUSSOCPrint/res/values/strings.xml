@@ -20,18 +20,18 @@
         <item>2</item>
     </string-array>
     <string-array name="pagesForM2">
-        <item>1</item>
-        <item>2</item>
-        <item>4</item>
-        <item>8</item>
-    </string-array>
-    <string-array name="pagesForM3">
         <item>Use cols x rows</item>
         <item>2</item>
         <item>4</item>
         <item>6</item>
         <item>9</item>
         <item>16</item>
+    </string-array>
+        <string-array name="pagesForM3">
+        <item>1</item>
+        <item>2</item>
+        <item>4</item>
+        <item>8</item>
     </string-array>
 
     <string name="multivalent_filename">Multivalent.jar</string>
@@ -58,11 +58,11 @@ BAD: Slides\n\n
 
 Method 2:\n
 Good: All-rounder\n
-BAD: 2.6MB jar program upload to Sunfire. Some rare PDFs cannot be processed. Output page-frames align to the left.\n
+BAD: 2.6MB jar program upload to Sunfire. Some rare PDFs cannot be processed (properly). row x col option aligns frames to the left.\n\n
 
 
 Method 3\n 
-GOOD: Intuitive auto-layout. Backup for Method 2\n
+GOOD: Intuitive auto-layout. Backup for Method 1\n
 BAD: 1.2MB jar program upload to Sunfire. PDFs saved with incorrect page properties may not come out properly.\n\n
 </string>
 

@@ -50,11 +50,12 @@ public class SSH_Upload_Print_Method_2 extends SSHManager {
 
 		String filePath = params[0];
 		String printerName = params[1];
-		String numCols = params[2];
-		String numRows = params[3];
-		String startRange = params[4];
-		String endRange = params[5];
-		String lineBorder = params[6];
+		String numPagesPerSheet = params[2];
+		String numCols = params[3];
+		String numRows = params[4];
+		String startRange = params[5];
+		String endRange = params[6];
+		String lineBorder = params[7];
 
 
 		try {
@@ -76,7 +77,7 @@ public class SSH_Upload_Print_Method_2 extends SSHManager {
 			publishProgress("Uploading Document...");
 			super.uploadFile(fileStream, toBePrinted.getName());
 
-			String imposeCommand = generateMultivalentCommand(onServerFileName, numRows, numCols, startRange, endRange, lineBorder);
+			String imposeCommand = generateMultivalentCommand(onServerFileName, numPagesPerSheet, numRows, numCols, startRange, endRange, lineBorder);
 
 			publishProgress("Formatting PDF using: " + imposeCommand);
 			super.sendCommand(imposeCommand);
@@ -105,12 +106,17 @@ public class SSH_Upload_Print_Method_2 extends SSHManager {
 	}
 
 
-	public String generateMultivalentCommand(String filePath, String numRows, String numCols, 
+	public String generateMultivalentCommand(String filePath, String numPagesPerSheet, String numRows, String numCols, 
 			String startRange, String endRange, String lineBorder ){
 
 		String command = "java -classpath socPrint/Multivalent.jar tool.pdf.Impose -paper a4";
 		
-		command += " -dim " + numCols + "x" + numRows;
+		
+		if(numPagesPerSheet == null){
+			command += " -dim " + numCols + "x" + numRows;
+		} else {
+			command += " -nup " + numPagesPerSheet;
+		}
 
 		if(!(startRange == null && endRange == null)){
 

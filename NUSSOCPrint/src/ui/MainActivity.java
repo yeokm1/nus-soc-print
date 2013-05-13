@@ -165,6 +165,8 @@ public class MainActivity extends Activity implements TabListener {
 		View pageRangeTo = findViewById(R.id.tv_to); pageRangeTo.setVisibility(View.INVISIBLE);
 		View pageRangeEnd = findViewById(R.id.num_end_range); pageRangeEnd.setVisibility(View.INVISIBLE);
 
+		Spinner numPagesSpinner = (Spinner) pagesPerSheetSpinner;
+		
 		switch(method){
 		case METHOD_1 : {
 			
@@ -178,7 +180,7 @@ public class MainActivity extends Activity implements TabListener {
 			pageRangeEnd.setVisibility(View.VISIBLE);
 
 
-			Spinner numPagesSpinner = (Spinner) pagesPerSheetSpinner;
+			
 			String[] pagesArray = getResources().getStringArray(R.array.pagesForM1);
 			ArrayAdapter<String> pagesAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, pagesArray);
 			numPagesSpinner.setAdapter(pagesAdapter);
@@ -190,8 +192,8 @@ public class MainActivity extends Activity implements TabListener {
 			pagesPerSheetTitle.setVisibility(View.VISIBLE);
 			pagesPerSheetSpinner.setVisibility(View.VISIBLE);
 			
-			Spinner numPagesSpinner = (Spinner) pagesPerSheetSpinner;
-			String[] pagesArray = getResources().getStringArray(R.array.pagesForM3);
+
+			String[] pagesArray = getResources().getStringArray(R.array.pagesForM2);
 			ArrayAdapter<String> pagesAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, pagesArray);
 			numPagesSpinner.setAdapter(pagesAdapter);
 			
@@ -211,8 +213,7 @@ public class MainActivity extends Activity implements TabListener {
 			pagesPerSheetTitle.setVisibility(View.VISIBLE);
 			pagesPerSheetSpinner.setVisibility(View.VISIBLE);
 
-			Spinner numPagesSpinner = (Spinner) pagesPerSheetSpinner;
-			String[] pagesArray = getResources().getStringArray(R.array.pagesForM2);
+			String[] pagesArray = getResources().getStringArray(R.array.pagesForM3);
 			ArrayAdapter<String> pagesAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, pagesArray);
 			numPagesSpinner.setAdapter(pagesAdapter);
 
@@ -393,7 +394,7 @@ public class MainActivity extends Activity implements TabListener {
 		EditText endRangeField = (EditText) findViewById(R.id.num_end_range);
 
 
-		if((currentMethod == METHOD_1) || (currentMethod == METHOD_3)){
+		if((currentMethod == METHOD_1) || (currentMethod == METHOD_2)){
 			if(radioRange.isChecked()){
 
 				startRangeText = startRangeField.getText().toString();
@@ -434,29 +435,36 @@ public class MainActivity extends Activity implements TabListener {
 				return;
 			}
 
-			if(currentMethod == METHOD_3){
+			if(currentMethod == METHOD_2){
 
-				String numColsText = colsTextField.getText().toString();
-				String numRowsText = rowsTextField.getText().toString();
+				String numColsText = null;
+				String numRowsText = null;
+				
+				if(pagesPerSheetSpinner.getSelectedItemPosition() == 0){
+					numColsText = colsTextField.getText().toString();
+					numRowsText = rowsTextField.getText().toString();
+					
+					try{
+						int numCols = Integer.parseInt(numColsText);
+						int numRows = Integer.parseInt(numRowsText);
 
+						if((numCols == 0) || (numRows == 0)){
+							showToast(invalidPageLayout);
+							return;
+						}
 
-				try{
-					int numCols = Integer.parseInt(numColsText);
-					int numRows = Integer.parseInt(numRowsText);
-
-					if((numCols == 0) || (numRows == 0)){
+					} catch (NumberFormatException e){
 						showToast(invalidPageLayout);
 						return;
 					}
-
-				} catch (NumberFormatException e){
-					showToast(invalidPageLayout);
-					return;
+					
+				} else {
+					pagesPerSheetText =  pagesPerSheetSpinner.getSelectedItem().toString();
 				}
-
-
-				SSH_Upload_Print_Method_3 printing = new SSH_Upload_Print_Method_3(this);
-				printing.execute(filePath, printerName, numColsText, numRowsText, startRangeText, endRangeText, lineBorder);
+					
+				SSH_Upload_Print_Method_2 printing = new SSH_Upload_Print_Method_2(this);
+				printing.execute(filePath, printerName, pagesPerSheetText, numColsText, numRowsText, startRangeText, endRangeText, lineBorder);
+					
 				return;
 			}
 
@@ -464,9 +472,9 @@ public class MainActivity extends Activity implements TabListener {
 		}
 		
 		
-		if(currentMethod == METHOD_2){
+		if(currentMethod == METHOD_3){
 			pagesPerSheetText =  pagesPerSheetSpinner.getSelectedItem().toString();
-			SSH_Upload_Print_Method_2 action = new SSH_Upload_Print_Method_2(this);
+			SSH_Upload_Print_Method_3 action = new SSH_Upload_Print_Method_3(this);
 			action.execute(filePath, printerName, pagesPerSheetText, lineBorder);
 			return;
 		}
