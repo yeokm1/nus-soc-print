@@ -11,8 +11,8 @@ import network.SSH_Clear_Cache;
 import network.SSH_Delete_All_Jobs;
 import network.SSH_Printer_Status;
 import network.SSH_Upload_Print_Method_1;
-import network.SSH_Upload_Print_Method_3;
 import network.SSH_Upload_Print_Method_2;
+import network.SSH_Upload_Print_Method_3;
 import network.WebViewSettings;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
@@ -158,7 +158,7 @@ public class MainActivity extends Activity implements TabListener {
 		View colsXRows_rows = findViewById(R.id.numRows); colsXRows_rows.setVisibility(View.INVISIBLE);
 
 		
-		if(position == 0 && currentMethod == METHOD_2){
+		if(position == 0 && currentMethod == METHOD_3){
 			colsXRowsTitle.setVisibility(View.VISIBLE);
 			colsXRows_cols.setVisibility(View.VISIBLE);
 			colsXRows_x.setVisibility(View.VISIBLE);
@@ -177,7 +177,7 @@ public class MainActivity extends Activity implements TabListener {
 		View pageRangeTo = findViewById(R.id.tv_to); pageRangeTo.setVisibility(View.INVISIBLE);
 		View pageRangeEnd = findViewById(R.id.num_end_range); pageRangeEnd.setVisibility(View.INVISIBLE);
 		
-		if(value && (currentMethod != METHOD_3)){
+		if(value && (currentMethod != METHOD_2)){
 			pageRangeStart.setVisibility(View.VISIBLE);
 			pageRangeTo.setVisibility(View.VISIBLE);
 			pageRangeEnd.setVisibility(View.VISIBLE);
@@ -231,9 +231,18 @@ public class MainActivity extends Activity implements TabListener {
 		case METHOD_2 :	{
 			pagesPerSheetTitle.setVisibility(View.VISIBLE);
 			pagesPerSheetSpinner.setVisibility(View.VISIBLE);
-			
 
 			String[] pagesArray = getResources().getStringArray(R.array.pagesForM2);
+			ArrayAdapter<String> pagesAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, pagesArray);
+			numPagesSpinner.setAdapter(pagesAdapter);
+			
+		} break;
+		case METHOD_3 : {
+			pagesPerSheetTitle.setVisibility(View.VISIBLE);
+			pagesPerSheetSpinner.setVisibility(View.VISIBLE);
+			
+
+			String[] pagesArray = getResources().getStringArray(R.array.pagesForM3);
 			ArrayAdapter<String> pagesAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, pagesArray);
 			numPagesSpinner.setAdapter(pagesAdapter);
 			
@@ -247,15 +256,6 @@ public class MainActivity extends Activity implements TabListener {
 			pageRangeStart.setVisibility(View.VISIBLE);
 			pageRangeTo.setVisibility(View.VISIBLE);
 			pageRangeEnd.setVisibility(View.VISIBLE);
-
-		} break;
-		case METHOD_3 : {
-			pagesPerSheetTitle.setVisibility(View.VISIBLE);
-			pagesPerSheetSpinner.setVisibility(View.VISIBLE);
-
-			String[] pagesArray = getResources().getStringArray(R.array.pagesForM3);
-			ArrayAdapter<String> pagesAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, pagesArray);
-			numPagesSpinner.setAdapter(pagesAdapter);
 
 
 		} break;
@@ -434,7 +434,7 @@ public class MainActivity extends Activity implements TabListener {
 		EditText endRangeField = (EditText) findViewById(R.id.num_end_range);
 
 
-		if((currentMethod == METHOD_1) || (currentMethod == METHOD_2)){
+		if((currentMethod == METHOD_1) || (currentMethod == METHOD_3)){
 			if(radioRange.isChecked()){
 
 				startRangeText = startRangeField.getText().toString();
@@ -475,7 +475,7 @@ public class MainActivity extends Activity implements TabListener {
 				return;
 			}
 
-			if(currentMethod == METHOD_2){
+			if(currentMethod == METHOD_3){
 
 				String numColsText = null;
 				String numRowsText = null;
@@ -502,7 +502,7 @@ public class MainActivity extends Activity implements TabListener {
 					pagesPerSheetText =  pagesPerSheetSpinner.getSelectedItem().toString();
 				}
 					
-				SSH_Upload_Print_Method_2 printing = new SSH_Upload_Print_Method_2(this);
+				SSH_Upload_Print_Method_3 printing = new SSH_Upload_Print_Method_3(this);
 				printing.execute(filePath, printerName, pagesPerSheetText, numColsText, numRowsText, startRangeText, endRangeText, lineBorder);
 					
 				return;
@@ -512,9 +512,9 @@ public class MainActivity extends Activity implements TabListener {
 		}
 		
 		
-		if(currentMethod == METHOD_3){
+		if(currentMethod == METHOD_2){
 			pagesPerSheetText =  pagesPerSheetSpinner.getSelectedItem().toString();
-			SSH_Upload_Print_Method_3 action = new SSH_Upload_Print_Method_3(this);
+			SSH_Upload_Print_Method_2 action = new SSH_Upload_Print_Method_2(this);
 			action.execute(filePath, printerName, pagesPerSheetText, lineBorder);
 			return;
 		}
