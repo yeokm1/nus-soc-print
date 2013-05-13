@@ -18,14 +18,20 @@
     <string-array name="pagesForM1">
         <item>1</item>
         <item>2</item>
-        <item>4</item>
-        <item>6</item>
     </string-array>
     <string-array name="pagesForM2">
         <item>1</item>
         <item>2</item>
         <item>4</item>
         <item>8</item>
+    </string-array>
+    <string-array name="pagesForM3">
+        <item>Use cols x rows</item>
+        <item>2</item>
+        <item>4</item>
+        <item>6</item>
+        <item>9</item>
+        <item>16</item>
     </string-array>
 
     <string name="multivalent_filename">Multivalent.jar</string>
@@ -43,25 +49,21 @@
     <string name="credentials_not_set">UNIX Username/password not entered, set them in the Settings page.</string>
     <string name="quota_url">http://mysoc.nus.edu.sg/~eprint/forms/quota.php</string>
     <string name="about_box_text">NUS SOC Print v0.3\nGNU GPL v3\nBuild Date: 13 May 2013\nBy: Yeo Kheng Meng\nWith thanks to Yong Quan, Kai Yao, Gabriel and Jason\n\nWhere to check for updates?\nhttps://code.google.com/p/nus-soc-print/\n\nhttp://yeokhengmeng.com/2013/03/nus-soc-print-android-app</string>
-    <string name="help_text">NUS SOC Print v0.3\nGNU GPL v3\nBuild Date: 13 May 2013\nBy: Yeo Kheng Meng\nWith thanks to Yong Quan, Kai Yao, Gabriel and Jason. Hit the about button to go to the website.\n
+    <string name="help_text">NUS SOC Print v0.3\nGNU GPL v3\nBuild Date: 13 May 2013\nBy: Yeo Kheng Meng\n
        
-       \nMethods of Printing\n
-       \nMethod 1 (Original from v0.22)\n
-	   Tools: pdftops and psnup\n
-	   Features: Page-range, 1,2,4,6 pages per sheet\n
-	   Issues: When pages/sheet >2, Auto layout is quite unpredictable.\n
+\nMethods of Printing\n\n
+Method 1 (Original from v0.22)\n
+GOOD: A4 files\n
+BAD: Slides\n\n
 
 
-\nMethod 2\n 
-Tools: nup-pdf by rubypdf, pdftops\n
-Features: 1,2,4,8 pages per sheet. Auto Layout is intuitively better then method 1\n
-Issues: No page range\n
+Method 2\n 
+GOOD: Intuitive auto-layout, slides\n
+BAD: 1.2MB jar program upload to Sunfire. PDFs saved with incorrect page properties may not come out properly.\n\n
 
 
-\nMethod 3:\n
-Tools: Multivalent-tools and pdftops\n
-Features: rows x col, Page-range\n
-Issue: This method is slightly buggy, may not work on all pdf files. Unnecessary alignment to the left. Portrait or landscape is auto-selected, but I believe the default is portrait.\n
-        </string>
+Method 3:\n
+Good: All-rounder\n
+BAD: 2.6MB jar program upload to Sunfire. Some rare PDFs cannot be processed. Output page-frames align to the left.\n</string>
 
 </resources>

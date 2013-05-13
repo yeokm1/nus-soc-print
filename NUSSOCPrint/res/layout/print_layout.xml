@@ -92,8 +92,8 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/separator2"
             android:layout_alignParentLeft="true"
-            android:layout_alignRight="@+id/tv_pages_per_sheet"
-            android:layout_below="@+id/tv_pages_per_sheet"/>
+            android:layout_below="@+id/tv_pages_per_sheet"
+            android:layout_toLeftOf="@+id/numCols" />
 
         <EditText
             android:id="@+id/numRows"

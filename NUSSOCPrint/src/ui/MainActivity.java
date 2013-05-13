@@ -194,6 +194,14 @@ public class MainActivity extends Activity implements TabListener {
 
 		} break;
 		case METHOD_3 : {
+			pagesPerSheetTitle.setVisibility(View.VISIBLE);
+			pagesPerSheetSpinner.setVisibility(View.VISIBLE);
+			
+			Spinner numPagesSpinner = (Spinner) pagesPerSheetSpinner;
+			String[] pagesArray = getResources().getStringArray(R.array.pagesForM3);
+			ArrayAdapter<String> pagesAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, pagesArray);
+			numPagesSpinner.setAdapter(pagesAdapter);
+			
 			colsXRowsTitle.setVisibility(View.VISIBLE);
 			colsXRows_cols.setVisibility(View.VISIBLE);
 			colsXRows_x.setVisibility(View.VISIBLE);
@@ -652,6 +660,10 @@ public class MainActivity extends Activity implements TabListener {
 	public void setIndeterminateProgress(boolean value){
 		ProgressBar bar1 = (ProgressBar) findViewById(R.id.separator1);
 		ProgressBar bar2 = (ProgressBar) findViewById(R.id.separator2);
+		
+		if(bar1 == null || bar2 == null){
+			return;
+		}
 		
 		bar1.setIndeterminate(value);
 		bar2.setIndeterminate(value);
