@@ -58,7 +58,8 @@ public class SSH_Upload_Print_Method_2 extends SSHManager {
 
 
 		try {
-			publishProgress("Uploading " + nup_pdf_Filename);
+			
+			super.publishProgress("Uploading " + nup_pdf_Filename);
 			super.uploadFile(nup_pdf_stream, nup_pdf_Filename);
 
 			File toBePrinted = new File(filePath);
@@ -127,6 +128,14 @@ public class SSH_Upload_Print_Method_2 extends SSHManager {
 		
 		return command;
 
+	}
+	
+	
+	@Override
+	protected void onProgressUpdate(String... progress){
+		currentProgress += progressIncrement;
+		String soFar = progress[0];
+		callingActivity.updatePrintingStatusProgressBar(soFar, currentProgress.intValue());
 	}
 
 }
