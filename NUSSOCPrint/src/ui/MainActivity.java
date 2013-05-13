@@ -79,6 +79,7 @@ public class MainActivity extends Activity implements TabListener {
 	String fileName = null;
 
 	int currentMethod = 1;
+	boolean showPageRangeEntries = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -147,6 +148,24 @@ public class MainActivity extends Activity implements TabListener {
 
 		updatePrinterSpinner();
 
+	}
+	
+	public void adjustPageRangeVisibility(boolean value){
+		
+		View pageRangeStart = findViewById(R.id.num_start_range); pageRangeStart.setVisibility(View.INVISIBLE);
+		View pageRangeTo = findViewById(R.id.tv_to); pageRangeTo.setVisibility(View.INVISIBLE);
+		View pageRangeEnd = findViewById(R.id.num_end_range); pageRangeEnd.setVisibility(View.INVISIBLE);
+		
+		if(value){
+			pageRangeStart.setVisibility(View.VISIBLE);
+			pageRangeTo.setVisibility(View.VISIBLE);
+			pageRangeEnd.setVisibility(View.VISIBLE);
+		} else {
+
+			pageRangeStart.setVisibility(View.INVISIBLE);
+			pageRangeTo.setVisibility(View.INVISIBLE);
+			pageRangeEnd.setVisibility(View.INVISIBLE);
+		}
 	}
 
 	public void disableAndAdjustSomeUiOptionsBasedOnMethods(int method){

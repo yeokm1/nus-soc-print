@@ -37,11 +37,14 @@ public class PrintingFragment extends Fragment {
 		super.onStart();
 		caller.updatePrinterSpinner();
 		
-		
+
 		caller.disableAndAdjustSomeUiOptionsBasedOnMethods(caller.currentMethod);
+		
+		//The statement below must come after visibility is adjusted
+		caller.adjustPageRangeVisibility(caller.showPageRangeEntries);
 		//Put this listener here to renew it across tab changes
-		RadioGroup radioGroup = (RadioGroup) caller.findViewById(R.id.radio_group_method);        
-		radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() 
+		RadioGroup methodsRadioGroup = (RadioGroup) caller.findViewById(R.id.radio_group_method);        
+		methodsRadioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() 
 		{
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
 
@@ -58,9 +61,38 @@ public class PrintingFragment extends Fragment {
 
 				caller.currentMethod = method;
 
+				
 				caller.disableAndAdjustSomeUiOptionsBasedOnMethods(method);
+				caller.adjustPageRangeVisibility(caller.showPageRangeEntries);
+				
 			}
 		});
+		
+		
+		RadioGroup pageRangeRadioGroup = (RadioGroup) caller.findViewById(R.id.radioGroup_page_range);        
+		pageRangeRadioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() 
+		{
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+				boolean showRangeOptions;
+				switch(checkedId){
+				case R.id.radio_all_page: showRangeOptions = false;
+				break;
+				case R.id.radio_range_page: showRangeOptions = true;
+				break;
+				default : showRangeOptions = true;
+				}
+
+				caller.showPageRangeEntries = showRangeOptions;
+
+				caller.adjustPageRangeVisibility(showRangeOptions);
+			}
+		});
+		
+		
+		
+		
+		
 
 	}
 }
