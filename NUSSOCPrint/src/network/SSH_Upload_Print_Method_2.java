@@ -44,7 +44,7 @@ public class SSH_Upload_Print_Method_2 extends SSHManager {
 		}
 		
 		tempDir = callingActivity.getString(R.string.server_temp_dir) + "/";
-
+		SSHManager.callingActivity.setIndeterminateProgress(true);
 		
 
 
@@ -145,6 +145,7 @@ public class SSH_Upload_Print_Method_2 extends SSHManager {
 	@Override
 	protected void onPostExecute(String output){
 		callingActivity.updatePrintingStatusProgressBar(output, 100);
+		SSHManager.callingActivity.setIndeterminateProgress(false);
 	}
 
 }

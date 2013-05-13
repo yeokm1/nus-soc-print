@@ -6,8 +6,6 @@ import java.io.IOException;
 
 import ui.MainActivity;
 
-import android.content.res.AssetManager;
-
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.SftpException;
 import com.yeokm1.nussocprint.R;
@@ -26,6 +24,7 @@ public class SSH_Upload_Print_Method_1 extends SSHManager {
 	@Override
 	protected void onPreExecute(){
 		tempDir = callingActivity.getString(R.string.server_temp_dir) + "/";
+		SSHManager.callingActivity.setIndeterminateProgress(true);
 	}
 
 	@Override
@@ -143,6 +142,7 @@ public class SSH_Upload_Print_Method_1 extends SSHManager {
 	@Override
 	protected void onPostExecute(String output){
 		callingActivity.updatePrintingStatusProgressBar(output, 100);
+		SSHManager.callingActivity.setIndeterminateProgress(false);
 	}
 
 }

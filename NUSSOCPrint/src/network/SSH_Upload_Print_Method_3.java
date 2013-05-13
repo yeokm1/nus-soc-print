@@ -37,6 +37,7 @@ public class SSH_Upload_Print_Method_3 extends SSHManager {
 		} catch (IOException e) {
 			//Nothing
 		}
+		SSHManager.callingActivity.setIndeterminateProgress(true);
 
 	}
 
@@ -152,6 +153,7 @@ public class SSH_Upload_Print_Method_3 extends SSHManager {
 	@Override
 	protected void onPostExecute(String output){
 		callingActivity.updatePrintingStatusProgressBar(output, 100);
+		SSHManager.callingActivity.setIndeterminateProgress(false);
 	}
 
 }

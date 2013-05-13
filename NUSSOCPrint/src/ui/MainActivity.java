@@ -631,6 +631,15 @@ public class MainActivity extends Activity implements TabListener {
 		}
 		statusView.setText(data);
 	}
+	
+	public void setIndeterminateProgress(boolean value){
+		ProgressBar bar1 = (ProgressBar) findViewById(R.id.separator1);
+		ProgressBar bar2 = (ProgressBar) findViewById(R.id.separator2);
+		
+		bar1.setIndeterminate(value);
+		bar2.setIndeterminate(value);
+
+	}
 
 	public void updateRefreshStatusProgressBar(String text, int progress){
 		ProgressBar progressBar = (ProgressBar) findViewById(R.id.refreshProgressBar);
