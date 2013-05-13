@@ -58,6 +58,7 @@ public class MainActivity extends Activity implements TabListener {
 	final String tab2Text = "Status";
 	final String tab3Text = "Quota";
 	final String tab4Text = "Settings";
+	final String tab5Text = "Help";
 
 	final String fileNotSelected = "Please select a file to print";
 	final String invalidPageRange = "Invalid page range given";
@@ -109,6 +110,7 @@ public class MainActivity extends Activity implements TabListener {
 			bar.addTab(bar.newTab().setText(tab2Text).setTabListener(this));
 			bar.addTab(bar.newTab().setText(tab3Text).setTabListener(this));
 			bar.addTab(bar.newTab().setText(tab4Text).setTabListener(this));
+			bar.addTab(bar.newTab().setText(tab5Text).setTabListener(this));
 
 			//			bar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM
 			//					| ActionBar.DISPLAY_USE_LOGO);
@@ -223,6 +225,7 @@ public class MainActivity extends Activity implements TabListener {
 	Fragment fram2 = new StatusFragment();
 	QuotaFragment fram3 = new QuotaFragment();
 	SettingsFragment fram4 = new SettingsFragment();
+	HelpFragment fram5 = new HelpFragment();
 
 
 	@Override
@@ -296,6 +299,20 @@ public class MainActivity extends Activity implements TabListener {
 			fragMentTra.commit();
 
 			currentFragment = fram4;
+
+		}else if (tab.getText().equals(tab5Text)) {
+			try {
+				rl.removeAllViews();
+			} catch (Exception e) {
+			}
+			fragMentTra.remove(currentFragment);
+			fram5.setCallingActivity(this);
+			fragMentTra.addToBackStack(null);
+			fragMentTra = getFragmentManager().beginTransaction();
+			fragMentTra.replace(rl.getId(), fram5);
+			fragMentTra.commit();
+
+			currentFragment = fram5;
 
 		}
 
