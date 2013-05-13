@@ -19,6 +19,8 @@
     <string-array name="pagesForM1">
         <item>1</item>
         <item>2</item>
+    	<item>4</item>
+    	<item>6</item>
     </string-array>
     
     <string-array name="pagesForM2">
