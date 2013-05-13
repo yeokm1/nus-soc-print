@@ -238,20 +238,29 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/tv_print_method"
+            android:id="@+id/tv_to"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/checkbox_page_line_border"
-            android:layout_toLeftOf="@+id/button_select_file"
-            android:text="Print Method:"
+            android:layout_alignBottom="@+id/radioGroup_page_range"
+            android:layout_alignLeft="@+id/tv_cols_x_rows"
+            android:text="to"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <CheckBox
+            android:id="@+id/checkbox_page_line_border"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/tv_printer"
+            android:text="Draw Page Border  "
+            android:textSize="@dimen/Medium12" />
 
         <RadioGroup
             android:id="@+id/radio_group_method"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tv_print_method"
-            android:layout_below="@+id/tv_print_method"
+            android:layout_above="@+id/separator1"
+            android:layout_alignParentRight="true"
             android:orientation="horizontal" >
 
             <RadioButton
@@ -275,22 +284,13 @@
         </RadioGroup>
 
         <TextView
-            android:id="@+id/tv_to"
+            android:id="@+id/tv_print_method"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/radioGroup_page_range"
-            android:layout_alignLeft="@+id/tv_cols_x_rows"
-            android:text="to"
+            android:layout_above="@+id/radio_group_method"
+            android:layout_alignLeft="@+id/radio_group_method"
+            android:text="Print Method:"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <CheckBox
-            android:id="@+id/checkbox_page_line_border"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/tv_printer"
-            android:text="Draw Page Border  "
-            android:textSize="@dimen/Medium12" />
 
     </RelativeLayout>
     
