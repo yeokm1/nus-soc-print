@@ -177,7 +177,7 @@ public class MainActivity extends Activity implements TabListener {
 		View pageRangeTo = findViewById(R.id.tv_to); pageRangeTo.setVisibility(View.INVISIBLE);
 		View pageRangeEnd = findViewById(R.id.num_end_range); pageRangeEnd.setVisibility(View.INVISIBLE);
 		
-		if(value){
+		if(value && (currentMethod != METHOD_3)){
 			pageRangeStart.setVisibility(View.VISIBLE);
 			pageRangeTo.setVisibility(View.VISIBLE);
 			pageRangeEnd.setVisibility(View.VISIBLE);
