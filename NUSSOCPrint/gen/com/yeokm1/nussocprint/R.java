@@ -72,7 +72,7 @@ public final class R {
         public static final int refresh_print_queue=0x7f0a002d;
         public static final int relativeLayout01=0x7f0a0001;
         public static final int separator1=0x7f0a0024;
-        public static final int sepeaator2=0x7f0a0017;
+        public static final int separator2=0x7f0a0017;
         public static final int textViewFilename=0x7f0a0007;
         public static final int tv_cols_x_rows=0x7f0a001d;
         public static final int tv_page_range=0x7f0a001f;

@@ -90,7 +90,7 @@
             android:id="@+id/num_pages_per_sheet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/sepeaator2"
+            android:layout_above="@+id/separator2"
             android:layout_alignParentLeft="true"
             android:layout_alignRight="@+id/tv_pages_per_sheet"
             android:layout_below="@+id/tv_pages_per_sheet"/>
@@ -131,7 +131,7 @@
             android:text="1" />
 
         <ProgressBar
-            android:id="@+id/sepeaator2"
+            android:id="@+id/separator2"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -233,7 +233,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/sepeaator2"
+            android:layout_below="@+id/separator2"
             android:text="Page Range:"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
