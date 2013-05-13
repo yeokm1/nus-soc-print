@@ -48,8 +48,8 @@
     <string name="server_temp_dir">socPrint</string>
     <string name="credentials_not_set">UNIX Username/password not entered, set them in the Settings page.</string>
     <string name="quota_url">http://mysoc.nus.edu.sg/~eprint/forms/quota.php</string>
-    <string name="about_box_text">NUS SOC Print v0.3\nGNU GPL v3\nBuild Date: 13 May 2013\nBy: Yeo Kheng Meng\nWith thanks to Yong Quan, Kai Yao, Gabriel and Jason\n\nWhere to check for updates?\nhttps://code.google.com/p/nus-soc-print/\n\nhttp://yeokhengmeng.com/2013/03/nus-soc-print-android-app</string>
-    <string name="help_text">NUS SOC Print v0.3\nGNU GPL v3\nBuild Date: 13 May 2013\nBy: Yeo Kheng Meng\n
+    <string name="about_box_text">NUS SOC Print v0.3\nGNU GPL v3\nBuild Date: 14 May 2013\nBy: Yeo Kheng Meng\nWith thanks to Yong Quan, Kai Yao, Gabriel and Jason\n\nWhere to check for updates?\nhttps://code.google.com/p/nus-soc-print/\n\nhttp://yeokhengmeng.com/2013/03/nus-soc-print-android-app</string>
+    <string name="help_text">NUS SOC Print v0.3\nGNU GPL v3\nBuild Date: 14 May 2013\nBy: Yeo Kheng Meng\n
        
 \nMethods of Printing\n\n
 Method 1 (Original from v0.22)\n
@@ -58,11 +58,11 @@ BAD: Slides\n\n
 
 Method 2:\n
 Good: All-rounder\n
-BAD: 2.6MB jar program upload to Sunfire. Some rare PDFs cannot be processed (properly). row x col option aligns frames to the left.\n\n
+BAD: 2.6MB jar program upload to Sunfire. Some rare PDFs cannot be processed (properly). Col x Row option aligns frames to the left.\n\n
 
 
 Method 3\n 
-GOOD: Intuitive auto-layout. Backup for Method 1\n
+GOOD: Intuitive auto-layout. Backup for method 2\n
 BAD: 1.2MB jar program upload to Sunfire. PDFs saved with incorrect page properties may not come out properly.\n\n
 </string>
 

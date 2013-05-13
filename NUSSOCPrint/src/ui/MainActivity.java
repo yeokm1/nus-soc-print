@@ -81,6 +81,7 @@ public class MainActivity extends Activity implements TabListener {
 	int currentMethod = 1;
 	boolean showPageRangeEntries = false;
 
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -148,6 +149,26 @@ public class MainActivity extends Activity implements TabListener {
 
 		updatePrinterSpinner();
 
+	}
+	
+	public void adjustColsxRowsVisibility(int position){
+		View colsXRowsTitle = findViewById(R.id.tv_cols_x_rows); colsXRowsTitle.setVisibility(View.INVISIBLE);
+		View colsXRows_cols = findViewById(R.id.numCols); colsXRows_cols.setVisibility(View.INVISIBLE);
+		View colsXRows_x = findViewById(R.id.tv_x); colsXRows_x.setVisibility(View.INVISIBLE);
+		View colsXRows_rows = findViewById(R.id.numRows); colsXRows_rows.setVisibility(View.INVISIBLE);
+
+		
+		if(position == 0 && currentMethod == METHOD_2){
+			colsXRowsTitle.setVisibility(View.VISIBLE);
+			colsXRows_cols.setVisibility(View.VISIBLE);
+			colsXRows_x.setVisibility(View.VISIBLE);
+			colsXRows_rows.setVisibility(View.VISIBLE);
+		} else {
+			colsXRowsTitle.setVisibility(View.INVISIBLE);
+			colsXRows_cols.setVisibility(View.INVISIBLE);
+			colsXRows_x.setVisibility(View.INVISIBLE);
+			colsXRows_rows.setVisibility(View.INVISIBLE);
+		}
 	}
 	
 	public void adjustPageRangeVisibility(boolean value){

@@ -9,8 +9,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.Spinner;
 
 
 public class PrintingFragment extends Fragment {
@@ -89,7 +92,20 @@ public class PrintingFragment extends Fragment {
 			}
 		});
 		
-		
+		Spinner pagesSpinner = (Spinner) caller.findViewById(R.id.num_pages_per_sheet);
+		pagesSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int position, long id) {
+				caller.adjustColsxRowsVisibility(position);
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				//Nothing done
+			}
+		});
 		
 		
 		
