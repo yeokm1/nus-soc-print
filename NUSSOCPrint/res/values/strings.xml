@@ -53,17 +53,17 @@
        
 \nMethods of Printing\n\n
 Method 1 (Original from v0.22)\n
-GOOD: A4 files\n
+GOOD: Fast. A4 files\n
 BAD: Slides\n\n
 
-
-Method 2\n 
-GOOD: Intuitive auto-layout, slides\n
-BAD: 1.2MB jar program upload to Sunfire. PDFs saved with incorrect page properties may not come out properly.\n\n
-
-
-Method 3:\n
+Method 2:\n
 Good: All-rounder\n
-BAD: 2.6MB jar program upload to Sunfire. Some rare PDFs cannot be processed. Output page-frames align to the left.\n</string>
+BAD: 2.6MB jar program upload to Sunfire. Some rare PDFs cannot be processed. Output page-frames align to the left.\n
+
+
+Method 3\n 
+GOOD: Intuitive auto-layout. Backup for Method 2\n
+BAD: 1.2MB jar program upload to Sunfire. PDFs saved with incorrect page properties may not come out properly.\n\n
+</string>
 
 </resources>

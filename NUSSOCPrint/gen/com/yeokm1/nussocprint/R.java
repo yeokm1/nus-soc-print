@@ -53,8 +53,8 @@ public final class R {
         public static final int help_layout=0x7f0a000e;
         public static final int mainLayout=0x7f0a0000;
         public static final int menu_about=0x7f0a0034;
-        public static final int numCols=0x7f0a001d;
-        public static final int numRows=0x7f0a001b;
+        public static final int numCols=0x7f0a001b;
+        public static final int numRows=0x7f0a001c;
         public static final int num_end_range=0x7f0a0024;
         public static final int num_pages_per_sheet=0x7f0a0018;
         public static final int num_start_range=0x7f0a0025;
@@ -83,7 +83,7 @@ public final class R {
         public static final int tv_print_method=0x7f0a001e;
         public static final int tv_printer=0x7f0a0028;
         public static final int tv_to=0x7f0a0016;
-        public static final int tv_x=0x7f0a001c;
+        public static final int tv_x=0x7f0a001d;
         public static final int webView_qouta=0x7f0a0033;
     }
     public static final class layout {

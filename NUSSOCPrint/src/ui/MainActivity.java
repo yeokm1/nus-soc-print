@@ -11,8 +11,8 @@ import network.SSH_Clear_Cache;
 import network.SSH_Delete_All_Jobs;
 import network.SSH_Printer_Status;
 import network.SSH_Upload_Print_Method_1;
-import network.SSH_Upload_Print_Method_2;
 import network.SSH_Upload_Print_Method_3;
+import network.SSH_Upload_Print_Method_2;
 import network.WebViewSettings;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
@@ -167,6 +167,7 @@ public class MainActivity extends Activity implements TabListener {
 
 		switch(method){
 		case METHOD_1 : {
+			
 			pagesPerSheetTitle.setVisibility(View.VISIBLE);
 			pagesPerSheetSpinner.setVisibility(View.VISIBLE);
 
@@ -181,19 +182,11 @@ public class MainActivity extends Activity implements TabListener {
 			String[] pagesArray = getResources().getStringArray(R.array.pagesForM1);
 			ArrayAdapter<String> pagesAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, pagesArray);
 			numPagesSpinner.setAdapter(pagesAdapter);
+			
+			
 
 		} break;
 		case METHOD_2 :	{
-			pagesPerSheetTitle.setVisibility(View.VISIBLE);
-			pagesPerSheetSpinner.setVisibility(View.VISIBLE);
-
-			Spinner numPagesSpinner = (Spinner) pagesPerSheetSpinner;
-			String[] pagesArray = getResources().getStringArray(R.array.pagesForM2);
-			ArrayAdapter<String> pagesAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, pagesArray);
-			numPagesSpinner.setAdapter(pagesAdapter);
-
-		} break;
-		case METHOD_3 : {
 			pagesPerSheetTitle.setVisibility(View.VISIBLE);
 			pagesPerSheetSpinner.setVisibility(View.VISIBLE);
 			
@@ -212,6 +205,17 @@ public class MainActivity extends Activity implements TabListener {
 			pageRangeStart.setVisibility(View.VISIBLE);
 			pageRangeTo.setVisibility(View.VISIBLE);
 			pageRangeEnd.setVisibility(View.VISIBLE);
+
+		} break;
+		case METHOD_3 : {
+			pagesPerSheetTitle.setVisibility(View.VISIBLE);
+			pagesPerSheetSpinner.setVisibility(View.VISIBLE);
+
+			Spinner numPagesSpinner = (Spinner) pagesPerSheetSpinner;
+			String[] pagesArray = getResources().getStringArray(R.array.pagesForM2);
+			ArrayAdapter<String> pagesAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, pagesArray);
+			numPagesSpinner.setAdapter(pagesAdapter);
+
 
 		} break;
 
