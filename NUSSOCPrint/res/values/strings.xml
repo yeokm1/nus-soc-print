@@ -34,9 +34,13 @@
         <item>16</item>
     </string-array>
 
-
-    <string name="multivalent_filename">Multivalent.jar</string>
     <string name="nup_pdf_filename">nup_pdf.jar</string>
+    <string name="nup_pdf_md5">C1F8FF3F9DE7B2D2A2B41FBC0085888B</string>
+    
+    <string name="multivalent_filename">Multivalent.jar</string>
+    <string name="multivalent_md5">813BB651A1CC6EA230F28AAC47F78051</string>
+    
+    
     <string name="select_file_to_print">Choose pdf file to print</string>
     <string name="default_username">Enter your UNIX username</string>
     <string name="default_password">Enter your UNIX password</string>
@@ -63,9 +67,6 @@ BAD: 1.2MB jar program upload to Sunfire. PDFs saved with incorrect page propert
 
 Method 3:\n
 Good: All-rounder\n
-BAD: 2.6MB jar program upload to Sunfire. Permanent Portrait layout. Some rare PDFs cannot be processed (properly). Col x Row option aligns frames to the left.\n\n
-
-
-</string>
+BAD: 2.6MB jar program upload to Sunfire. Permanent Portrait layout. Some rare PDFs cannot be processed (properly). Col x Row option aligns frames to the left.\n\n</string>
 
 </resources>

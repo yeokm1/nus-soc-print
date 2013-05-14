@@ -6,13 +6,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
+import ui.MainActivity;
 import android.content.res.AssetManager;
 
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.SftpException;
 import com.yeokm1.nussocprint.R;
-
-import ui.MainActivity;
 
 public class SSH_Upload_Print_Method_2 extends SSHManager {
 
@@ -23,6 +22,7 @@ public class SSH_Upload_Print_Method_2 extends SSHManager {
 	String nup_pdf_Filename;
 	
 	String tempDir;
+	String nupMD5;
 
 
 
@@ -46,7 +46,7 @@ public class SSH_Upload_Print_Method_2 extends SSHManager {
 		tempDir = callingActivity.getString(R.string.server_temp_dir) + "/";
 		SSHManager.callingActivity.setIndeterminateProgress(true);
 		
-
+		nupMD5 = callingActivity.getString(R.string.nup_pdf_md5);
 
 	}
 
@@ -63,10 +63,15 @@ public class SSH_Upload_Print_Method_2 extends SSHManager {
 
 
 		try {
-			
-			super.publishProgress("Uploading " + nup_pdf_Filename);
-			super.uploadFile(nup_pdf_stream, nup_pdf_Filename);
+			super.publishProgress("Checking if need to upload nup_pdf jar tool");
+			String md5reply = super.sendCommand("md5 " + tempDir + nup_pdf_Filename);
 
+			if(!md5reply.startsWith(nupMD5)){
+				super.publishProgress("Uploading " + nup_pdf_Filename);
+				super.uploadFile(nup_pdf_stream, nup_pdf_Filename);
+			}
+			
+			
 			File toBePrinted = new File(filePath);
 			InputStream fileStream = new FileInputStream(toBePrinted);
 

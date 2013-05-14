@@ -21,6 +21,8 @@ public class SSH_Upload_Print_Method_3 extends SSHManager {
 	Float currentProgress = (float) 0;
 	InputStream multiValStream = null;
 	String multivalentFilename;
+	String mvMD5;
+	String tempDir;
 
 	public SSH_Upload_Print_Method_3(MainActivity caller) {
 		super(caller);
@@ -37,7 +39,11 @@ public class SSH_Upload_Print_Method_3 extends SSHManager {
 		} catch (IOException e) {
 			//Nothing
 		}
+		
+		tempDir = callingActivity.getString(R.string.server_temp_dir) + "/";
 		SSHManager.callingActivity.setIndeterminateProgress(true);
+		
+		mvMD5 = callingActivity.getString(R.string.multivalent_md5);
 
 	}
 
@@ -59,15 +65,16 @@ public class SSH_Upload_Print_Method_3 extends SSHManager {
 
 
 		try {
-			publishProgress("Uploading " + multivalentFilename);
-			super.uploadFile(multiValStream, multivalentFilename);
+			super.publishProgress("Checking if need to upload multivalent jar tool");
+			String md5reply = super.sendCommand("md5 " + tempDir + multivalentFilename);
 
-
+			if(!md5reply.startsWith(mvMD5)){
+				publishProgress("Uploading " + multivalentFilename);
+				super.uploadFile(multiValStream, multivalentFilename);
+			}
+			
 			File toBePrinted = new File(filePath);
 			InputStream fileStream = new FileInputStream(toBePrinted);
-
-
-			String tempDir = callingActivity.getString(R.string.server_temp_dir) + "/";
 
 
 			String onServerFileName = tempDir + "\"" + toBePrinted.getName() + "\"";
@@ -109,7 +116,7 @@ public class SSH_Upload_Print_Method_3 extends SSHManager {
 	public String generateMultivalentCommand(String filePath, String numPagesPerSheet, String numRows, String numCols, 
 			String startRange, String endRange, String lineBorder ){
 
-		String command = "java -classpath socPrint/Multivalent.jar tool.pdf.Impose -paper a4";
+		String command = "java -classpath " + tempDir + multivalentFilename + "tool.pdf.Impose -paper a4";
 		
 		
 		if(numPagesPerSheet == null){
