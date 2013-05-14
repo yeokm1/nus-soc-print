@@ -56,7 +56,7 @@
     <string name="about_box_text">NUS SOC Print v0.3\nBSD license\nBuild Date: 14 May 2013\nBy: Yeo Kheng Meng\nWith thanks to Yong Quan, Kai Yao, Gabriel and Jason\n\nWhere to check for updates?\nhttps://code.google.com/p/nus-soc-print/\n\nhttp://yeokhengmeng.com/2013/03/nus-soc-print-android-app</string>
     <string name="help_text">NUS SOC Print v0.3\nBSD license\nBuild Date: 14 May 2013\nBy: Yeo Kheng Meng\n
        
-\nMethods of Printing\n\n
+\nWhich method to pick?\n\n
 Method 1 (From v0.22)\n
 GOOD: A4 files. Fast and reliable.\n
 BAD: Slides\n\n
