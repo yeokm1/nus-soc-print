@@ -57,8 +57,8 @@
     <string name="help_text">NUS SOC Print v0.3\nBSD license\nBuild Date: 14 May 2013\nBy: Yeo Kheng Meng\n
        
 \nMethods of Printing\n\n
-Method 1 (Original from v0.22)\n
-GOOD: Fast and reliable. A4 files\n
+Method 1 (From v0.22)\n
+GOOD: A4 files. Fast and reliable.\n
 BAD: Slides\n\n
 
 Method 2\n 
