@@ -53,8 +53,8 @@
     <string name="server_temp_dir">socPrint</string>
     <string name="credentials_not_set">UNIX Username/password not entered, set them in the Settings page.</string>
     <string name="quota_url">http://mysoc.nus.edu.sg/~eprint/forms/quota.php</string>
-    <string name="about_box_text">NUS SOC Print v0.3\nGNU GPL v3\nBuild Date: 14 May 2013\nBy: Yeo Kheng Meng\nWith thanks to Yong Quan, Kai Yao, Gabriel and Jason\n\nWhere to check for updates?\nhttps://code.google.com/p/nus-soc-print/\n\nhttp://yeokhengmeng.com/2013/03/nus-soc-print-android-app</string>
-    <string name="help_text">NUS SOC Print v0.3\nGNU GPL v3\nBuild Date: 14 May 2013\nBy: Yeo Kheng Meng\n
+    <string name="about_box_text">NUS SOC Print v0.3\nBSD license\nBuild Date: 14 May 2013\nBy: Yeo Kheng Meng\nWith thanks to Yong Quan, Kai Yao, Gabriel and Jason\n\nWhere to check for updates?\nhttps://code.google.com/p/nus-soc-print/\n\nhttp://yeokhengmeng.com/2013/03/nus-soc-print-android-app</string>
+    <string name="help_text">NUS SOC Print v0.3\nBSD license\nBuild Date: 14 May 2013\nBy: Yeo Kheng Meng\n
        
 \nMethods of Printing\n\n
 Method 1 (Original from v0.22)\n
