@@ -38,7 +38,7 @@ public final class R {
         public static final int button_print=0x7f0a0011;
         public static final int button_print_quota=0x7f0a0032;
         public static final int button_select_file=0x7f0a0017;
-        public static final int checkbox_page_line_border=0x7f0a0029;
+        public static final int checkbox_page_line_border=0x7f0a002a;
         public static final int fdButtonCancel=0x7f0a0009;
         public static final int fdButtonCreate=0x7f0a000a;
         public static final int fdButtonNew=0x7f0a0004;
@@ -65,7 +65,7 @@ public final class R {
         public static final int progressBar_print=0x7f0a0013;
         public static final int radioGroup_page_range=0x7f0a0020;
         public static final int radio_all_page=0x7f0a0022;
-        public static final int radio_group_method=0x7f0a002a;
+        public static final int radio_group_method=0x7f0a0029;
         public static final int radio_method1=0x7f0a002b;
         public static final int radio_method2=0x7f0a002c;
         public static final int radio_method3=0x7f0a002d;

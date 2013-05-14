@@ -206,8 +206,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignRight="@+id/tv_page_range"
-            android:layout_below="@+id/tv_printer" />
+            android:layout_below="@+id/tv_printer"
+            android:layout_toLeftOf="@+id/radio_group_method" />
 
         <TextView
             android:id="@+id/tv_printer"
