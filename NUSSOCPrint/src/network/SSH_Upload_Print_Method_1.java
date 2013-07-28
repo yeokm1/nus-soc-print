@@ -74,7 +74,7 @@ public class SSH_Upload_Print_Method_1 extends SSHManager {
 			String conversionMessage = super.sendCommand(convertToPSCommand);
 
 
-			if(conversionMessage.isEmpty()){
+			if(conversionMessage.length() == 0){
 				publishProgress("Conversion to Postscript Complete");
 			} else {
 				publishProgress(conversionMessage);
@@ -103,7 +103,7 @@ public class SSH_Upload_Print_Method_1 extends SSHManager {
 				String psFormatMessage = super.sendCommand(psformatCommand);
 
 
-				if(psFormatMessage.isEmpty()){
+				if(psFormatMessage.length() == 0){
 					publishProgress("Formatting of Postscript file Complete");
 				} else {
 					publishProgress(psFormatMessage);

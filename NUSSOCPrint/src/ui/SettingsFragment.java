@@ -4,15 +4,14 @@ package ui;
 
 
 
-import com.yeokm1.nussocprint.R;
-
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
+
+import com.yeokm1.nussocprint.R;
 
 
-public class SettingsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener{
+public class SettingsFragment extends PreferenceListFragment implements OnSharedPreferenceChangeListener{
 
     private MainActivity caller;
     

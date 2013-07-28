@@ -8,42 +8,42 @@ package com.lamerman;
 
 public final class R {
 	public static final class color {
-		public static final int gray = 0x7f050000;
+		public static final int gray = 0x7f060006;
 	}
 	public static final class drawable {
-		public static final int file = 0x7f020001;
-		public static final int folder = 0x7f020002;
-		public static final int icon = 0x7f020003;
+		public static final int file = 0x7f020071;
+		public static final int folder = 0x7f020072;
+		public static final int icon = 0x7f020073;
 	}
 	public static final class id {
-		public static final int fdButtonCancel = 0x7f0a0009;
-		public static final int fdButtonCreate = 0x7f0a000a;
-		public static final int fdButtonNew = 0x7f0a0004;
-		public static final int fdButtonSelect = 0x7f0a0005;
-		public static final int fdEditTextFile = 0x7f0a0008;
-		public static final int fdLinearLayoutCreate = 0x7f0a0006;
-		public static final int fdLinearLayoutList = 0x7f0a0002;
-		public static final int fdLinearLayoutSelect = 0x7f0a0003;
-		public static final int fdrowimage = 0x7f0a000c;
-		public static final int fdrowtext = 0x7f0a000d;
-		public static final int path = 0x7f0a000b;
-		public static final int relativeLayout01 = 0x7f0a0001;
-		public static final int textViewFilename = 0x7f0a0007;
+		public static final int fdButtonCancel = 0x7f04003b;
+		public static final int fdButtonCreate = 0x7f04003c;
+		public static final int fdButtonNew = 0x7f040036;
+		public static final int fdButtonSelect = 0x7f040037;
+		public static final int fdEditTextFile = 0x7f04003a;
+		public static final int fdLinearLayoutCreate = 0x7f040038;
+		public static final int fdLinearLayoutList = 0x7f040034;
+		public static final int fdLinearLayoutSelect = 0x7f040035;
+		public static final int fdrowimage = 0x7f04003e;
+		public static final int fdrowtext = 0x7f04003f;
+		public static final int path = 0x7f04003d;
+		public static final int relativeLayout01 = 0x7f040033;
+		public static final int textViewFilename = 0x7f040039;
 	}
 	public static final class layout {
-		public static final int file_dialog_main = 0x7f030001;
-		public static final int file_dialog_row = 0x7f030002;
+		public static final int file_dialog_main = 0x7f030016;
+		public static final int file_dialog_row = 0x7f030017;
 	}
 	public static final class string {
-		public static final int app_name = 0x7f040000;
-		public static final int cancel = 0x7f040006;
-		public static final int cant_read_folder = 0x7f040002;
-		public static final int create = 0x7f040007;
-		public static final int err = 0x7f040009;
-		public static final int file_name = 0x7f040005;
-		public static final int location = 0x7f040001;
-		public static final int nnew = 0x7f040003;
-		public static final int no_data = 0x7f040008;
-		public static final int select = 0x7f040004;
+		public static final int app_name = 0x7f09000d;
+		public static final int cancel = 0x7f090013;
+		public static final int cant_read_folder = 0x7f09000f;
+		public static final int create = 0x7f090014;
+		public static final int err = 0x7f090016;
+		public static final int file_name = 0x7f090012;
+		public static final int location = 0x7f09000e;
+		public static final int nnew = 0x7f090010;
+		public static final int no_data = 0x7f090015;
+		public static final int select = 0x7f090011;
 	}
 }

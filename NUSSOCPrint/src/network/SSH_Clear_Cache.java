@@ -18,7 +18,7 @@ public class SSH_Clear_Cache extends SSHManager {
 		try {
 			String message = super.sendCommand("rm -rf socPrint");
 			
-			if(message.isEmpty()){
+			if(message.length() == 0){
 				message = "Delete socPrint folder success";
 			}
 			super.close();

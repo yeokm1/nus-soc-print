@@ -1,11 +1,10 @@
 package ui;
 
-
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import ui.PreferenceListFragment.OnPreferenceAttachedListener;
 import network.SSHManager;
 import network.SSH_Clear_Cache;
 import network.SSH_Delete_All_Jobs;
@@ -15,13 +14,8 @@ import network.SSH_Upload_Print_Method_2;
 import network.SSH_Upload_Print_Method_3;
 import network.WebViewSettings;
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.ActionBar.Tab;
-import android.app.ActionBar.TabListener;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -29,12 +23,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.preference.PreferenceScreen;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
 import android.text.util.Linkify;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ArrayAdapter;
@@ -47,12 +42,22 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.ActionBar.Tab;
+import com.actionbarsherlock.app.ActionBar.TabListener;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.lamerman.FileDialog;
 import com.lamerman.SelectionMode;
 import com.yeokm1.nussocprint.R;
 
 
-public class MainActivity extends Activity implements TabListener {
+
+
+
+
+public class MainActivity extends SherlockFragmentActivity implements TabListener, OnPreferenceAttachedListener {
 
 	final String tab1Text = "Print";
 	final String tab2Text = "Status";
@@ -68,7 +73,7 @@ public class MainActivity extends Activity implements TabListener {
 	final int METHOD_2 = 2;
 	final int METHOD_3 = 3;
 
-	final int REQUEST_OPEN = 123456;
+	final int REQUEST_OPEN = 123;
 
 	RelativeLayout rl;
 
@@ -103,8 +108,8 @@ public class MainActivity extends Activity implements TabListener {
 		setContentView(R.layout.activity_action_bar_main);
 		try {
 			rl = (RelativeLayout) findViewById(R.id.mainLayout);
-			fragMentTra = getFragmentManager().beginTransaction();
-			ActionBar bar = getActionBar();
+			fragMentTra = getSupportFragmentManager().beginTransaction();
+			ActionBar bar = getSupportActionBar();
 			bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 			//			bar.setDisplayShowHomeEnabled(true);
 			//			bar.setDisplayShowTitleEnabled(true);
@@ -283,7 +288,7 @@ public class MainActivity extends Activity implements TabListener {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.action_bar, menu);
+		getSupportMenuInflater().inflate(R.menu.action_bar, menu);
 		return true;
 	}
 
@@ -303,7 +308,7 @@ public class MainActivity extends Activity implements TabListener {
 
 
 			fragMentTra.addToBackStack(null);
-			fragMentTra = getFragmentManager().beginTransaction();
+			fragMentTra = getSupportFragmentManager().beginTransaction();
 			fram1.setCallingActivity(this);
 
 			fragMentTra.replace(rl.getId(), fram1);
@@ -319,7 +324,7 @@ public class MainActivity extends Activity implements TabListener {
 			}
 			fragMentTra.remove(currentFragment);
 			fragMentTra.addToBackStack(null);
-			fragMentTra = getFragmentManager().beginTransaction();
+			fragMentTra = getSupportFragmentManager().beginTransaction();
 			fragMentTra.replace(rl.getId(), fram2);
 			fragMentTra.commit();
 
@@ -334,7 +339,7 @@ public class MainActivity extends Activity implements TabListener {
 			fragMentTra.remove(currentFragment);
 			fram3.setCallingActivity(this);
 			fragMentTra.addToBackStack(null);
-			fragMentTra = getFragmentManager().beginTransaction();
+			fragMentTra = getSupportFragmentManager().beginTransaction();
 			fragMentTra.replace(rl.getId(), fram3);
 			fragMentTra.commit();
 
@@ -347,7 +352,7 @@ public class MainActivity extends Activity implements TabListener {
 			fragMentTra.remove(currentFragment);
 			fram4.setCallingActivity(this);
 			fragMentTra.addToBackStack(null);
-			fragMentTra = getFragmentManager().beginTransaction();
+			fragMentTra = getSupportFragmentManager().beginTransaction();
 			fragMentTra.replace(rl.getId(), fram4);
 			fragMentTra.commit();
 
@@ -361,7 +366,7 @@ public class MainActivity extends Activity implements TabListener {
 			fragMentTra.remove(currentFragment);
 			fram5.setCallingActivity(this);
 			fragMentTra.addToBackStack(null);
-			fragMentTra = getFragmentManager().beginTransaction();
+			fragMentTra = getSupportFragmentManager().beginTransaction();
 			fragMentTra.replace(rl.getId(), fram5);
 			fragMentTra.commit();
 
@@ -440,7 +445,7 @@ public class MainActivity extends Activity implements TabListener {
 				startRangeText = startRangeField.getText().toString();
 				endRangeText = endRangeField.getText().toString();
 
-				if(startRangeText.isEmpty() && endRangeText.isEmpty()){
+				if((startRangeText.length() == 0) && (endRangeText.length() == 0)){
 					showToast(invalidPageRange);
 					return;
 				}
@@ -533,6 +538,7 @@ public class MainActivity extends Activity implements TabListener {
 		deleteAll.execute(printerArray);
 	}
 
+	@SuppressWarnings("deprecation")
 	@SuppressLint("SetJavaScriptEnabled")
 	public void getPrintQuota(View view){
 
@@ -546,6 +552,11 @@ public class MainActivity extends Activity implements TabListener {
 		webView.getSettings().setBuiltInZoomControls(true);
 		webView.getSettings().setSupportZoom(true);
 		webView.loadUrl(getString(R.string.quota_url));
+		
+		
+		if(android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.JELLY_BEAN_MR1) {
+			webView.getSettings().setSavePassword(false);
+		}
 	}
 
 	public void forceDisconnectAndReinit(View view){
@@ -633,7 +644,7 @@ public class MainActivity extends Activity implements TabListener {
 
 		customPrinterName = getPreference(getString(R.string.custom_printer_preference));
 
-		if(!customPrinterName.isEmpty()){
+		if(!(customPrinterName.length() == 0)){
 			printerList.add(0, customPrinterName);
 		}
 
@@ -663,12 +674,12 @@ public class MainActivity extends Activity implements TabListener {
 		String serverIP;
 
 
-		if(credentials[0].isEmpty()|| credentials[1].isEmpty()){
+		if((credentials[0].length() == 0) || (credentials[1].length() == 0)){
 			showToast(getString(R.string.credentials_not_set));
 			return false;
 		}
 
-		if(credentials[2].isEmpty()){
+		if(credentials[2].length() == 0){
 			serverIP = getString(R.string.server_IP);
 		} else {
 			serverIP = credentials[2];
@@ -748,5 +759,10 @@ public class MainActivity extends Activity implements TabListener {
 		SharedPreferences userDetails = PreferenceManager.getDefaultSharedPreferences(this);
 		String value = userDetails.getString(key, "");
 		return value;
+	}
+
+	@Override
+	public void onPreferenceAttached(PreferenceScreen root, int xmlId) {
+		//Dummy function used by PreferenceListFragment
 	}
 }

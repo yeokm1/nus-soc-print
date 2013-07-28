@@ -190,7 +190,7 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 
 		String printReply = sendCommand(printCommand);
 
-		if(printReply.isEmpty()){
+		if(printReply.length() == 0){
 			return "Print command sent successfully";
 		} else {
 			return printReply;
