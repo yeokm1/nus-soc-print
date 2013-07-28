@@ -73,7 +73,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 	final int METHOD_2 = 2;
 	final int METHOD_3 = 3;
 
-	final int REQUEST_OPEN = 123;
+	final int REQUEST_OPEN = 63;
 
 	RelativeLayout rl;
 
