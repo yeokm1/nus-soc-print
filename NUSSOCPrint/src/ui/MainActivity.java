@@ -545,7 +545,6 @@ public class MainActivity extends Activity implements TabListener {
 
 		webView.getSettings().setBuiltInZoomControls(true);
 		webView.getSettings().setSupportZoom(true);
-		webView.getSettings().setSavePassword(false);
 		webView.loadUrl(getString(R.string.quota_url));
 	}
 
