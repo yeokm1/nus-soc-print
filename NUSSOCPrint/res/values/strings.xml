@@ -67,7 +67,7 @@ BAD: *1.2MB jar program initial upload to Sunfire. PDFs saved with incorrect pag
 
 Method 3:\n
 Good: All-rounder\n
-BAD: *2.6MB jar program initial upload to Sunfire. Permanent Portrait layout. Some rare PDFs cannot be processed (properly). Col x Row option aligns frames to the left.\n\n
+BAD: *2.6MB jar program initial upload to Sunfire. Permanent Portrait layout. Some PDFs cannot be processed (properly). If file does not print, please try other options or M2. Col x Row option aligns frames to the left.\n\n
 
 *Unless you clear the cache, the upload will only take place the first time you use the method. Subsequent print jobs will not need to upload this jar program.\n</string>
 
