@@ -34,6 +34,7 @@ public class SSH_Clear_Cache extends SSHManager {
 	
 	protected void onPostExecute(String output){
 		callingActivity.showToast(output);
+		super.onPostExecute(output);
 	}
 
 }

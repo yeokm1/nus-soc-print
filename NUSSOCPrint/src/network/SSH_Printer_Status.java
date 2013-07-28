@@ -59,6 +59,7 @@ public class SSH_Printer_Status extends SSHManager {
 	@Override
 	protected void onPostExecute(String output){
 		callingActivity.showToPrinterQueueStatus(output);
+		super.onPostExecute(output);
 
 	}
 

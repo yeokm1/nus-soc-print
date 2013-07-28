@@ -30,7 +30,7 @@ public class SSH_Upload_Print_Method_3 extends SSHManager {
 
 	@Override
 	protected void onPreExecute(){
-
+		super.onPreExecute();
 		multivalentFilename = SSHManager.callingActivity.getString(R.string.multivalent_filename);
 
 		AssetManager assetMgr = SSHManager.callingActivity.getAssets();
@@ -167,6 +167,7 @@ public class SSH_Upload_Print_Method_3 extends SSHManager {
 	protected void onPostExecute(String output){
 		callingActivity.updatePrintingStatusProgressBar(output, 100);
 		SSHManager.callingActivity.setIndeterminateProgress(false);
+		super.onPostExecute(output);
 	}
 
 }

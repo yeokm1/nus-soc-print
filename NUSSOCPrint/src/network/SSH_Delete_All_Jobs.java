@@ -53,8 +53,8 @@ public class SSH_Delete_All_Jobs extends SSHManager {
 	
 	@Override
 	protected void onPostExecute(String output){
-		
 		callingActivity.updateRefreshStatusProgressBar(output, currentProgress.intValue());
+		super.onPostExecute(output);
 	}
 
 }

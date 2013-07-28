@@ -10,6 +10,8 @@ package network;
 
 
 
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 
 
@@ -20,11 +22,15 @@ import com.yeokm1.nussocprint.R;
 
 
 
+
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+
+
 
 
 
@@ -44,13 +50,12 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 	private static boolean connectionStatus = false;
 
 	protected static MainActivity callingActivity = null;
-	
+
 	protected final String FILE_NOT_FOUND_EXCEPTION_FORMAT = "File not found exception: " + "%1$s";
 	protected final String SFTP_EXCEPTION_FORMAT = "Sftp exception: " + "%1$s";
 	protected final String JSCH_EXCEPTION_FORMAT = "Jsch exception: " + "%1$s";
 	protected final String IO_EXCEPTION_FORMAT = "IO exception: " + "%1$s";
-	
-	
+
 
 	public SSHManager(MainActivity caller){
 		SSHManager.callingActivity = caller;
@@ -105,7 +110,7 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 	protected static synchronized String sendCommand(String command) throws IOException, JSchException
 	{
 		Log.i("SSHmgr command", command);
-		
+
 		if(connectionStatus == false){
 			connect();
 		}
@@ -138,7 +143,7 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 	protected static synchronized void uploadFile(File toBePrinted) throws FileNotFoundException, SftpException, JSchException{
 		uploadFile(new FileInputStream(toBePrinted), toBePrinted.getName());
 	}
-	
+
 	protected static synchronized void uploadFile(InputStream toBePrinted, String fileName) throws FileNotFoundException, SftpException, JSchException{
 		if(connectionStatus == false){
 			connect();
@@ -177,8 +182,8 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 	protected static boolean getConnectionStatus(){
 		return connectionStatus;
 	}
-	
-	
+
+
 	protected String printThisPSFile(String psFilename, String printerName) throws IOException, JSchException{
 		String printCommand = "lpr -P ";
 
@@ -197,5 +202,22 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 		}
 	}
 
+	@Override
+	protected void onPreExecute(){
+		// Stop the screen orientation changing during an event
+		switch (callingActivity.getResources().getConfiguration().orientation)
+		{
+		case Configuration.ORIENTATION_PORTRAIT:
+			callingActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+			break;
+		case Configuration.ORIENTATION_LANDSCAPE:
+			callingActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+			break;
+		}
+	}
 
+	@Override
+	protected void onPostExecute(String output){
+		callingActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+	}
 }

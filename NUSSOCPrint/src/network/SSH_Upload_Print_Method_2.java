@@ -33,6 +33,7 @@ public class SSH_Upload_Print_Method_2 extends SSHManager {
 
 	@Override
 	protected void onPreExecute(){
+		super.onPreExecute();
 
 		nup_pdf_Filename = SSHManager.callingActivity.getString(R.string.nup_pdf_filename);
 
@@ -151,6 +152,7 @@ public class SSH_Upload_Print_Method_2 extends SSHManager {
 	protected void onPostExecute(String output){
 		callingActivity.updatePrintingStatusProgressBar(output, 100);
 		SSHManager.callingActivity.setIndeterminateProgress(false);
+		super.onPostExecute(output);
 	}
 
 }
