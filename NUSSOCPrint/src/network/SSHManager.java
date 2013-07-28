@@ -13,8 +13,11 @@ package network;
 import android.os.AsyncTask;
 
 
+import android.util.Log;
+
 import com.jcraft.jsch.*;
 import com.yeokm1.nussocprint.R;
+
 
 
 import java.io.File;
@@ -22,6 +25,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+
 
 
 import ui.MainActivity;
@@ -98,8 +102,10 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 	}
 
 
-	protected static synchronized String sendCommand(String command)throws IOException, JSchException
+	protected static synchronized String sendCommand(String command) throws IOException, JSchException
 	{
+		Log.i("SSHmgr command", command);
+		
 		if(connectionStatus == false){
 			connect();
 		}
