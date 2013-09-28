@@ -1,6 +1,10 @@
 nus-soc-print
 =============
 
+You can download this app from Play Store here.
+
+https://play.google.com/store/apps/details?id=com.yeokm1.nussocprintandroid
+
 This Android application prints PDF files to UNIX printers in the NUS School of Computing via the usage of SSH commands. Custom server address and printers can be added.
 
 Warning: This app works even outside the vicinity of the NUS network. So don't be too trigger happy with the print button.
@@ -31,7 +35,9 @@ Things to take note:
 
 
 Bugs so far: 
+
 1. Page border for M2 does not work
+
 2. Pages/Sheet dropdown menu does not appear properly on Android 4.3 devices 
 
 
