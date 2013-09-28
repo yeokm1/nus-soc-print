@@ -11,7 +11,7 @@ import android.content.res.AssetManager;
 
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.SftpException;
-import com.yeokm1.nussocprint.R;
+import com.yeokm1.nussocprintandroid.R;
 
 public class SSH_Upload_Print_Method_2 extends SSHManager {
 

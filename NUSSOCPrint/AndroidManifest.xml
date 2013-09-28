@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yeokm1.nussocprint"
-    android:versionCode="5"
+    package="com.yeokm1.nussocprintandroid"
+    android:versionCode="7"
     android:versionName="0.4.1" >
 
     <uses-sdk

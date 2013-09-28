@@ -6,15 +6,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-
 import ui.MainActivity;
-
 import android.content.res.AssetManager;
-
 
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.SftpException;
-import com.yeokm1.nussocprint.R;
+import com.yeokm1.nussocprintandroid.R;
 
 public class SSH_Upload_Print_Method_3 extends SSHManager {
 	final Float progressIncrement = (float) 100 / 8;

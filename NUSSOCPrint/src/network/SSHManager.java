@@ -10,31 +10,26 @@ package network;
 
 
 
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
-import android.os.AsyncTask;
-
-
-import android.util.Log;
-
-import com.jcraft.jsch.*;
-import com.yeokm1.nussocprint.R;
-
-
-
-
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-
-
-
-
 import ui.MainActivity;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
+import android.os.AsyncTask;
+import android.util.Log;
+
+import com.jcraft.jsch.Channel;
+import com.jcraft.jsch.ChannelExec;
+import com.jcraft.jsch.ChannelSftp;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.Session;
+import com.jcraft.jsch.SftpException;
+import com.yeokm1.nussocprintandroid.R;
 
 
 public abstract class SSHManager extends AsyncTask<String, String, String>

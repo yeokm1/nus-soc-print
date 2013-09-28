@@ -13,7 +13,7 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Spinner;
 
-import com.yeokm1.nussocprint.R;
+import com.yeokm1.nussocprintandroid.R;
 
 
 

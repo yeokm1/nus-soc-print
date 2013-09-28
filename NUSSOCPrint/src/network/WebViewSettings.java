@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.yeokm1.nussocprint.R;
+import com.yeokm1.nussocprintandroid.R;
 
 
 

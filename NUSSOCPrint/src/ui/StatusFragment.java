@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.yeokm1.nussocprint.R;
+import com.yeokm1.nussocprintandroid.R;
 
 
 

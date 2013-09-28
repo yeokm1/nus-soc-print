@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import ui.PreferenceListFragment.OnPreferenceAttachedListener;
 import network.SSHManager;
 import network.SSH_Clear_Cache;
 import network.SSH_Delete_All_Jobs;
@@ -13,6 +12,7 @@ import network.SSH_Upload_Print_Method_1;
 import network.SSH_Upload_Print_Method_2;
 import network.SSH_Upload_Print_Method_3;
 import network.WebViewSettings;
+import ui.PreferenceListFragment.OnPreferenceAttachedListener;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -50,7 +50,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.lamerman.FileDialog;
 import com.lamerman.SelectionMode;
-import com.yeokm1.nussocprint.R;
+import com.yeokm1.nussocprintandroid.R;
 
 
 

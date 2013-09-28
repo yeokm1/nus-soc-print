@@ -8,7 +8,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 
-import com.yeokm1.nussocprint.R;
+import com.yeokm1.nussocprintandroid.R;
 
 
 public class SettingsFragment extends PreferenceListFragment implements OnSharedPreferenceChangeListener{
