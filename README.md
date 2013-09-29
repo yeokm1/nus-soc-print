@@ -1,7 +1,7 @@
 nus-soc-print
 =============
 
-You can download this app from Play Store here.
+You can download this app from the Play Store here.
 
 https://play.google.com/store/apps/details?id=com.yeokm1.nussocprintandroid
 
