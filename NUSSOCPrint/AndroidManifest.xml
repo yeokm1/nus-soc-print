@@ -37,6 +37,11 @@
                 <data android:mimeType="application/pdf" />
             </intent-filter>
         </activity>
+
+
+    
+
+    <meta-data android:name="com.crashlytics.ApiKey" android:value="378cecf7f2dce6ec0029267d0ebebd246b5339e5"/>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package ui;
 
+import com.crashlytics.android.Crashlytics;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -91,6 +92,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		Crashlytics.start(this);
 		Bundle intentBundle = getIntent().getExtras();
 
 
