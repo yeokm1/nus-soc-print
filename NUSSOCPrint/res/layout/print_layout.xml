@@ -90,24 +90,9 @@
             android:id="@+id/num_pages_per_sheet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/separator2"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/tv_pages_per_sheet"
-            android:layout_toLeftOf="@+id/numCols" />
-
-        <EditText
-            android:id="@+id/numRows"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/button_select_file"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/tv_pages_per_sheet"
-            android:ems="10"
-            android:inputType="number"
-            android:text="1" >
-
-            <requestFocus />
-        </EditText>
+            android:layout_alignRight="@+id/printer_list"
+            android:layout_below="@+id/tv_pages_per_sheet" />
 
         <TextView
             android:id="@+id/tv_x"
@@ -118,27 +103,6 @@
             android:layout_toLeftOf="@+id/numRows"
             android:text="x"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <EditText
-            android:id="@+id/numCols"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tv_print_method"
-            android:layout_below="@+id/tv_cols_x_rows"
-            android:layout_toLeftOf="@+id/tv_x"
-            android:ems="10"
-            android:inputType="number"
-            android:text="1" />
-
-        <ProgressBar
-            android:id="@+id/separator2"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/numRows"
-            android:progress="100" />
 
         <RadioGroup
             android:id="@+id/radioGroup_page_range"
@@ -192,15 +156,6 @@
             android:text="Pages/Sheet:"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView
-            android:id="@+id/tv_cols_x_rows"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/separator1"
-            android:text="Cols x Rows"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
         <Spinner
             android:id="@+id/printer_list"
             android:layout_width="wrap_content"
@@ -235,15 +190,6 @@
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/separator2"
             android:text="Page Range:"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/tv_to"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/radioGroup_page_range"
-            android:layout_alignLeft="@+id/tv_cols_x_rows"
-            android:text="to"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <CheckBox
@@ -290,6 +236,60 @@
             android:layout_above="@+id/radio_group_method"
             android:layout_alignLeft="@+id/radio_group_method"
             android:text="Print Method:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <ProgressBar
+            android:id="@+id/separator2"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/num_pages_per_sheet"
+            android:progress="100" />
+
+        <EditText
+            android:id="@+id/numRows"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/num_pages_per_sheet"
+            android:layout_alignLeft="@+id/button_select_file"
+            android:layout_alignParentRight="true"
+            android:ems="10"
+            android:inputType="number"
+            android:text="1" />
+
+        <EditText
+            android:id="@+id/numCols"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_x"
+            android:layout_alignBottom="@+id/tv_x"
+            android:layout_alignLeft="@+id/radio_group_method"
+            android:layout_toLeftOf="@+id/tv_x"
+            android:ems="10"
+            android:inputType="number"
+            android:text="1" >
+
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:id="@+id/tv_cols_x_rows"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/num_pages_per_sheet"
+            android:layout_alignLeft="@+id/checkbox_page_line_border"
+            android:text="Cols x Rows"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/tv_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/radioGroup_page_range"
+            android:layout_alignRight="@+id/tv_x"
+            android:text="to"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
     </RelativeLayout>
