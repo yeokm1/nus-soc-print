@@ -1,6 +1,8 @@
 package ui;
 
 import com.crashlytics.android.Crashlytics;
+import com.google.analytics.tracking.android.EasyTracker;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -155,8 +157,18 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 		disableAndAdjustSomeUiOptionsBasedOnMethods(METHOD_1);
 
 		updatePrinterSpinner();
-
+		
+		EasyTracker.getInstance(this).activityStart(this);
 	}
+	
+	  @Override
+	  public void onStop() {
+	    super.onStop();
+	    EasyTracker.getInstance(this).activityStop(this); 
+	  }
+
+	
+	
 	
 	public void adjustColsxRowsVisibility(int position){
 		View colsXRowsTitle = findViewById(R.id.tv_cols_x_rows); colsXRowsTitle.setVisibility(View.INVISIBLE);
