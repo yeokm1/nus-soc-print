@@ -38,8 +38,8 @@ public class PrintingFragment extends Fragment {
 	}
 
 	@Override
-	public void onStart(){
-		super.onStart();
+	public void onResume(){
+		super.onResume();
 		caller.updatePrinterSpinner();
 		
 

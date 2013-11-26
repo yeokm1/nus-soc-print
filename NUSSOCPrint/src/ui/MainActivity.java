@@ -86,7 +86,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 
 	String fileName = null;
 
-	int currentMethod = 1;
+	int currentMethod = METHOD_1;
 	boolean showPageRangeEntries = false;
 
 
@@ -153,8 +153,6 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 
 			fileName = null;
 		}
-
-		disableAndAdjustSomeUiOptionsBasedOnMethods(METHOD_1);
 
 		updatePrinterSpinner();
 		
