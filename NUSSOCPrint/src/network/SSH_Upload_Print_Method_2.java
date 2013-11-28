@@ -16,13 +16,12 @@ import com.yeokm1.nussocprintandroid.R;
 public class SSH_Upload_Print_Method_2 extends SSHManager {
 
 	final Float progressIncrement = (float) 100 / 8;
-	Float currentProgress = (float) 0;
+	private Float currentProgress = (float) 0;
 
-	InputStream nup_pdf_stream = null;
-	String nup_pdf_Filename;
+	private InputStream nup_pdf_stream = null;
+	private String nup_pdf_Filename;
 	
-	String tempDir;
-	String nupMD5;
+	private String nupMD5;
 
 
 
@@ -43,8 +42,6 @@ public class SSH_Upload_Print_Method_2 extends SSHManager {
 		} catch (IOException e) {
 			//Nothing
 		}
-		
-		tempDir = callingActivity.getString(R.string.server_temp_dir) + "/";
 		SSHManager.callingActivity.setIndeterminateProgress(true);
 		
 		nupMD5 = callingActivity.getString(R.string.nup_pdf_md5);
@@ -65,13 +62,15 @@ public class SSH_Upload_Print_Method_2 extends SSHManager {
 
 		try {
 			super.publishProgress("Checking if need to upload nup_pdf jar tool");
-			String md5reply = super.sendCommand("md5 " + tempDir + nup_pdf_Filename);
 
-			if(!md5reply.startsWith(nupMD5)){
+			if(!doesMD5MatchExistingFile(nup_pdf_Filename, nupMD5)){
 				super.publishProgress("Uploading " + nup_pdf_Filename);
 				super.uploadFile(nup_pdf_stream, nup_pdf_Filename);
 			}
 			
+			nup_pdf_stream.close();
+			
+
 			
 			File toBePrinted = new File(filePath);
 			InputStream fileStream = new FileInputStream(toBePrinted);

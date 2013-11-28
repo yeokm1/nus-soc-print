@@ -50,10 +50,13 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 	protected final String SFTP_EXCEPTION_FORMAT = "Sftp exception: " + "%1$s";
 	protected final String JSCH_EXCEPTION_FORMAT = "Jsch exception: " + "%1$s";
 	protected final String IO_EXCEPTION_FORMAT = "IO exception: " + "%1$s";
+	
+	protected String tempDir;
 
 
 	public SSHManager(MainActivity caller){
 		SSHManager.callingActivity = caller;
+		tempDir = callingActivity.getString(R.string.server_temp_dir) + "/";
 	}
 
 
@@ -215,4 +218,10 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 	protected void onPostExecute(String output){
 		callingActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
 	}
+	
+	protected boolean doesMD5MatchExistingFile(String filename, String md5) throws IOException, JSchException{
+		String md5reply = sendCommand("md5 " + tempDir + filename);
+		return md5reply.startsWith(md5);
+	}
+	
 }

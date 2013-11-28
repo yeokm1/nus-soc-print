@@ -15,11 +15,10 @@ import com.yeokm1.nussocprintandroid.R;
 
 public class SSH_Upload_Print_Method_3 extends SSHManager {
 	final Float progressIncrement = (float) 100 / 8;
-	Float currentProgress = (float) 0;
-	InputStream multiValStream = null;
-	String multivalentFilename;
-	String mvMD5;
-	String tempDir;
+	private Float currentProgress = (float) 0;
+	private InputStream multiValStream = null;
+	private String multivalentFilename;
+	private String mvMD5;
 
 	public SSH_Upload_Print_Method_3(MainActivity caller) {
 		super(caller);
@@ -37,7 +36,6 @@ public class SSH_Upload_Print_Method_3 extends SSHManager {
 			//Nothing
 		}
 		
-		tempDir = callingActivity.getString(R.string.server_temp_dir) + "/";
 		SSHManager.callingActivity.setIndeterminateProgress(true);
 		
 		mvMD5 = callingActivity.getString(R.string.multivalent_md5);
@@ -63,12 +61,14 @@ public class SSH_Upload_Print_Method_3 extends SSHManager {
 
 		try {
 			super.publishProgress("Checking if need to upload multivalent jar tool");
-			String md5reply = super.sendCommand("md5 " + tempDir + multivalentFilename);
 
-			if(!md5reply.startsWith(mvMD5)){
+
+			if(!doesMD5MatchExistingFile(multivalentFilename, mvMD5)){
 				publishProgress("Uploading " + multivalentFilename);
 				super.uploadFile(multiValStream, multivalentFilename);
 			}
+			
+			multiValStream.close();
 			
 			File toBePrinted = new File(filePath);
 			InputStream fileStream = new FileInputStream(toBePrinted);
