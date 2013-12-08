@@ -59,6 +59,11 @@
     <string name="quota_url">http://mysoc.nus.edu.sg/~eprint/forms/quota.php</string>
     <string name="about_box_text">NUS SOC Print v0.42\nMIT license\nBuild Date: 29 Sept 2013\nBy: Yeo Kheng Meng\nWith thanks to Yong Quan, Kai Yao, Gabriel and Jason\n\nSource Code: \nhttps://github.com/yeokm1/nus-soc-print\n\nWrite-up:\nhttp://yeokhengmeng.com/2013/03/nus-soc-print-android-app\n\n</string>
     <string name="help_text">NUS SOC Print v0.42\nMIT license\nBuild Date: 29 Sept 2013\nBy: Yeo Kheng Meng\n
+\nWhat is \"Clear Server Cache\"?\n
+Clears temporary files in the socPrint directory in your Unix account. You are advised to clear regularly to prevent filename conflicts.\n
+
+\nWhat is \"Reset connection\"?\n
+If the app\'s SSH connection is unresponsive, this is the button to hit. It will also terminate any active SSH operations.\n
        
 \nWhich method to pick?\n\n
 Method 1 (From v0.22)\n
