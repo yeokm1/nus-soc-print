@@ -567,7 +567,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 		webView.setWebViewClient(new WebViewSettings(getApplicationContext(), PreferenceManager.getDefaultSharedPreferences(this)));
 
 		webView.getSettings().setBuiltInZoomControls(true);
-		webView.getSettings().setSupportZoom(true);
+//		webView.getSettings().setSupportZoom(true);
 		webView.loadUrl(getString(R.string.quota_url));
 		
 		
