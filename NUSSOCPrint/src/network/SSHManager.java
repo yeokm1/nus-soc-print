@@ -285,7 +285,7 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 				sendCommand(wgetCommand);
 
 				if(!doesMD5MatchServerFile(docsToPDFFileName, docsToPDFMD5)){
-					return callingActivity.getString(R.string.server_download_fail_docs_to_pdf_converter);
+					throw new JSchException(callingActivity.getString(R.string.server_download_fail_docs_to_pdf_converter));
 				}
 
 			}
