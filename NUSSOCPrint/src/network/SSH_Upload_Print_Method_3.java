@@ -60,12 +60,23 @@ public class SSH_Upload_Print_Method_3 extends SSHManager {
 
 
 		try {
-			super.publishProgress("Checking if need to upload multivalent jar tool");
+			super.publishProgress(String.format(callingActivity.getString(R.string.server_checking_if_need_to_upload), multivalentFilename));
 
-
-			if(!doesMD5MatchExistingFile(multivalentFilename, mvMD5)){
-				publishProgress("Uploading " + multivalentFilename);
-				super.uploadFile(multiValStream, multivalentFilename);
+			if(!doesMD5MatchServerFile(multivalentFilename, mvMD5)){
+				
+				String wgetCommand = String.format(callingActivity.getString(R.string.server_wget_command_with_url), multivalentFilename, tempDir);
+				
+				super.publishProgress(wgetCommand);
+				super.sendCommand(wgetCommand);
+				
+				if(!doesMD5MatchServerFile(multivalentFilename, mvMD5)){
+					
+					String downloadErrorMessage = String.format(callingActivity.getString(R.string.server_download_error_now_uploading_from_app), multivalentFilename);
+					
+					super.publishProgress(downloadErrorMessage);
+					super.uploadFile(multiValStream, multivalentFilename);
+				}
+				
 			}
 			
 			multiValStream.close();
@@ -78,22 +89,16 @@ public class SSH_Upload_Print_Method_3 extends SSHManager {
 			String pdfUpFilename = onServerFileName.substring(0, onServerFileName.length() - 5) + "-up.pdf\"";  //-5 to remove .pdf";
 			String psFilename = pdfUpFilename.substring(0, pdfUpFilename.length() - 4) + "ps\"";
 
-			publishProgress("Uploading Document...");
+			publishProgress(callingActivity.getString(R.string.server_uploading_document));
 			super.uploadFile(fileStream, toBePrinted.getName());
 
 			String imposeCommand = generateMultivalentCommand(onServerFileName, numPagesPerSheet, numRows, numCols, startRange, endRange, lineBorder);
 
-			publishProgress("Formatting PDF using: " + imposeCommand);
+			publishProgress(String.format(callingActivity.getString(R.string.server_formatting_pdf), imposeCommand));
 			super.sendCommand(imposeCommand);
 
-			String convertToPSCommand = "pdftops";
-
-			convertToPSCommand += " " + pdfUpFilename + " "  + psFilename;	
-
-			publishProgress("Converting to PostScript using: " + convertToPSCommand);
+			convertToPS(pdfUpFilename, psFilename);
 			
-			super.sendCommand(convertToPSCommand);
-
 			return super.printThisPSFile(psFilename, printerName);
 
 		} catch (FileNotFoundException e) {

@@ -53,7 +53,7 @@ public class SSH_Upload_Print_Method_1 extends SSHManager {
 
 		try {
 
-			publishProgress("Uploading File");
+			publishProgress(callingActivity.getString(R.string.server_uploading_document));
 			super.uploadFile(toBePrinted);
 
 
@@ -70,7 +70,7 @@ public class SSH_Upload_Print_Method_1 extends SSHManager {
 			convertToPSCommand += " " + fileName + " "  + psFileName;	
 
 
-			publishProgress("Converting to PostScript using: " + convertToPSCommand);
+			publishProgress(String.format(callingActivity.getString(R.string.server_converting_to_ps), convertToPSCommand));
 
 			String conversionMessage = super.sendCommand(convertToPSCommand);
 

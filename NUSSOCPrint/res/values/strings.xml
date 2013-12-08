@@ -33,13 +33,17 @@
         <item>16</item>
     </string-array>
 
+    
     <string name="nup_pdf_filename">nup_pdf.jar</string>
     <string name="nup_pdf_md5">C1F8FF3F9DE7B2D2A2B41FBC0085888B</string>
-    
     <string name="multivalent_filename">Multivalent.jar</string>
     <string name="multivalent_md5">813BB651A1CC6EA230F28AAC47F78051</string>
-    
-    
+    <string name="server_wget_command_with_url">wget -N http://www.comp.nus.edu.sg/~yeokm1/nus-soc-print-tools/%1$s -P %2$s</string>
+    <string name="server_uploading_document">Uploading document&#8230;</string>
+    <string name="server_checking_if_need_to_upload">Checking if need to retrieve %1$s</string>
+    <string name="server_converting_to_ps">Converting to Postscript using: %1$s</string>
+    <string name="server_formatting_pdf">Formatting PDF using: %1$s</string>
+    <string name="server_download_error_now_uploading_from_app">Download Error. Now Uploading %1$s from app</string>
     <string name="select_file_to_print">Choose pdf file to print</string>
     <string name="default_username">Enter your UNIX username</string>
     <string name="default_password">Enter your UNIX password</string>

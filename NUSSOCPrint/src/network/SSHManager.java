@@ -133,8 +133,9 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 		channel.disconnect();
 
 
-
-		return outputBuffer.toString();
+		String output = outputBuffer.toString();
+		Log.i("SSHmgr command output", output);
+		return output;
 	}
 
 
@@ -219,9 +220,31 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 		callingActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
 	}
 	
-	protected boolean doesMD5MatchExistingFile(String filename, String md5) throws IOException, JSchException{
+	protected boolean doesMD5MatchServerFile(String filename, String md5) throws IOException, JSchException{
 		String md5reply = sendCommand("md5 " + tempDir + filename);
 		return md5reply.startsWith(md5);
+	}
+	
+//	protected String wgetThisFileFromMe(String filename) throws IOException, JSchException{
+//		String serverTempDir = callingActivity.getString(R.string.server_temp_dir);
+//		return wgetThisFileFromMe(filename, serverTempDir);
+//	}
+//	
+//	protected String wgetThisFileFromMe(String filename, String folderToDownloadTo) throws IOException, JSchException{
+//		String wgetCommand = String.format(callingActivity.getString(R.string.wget_command_with_url), filename, folderToDownloadTo);
+//		String reply = sendCommand(wgetCommand);
+//		return reply;
+//	}
+	
+	protected void convertToPS(String pdfUpFilename, String psFilename)
+			throws IOException, JSchException {
+		String convertToPSCommand = "pdftops";
+
+		convertToPSCommand += " " + pdfUpFilename + " "  + psFilename;	
+
+		publishProgress(String.format(callingActivity.getString(R.string.server_converting_to_ps), convertToPSCommand));
+		
+		sendCommand(convertToPSCommand);
 	}
 	
 }

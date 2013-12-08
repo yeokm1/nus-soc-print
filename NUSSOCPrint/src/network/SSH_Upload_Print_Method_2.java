@@ -61,11 +61,23 @@ public class SSH_Upload_Print_Method_2 extends SSHManager {
 
 
 		try {
-			super.publishProgress("Checking if need to upload nup_pdf jar tool");
+			super.publishProgress(String.format(callingActivity.getString(R.string.server_checking_if_need_to_upload), nup_pdf_Filename));
 
-			if(!doesMD5MatchExistingFile(nup_pdf_Filename, nupMD5)){
-				super.publishProgress("Uploading " + nup_pdf_Filename);
-				super.uploadFile(nup_pdf_stream, nup_pdf_Filename);
+			if(!doesMD5MatchServerFile(nup_pdf_Filename, nupMD5)){
+				
+				String wgetCommand = String.format(callingActivity.getString(R.string.server_wget_command_with_url), nup_pdf_Filename, tempDir);
+				
+				super.publishProgress(wgetCommand);
+				super.sendCommand(wgetCommand);
+				
+				if(!doesMD5MatchServerFile(nup_pdf_Filename, nupMD5)){
+					
+					String downloadErrorMessage = String.format(callingActivity.getString(R.string.server_download_error_now_uploading_from_app), nup_pdf_Filename);
+					
+					super.publishProgress(downloadErrorMessage);
+					super.uploadFile(nup_pdf_stream, nup_pdf_Filename);
+				}
+				
 			}
 			
 			nup_pdf_stream.close();
@@ -76,28 +88,20 @@ public class SSH_Upload_Print_Method_2 extends SSHManager {
 			InputStream fileStream = new FileInputStream(toBePrinted);
 
 
-
-
 			String onServerFileName = tempDir + "\"" + toBePrinted.getName() + "\"";
 			String pdfUpFilename = onServerFileName.substring(0, onServerFileName.length() - 5) + "-up.pdf\"";  //-5 to remove .pdf";
 			String psFilename = pdfUpFilename.substring(0, pdfUpFilename.length() - 4) + "ps\"";
 
-			publishProgress("Uploading Document...");
+			publishProgress(callingActivity.getString(R.string.server_uploading_document));
 			super.uploadFile(fileStream, toBePrinted.getName());
 			
 			
 			String nupCommand = generateNupCommand(onServerFileName, pdfUpFilename, pagesPerSheet, lineBorder);
 
-			publishProgress("Formatting PDF using: " + nupCommand);
+			publishProgress(String.format(callingActivity.getString(R.string.server_formatting_pdf), nupCommand));
 			super.sendCommand(nupCommand);
 
-			String convertToPSCommand = "pdftops";
-
-			convertToPSCommand += " " + pdfUpFilename + " "  + psFilename;	
-
-			publishProgress("Converting to PostScript using: " + convertToPSCommand);
-			
-			super.sendCommand(convertToPSCommand);
+			convertToPS(pdfUpFilename, psFilename);
 
 			return super.printThisPSFile(psFilename, printerName);
 
@@ -118,9 +122,6 @@ public class SSH_Upload_Print_Method_2 extends SSHManager {
 
 
 	}
-
-
-
 
 
 	public String generateNupCommand(String inputFilePath, String outputFilePath, String pagesPerSheet, String lineBorder ){
