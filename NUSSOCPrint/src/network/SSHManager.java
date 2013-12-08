@@ -225,17 +225,7 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 		return md5reply.startsWith(md5);
 	}
 	
-//	protected String wgetThisFileFromMe(String filename) throws IOException, JSchException{
-//		String serverTempDir = callingActivity.getString(R.string.server_temp_dir);
-//		return wgetThisFileFromMe(filename, serverTempDir);
-//	}
-//	
-//	protected String wgetThisFileFromMe(String filename, String folderToDownloadTo) throws IOException, JSchException{
-//		String wgetCommand = String.format(callingActivity.getString(R.string.wget_command_with_url), filename, folderToDownloadTo);
-//		String reply = sendCommand(wgetCommand);
-//		return reply;
-//	}
-	
+
 	protected void convertToPS(String pdfUpFilename, String psFilename)
 			throws IOException, JSchException {
 		String convertToPSCommand = "pdftops";
