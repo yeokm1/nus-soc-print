@@ -45,7 +45,7 @@ public class SSH_Upload_Print_Method_1 extends SSHManager {
 
 		try {
 
-			publishProgress(callingActivity.getString(R.string.server_uploading_document));
+			publishProgress(callingActivity.getString(R.string.server_uploading_file));
 			super.uploadFile(toBePrinted);
 
 			String fileName = convertDocsToPDFAndReturnFileName(toBePrinted.getName());
@@ -135,7 +135,10 @@ public class SSH_Upload_Print_Method_1 extends SSHManager {
 
 	@Override
 	protected void onProgressUpdate(String... progress){
-		currentProgress += progressIncrement;
+		//If more than one items means progress is for file uploading
+		if(progress.length == 1){
+			currentProgress += progressIncrement;
+		}
 		String soFar = progress[0];
 		callingActivity.updatePrintingStatusProgressBar(soFar, currentProgress.intValue());
 	}

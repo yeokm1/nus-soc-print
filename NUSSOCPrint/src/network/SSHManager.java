@@ -12,7 +12,6 @@ package network;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -29,7 +28,9 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import com.jcraft.jsch.SftpException;
+import com.jcraft.jsch.SftpProgressMonitor;
 import com.yeokm1.nussocprintandroid.R;
+
 
 
 public abstract class SSHManager extends AsyncTask<String, String, String>
@@ -144,11 +145,11 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 	}
 
 
-	protected static synchronized void uploadFile(File toBePrinted) throws FileNotFoundException, SftpException, JSchException{
+	protected synchronized void uploadFile(File toBePrinted) throws SftpException, JSchException, IOException{
 		uploadFile(new FileInputStream(toBePrinted), toBePrinted.getName());
 	}
 
-	protected static synchronized void uploadFile(InputStream toBePrinted, String fileName) throws FileNotFoundException, SftpException, JSchException{
+	protected synchronized void uploadFile(InputStream toBePrinted, String fileName) throws SftpException, JSchException, IOException{
 		if(connectionStatus == false){
 			connect();
 		}
@@ -170,8 +171,7 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 			//If cannot make directory, means directory already created
 		}
 		channelSftp.cd(tempDir);
-		channelSftp.put(toBePrinted, fileName);
-
+		channelSftp.put(toBePrinted, fileName, new FileUploadMonitor(fileName, toBePrinted.available(), this));
 
 	}
 
@@ -310,6 +310,56 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 		return fileName;
 		
 		
+	}
+	
+	
+	public static class FileUploadMonitor implements SftpProgressMonitor {
+
+		
+		private long bytesTransferredSoFar = 0;
+		private String actualFileSize;
+		private String fileName;
+		private SSHManager task;
+		
+		public FileUploadMonitor(String fileName, long fileSize, SSHManager task){
+			actualFileSize = humanReadableByteCount(fileSize, false);
+			this.fileName = fileName;
+			this.task = task;
+		}
+		@Override
+		public boolean count(long bytesTransferred) {
+			bytesTransferredSoFar += bytesTransferred;
+			
+			String bytesTransferredSoFarStr = humanReadableByteCount(bytesTransferredSoFar, false);
+			
+			Log.d("transfer",  " transferred "  + bytesTransferredSoFarStr + " of " + actualFileSize);
+			
+			String progressMessage = String.format(callingActivity.getString(R.string.server_uploading_file_progress), fileName, bytesTransferredSoFarStr, actualFileSize);
+			String[] arrayStr = {progressMessage, "dummy"};
+			
+			task.publishProgress(arrayStr);
+			return true;
+		}
+
+		@Override
+		public void end() {
+			Log.d("transfer", "end");
+		}
+
+		@Override
+		public void init(int opCodeOfTransfer, String sourceFileName, String destFileName, long fileSize) {
+//			Log.d("transfer", opCodeOfTransfer + " " + sourceFileName + " " + destFileName + " " + Long.toString(fileSize));
+		}
+
+	}
+	
+	//http://stackoverflow.com/questions/3758606/how-to-convert-byte-size-into-human-readable-format-in-java
+	public static String humanReadableByteCount(long bytes, boolean si) {
+	    int unit = si ? 1000 : 1024;
+	    if (bytes < unit) return bytes + " B";
+	    int exp = (int) (Math.log(bytes) / Math.log(unit));
+	    String pre = (si ? "kMGTPE" : "KMGTPE").charAt(exp-1) + (si ? "" : "i");
+	    return String.format("%.1f %sB", bytes / Math.pow(unit, exp), pre);
 	}
 	
 }
