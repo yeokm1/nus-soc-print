@@ -14,13 +14,13 @@ public class SSH_Upload_Print_Method_1 extends SSHManager {
 
 	final Float progressIncrement = (float) 100 / 8;
 	Float currentProgress = (float) 0;
-	
+
 	String tempDir;
 
 	public SSH_Upload_Print_Method_1(MainActivity caller) {
 		super(caller);
 	}
-	
+
 	@Override
 	protected void onPreExecute(){
 		super.onPreExecute();
@@ -41,20 +41,21 @@ public class SSH_Upload_Print_Method_1 extends SSHManager {
 
 		File toBePrinted = new File(filePath);
 
-		String fileName = tempDir + "\"" + toBePrinted.getName() + "\"";
-		String psFileName;
-		String formattedPsFileName;
-
-
-		psFileName =  fileName.substring(0, fileName.length() - 4) + "ps\"";  //-4 to remove pdf"
-		formattedPsFileName = fileName.substring(0, fileName.length() - 4) + "psf\"";
-
 
 
 		try {
 
 			publishProgress(callingActivity.getString(R.string.server_uploading_document));
 			super.uploadFile(toBePrinted);
+
+			String fileName = convertDocsToPDFAndReturnFileName(toBePrinted.getName());
+			String psFileName;
+			String formattedPsFileName;
+
+
+
+			psFileName =  fileName.substring(0, fileName.length() - 4) + "ps\"";  //-4 to remove pdf"
+			formattedPsFileName = fileName.substring(0, fileName.length() - 4) + "psf\"";
 
 
 			String convertToPSCommand = "pdftops";
@@ -112,7 +113,7 @@ public class SSH_Upload_Print_Method_1 extends SSHManager {
 				}
 
 			}
-			
+
 			return super.printThisPSFile(formattedPsFileName, printerName);
 
 

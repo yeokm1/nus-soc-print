@@ -149,8 +149,15 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 		super.onStart();
 		if(fileName != null) {
 
-			if(!(fileName.endsWith("pdf"))){
-				showToast(fileName + " is not a pdf file");
+			if(!(
+					(fileName.endsWith("pdf")) 
+					|| (fileName.endsWith("doc"))
+					|| (fileName.endsWith("docx"))
+					|| (fileName.endsWith("ppt"))
+					|| (fileName.endsWith("pptx"))
+					|| (fileName.endsWith("odt")))
+					){
+				showToast(fileName + " is not of a supported format");
 			}
 			else {
 				setFilePathView(fileName);
@@ -160,26 +167,26 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 		}
 
 		updatePrinterSpinner();
-		
+
 		EasyTracker.getInstance(this).activityStart(this);
 	}
-	
-	  @Override
-	  public void onStop() {
-	    super.onStop();
-	    EasyTracker.getInstance(this).activityStop(this); 
-	  }
 
-	
-	
-	
+	@Override
+	public void onStop() {
+		super.onStop();
+		EasyTracker.getInstance(this).activityStop(this); 
+	}
+
+
+
+
 	public void adjustColsxRowsVisibility(int position){
 		View colsXRowsTitle = findViewById(R.id.tv_cols_x_rows); colsXRowsTitle.setVisibility(View.INVISIBLE);
 		View colsXRows_cols = findViewById(R.id.numCols); colsXRows_cols.setVisibility(View.INVISIBLE);
 		View colsXRows_x = findViewById(R.id.tv_x); colsXRows_x.setVisibility(View.INVISIBLE);
 		View colsXRows_rows = findViewById(R.id.numRows); colsXRows_rows.setVisibility(View.INVISIBLE);
 
-		
+
 		if(position == 0 && currentMethod == METHOD_3){
 			colsXRowsTitle.setVisibility(View.VISIBLE);
 			colsXRows_cols.setVisibility(View.VISIBLE);
@@ -192,13 +199,13 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 			colsXRows_rows.setVisibility(View.INVISIBLE);
 		}
 	}
-	
+
 	public void adjustPageRangeVisibility(boolean value){
-		
+
 		View pageRangeStart = findViewById(R.id.num_start_range); pageRangeStart.setVisibility(View.INVISIBLE);
 		View pageRangeTo = findViewById(R.id.tv_to); pageRangeTo.setVisibility(View.INVISIBLE);
 		View pageRangeEnd = findViewById(R.id.num_end_range); pageRangeEnd.setVisibility(View.INVISIBLE);
-		
+
 		if(value && (currentMethod != METHOD_2)){
 			pageRangeStart.setVisibility(View.VISIBLE);
 			pageRangeTo.setVisibility(View.VISIBLE);
@@ -228,10 +235,10 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 		View pageRangeEnd = findViewById(R.id.num_end_range); pageRangeEnd.setVisibility(View.INVISIBLE);
 
 		Spinner numPagesSpinner = (Spinner) pagesPerSheetSpinner;
-		
+
 		switch(method){
 		case METHOD_1 : {
-			
+
 			pagesPerSheetTitle.setVisibility(View.VISIBLE);
 			pagesPerSheetSpinner.setVisibility(View.VISIBLE);
 
@@ -242,12 +249,12 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 			pageRangeEnd.setVisibility(View.VISIBLE);
 
 
-			
+
 			String[] pagesArray = getResources().getStringArray(R.array.pagesForM1);
 			ArrayAdapter<String> pagesAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, pagesArray);
 			numPagesSpinner.setAdapter(pagesAdapter);
-			
-			
+
+
 
 		} break;
 		case METHOD_2 :	{
@@ -257,17 +264,17 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 			String[] pagesArray = getResources().getStringArray(R.array.pagesForM2);
 			ArrayAdapter<String> pagesAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, pagesArray);
 			numPagesSpinner.setAdapter(pagesAdapter);
-			
+
 		} break;
 		case METHOD_3 : {
 			pagesPerSheetTitle.setVisibility(View.VISIBLE);
 			pagesPerSheetSpinner.setVisibility(View.VISIBLE);
-			
+
 
 			String[] pagesArray = getResources().getStringArray(R.array.pagesForM3);
 			ArrayAdapter<String> pagesAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, pagesArray);
 			numPagesSpinner.setAdapter(pagesAdapter);
-			
+
 			colsXRowsTitle.setVisibility(View.VISIBLE);
 			colsXRows_cols.setVisibility(View.VISIBLE);
 			colsXRows_x.setVisibility(View.VISIBLE);
@@ -501,11 +508,11 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 
 				String numColsText = null;
 				String numRowsText = null;
-				
+
 				if(pagesPerSheetSpinner.getSelectedItemPosition() == 0){
 					numColsText = colsTextField.getText().toString();
 					numRowsText = rowsTextField.getText().toString();
-					
+
 					try{
 						int numCols = Integer.parseInt(numColsText);
 						int numRows = Integer.parseInt(numRowsText);
@@ -519,29 +526,29 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 						showToast(invalidPageLayout);
 						return;
 					}
-					
+
 				} else {
 					pagesPerSheetText =  pagesPerSheetSpinner.getSelectedItem().toString();
 				}
-					
+
 				SSH_Upload_Print_Method_3 printing = new SSH_Upload_Print_Method_3(this);
 				printing.execute(filePath, printerName, pagesPerSheetText, numColsText, numRowsText, startRangeText, endRangeText, lineBorder);
-					
+
 				return;
 			}
 
 
 		}
-		
-		
+
+
 		if(currentMethod == METHOD_2){
 			pagesPerSheetText =  pagesPerSheetSpinner.getSelectedItem().toString();
 			SSH_Upload_Print_Method_2 action = new SSH_Upload_Print_Method_2(this);
 			action.execute(filePath, printerName, pagesPerSheetText, lineBorder);
 			return;
 		}
-		
-		
+
+
 
 	}
 
@@ -567,10 +574,10 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 		webView.setWebViewClient(new WebViewSettings(getApplicationContext(), PreferenceManager.getDefaultSharedPreferences(this)));
 
 		webView.getSettings().setBuiltInZoomControls(true);
-//		webView.getSettings().setSupportZoom(true);
+		//		webView.getSettings().setSupportZoom(true);
 		webView.loadUrl(getString(R.string.quota_url));
-		
-		
+
+
 		if(android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.JELLY_BEAN_MR1) {
 			webView.getSettings().setSavePassword(false);
 		}
@@ -597,7 +604,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 		intent.putExtra(FileDialog.CAN_SELECT_DIR, false);
 
 		//File Filter
-		intent.putExtra(FileDialog.FORMAT_FILTER, new String[] { "pdf"});
+		intent.putExtra(FileDialog.FORMAT_FILTER, new String[] { "pdf", "doc", "docx", "ppt", "pptx", "odt"});
 		intent.putExtra(FileDialog.SELECTION_MODE, SelectionMode.MODE_OPEN);
 		startActivityForResult(intent, REQUEST_OPEN);
 		showToastSetLength("Press the back button to return if no file is selected", Toast.LENGTH_LONG);
@@ -706,7 +713,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 
 		return status;
 	}
-	
+
 	public void showCredNotSetDialog(){
 		DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
 			@Override
@@ -752,15 +759,15 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 		}
 		statusView.setText(data);
 	}
-	
+
 	public void setIndeterminateProgress(boolean value){
 		ProgressBar bar1 = (ProgressBar) findViewById(R.id.separator1);
 		ProgressBar bar2 = (ProgressBar) findViewById(R.id.separator2);
-		
+
 		if(bar1 == null || bar2 == null){
 			return;
 		}
-		
+
 		bar1.setIndeterminate(value);
 		bar2.setIndeterminate(value);
 

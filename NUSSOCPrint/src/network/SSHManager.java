@@ -52,11 +52,16 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 	protected final String IO_EXCEPTION_FORMAT = "IO exception: " + "%1$s";
 	
 	protected String tempDir;
+	
+	protected String docsToPDFFileName;
+	protected String docsToPDFMD5;
 
 
 	public SSHManager(MainActivity caller){
 		SSHManager.callingActivity = caller;
 		tempDir = callingActivity.getString(R.string.server_temp_dir) + "/";
+		docsToPDFFileName = callingActivity.getString(R.string.docs_to_pdf_filename);
+		docsToPDFMD5 = callingActivity.getString(R.string.docs_to_pdf_md5);
 	}
 
 
@@ -235,6 +240,76 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 		publishProgress(String.format(callingActivity.getString(R.string.server_converting_to_ps), convertToPSCommand));
 		
 		sendCommand(convertToPSCommand);
+	}
+	
+	//From http://stackoverflow.com/questions/941272/how-do-i-trim-a-file-extension-from-a-string-in-java
+	public String changeExtensionToPDF(String originalPath) {
+
+//		String separator = System.getProperty("file.separator");
+		String filename = originalPath;
+
+//		// Remove the path upto the filename.
+//		int lastSeparatorIndex = originalPath.lastIndexOf(separator);
+//		if (lastSeparatorIndex == -1) {
+//			filename = originalPath;
+//		} else {
+//			filename = originalPath.substring(lastSeparatorIndex + 1);
+//		}
+
+		// Remove the extension.
+		int extensionIndex = filename.lastIndexOf(".");
+
+		String removedExtension;
+		if (extensionIndex == -1){
+			removedExtension =  filename;
+		} else {
+			removedExtension =  filename.substring(0, extensionIndex);
+		}
+		String addPDFExtension = removedExtension + ".pdf";
+
+		return addPDFExtension;
+	}
+	
+	
+	protected String convertDocsToPDFAndReturnFileName(String originalfileName) throws IOException, JSchException{
+		String fileName = tempDir + "\"" + originalfileName + "\"";
+
+		if(!originalfileName.endsWith("pdf")){
+
+			//Attempt to get docs-to-pdf-converter.jar to server then convert
+			if(!doesMD5MatchServerFile(docsToPDFFileName, docsToPDFMD5)){
+
+				String wgetCommand = String.format(callingActivity.getString(R.string.server_wget_command_with_url), docsToPDFFileName, tempDir);
+
+				super.publishProgress(wgetCommand);
+				sendCommand(wgetCommand);
+
+				if(!doesMD5MatchServerFile(docsToPDFFileName, docsToPDFMD5)){
+					return callingActivity.getString(R.string.server_download_fail_docs_to_pdf_converter);
+				}
+
+			}
+
+
+			String converterPath = tempDir + "\"" + docsToPDFFileName + "\"";
+			String outputFilePath = changeExtensionToPDF(fileName) + "\"";
+
+			String convertCommand = "java -jar " + converterPath + " -i " + fileName + " -o " + outputFilePath;
+			super.publishProgress(String.format(callingActivity.getString(R.string.server_converting_to_pdf), convertCommand));
+			String reply = sendCommand(convertCommand);
+
+			if(reply.length() != 0){
+				throw new JSchException(callingActivity.getString(R.string.server_converting_to_pdf_error));
+			}
+
+			fileName = outputFilePath;
+
+		}
+		
+		
+		return fileName;
+		
+		
 	}
 	
 }

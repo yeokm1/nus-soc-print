@@ -14,11 +14,10 @@
     <application
         android:allowBackup="false"
         android:icon="@drawable/app_icon"
-        android:label="@string/app_name" 
-        android:installLocation="auto">
+        android:installLocation="auto"
+        android:label="@string/app_name" >
         <activity android:name="com.lamerman.FileDialog" >
         </activity>
-
         <activity
             android:name="ui.MainActivity"
             android:label="@string/app_name"
@@ -34,15 +33,24 @@
                 <action android:name="android.intent.action.SEND" />
 
                 <category android:name="android.intent.category.DEFAULT" />
-
+                <!-- PDF -->
                 <data android:mimeType="application/pdf" />
+                <!-- DOC -->
+                <data android:mimeType="application/msword" />
+                <!-- DOCX -->
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+                <!-- PPT -->
+                <data android:mimeType="application/vnd.ms-powerpoint" />
+                <!-- PPTX -->
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.presentationml.presentation" />
+                <!-- ODT -->
+                <data android:mimeType="application/vnd.oasis.opendocument.text" />
             </intent-filter>
         </activity>
 
-
-    
-
-    <meta-data android:name="com.crashlytics.ApiKey" android:value="378cecf7f2dce6ec0029267d0ebebd246b5339e5"/>
+        <meta-data
+            android:name="com.crashlytics.ApiKey"
+            android:value="378cecf7f2dce6ec0029267d0ebebd246b5339e5" />
     </application>
 
 </manifest>

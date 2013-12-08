@@ -33,18 +33,22 @@
         <item>16</item>
     </string-array>
 
-    
     <string name="nup_pdf_filename">nup_pdf.jar</string>
     <string name="nup_pdf_md5">C1F8FF3F9DE7B2D2A2B41FBC0085888B</string>
     <string name="multivalent_filename">Multivalent.jar</string>
     <string name="multivalent_md5">813BB651A1CC6EA230F28AAC47F78051</string>
+    <string name="docs_to_pdf_filename">docs-to-pdf-converter.jar</string>
+    <string name="docs_to_pdf_md5">1FC140AD8074E333F9082300F4EA38DC</string>
     <string name="server_wget_command_with_url">wget -N http://www.comp.nus.edu.sg/~yeokm1/nus-soc-print-tools/%1$s -P %2$s</string>
     <string name="server_uploading_document">Uploading document&#8230;</string>
     <string name="server_checking_if_need_to_upload">Checking if need to retrieve %1$s</string>
     <string name="server_converting_to_ps">Converting to Postscript using: %1$s</string>
+    <string name="server_converting_to_pdf">Converting to PDF using: %1$s</string>
+    <string name="server_converting_to_pdf_error">Error converting to PDF</string>
     <string name="server_formatting_pdf">Formatting PDF using: %1$s</string>
     <string name="server_download_error_now_uploading_from_app">Download Error. Now Uploading %1$s from app</string>
-    <string name="select_file_to_print">Choose pdf file to print</string>
+    <string name="server_download_fail_docs_to_pdf_converter">Unable to download docs-to-pdf-converter.jar, cannot proceed with printing non-PDF document.</string>
+    <string name="select_file_to_print">Choose document to print</string>
     <string name="default_username">Enter your UNIX username</string>
     <string name="default_password">Enter your UNIX password</string>
     <string name="default_printer">Enter your custom printer here</string>
@@ -61,8 +65,11 @@
     <string name="credentials_not_set_dialog_text">You have not specified your Unix username or password in this app, enter them in the Settings page.</string>
     <string name="credentials_not_set_dialog_close_button">Close</string>
     <string name="quota_url">http://mysoc.nus.edu.sg/~eprint/forms/quota.php</string>
-    <string name="about_box_text">NUS SOC Print v0.42\nMIT license\nBuild Date: 29 Sept 2013\nBy: Yeo Kheng Meng\nWith thanks to Yong Quan, Kai Yao, Gabriel and Jason\n\nSource Code: \nhttps://github.com/yeokm1/nus-soc-print\n\nWrite-up:\nhttp://yeokhengmeng.com/2013/03/nus-soc-print-android-app\n\n</string>
-    <string name="help_text">NUS SOC Print v0.42\nMIT license\nBuild Date: 29 Sept 2013\nBy: Yeo Kheng Meng\n
+    <string name="about_box_text">NUS SOC Print v0.5\nMIT license\nBuild Date: 29 Sept 2013\nBy: Yeo Kheng Meng\nWith thanks to Yong Quan, Kai Yao, Gabriel and Jason\n\nSource Code: \nhttps://github.com/yeokm1/nus-soc-print\n\nWrite-up:\nhttp://yeokhengmeng.com/2013/03/nus-soc-print-android-app\n\n</string>
+    <string name="help_text">NUS SOC Print v0.5\nMIT license\nBuild Date: 29 Sept 2013\nBy: Yeo Kheng Meng\n
+\nWhat file formats are supported?\n
+PDF, DOCX, ODT, DOC, PPTX and PPT in order of reliability.\n        
+        
 \nWhat is \"Clear Server Cache\"?\n
 Clears temporary files in the socPrint directory in your Unix account. You are advised to clear regularly to prevent filename conflicts.\n
 

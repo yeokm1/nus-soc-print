@@ -86,14 +86,15 @@ public class SSH_Upload_Print_Method_2 extends SSHManager {
 			
 			File toBePrinted = new File(filePath);
 			InputStream fileStream = new FileInputStream(toBePrinted);
+			
+			publishProgress(callingActivity.getString(R.string.server_uploading_document));
+			super.uploadFile(fileStream, toBePrinted.getName());
 
-
-			String onServerFileName = tempDir + "\"" + toBePrinted.getName() + "\"";
+			String onServerFileName = convertDocsToPDFAndReturnFileName(toBePrinted.getName());
 			String pdfUpFilename = onServerFileName.substring(0, onServerFileName.length() - 5) + "-up.pdf\"";  //-5 to remove .pdf";
 			String psFilename = pdfUpFilename.substring(0, pdfUpFilename.length() - 4) + "ps\"";
 
-			publishProgress(callingActivity.getString(R.string.server_uploading_document));
-			super.uploadFile(fileStream, toBePrinted.getName());
+
 			
 			
 			String nupCommand = generateNupCommand(onServerFileName, pdfUpFilename, pagesPerSheet, lineBorder);
