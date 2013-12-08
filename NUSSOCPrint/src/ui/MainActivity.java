@@ -19,6 +19,7 @@ import ui.PreferenceListFragment.OnPreferenceAttachedListener;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -135,7 +136,11 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 
 		setSSHManager();
 
+		String[] credentials = obtainCredentials();
 
+		if((credentials[0].length() == 0) || (credentials[1].length() == 0)){
+			showCredNotSetDialog();
+		}
 
 	}
 
@@ -396,7 +401,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 
 	public void refreshPrintQueue(View view){
 		if(obtainCredentials() == null){
-			showToast(getString(R.string.credentials_not_set));
+			showToast(getString(R.string.credentials_not_set_dialog_text));
 			return;
 		}
 
@@ -413,7 +418,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 
 	public void printButtonPress(View view){
 		if(obtainCredentials() == null){
-			showToast(getString(R.string.credentials_not_set));
+			showToast(getString(R.string.credentials_not_set_dialog_text));
 			return;
 		}
 
@@ -687,7 +692,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 
 
 		if((credentials[0].length() == 0) || (credentials[1].length() == 0)){
-			showToast(getString(R.string.credentials_not_set));
+			showToast(getString(R.string.credentials_not_set_dialog_text));
 			return false;
 		}
 
@@ -700,6 +705,23 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 		SSHManager.setSettings(credentials[0], credentials[1], serverIP);
 
 		return status;
+	}
+	
+	public void showCredNotSetDialog(){
+		DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				switch (which){
+				case DialogInterface.BUTTON_NEGATIVE:
+					break;
+				}
+			}
+		};
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(getString(R.string.credentials_not_set_dialog_text));
+		builder.setNegativeButton(R.string.credentials_not_set_dialog_close_button, dialogClickListener);
+		builder.show();
 	}
 
 	public void showToast(String message){

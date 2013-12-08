@@ -54,7 +54,8 @@
     <string name="custom_server_preference">custom_server_preference</string>
     <string name="server_IP">sunfire.comp.nus.edu.sg</string>
     <string name="server_temp_dir">socPrint</string>
-    <string name="credentials_not_set">UNIX Username/password not entered, set them in the Settings page.</string>
+    <string name="credentials_not_set_dialog_text">You have not specified your Unix username or password in this app, enter them in the Settings page.</string>
+    <string name="credentials_not_set_dialog_close_button">Close</string>
     <string name="quota_url">http://mysoc.nus.edu.sg/~eprint/forms/quota.php</string>
     <string name="about_box_text">NUS SOC Print v0.42\nMIT license\nBuild Date: 29 Sept 2013\nBy: Yeo Kheng Meng\nWith thanks to Yong Quan, Kai Yao, Gabriel and Jason\n\nSource Code: \nhttps://github.com/yeokm1/nus-soc-print\n\nWrite-up:\nhttp://yeokhengmeng.com/2013/03/nus-soc-print-android-app\n\n</string>
     <string name="help_text">NUS SOC Print v0.42\nMIT license\nBuild Date: 29 Sept 2013\nBy: Yeo Kheng Meng\n

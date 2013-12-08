@@ -39,7 +39,9 @@ public class SettingsFragment extends PreferenceListFragment implements OnShared
 
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-		caller.onPreferenceChange();
+		if(caller != null) {
+			caller.onPreferenceChange();
+		}
 		
 	}
 
