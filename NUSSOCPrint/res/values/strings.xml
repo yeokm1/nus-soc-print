@@ -52,6 +52,10 @@
     <string name="password_preference">password_preference</string>
     <string name="custom_printer_preference">custom_printer_preference</string>
     <string name="custom_server_preference">custom_server_preference</string>
+    <string name="preference_reset_unix_password_link_title">Forgot your Unix credentials?</string>
+    <string name="preference_reset_unix_password_link_summary">Click here to reset your password. Enter your NUSNET credentials at the site. Then choose Reset Password on the left banner.</string>
+    <string name="preference_reset_unix_password_link_key">forgot_password_link</string>
+    <string name="reset_unix_password_link">https://mysoc.nus.edu.sg/~myacct/</string>
     <string name="server_IP">sunfire.comp.nus.edu.sg</string>
     <string name="server_temp_dir">socPrint</string>
     <string name="credentials_not_set_dialog_text">You have not specified your Unix username or password in this app, enter them in the Settings page.</string>
