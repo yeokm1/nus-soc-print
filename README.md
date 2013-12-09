@@ -16,7 +16,7 @@ Warning: This app works even outside the vicinity of the NUS network. So don't b
 2. Remaining quota check
 3. Print Status Check
 4. Print to custom printer
-5. Page formatting for pdf files
+5. Page formatting for documents
 6. Can share files to this app via file browser applications
 
 
@@ -45,7 +45,7 @@ A high level write-up can be viewed on my blog here http://yeokhengmeng.com/2013
 
 <b>Workings: How are things actually done?</b>
 
-1. Document is uploaded via SSH to a folder called socPrint in your UNIX account
+1. Document is uploaded via SFTP to a folder called socPrint in your UNIX account
 
 2. Document converted to PDF if necessary via external download of my docs-to-pdf-converter program. (https://github.com/yeokm1/docs-to-pdf-converter)
 
