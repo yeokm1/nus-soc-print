@@ -166,8 +166,6 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 			fileName = null;
 		}
 
-		updatePrinterSpinner();
-
 		EasyTracker.getInstance(this).activityStart(this);
 	}
 
@@ -299,7 +297,9 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 		List<String> printerList = getPrinterList();
 		Spinner printListSpinner = (Spinner) findViewById(R.id.printer_list);
 		ArrayAdapter<String> printListAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, printerList);
-		printListSpinner.setAdapter(printListAdapter);
+		if(printListAdapter != null){
+			printListSpinner.setAdapter(printListAdapter);
+		}
 	}
 
 	FragmentTransaction fragMentTra = null;
