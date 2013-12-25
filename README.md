@@ -5,19 +5,18 @@ You can download this app from the Play Store here.
 
 https://play.google.com/store/apps/details?id=com.yeokm1.nussocprintandroid
 
-This Android application prints PDF files to UNIX printers in the NUS School of Computing via the usage of SSH commands. Custom server address and printers can be added.
+This Android application prints Microsoft Office documents (experimental) and PDF files to UNIX printers in NUS School of Computing via the usage of SSH commands. Custom server address and printers can be added.
 
 Warning: This app works even outside the vicinity of the NUS network. So don't be too trigger happy with the print button.
 
-Kingsoft supports saving of doc and docx files as pdf. Use Kingsoft to convert files for printing.
 
 <b>Main Features:</b>
 
-1. Print PDF files
+1. Print PDF, DOC, DOCX, PPT, PPTX and ODT files
 2. Remaining quota check
 3. Print Status Check
 4. Print to custom printer
-5. Page formatting for pdf files
+5. Page formatting for documents
 6. Can share files to this app via file browser applications
 
 
@@ -46,28 +45,29 @@ A high level write-up can be viewed on my blog here http://yeokhengmeng.com/2013
 
 <b>Workings: How are things actually done?</b>
 
-1. PDF file is uploaded via SSH to a folder called socPrint in your UNIX account
+1. Document is uploaded via SFTP to a folder called socPrint in your UNIX account
+
+2. Document converted to PDF if necessary via external download of my docs-to-pdf-converter program. (https://github.com/yeokm1/docs-to-pdf-converter)
 
 Method 1:
 
-2a. PDF File converted to PostScript (pdftops)
+3a. PDF File converted to PostScript (pdftops)
 
-2b. Postscript file formatted according to requirements (psnup)
+3b. Postscript file formatted according to requirements (psnup)
 
 Method 2:
 
-2a PDF formatted using nup-pdf java program from ruby pdf
+3a. PDF formatted using nup-pdf java program from ruby pdf
 
-2b PDF File converted to PostScript (pdftops)
+3b. PDF File converted to PostScript (pdftops)
 
 Method 3:
 
-2a PDF formatted using Multivalent tools Impose java program
+3a. PDF formatted using Multivalent tools Impose java program
 
-2b PDF File converted to PostScript (pdftops)
+3b. PDF File converted to PostScript (pdftops)
 
-
-3. Send postscript file to print queue (uses the lpr command)
+Finally: Send postscript file to print queue (uses the lpr command)
 
 
 <b>Quick Guide and Recommendation:</b>
@@ -75,8 +75,6 @@ Method 3:
 "Reset Connection" button: Sometimes the SSH connection may throw up some issues, hit this button. It also halts any active connection.
 
 "Clear Server Cache" button: To remove unwanted files in the socPrint folder. 
-
-
 
 
 
