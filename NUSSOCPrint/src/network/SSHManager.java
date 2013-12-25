@@ -14,13 +14,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
 import ui.MainActivity;
+import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.util.Log;
-
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.ChannelSftp;
@@ -56,7 +55,6 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 	
 	protected String docsToPDFFileName;
 	protected String docsToPDFMD5;
-
 
 	public SSHManager(MainActivity caller){
 		SSHManager.callingActivity = caller;
@@ -218,11 +216,14 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 			callingActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 			break;
 		}
+		
+		keepScreenOn();
 	}
 
 	@Override
 	protected void onPostExecute(String output){
 		callingActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+		stopKeepScreenOn();
 	}
 	
 	protected boolean doesMD5MatchServerFile(String filename, String md5) throws IOException, JSchException{
@@ -354,12 +355,22 @@ public abstract class SSHManager extends AsyncTask<String, String, String>
 	}
 	
 	//http://stackoverflow.com/questions/3758606/how-to-convert-byte-size-into-human-readable-format-in-java
+	@SuppressLint("DefaultLocale")
 	public static String humanReadableByteCount(long bytes, boolean si) {
 	    int unit = si ? 1000 : 1024;
 	    if (bytes < unit) return bytes + " B";
 	    int exp = (int) (Math.log(bytes) / Math.log(unit));
 	    String pre = (si ? "kMGTPE" : "KMGTPE").charAt(exp-1) + (si ? "" : "i");
 	    return String.format("%.1f %sB", bytes / Math.pow(unit, exp), pre);
+	}
+	
+	
+	protected void keepScreenOn(){
+		callingActivity.getWindow().addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+	}
+	
+	protected void stopKeepScreenOn(){
+		callingActivity.getWindow().clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 	}
 	
 }
