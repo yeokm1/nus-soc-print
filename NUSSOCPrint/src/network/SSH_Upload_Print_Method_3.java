@@ -119,7 +119,7 @@ public class SSH_Upload_Print_Method_3 extends SSHManager {
 	public String generateMultivalentCommand(String filePath, String numPagesPerSheet, String numRows, String numCols, 
 			String startRange, String endRange, String lineBorder ){
 
-		String command = "java -classpath " + tempDir + multivalentFilename + "tool.pdf.Impose -paper a4";
+		String command = "java -classpath " + tempDir + multivalentFilename + " tool.pdf.Impose -paper a4";
 		
 		
 		if(numPagesPerSheet == null){
