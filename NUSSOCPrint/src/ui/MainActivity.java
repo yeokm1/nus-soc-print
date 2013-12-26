@@ -297,7 +297,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 		List<String> printerList = getPrinterList();
 		Spinner printListSpinner = (Spinner) findViewById(R.id.printer_list);
 		ArrayAdapter<String> printListAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, printerList);
-		if(printListAdapter != null){
+		if(printListSpinner != null && printListAdapter != null){
 			printListSpinner.setAdapter(printListAdapter);
 		}
 	}
