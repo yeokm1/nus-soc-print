@@ -33,13 +33,6 @@ Warning: This app works even outside the vicinity of the NUS network. So don't b
 5. Since this app is still new, bugs are to be expected. Inform me if you do encounter them.
 
 
-<b>Bugs so far: </b>
-
-1. Page border for M2 does not work
-
-2. Pages/Sheet dropdown menu does not appear properly on Android 4.3 devices 
-
-
 A high level write-up can be viewed on my blog here http://yeokhengmeng.com/2013/03/nus-soc-print-android-app
 
 
