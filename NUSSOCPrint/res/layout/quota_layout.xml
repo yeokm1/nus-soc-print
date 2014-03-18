@@ -11,15 +11,15 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:onClick="getPrintQuota"
-        android:text="Refresh Quota Page" />
+        android:text="Refresh Quota" />
 
-    <WebView
-        android:id="@+id/webView_qouta"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+    <TextView
+        android:id="@+id/print_quota_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/button_print_quota"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true" />
 
 </RelativeLayout>

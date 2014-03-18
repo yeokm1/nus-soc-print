@@ -1,8 +1,5 @@
 package ui;
 
-import com.crashlytics.android.Crashlytics;
-import com.google.analytics.tracking.android.EasyTracker;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -14,9 +11,7 @@ import network.SSH_Printer_Status;
 import network.SSH_Upload_Print_Method_1;
 import network.SSH_Upload_Print_Method_2;
 import network.SSH_Upload_Print_Method_3;
-import network.WebViewSettings;
 import ui.PreferenceListFragment.OnPreferenceAttachedListener;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -35,7 +30,6 @@ import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
 import android.text.util.Linkify;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -52,6 +46,8 @@ import com.actionbarsherlock.app.ActionBar.TabListener;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.crashlytics.android.Crashlytics;
+import com.google.analytics.tracking.android.EasyTracker;
 import com.lamerman.FileDialog;
 import com.lamerman.SelectionMode;
 import com.yeokm1.nussocprintandroid.R;
@@ -127,7 +123,9 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 			//			bar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM
 			//					| ActionBar.DISPLAY_USE_LOGO);
 
+			fragMentTra.commit();
 			bar.show();
+			
 
 
 		} catch (Exception e) {
@@ -565,27 +563,6 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 		printerList.toArray(printerArray);
 
 		deleteAll.execute(printerArray);
-	}
-
-	@SuppressWarnings("deprecation")
-	@SuppressLint("SetJavaScriptEnabled")
-	public void getPrintQuota(View view){
-
-		showToast("Loading Quota Check page");
-
-		WebView webView = (WebView) findViewById(R.id.webView_qouta);
-		webView.getSettings().setJavaScriptEnabled(true);
-
-		webView.setWebViewClient(new WebViewSettings(getApplicationContext(), PreferenceManager.getDefaultSharedPreferences(this)));
-
-		webView.getSettings().setBuiltInZoomControls(true);
-		//		webView.getSettings().setSupportZoom(true);
-		webView.loadUrl(getString(R.string.quota_url));
-
-
-		if(android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.JELLY_BEAN_MR1) {
-			webView.getSettings().setSavePassword(false);
-		}
 	}
 
 	public void forceDisconnectAndReinit(View view){
