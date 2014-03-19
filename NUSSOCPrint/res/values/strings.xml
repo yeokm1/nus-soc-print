@@ -66,10 +66,12 @@
     <string name="credentials_not_set_dialog_text">You have not specified your Unix username or password in this app, enter them in the Settings page.</string>
     <string name="credentials_not_set_dialog_close_button">Close</string>
    
-    <string name="quota_url">http://mysoc.nus.edu.sg/~eprint/forms/quota.php</string>
+    <string name="quota_url">https://mysoc.nus.edu.sg/~eprint/forms/quota.php</string>
     <string name="quota_login_url">https://mysoc.nus.edu.sg/images/LOGIN</string>
     <string name="quota_page_relative_url">/~eprint/forms/quota.php</string>
-    <string name="quota_refresh_text">Refreshing Print Quota</string>
+    <string name="quota_refresh_text">Refreshing Print Quota&#8230;</string>
+    <string name="quota_no_network">No network connection or mysoc site unreachable.</string>
+    <string name="quota_wrong_credentials">Username or password incorrect.</string>
     
     <string name="about_box_text">NUS SOC Print v0.53\nMIT license\nBuild Date: 18 Mar 2014\nBy: Yeo Kheng Meng\nWith thanks to Yong Quan, Kai Yao, Gabriel and Jason\n\nSource Code: \nhttps://github.com/yeokm1/nus-soc-print\n\nWrite-up:\nhttp://yeokhengmeng.com/2013/03/nus-soc-print-android-app\n\n</string>
     <string name="help_text">NUS SOC Print v0.53\nMIT license\nBuild Date: 18 Mar 2014\nBy: Yeo Kheng Meng\n
