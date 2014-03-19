@@ -79,7 +79,7 @@
     <string name="about_box_text">NUS SOC Print v0.54\nMIT license\nBuild Date: 19 Mar 2014\nBy: Yeo Kheng Meng (yeokm1@gmail.com)\nWith thanks to Yong Quan, Kai Yao, Gabriel and Jason\n\nSource Code: \nhttps://github.com/yeokm1/nus-soc-print\n\nWrite-up:\nhttp://yeokhengmeng.com/2013/03/nus-soc-print-android-app\n\n</string>
     <string name="help_text">NUS SOC Print v0.54\nMIT license\nBuild Date: 19 Mar 2014\nBy: Yeo Kheng Meng (yeokm1@gmail.com)\n
 \nWhich file formats are supported?\n
-PDF, DOCX, ODT, DOC, PPTX and PPT in order of reliability. Printing MS office documents requires an external java program download by the app to your Sunfire account.\n        
+PDF, DOCX, ODT, DOC, PPTX and PPT in order of reliability. Printing MS office documents requires an external java program download by the app to your Unix account.\n        
         
 \nWhat is \"Clear Server Cache\"?\n
 Clears temporary files in the socPrint directory in your Unix account. You are advised to clear regularly to prevent filename conflicts.\n
