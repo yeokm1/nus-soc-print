@@ -13,6 +13,9 @@
         <item>psc008-sx</item>
         <item>psc011</item>
         <item>psc011-sx</item>
+        <item>psc245</item>
+        <item>psc245-sx</item>
+        
     </string-array>
     <string-array name="pagesForM1">
         <item>1</item>

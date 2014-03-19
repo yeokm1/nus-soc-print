@@ -11,11 +11,11 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:freezesText="true"
         android:scrollbarAlwaysDrawVerticalTrack="true"
         android:scrollbarStyle="insideInset"
         android:scrollbars="vertical"
-        android:text="Nothing to show yet"
-        android:freezesText="true"
+        android:text="Hit refresh or delete to start."
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <ProgressBar
