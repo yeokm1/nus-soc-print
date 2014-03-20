@@ -2,6 +2,7 @@ package ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +24,6 @@ public class HelpFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		View result = inflater.inflate(R.layout.help_layout, container, false);
 		return result;
 	}
@@ -31,7 +31,9 @@ public class HelpFragment extends Fragment {
 	public void onStart(){
 		super.onStart();
 		TextView helpView = (TextView) caller.findViewById(R.id.tv_help_text);
+		
 		helpView.setMovementMethod(new ScrollingMovementMethod());
+		helpView.setMovementMethod(LinkMovementMethod.getInstance());
 	}
 	
 
