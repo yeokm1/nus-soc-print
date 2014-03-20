@@ -119,7 +119,7 @@ public class QuotaFragment extends Fragment {
 
 			@Override
 			public void onPostExecute(String output){
-				if(outputTextView != null){
+				if(isAdded() && outputTextView != null){
 					if(output.length() == 0){
 						outputTextView.setText(R.string.quota_no_network);
 					} else {
