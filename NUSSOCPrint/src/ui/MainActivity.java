@@ -599,7 +599,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 
 			final TextView message = new TextView(this);
 			final SpannableString s = new SpannableString(getString(R.string.about_box_text));
-			Linkify.addLinks(s, Linkify.WEB_URLS);
+			Linkify.addLinks(s, Linkify.WEB_URLS | Linkify.EMAIL_ADDRESSES);
 			message.setText(s);
 			message.setMovementMethod(LinkMovementMethod.getInstance());
 
