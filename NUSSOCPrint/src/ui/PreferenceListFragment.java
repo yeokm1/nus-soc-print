@@ -15,13 +15,13 @@ import android.preference.Preference;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.ListView;
 
-import com.actionbarsherlock.app.SherlockListFragment;
 import com.yeokm1.nussocprintandroid.R;
 
 
@@ -29,7 +29,7 @@ import com.yeokm1.nussocprintandroid.R;
 
 
 @SuppressLint("ValidFragment")
-public class PreferenceListFragment extends SherlockListFragment{
+public class PreferenceListFragment extends ListFragment{
     
     private PreferenceManager mPreferenceManager;
     

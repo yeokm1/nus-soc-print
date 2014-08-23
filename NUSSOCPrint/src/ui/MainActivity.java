@@ -25,10 +25,16 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBar.Tab;
+import android.support.v7.app.ActionBar.TabListener;
+import android.support.v7.app.ActionBarActivity;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
 import android.text.util.Linkify;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -40,12 +46,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.Tab;
-import com.actionbarsherlock.app.ActionBar.TabListener;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 import com.crashlytics.android.Crashlytics;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.lamerman.FileDialog;
@@ -57,7 +57,7 @@ import com.yeokm1.nussocprintandroid.R;
 
 
 
-public class MainActivity extends SherlockFragmentActivity implements TabListener, OnPreferenceAttachedListener {
+public class MainActivity extends ActionBarActivity implements TabListener, OnPreferenceAttachedListener {
 
 	final String tab1Text = "Print";
 	final String tab2Text = "Status";
@@ -315,7 +315,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getSupportMenuInflater().inflate(R.menu.action_bar, menu);
+		getMenuInflater().inflate(R.menu.action_bar, menu);
 		return true;
 	}
 
