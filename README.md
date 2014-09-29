@@ -1,7 +1,7 @@
 nus-soc-print
 =============
 
-(I'm in the midst of rewriting this app from the ground up using Android Studio. So just create issues for now. Pull Requests won't be useful since I'm reorganising the project anyway.)
+(I'm in the midst of rewriting this app from the ground up using Android Studio to clean up the code as well as make the UI on par with the [iOS version](https://github.com/yeokm1/nus-soc-print-ios). So just create issues for now. Pull Requests won't be useful since I'm reorganising the project anyway.)
 
 You can download this app from the Play Store here.
 
