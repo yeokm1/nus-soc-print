@@ -2,6 +2,7 @@ package com.yeokm1.nussocprint.print_activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,7 +25,7 @@ public class StatusActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_status);
         outputView = (TextView) findViewById(R.id.status_output);
-
+        outputView.setMovementMethod(new ScrollingMovementMethod());
         refreshStatusButton = (Button) findViewById(R.id.status_refresh_button);
         refreshStatusButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,9 +37,7 @@ public class StatusActivity extends Activity {
     }
 
     public void startRefreshTask(){
-        if(deleteTask != null){
-            deleteTask.cancel(true);
-        }
+        stopDeleteTask();
 
         if(refreshTask == null){
             refreshTask = new RefreshStatusTask(this);
@@ -48,9 +47,7 @@ public class StatusActivity extends Activity {
     }
 
     public void startDeleteTask(){
-        if(refreshTask != null){
-            refreshTask.cancel(true);
-        }
+        stopRefreshTask();
 
         if(deleteTask == null){
             deleteTask = new DeleteTask(this);
@@ -59,6 +56,24 @@ public class StatusActivity extends Activity {
 
     }
 
+    public void stopDeleteTask(){
+        if(deleteTask != null){
+            deleteTask.cancel(true);
+        }
+    }
+
+    public void stopRefreshTask(){
+        if(refreshTask != null){
+            refreshTask.cancel(true);
+        }
+    }
+
+    @Override
+    public void onBackPressed(){
+        stopRefreshTask();
+        stopDeleteTask();
+        finish();
+    }
     
     class RefreshStatusTask extends ConnectionTask {
 
@@ -113,7 +128,9 @@ public class StatusActivity extends Activity {
 
         @Override
         protected void onProgressUpdate(String... progress){
-            outputView.setText(progress[0]);
+            if(outputView != null){
+                outputView.setText(progress[0]);
+            }
         }
 
         @Override
