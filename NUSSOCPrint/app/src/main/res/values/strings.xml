@@ -51,6 +51,7 @@
 
     <!-- Misc -->
     <string name="misc_server">sunfire.comp.nus.edu.sg</string>
+    <string name="misc_connecting_to_server">Connecting to server&#8230;</string>
     <string name="misc_no_network">No network connection or server unreachable.</string>
     <string name="misc_missing_credentials">Username/password not set.</string>
     <string name="misc_wrong_credentials">Username/password incorrect.</string>

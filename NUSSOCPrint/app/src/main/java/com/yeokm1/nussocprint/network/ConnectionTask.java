@@ -14,7 +14,7 @@ public abstract class ConnectionTask extends AsyncTask<String, String, String>{
     protected Activity activity;
     protected SSHConnectivity connection;
 
-    protected void setActivity(Activity activity){
+    public ConnectionTask(Activity activity){
         this.activity = activity;
     }
 
@@ -33,6 +33,12 @@ public abstract class ConnectionTask extends AsyncTask<String, String, String>{
         connection.connect();
     }
 
+    protected void disconnect(){
+        if(connection != null){
+            connection.disconnect();
+        }
+    }
+
     @Override
     protected void onPreExecute(){
         super.onPreExecute();
@@ -42,6 +48,11 @@ public abstract class ConnectionTask extends AsyncTask<String, String, String>{
     @Override
     protected void onPostExecute(String output){
         super.onPostExecute(output);
+        stopKeepScreenOn();
+    }
+    @Override
+    protected void onCancelled(){
+        super.onCancelled();
         stopKeepScreenOn();
     }
 
