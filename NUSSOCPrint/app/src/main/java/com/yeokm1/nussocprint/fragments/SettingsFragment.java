@@ -16,7 +16,7 @@ public class SettingsFragment extends PreferenceListFragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.layout.settings_layout);
+        addPreferencesFromResource(R.layout.fragment_settings);
 
         Preference resetLink = findPreference(getString(R.string.preference_reset_key));
         resetLink.setOnPreferenceClickListener(new OnPreferenceClickListener() {

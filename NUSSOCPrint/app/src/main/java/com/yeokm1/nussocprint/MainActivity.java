@@ -11,12 +11,20 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 
 import com.yeokm1.nussocprint.fragments.PreferenceListFragment.OnPreferenceAttachedListener;
+import com.yeokm1.nussocprint.fragments.QuotaFragment;
 import com.yeokm1.nussocprint.fragments.SettingsFragment;
 
 import java.util.Locale;
 
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener, OnPreferenceAttachedListener {
+
+
+
+    private static final int FRAGMENT_PRINT_NUMBER = 0;
+    private static final int FRAGMENT_QUOTA_NUMBER = 1;
+    private static final int FRAGMENT_SETTINGS_NUMBER = 2;
+    private static final int FRAGMENT_HELP_NUMBER = 3;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -100,9 +108,12 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return new SettingsFragment();
+
+            switch(position){
+                case FRAGMENT_QUOTA_NUMBER :
+                    return new QuotaFragment();
+                default:  return new SettingsFragment();
+            }
         }
 
         @Override
@@ -114,13 +125,13 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         public CharSequence getPageTitle(int position) {
             Locale l = Locale.getDefault();
             switch (position) {
-                case 0:
+                case FRAGMENT_PRINT_NUMBER:
                     return getString(R.string.tab_print).toUpperCase(l);
-                case 1:
+                case FRAGMENT_QUOTA_NUMBER:
                     return getString(R.string.tab_quota).toUpperCase(l);
-                case 2:
+                case FRAGMENT_SETTINGS_NUMBER:
                     return getString(R.string.tab_settings).toUpperCase(l);
-                case 3:
+                case FRAGMENT_HELP_NUMBER:
                     return getString(R.string.tab_help).toUpperCase(l);
             }
             return null;

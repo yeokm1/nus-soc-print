@@ -7,33 +7,36 @@
     <string name="tab_settings">Settings</string>
     <string name="tab_help">Help</string>
 
+    <!-- Quota Fragment -->
+    <string name="quota_button_text">Refresh Quota</string>
+    <string name="quota_url">https://mysoc.nus.edu.sg/~eprint/forms/quota.php</string>
+    <string name="quota_login_url">https://mysoc.nus.edu.sg/images/LOGIN</string>
+    <string name="quota_page_relative_url">/~eprint/forms/quota.php</string>
+    <string name="quota_refresh_text">Refreshing Print Quota&#8230;</string>
+    <string name="quota_no_network">No network connection or mysoc site unreachable.</string>
+    <string name="quota_wrong_credentials">Username or password incorrect.</string>
 
     <!-- Preference Fragment -->
     <string name="preference_username_title">UNIX username</string>
     <string name="preference_username_summary">Enter your UNIX username</string>
     <string name="preference_username_hint">Enter your UNIX username</string>
     <string name="preference_username_key">>username_preference</string>
-
     <string name="preference_password_title">UNIX password</string>
     <string name="preference_password_summary">Enter your UNIX password</string>
     <string name="preference_password_hint">Enter your UNIX password</string>
     <string name="preference_password_key">password_preference</string>
-
     <string name="preference_printer_title">Custom Printer</string>
     <string name="preference_printer_summary">Use a printer not in app database</string>
     <string name="preference_printer_hint">Enter your custom printer here</string>
     <string name="preference_printer_key">custom_printer_preference</string>
-
     <string name="preference_server_title">Custom Server</string>
     <string name="preference_server_summary">Specify your own server (overrides Sunfire)</string>
     <string name="preference_server_hint">sunfire.comp.nus.edu.sg</string>
     <string name="preference_server_key">custom_server_preference</string>
-
     <string name="preference_reset_title">Forgot your Unix credentials?</string>
     <string name="preference_reset_summary">Click here to reset your password. Enter your NUSNET credentials at the site. Then choose Reset Password on the left banner</string>
     <string name="preference_reset_key">forgot_password_link</string>
     <string name="preference_reset_link">https://mysoc.nus.edu.sg/~myacct/</string>
-
-
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
