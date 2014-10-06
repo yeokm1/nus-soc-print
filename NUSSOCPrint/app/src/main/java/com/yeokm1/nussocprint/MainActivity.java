@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBarActivity;
 
 import com.yeokm1.nussocprint.fragments.HelpFragment;
 import com.yeokm1.nussocprint.fragments.PreferenceListFragment.OnPreferenceAttachedListener;
+import com.yeokm1.nussocprint.fragments.PrintFragment;
 import com.yeokm1.nussocprint.fragments.QuotaFragment;
 import com.yeokm1.nussocprint.fragments.SettingsFragment;
 
@@ -111,13 +112,16 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         public Fragment getItem(int position) {
 
             switch(position){
+                case FRAGMENT_PRINT_NUMBER :
+                    return new PrintFragment();
                 case FRAGMENT_QUOTA_NUMBER :
                     return new QuotaFragment();
                 case FRAGMENT_SETTINGS_NUMBER :
                     return new SettingsFragment();
                 case FRAGMENT_HELP_NUMBER :
                     return new HelpFragment();
-                default:  return new SettingsFragment();
+                default :
+                    return null;
             }
         }
 

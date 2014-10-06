@@ -7,17 +7,21 @@
     <string name="tab_settings">Settings</string>
     <string name="tab_help">Help</string>
 
+    <!-- Print Fragment -->
+    <string name="print_print_button_text">Print</string>
+    <string name="print_status_button_text">Check Status</string>
+
     <!-- Quota Fragment -->
     <string name="quota_output_text">Press refresh to get quota</string>
     <string name="quota_button_text">Refresh Quota</string>
     <string name="quota_url">https://mysoc.nus.edu.sg/~eprint/forms/quota.php</string>
     <string name="quota_login_url">https://mysoc.nus.edu.sg/images/LOGIN</string>
     <string name="quota_page_relative_url">/~eprint/forms/quota.php</string>
-    <string name="quota_refresh_text">Refreshing Print Quota&#8230;</string>
+    <string name="quota_refresh_text">Refreshing Print Quota…</string>
     <string name="quota_no_network">No network connection or mysoc site unreachable.</string>
     <string name="quota_wrong_credentials">Username or password incorrect.</string>
 
-    <!-- Preference Fragment -->
+    <!-- Settings Fragment -->
     <string name="preference_username_title">UNIX username</string>
     <string name="preference_username_summary">Enter your UNIX username</string>
     <string name="preference_username_hint">Enter your UNIX username</string>
@@ -41,5 +45,7 @@
 
     <!-- Help Fragment -->
     <string name="help_text">Help fragment</string>
+
+    <!-- Misc -->
 
 </resources>
