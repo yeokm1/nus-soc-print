@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 
+import com.yeokm1.nussocprint.fragments.HelpFragment;
 import com.yeokm1.nussocprint.fragments.PreferenceListFragment.OnPreferenceAttachedListener;
 import com.yeokm1.nussocprint.fragments.QuotaFragment;
 import com.yeokm1.nussocprint.fragments.SettingsFragment;
@@ -112,6 +113,10 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             switch(position){
                 case FRAGMENT_QUOTA_NUMBER :
                     return new QuotaFragment();
+                case FRAGMENT_SETTINGS_NUMBER :
+                    return new SettingsFragment();
+                case FRAGMENT_HELP_NUMBER :
+                    return new HelpFragment();
                 default:  return new SettingsFragment();
             }
         }

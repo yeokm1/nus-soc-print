@@ -38,6 +38,8 @@
     <string name="preference_reset_summary">Click here to reset your password. Enter your NUSNET credentials at the site. Then choose Reset Password on the left banner</string>
     <string name="preference_reset_key">forgot_password_link</string>
     <string name="preference_reset_link">https://mysoc.nus.edu.sg/~myacct/</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Help Fragment -->
+    <string name="help_text">Help fragment</string>
 
 </resources>
