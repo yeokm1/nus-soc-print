@@ -8,6 +8,7 @@
     <string name="tab_help">Help</string>
 
     <!-- Quota Fragment -->
+    <string name="quota_output_text">Press refresh to get quota</string>
     <string name="quota_button_text">Refresh Quota</string>
     <string name="quota_url">https://mysoc.nus.edu.sg/~eprint/forms/quota.php</string>
     <string name="quota_login_url">https://mysoc.nus.edu.sg/images/LOGIN</string>

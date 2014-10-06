@@ -57,6 +57,8 @@ public class QuotaFragment extends Fragment {
             }
         });
 
+        refreshPrintQuota();
+
         return view;
     }
 
