@@ -1,11 +1,20 @@
 apply plugin: 'com.android.application'
 
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.jcraft:jsch:0.1.51'
+}
+
+
 android {
     compileSdkVersion 20
     buildToolsVersion "20.0.0"
 
     defaultConfig {
-        applicationId "com.yeokhengmeng.nussocprint"
+        applicationId "com.yeokm1.nussocprint"
         minSdkVersion 7
         targetSdkVersion 20
         versionCode 1
