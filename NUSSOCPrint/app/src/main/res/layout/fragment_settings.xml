@@ -24,7 +24,7 @@
         android:title="@string/settings_printer_title" />
 
     <EditTextPreference
-        android:hint="@string/settings_server_hint"
+        android:hint="@string/misc_server"
         android:key="@string/settings_server_key"
         android:summary="@string/settings_server_summary"
         android:title="@string/settings_server_title" />

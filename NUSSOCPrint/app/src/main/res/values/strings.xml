@@ -40,7 +40,6 @@
     <string name="settings_printer_key">custom_printer_preference</string>
     <string name="settings_server_title">Custom Server</string>
     <string name="settings_server_summary">Specify your own server (overrides Sunfire)</string>
-    <string name="settings_server_hint">sunfire.comp.nus.edu.sg</string>
     <string name="settings_server_key">custom_server_preference</string>
     <string name="settings_reset_title">Forgot your Unix credentials?</string>
     <string name="settings_reset_summary">Click here to reset your password. Enter your NUSNET credentials at the site. Then choose Reset Password on the left banner</string>
@@ -50,10 +49,25 @@
     <!-- Help Fragment -->
     <string name="help_text">Help fragment</string>
 
-    <!-- misc -->
+    <!-- Misc -->
+    <string name="misc_server">sunfire.comp.nus.edu.sg</string>
     <string name="misc_no_network">No network connection or server unreachable.</string>
     <string name="misc_missing_credentials">Username/password not set.</string>
     <string name="misc_wrong_credentials">Username/password incorrect.</string>
+    <string-array name="printer_names">
+        <item>psts</item>
+        <item>psts-sx</item>
+        <item>pstsb</item>
+        <item>pstsb-sx</item>
+        <item>pstsc</item>
+        <item>pstsc-sx</item>
+        <item>psc008</item>
+        <item>psc008-sx</item>
+        <item>psc011</item>
+        <item>psc011-sx</item>
+        <item>psc245</item>
+        <item>psc245-sx</item>
+    </string-array>
 
 
 
