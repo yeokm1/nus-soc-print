@@ -32,6 +32,7 @@
     <string name="preference_reset_title">Forgot your Unix credentials?</string>
     <string name="preference_reset_summary">Click here to reset your password. Enter your NUSNET credentials at the site. Then choose Reset Password on the left banner</string>
     <string name="preference_reset_key">forgot_password_link</string>
+    <string name="preference_reset_link">https://mysoc.nus.edu.sg/~myacct/</string>
 
 
 

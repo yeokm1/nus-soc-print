@@ -1,6 +1,10 @@
 package com.yeokm1.nussocprint.fragments;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
 
 import com.yeokm1.nussocprint.R;
 /**
@@ -12,8 +16,19 @@ public class SettingsFragment extends PreferenceListFragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.layout.preference_layout);
+        addPreferencesFromResource(R.layout.settings_layout);
 
+        Preference resetLink = findPreference(getString(R.string.preference_reset_key));
+        resetLink.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                String url = getString(R.string.preference_reset_link);
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(browserIntent);
+                return true;
+            }
+        });
 
     }
 
