@@ -38,6 +38,7 @@ public class SSHConnectivity {
 
 
     public void connect() throws Exception {
+        Log.i(TAG, "connect");
         try {
             session = jschSSHChannel.getSession(username, hostname, portNumber);
             session.setPassword(password);
@@ -58,7 +59,9 @@ public class SSHConnectivity {
 
     public void disconnect() {
         if (session != null) {
+            Log.i(TAG, "disconnect");
             session.disconnect();
+            session = null;
         }
     }
 
@@ -82,6 +85,8 @@ public class SSHConnectivity {
         channel.disconnect();
 
         String output = outputBuffer.toString();
+
+        Log.i(TAG + " runCommand", command + ", output: " + output);
         return output;
     }
 
