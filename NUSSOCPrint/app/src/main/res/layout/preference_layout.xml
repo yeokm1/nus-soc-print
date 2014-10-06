@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditTextPreference
+        android:hint="@string/preference_username_hint"
+        android:key="@string/preference_username_key"
+        android:summary="@string/preference_username_summary"
+        android:title="@string/preference_username_title" />
+
+    <EditTextPreference
+        android:inputType="textPassword"
+        android:hint="@string/preference_password_hint"
+        android:key="@string/preference_password_key"
+        android:summary="@string/preference_password_summary"
+        android:title="@string/preference_password_title" />
+
+    <EditTextPreference
+        android:hint="@string/preference_printer_hint"
+        android:key="@string/preference_printer_key"
+        android:summary="@string/preference_printer_summary"
+        android:title="@string/preference_printer_title" />
+
+    <EditTextPreference
+        android:hint="@string/preference_server_hint"
+        android:key="@string/preference_server_key"
+        android:summary="@string/preference_server_summary"
+        android:title="@string/preference_server_title" />
+
+    <Preference
+        android:key="@string/preference_reset_key"
+        android:summary="@string/preference_reset_summary"
+        android:title="@string/preference_reset_title" />
+
+</PreferenceScreen>
