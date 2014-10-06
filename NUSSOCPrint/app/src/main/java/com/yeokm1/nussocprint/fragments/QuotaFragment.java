@@ -3,6 +3,7 @@ package com.yeokm1.nussocprint.fragments;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +48,7 @@ public class QuotaFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_quota, container, false);
 
         outputTextView = (TextView) view.findViewById(R.id.fragment_quota_output);
+        outputTextView.setMovementMethod(new ScrollingMovementMethod());
         refreshButton = (Button) view.findViewById(R.id.fragment_quota_refresh_button);
         patternQuotaPage = Pattern.compile(QUOTA_REGEX);
 
