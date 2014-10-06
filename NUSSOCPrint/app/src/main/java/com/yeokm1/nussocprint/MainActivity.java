@@ -1,4 +1,4 @@
-package com.yeokhengmeng.nussocprint;
+package com.yeokm1.nussocprint;
 
 import android.os.Bundle;
 import android.preference.PreferenceScreen;
@@ -10,7 +10,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 
-import com.yeokm1.nussocprint.R;
 import com.yeokm1.nussocprint.fragments.PreferenceListFragment.OnPreferenceAttachedListener;
 import com.yeokm1.nussocprint.fragments.SettingsFragment;
 
