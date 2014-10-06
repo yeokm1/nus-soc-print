@@ -12,6 +12,9 @@
     <string name="print_print_button_text">Print</string>
     <string name="print_status_button_text">Check Status</string>
 
+    <!-- Status Activity -->
+    <string name="status_title">Printer Status</string>
+
     <!-- Quota Fragment -->
     <string name="quota_output_text">Press refresh to get quota</string>
     <string name="quota_button_text">Refresh Quota</string>
@@ -48,5 +51,7 @@
     <string name="help_text">Help fragment</string>
 
     <!-- Misc -->
+
+
 
 </resources>
