@@ -66,16 +66,19 @@ public class QuotaFragment extends Fragment {
 
 
     public void refreshPrintQuota(){
-        outputTextView.setText(R.string.quota_refresh_text);
-
-
-        String loginURL = getString(R.string.quota_login_url);
-        String quotaPageRelURL = getString(R.string.quota_page_relative_url);
-
         Storage storage = Storage.getInstance();
 
         String username = storage.getUsername();
         String password = storage.getPassword();
+
+        if(username.length() == 0 || password.length() == 0){
+            outputTextView.setText(R.string.misc_missing_credentials);
+            return;
+        }
+        String loginURL = getString(R.string.quota_login_url);
+        String quotaPageRelURL = getString(R.string.quota_page_relative_url);
+
+        outputTextView.setText(R.string.quota_refresh_text);
 
         new AsyncTask<String, String, String>() {
 
@@ -114,7 +117,7 @@ public class QuotaFragment extends Fragment {
             public void onPostExecute(String output){
                 if(isAdded() && outputTextView != null){
                     if(output.length() == 0){
-                        outputTextView.setText(R.string.quota_no_network);
+                        outputTextView.setText(R.string.misc_no_network);
                     } else {
                         String processed = processHTMLOutputToQuota(output);
                         outputTextView.setText(processed);
@@ -163,7 +166,7 @@ public class QuotaFragment extends Fragment {
         String finalText = finalString.toString();
 
         if(finalText.length() == 0){
-            finalText = getString(R.string.quota_wrong_credentials);
+            finalText = getString(R.string.misc_wrong_credentials);
         }
 
         Log.i(TAG, finalText);

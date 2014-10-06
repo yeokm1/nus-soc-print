@@ -22,8 +22,6 @@
     <string name="quota_login_url">https://mysoc.nus.edu.sg/images/LOGIN</string>
     <string name="quota_page_relative_url">/~eprint/forms/quota.php</string>
     <string name="quota_refresh_text">Refreshing Print Quota…</string>
-    <string name="quota_no_network">No network connection or mysoc site unreachable.</string>
-    <string name="quota_wrong_credentials">Username or password incorrect.</string>
 
     <!-- Settings Fragment -->
     <string name="settings_username_title">UNIX username</string>
@@ -50,7 +48,10 @@
     <!-- Help Fragment -->
     <string name="help_text">Help fragment</string>
 
-    <!-- Misc -->
+    <!-- misc -->
+    <string name="misc_no_network">No network connection or server unreachable.</string>
+    <string name="misc_missing_credentials">Username/password not set.</string>
+    <string name="misc_wrong_credentials">Username/password incorrect.</string>
 
 
 
