@@ -18,12 +18,12 @@ public class SettingsFragment extends PreferenceListFragment{
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.layout.fragment_settings);
 
-        Preference resetLink = findPreference(getString(R.string.preference_reset_key));
+        Preference resetLink = findPreference(getString(R.string.settings_reset_key));
         resetLink.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                String url = getString(R.string.preference_reset_link);
+                String url = getString(R.string.settings_reset_link);
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(browserIntent);
                 return true;

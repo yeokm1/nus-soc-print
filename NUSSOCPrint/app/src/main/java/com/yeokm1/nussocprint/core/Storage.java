@@ -27,25 +27,25 @@ public class Storage {
     }
 
     public String getUsername(){
-        String key = context.getString(R.string.preference_username_key);
+        String key = context.getString(R.string.settings_username_key);
         String output = sharedPreferences.getString(key, "");
         return output;
     }
 
     public String getPassword(){
-        String key = context.getString(R.string.preference_password_key);
+        String key = context.getString(R.string.settings_password_key);
         String output = sharedPreferences.getString(key, "");
         return output;
     }
 
     public String getPrinter(){
-        String key = context.getString(R.string.preference_printer_key);
+        String key = context.getString(R.string.settings_printer_key);
         String output = sharedPreferences.getString(key, "");
         return output;
     }
 
     public String getServer(){
-        String key = context.getString(R.string.preference_server_key);
+        String key = context.getString(R.string.settings_server_key);
         String output = sharedPreferences.getString(key, "");
         return output;
     }
