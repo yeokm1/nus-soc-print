@@ -2,10 +2,10 @@
 <resources>
 
     <string name="app_name">NUS SOC Print</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="tab_print">Print</string>
+    <string name="tab_quota">Quota</string>
+    <string name="tab_settings">Settings</string>
+    <string name="tab_help">Help</string>
+
 
 </resources>
