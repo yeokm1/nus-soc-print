@@ -20,6 +20,7 @@ public class StatusActivity extends Activity {
     private TextView outputView;
 
     private Button refreshStatusButton;
+    private Button deleteButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +34,16 @@ public class StatusActivity extends Activity {
                 startRefreshTask();
             }
         });
+
+
+        deleteButton = (Button) findViewById(R.id.status_delete_jobs_button);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startDeleteTask();
+            }
+        });
+
 
     }
 
@@ -58,13 +69,14 @@ public class StatusActivity extends Activity {
 
     public void stopDeleteTask(){
         if(deleteTask != null){
-            deleteTask.cancel(true);
+            deleteTask.cancel(false);
+
         }
     }
 
     public void stopRefreshTask(){
         if(refreshTask != null){
-            refreshTask.cancel(true);
+            refreshTask.cancel(false);
         }
     }
 
@@ -146,13 +158,64 @@ public class StatusActivity extends Activity {
 
     class DeleteTask extends ConnectionTask {
 
+        final String FORMAT_PRINTER_COMMAND = "lprm -P %s -";
+        final String FORMAT_DELETION_OUTPUT = "Deletion command sent to %s\n";
+        final String DELETION_COMMAND_SENT_TO_ALL = "Deletion command sent to all printers";
+
         public DeleteTask(Activity activity){
             super(activity);
         }
 
         @Override
         protected String doInBackground(String... params) {
+            StringBuilder builder = new StringBuilder();
+
+            String connecting = activity.getString(R.string.misc_connecting_to_server);
+            publishProgress(connecting);
+            try {
+                startConnection();
+                List<String> printerList =  Storage.getInstance().getPrinterList();
+
+                for(String printer : printerList){
+                    if(isCancelled()){
+                        break;
+                    }
+
+                    String command = String.format(FORMAT_PRINTER_COMMAND, printer);
+                    connection.runCommand(command);
+
+                    String lineToShowToUI = String.format(FORMAT_DELETION_OUTPUT, printer);
+
+                    builder.append(lineToShowToUI);
+                    publishProgress(builder.toString());
+
+                }
+
+                if(!isCancelled()){
+                    builder.append(DELETION_COMMAND_SENT_TO_ALL);
+                    publishProgress(builder.toString());
+                }
+
+            } catch (Exception e){
+                publishProgress(e.getMessage());
+            }
+
+            disconnect();
             return null;
+        }
+
+
+        @Override
+        protected void onProgressUpdate(String... progress){
+            if(outputView != null){
+                outputView.setText(progress[0]);
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String output){
+            super.onPostExecute(output);
+            deleteTask = null;
         }
 
 
