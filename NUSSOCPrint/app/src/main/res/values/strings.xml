@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Main -->
     <string name="app_name">NUS SOC Print</string>
     <string name="tab_print">Print</string>
     <string name="tab_quota">Quota</string>
