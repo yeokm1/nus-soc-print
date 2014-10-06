@@ -27,6 +27,9 @@ public class StatusActivity extends Activity {
         setContentView(R.layout.activity_status);
         outputView = (TextView) findViewById(R.id.status_output);
         outputView.setMovementMethod(new ScrollingMovementMethod());
+        outputView.setClickable(false);     // Both Clickable and LongClickable
+        outputView.setLongClickable(false); // after setting the MovementMeathod
+
         refreshStatusButton = (Button) findViewById(R.id.status_refresh_button);
         refreshStatusButton.setOnClickListener(new View.OnClickListener() {
             @Override
