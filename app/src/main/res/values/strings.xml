@@ -13,7 +13,19 @@
     <string name="print_status_button_text">Check Status</string>
     <string name="print_printer_text">Printer:</string>
     <string name="print_pages_sheet_text">Pages per sheet:</string>
+    <string-array name="printer_page_sheet_options">
+        <item>1</item>
+        <item>2</item>
+        <item>4</item>
+        <item>6</item>
+        <item>8</item>
+    </string-array>
     <string name="print_page_range_text">Page range:</string>
+    <string name="print_page_range_all_text">All</string>
+    <string name="print_page_range_custom_text">Custom</string>
+    <string name="print_page_range_arrow_text">↳</string>
+    <string name="print_page_range_from_text">From</string>
+    <string name="print_page_range_to_text">to</string>
 
     <!-- Status Activity -->
     <string name="status_title">Status</string>

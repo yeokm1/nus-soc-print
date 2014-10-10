@@ -38,81 +38,104 @@
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner"
-        android:layout_toEndOf="@+id/print_status_button"
+        android:id="@+id/print_printer_names"
+        android:layout_toEndOf="@+id/print_pages_sheet"
         android:entries="@array/printer_names"
-        android:layout_alignParentTop="true"
+        android:layout_alignTop="@+id/print_print_text"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp" />
+        android:layout_marginLeft="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/print_pages_sheet_text"
-        android:id="@+id/textView"
-        android:layout_below="@+id/spinner"
+        android:id="@+id/print_pages_sheet"
+        android:layout_below="@+id/print_printer_names"
         android:layout_alignLeft="@+id/print_print_text"
         android:layout_alignStart="@+id/print_print_text" />
-<RadioGroup
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation='horizontal'
-    android:layout_toStartOf="@+id/spinner"
-    android:layout_toEndOf="@+id/print_print_text"
-    android:layout_below="@+id/textView"
-    android:layout_alignLeft="@+id/textView"
-    android:layout_alignStart="@+id/textView"
-    android:layout_alignRight="@+id/spinner"
-    android:layout_alignEnd="@+id/spinner"
-    android:id="@+id/radioGroup">
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="1"
-        android:id="@+id/print_radio_1page"
-        android:checked="true" />
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2"
-        android:id="@+id/print_radio_2page"
-        android:checked="false" />
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="4"
-        android:id="@+id/print_radio_4page"
-        android:checked="false" />
-
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="6"
-        android:id="@+id/print_radio_6page"
-        android:checked="false" />
-
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="8"
-        android:id="@+id/print_radio_8page"
-        android:checked="false" />
-
-
-    </RadioGroup>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/print_page_range_text"
-        android:id="@+id/textView2"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/radioGroup"
-        android:layout_alignLeft="@+id/radioGroup"
-        android:layout_alignStart="@+id/radioGroup" />
+        android:id="@+id/print_page_range_text"
+        android:layout_toEndOf="@+id/print_page_range_arrow"
+        android:layout_toStartOf="@+id/printer_page_sheet_spinner"
+        android:layout_below="@+id/printer_page_sheet_spinner"
+        android:layout_alignLeft="@+id/print_pages_sheet"
+        android:layout_alignStart="@+id/print_pages_sheet"
+        android:layout_toLeftOf="@+id/printer_page_sheet_spinner" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation='horizontal'
+        android:id="@+id/print_page_range_radiogroup"
+        android:layout_toEndOf="@+id/print_page_range_text"
+        android:layout_below="@+id/printer_page_sheet_spinner"
+        android:layout_alignRight="@+id/printer_page_sheet_spinner"
+        android:layout_alignEnd="@+id/printer_page_sheet_spinner"
+        android:layout_alignLeft="@+id/printer_page_sheet_spinner"
+        android:layout_alignStart="@+id/printer_page_sheet_spinner">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/print_page_range_all_text"
+            android:id="@+id/print_page_range_all_text"
+            android:checked="true"
+            android:layout_toStartOf="@+id/print_pages_sheet"
+            android:layout_toEndOf="@+id/print_print_text"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/print_print_text" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/print_page_range_custom_text"
+            android:id="@+id/print_page_range_custom_text"
+            android:checked="false" />
+
+
+
+    </RadioGroup>
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/printer_page_sheet_spinner"
+        android:entries="@array/printer_page_sheet_options"
+        android:layout_toEndOf="@+id/print_pages_sheet"
+        android:layout_below="@+id/print_printer_names"
+        android:layout_alignRight="@+id/print_printer_names"
+        android:layout_alignEnd="@+id/print_printer_names"
+        android:layout_alignLeft="@+id/print_printer_names"
+        android:layout_alignStart="@+id/print_printer_names" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/print_page_range_from_text"
+        android:id="@+id/print_page_range_from"
+        android:layout_toEndOf="@+id/print_page_range_arrow"
+        android:layout_below="@+id/print_page_range_text"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/print_page_range_arrow_text"
+        android:id="@+id/print_page_range_arrow"
+        android:layout_below="@+id/print_page_range_text"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="10dp" />
+
 
 
 
