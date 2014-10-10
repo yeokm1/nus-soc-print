@@ -11,6 +11,9 @@
     <!-- Print Fragment -->
     <string name="print_print_button_text">Print</string>
     <string name="print_status_button_text">Check Status</string>
+    <string name="print_printer_text">Printer:</string>
+    <string name="print_pages_sheet_text">Pages per sheet:</string>
+    <string name="print_page_range_text">Page range:</string>
 
     <!-- Status Activity -->
     <string name="status_title">Status</string>
