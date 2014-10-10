@@ -86,11 +86,7 @@
             android:layout_height="wrap_content"
             android:text="@string/print_page_range_all_text"
             android:id="@+id/print_page_range_all_text"
-            android:checked="true"
-            android:layout_toStartOf="@+id/print_pages_sheet"
-            android:layout_toEndOf="@+id/print_print_text"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/print_print_text" />
+            android:checked="true"/>
 
         <RadioButton
             android:layout_width="wrap_content"
