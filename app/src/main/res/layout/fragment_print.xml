@@ -119,7 +119,7 @@
         android:id="@+id/print_page_range_from"
         android:layout_toEndOf="@+id/print_page_range_arrow"
         android:layout_below="@+id/print_page_range_text"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="15dp"/>
 
     <TextView
@@ -130,9 +130,41 @@
         android:id="@+id/print_page_range_arrow"
         android:layout_below="@+id/print_page_range_text"
         android:layout_marginLeft="60dp"
+        android:layout_marginTop="12dp"/>
+
+    <EditText
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/print_page_range_start"
+        android:layout_alignBottom="@+id/print_page_range_from"
+        android:layout_toRightOf="@+id/print_pages_sheet"
+        android:layout_toEndOf="@+id/print_pages_sheet"
         android:layout_marginTop="10dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/print_page_range_to_text"
+        android:id="@+id/print_page_range_to"
+        android:layout_toEndOf="@+id/print_page_range_start"
+        android:layout_alignBottom="@+id/print_page_range_start"
+        android:layout_toRightOf="@+id/print_page_range_start"
+        android:layout_marginLeft="10dp" />
 
+    <EditText
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/print_page_range_end"
+        android:layout_alignBaseline="@+id/print_page_range_start"
+        android:layout_alignBottom="@+id/print_page_range_start"
+        android:layout_toRightOf="@+id/print_page_range_to"
+        android:layout_toEndOf="@+id/print_page_range_to"
+        android:layout_marginLeft="10dp" />
 
 
 </RelativeLayout>
