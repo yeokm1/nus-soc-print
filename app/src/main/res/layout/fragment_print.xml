@@ -44,7 +44,8 @@
         android:layout_alignLeft="@+id/print_page_range_start"
         android:layout_alignStart="@+id/print_page_range_start"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="5dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -78,10 +79,10 @@
         android:id="@+id/print_page_range_radiogroup"
         android:layout_toEndOf="@+id/print_page_range_text"
         android:layout_below="@+id/print_pages_sheet"
-        android:layout_toRightOf="@+id/print_page_range_text"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="18dp">
+        android:layout_marginTop="18dp"
+        android:layout_toRightOf="@+id/print_page_range_text">
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -108,9 +109,10 @@
         android:id="@+id/printer_page_sheet_spinner"
         android:layout_toEndOf="@+id/print_pages_sheet"
         android:layout_alignTop="@+id/print_pages_sheet"
-        android:layout_toRightOf="@+id/print_pages_sheet"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignLeft="@+id/print_printer_names"
+        android:layout_alignStart="@+id/print_printer_names" />
 
     <TextView
         android:layout_width="wrap_content"
