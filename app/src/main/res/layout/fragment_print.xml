@@ -55,7 +55,7 @@
         android:layout_below="@+id/print_print_text"
         android:layout_alignLeft="@+id/print_print_text"
         android:layout_alignStart="@+id/print_print_text"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -69,7 +69,7 @@
         android:layout_alignLeft="@+id/print_pages_sheet"
         android:layout_alignStart="@+id/print_pages_sheet"
         android:layout_toLeftOf="@+id/printer_page_sheet_spinner"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="20dp" />
 
     <RadioGroup
         android:layout_width="wrap_content"
@@ -77,10 +77,11 @@
         android:orientation='horizontal'
         android:id="@+id/print_page_range_radiogroup"
         android:layout_toEndOf="@+id/print_page_range_text"
-        android:layout_alignTop="@+id/print_page_range_text"
+        android:layout_below="@+id/print_pages_sheet"
         android:layout_toRightOf="@+id/print_page_range_text"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="18dp">
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -94,7 +95,8 @@
             android:layout_height="wrap_content"
             android:text="@string/print_page_range_custom_text"
             android:id="@+id/print_page_range_custom_text"
-            android:checked="false" />
+            android:checked="false"
+            android:layout_marginLeft="8dp" />
 
 
 
@@ -118,7 +120,7 @@
         android:id="@+id/print_page_range_from"
         android:layout_toEndOf="@+id/print_page_range_arrow"
         android:layout_below="@+id/print_page_range_text"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         android:layout_marginLeft="15dp"/>
 
     <TextView
@@ -129,7 +131,7 @@
         android:id="@+id/print_page_range_arrow"
         android:layout_below="@+id/print_page_range_text"
         android:layout_marginLeft="60dp"
-        android:layout_marginTop="12dp"/>
+        android:layout_marginTop="20dp"/>
 
     <EditText
         android:layout_width="60dp"
