@@ -6,5 +6,5 @@
     android:layout_height="wrap_content"
     android:minHeight="40dip"
     android:ellipsize="marquee"
-    android:background="@android:color/black"
+    android:background="#303030"
     android:textColor="@android:color/white"/>
