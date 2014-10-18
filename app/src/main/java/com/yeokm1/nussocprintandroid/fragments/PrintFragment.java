@@ -7,12 +7,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.ArrayAdapter;
 
 import com.yeokm1.nussocprintandroid.R;
+import com.yeokm1.nussocprintandroid.core.Storage;
 import com.yeokm1.nussocprintandroid.print_activities.StatusActivity;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,11 +44,10 @@ public class PrintFragment extends Fragment {
         printerSpinner = (Spinner) view.findViewById(R.id.print_printer_names);
 
 
-        String[] printerArray = getResources().getStringArray(R.array.printer_names);
-
-        ArrayAdapter<String> printerAdapter = new ArrayAdapter<String>(getActivity(),
-                R.layout.item_simple , printerArray);
+        List<String> printerList = Storage.getInstance().getPrinterList();
+        ArrayAdapter<String> printerAdapter = new ArrayAdapter<String>(getActivity(), R.layout.item_simple , printerList);
         printerSpinner.setAdapter(printerAdapter);
+
 
         String[] pagesArray = getResources().getStringArray(R.array.printer_page_sheet_options);
         ArrayAdapter<String> pagesAdapter = new ArrayAdapter<String>(getActivity(),
