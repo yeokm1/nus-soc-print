@@ -142,7 +142,8 @@
         android:layout_alignBottom="@+id/print_page_range_from"
         android:layout_toRightOf="@+id/print_pages_sheet"
         android:layout_toEndOf="@+id/print_pages_sheet"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:gravity="center" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -165,7 +166,8 @@
         android:layout_alignBottom="@+id/print_page_range_start"
         android:layout_toRightOf="@+id/print_page_range_to"
         android:layout_toEndOf="@+id/print_page_range_to"
-        android:layout_marginLeft="10dp" />
+        android:layout_marginLeft="10dp"
+        android:gravity="center" />
 
 
 </RelativeLayout>
