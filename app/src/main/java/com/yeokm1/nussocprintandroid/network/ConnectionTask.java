@@ -1,10 +1,10 @@
-package com.yeokm1.nussocprint.network;
+package com.yeokm1.nussocprintandroid.network;
 
 import android.app.Activity;
 import android.os.AsyncTask;
 
-import com.yeokm1.nussocprint.R;
-import com.yeokm1.nussocprint.core.Storage;
+import com.yeokm1.nussocprintandroid.R;
+import com.yeokm1.nussocprintandroid.core.Storage;
 
 /**
  * Created by yeokm1 on 6/10/2014.

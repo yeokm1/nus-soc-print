@@ -1,10 +1,10 @@
-package com.yeokm1.nussocprint.core;
+package com.yeokm1.nussocprintandroid.core;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.yeokm1.nussocprint.R;
+import com.yeokm1.nussocprintandroid.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;

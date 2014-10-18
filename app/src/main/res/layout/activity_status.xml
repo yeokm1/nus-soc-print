@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.yeokm1.nussocprint.print_activities.StatusActivity">
+    tools:context="com.yeokm1.nussocprintandroid.print_activities.StatusActivity">
 
     <Button
         android:layout_width="wrap_content"

@@ -1,4 +1,4 @@
-package com.yeokm1.nussocprint.fragments;
+package com.yeokm1.nussocprintandroid.fragments;
 
 
 
@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.yeokm1.nussocprint.R;
+import com.yeokm1.nussocprintandroid.R;
 
 /**
  * A simple {@link Fragment} subclass.

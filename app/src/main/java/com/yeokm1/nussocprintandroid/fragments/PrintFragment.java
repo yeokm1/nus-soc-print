@@ -1,4 +1,4 @@
-package com.yeokm1.nussocprint.fragments;
+package com.yeokm1.nussocprintandroid.fragments;
 
 
 import android.content.Intent;
@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.yeokm1.nussocprint.R;
-import com.yeokm1.nussocprint.print_activities.StatusActivity;
+import com.yeokm1.nussocprintandroid.R;
+import com.yeokm1.nussocprintandroid.print_activities.StatusActivity;
 
 /**
  * A simple {@link Fragment} subclass.

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.0.1"
 
     defaultConfig {
-        applicationId "com.yeokm1.nussocprint"
+        applicationId "com.yeokm1.nussocprintandroid"
         minSdkVersion 7
         targetSdkVersion 21
         versionCode 1

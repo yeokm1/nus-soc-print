@@ -1,4 +1,4 @@
-package com.yeokm1.nussocprint.fragments;
+package com.yeokm1.nussocprintandroid.fragments;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 
-import com.yeokm1.nussocprint.R;
+import com.yeokm1.nussocprintandroid.R;
 /**
  * Created by yeokm1 on 6/10/2014.
  */

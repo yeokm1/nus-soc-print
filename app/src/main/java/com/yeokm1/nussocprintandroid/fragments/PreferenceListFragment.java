@@ -1,4 +1,4 @@
-package com.yeokm1.nussocprint.fragments;
+package com.yeokm1.nussocprintandroid.fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.ListView;
 
-import com.yeokm1.nussocprint.R;
+import com.yeokm1.nussocprintandroid.R;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;

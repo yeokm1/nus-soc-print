@@ -1,4 +1,4 @@
-package com.yeokm1.nussocprint.core;
+package com.yeokm1.nussocprintandroid.core;
 
 import android.app.Application;
 

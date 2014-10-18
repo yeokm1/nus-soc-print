@@ -1,4 +1,4 @@
-package com.yeokm1.nussocprint.print_activities;
+package com.yeokm1.nussocprintandroid.print_activities;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,9 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.yeokm1.nussocprint.R;
-import com.yeokm1.nussocprint.core.Storage;
-import com.yeokm1.nussocprint.network.ConnectionTask;
+import com.yeokm1.nussocprintandroid.R;
+import com.yeokm1.nussocprintandroid.core.Storage;
+import com.yeokm1.nussocprintandroid.network.ConnectionTask;
 
 import java.util.List;
 

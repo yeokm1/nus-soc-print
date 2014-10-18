@@ -1,4 +1,4 @@
-package com.yeokm1.nussocprint.fragments;
+package com.yeokm1.nussocprintandroid.fragments;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.yeokm1.nussocprint.R;
-import com.yeokm1.nussocprint.core.Storage;
+import com.yeokm1.nussocprintandroid.R;
+import com.yeokm1.nussocprintandroid.core.Storage;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;

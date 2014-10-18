@@ -1,4 +1,4 @@
-package com.yeokm1.nussocprint.network;
+package com.yeokm1.nussocprintandroid.network;
 
 import android.content.Context;
 import android.util.Log;
@@ -8,7 +8,7 @@ import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
-import com.yeokm1.nussocprint.R;
+import com.yeokm1.nussocprintandroid.R;
 
 import java.io.InputStream;
 
