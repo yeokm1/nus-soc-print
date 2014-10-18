@@ -37,7 +37,7 @@
 
     <Spinner
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
+        android:layout_height="30dp"
         android:id="@+id/print_printer_names"
         android:layout_toEndOf="@+id/print_pages_sheet"
         android:layout_alignTop="@+id/print_print_text"
@@ -105,7 +105,7 @@
 
     <Spinner
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
+        android:layout_height="30dp"
         android:id="@+id/printer_page_sheet_spinner"
         android:layout_toEndOf="@+id/print_pages_sheet"
         android:layout_alignTop="@+id/print_pages_sheet"
