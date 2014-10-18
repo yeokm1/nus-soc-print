@@ -40,6 +40,13 @@ public class PrintFragment extends Fragment {
         pagesPerSheetSpinner = (Spinner) view.findViewById(R.id.printer_page_sheet_spinner);
         printerSpinner = (Spinner) view.findViewById(R.id.print_printer_names);
 
+
+        String[] printerArray = getResources().getStringArray(R.array.printer_names);
+
+        ArrayAdapter<String> printerAdapter = new ArrayAdapter<String>(getActivity(),
+                R.layout.item_simple , printerArray);
+        printerSpinner.setAdapter(printerAdapter);
+
         String[] pagesArray = getResources().getStringArray(R.array.printer_page_sheet_options);
         ArrayAdapter<String> pagesAdapter = new ArrayAdapter<String>(getActivity(),
                 R.layout.item_simple , pagesArray);
