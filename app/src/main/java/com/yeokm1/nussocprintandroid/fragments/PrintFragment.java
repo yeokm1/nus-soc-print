@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.ArrayAdapter;
 
 import com.yeokm1.nussocprintandroid.R;
 import com.yeokm1.nussocprintandroid.print_activities.StatusActivity;
@@ -18,6 +20,9 @@ import com.yeokm1.nussocprintandroid.print_activities.StatusActivity;
  */
 public class PrintFragment extends Fragment {
 
+
+    private Spinner printerSpinner;
+    private Spinner pagesPerSheetSpinner;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,7 +37,14 @@ public class PrintFragment extends Fragment {
             }
         });
 
+        pagesPerSheetSpinner = (Spinner) view.findViewById(R.id.printer_page_sheet_spinner);
+        printerSpinner = (Spinner) view.findViewById(R.id.print_printer_names);
 
+        String[] pagesArray = getResources().getStringArray(R.array.printer_page_sheet_options);
+        ArrayAdapter<String> pagesAdapter = new ArrayAdapter<String>(getActivity(),
+                R.layout.item_simple , pagesArray);
+
+        pagesPerSheetSpinner.setAdapter(pagesAdapter);
         return view;
     }
 
