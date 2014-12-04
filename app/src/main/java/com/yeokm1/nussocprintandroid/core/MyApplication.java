@@ -7,6 +7,16 @@ import android.app.Application;
  */
 public class MyApplication extends Application{
 
+    private String currentDocumentPath;
+
+
+    public String getCurrentDocumentPath() {
+        return currentDocumentPath;
+    }
+
+    public void setCurrentDocumentPath(String currentDocumentPath) {
+        this.currentDocumentPath = currentDocumentPath;
+    }
 
     public void onCreate(){
         super.onCreate();

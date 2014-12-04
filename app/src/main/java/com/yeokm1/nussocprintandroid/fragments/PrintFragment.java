@@ -13,9 +13,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.ipaulpro.afilechooser.utils.FileUtils;
 import com.yeokm1.nussocprintandroid.R;
+import com.yeokm1.nussocprintandroid.core.MyApplication;
 import com.yeokm1.nussocprintandroid.core.Storage;
 import com.yeokm1.nussocprintandroid.print_activities.StatusActivity;
 
@@ -30,6 +32,8 @@ public class PrintFragment extends Fragment {
 
     private Spinner printerSpinner;
     private Spinner pagesPerSheetSpinner;
+    private TextView filePathView;
+
     private static final int REQUEST_CHOOSER = 1234;
     private static final String TAG = "PrintFragment";
 
@@ -38,8 +42,10 @@ public class PrintFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_print, container, false);
 
+        filePathView = (TextView) view.findViewById(R.id.print_filename_textview);
         pagesPerSheetSpinner = (Spinner) view.findViewById(R.id.printer_page_sheet_spinner);
         printerSpinner = (Spinner) view.findViewById(R.id.print_printer_names);
+
 
 
         List<String> printerList = Storage.getInstance().getPrinterList();
@@ -97,6 +103,14 @@ public class PrintFragment extends Fragment {
 
     public void obtainedDocumentPath(String path){
         Log.i(TAG, "incoming path " + path);
+        ((MyApplication) getActivity().getApplication()).setCurrentDocumentPath(path);
+        refreshDocumentPathIntoTextView();
+    }
+
+
+    private void refreshDocumentPathIntoTextView(){
+        String filePath =  ((MyApplication) getActivity().getApplication()).getCurrentDocumentPath();
+        filePathView.setText(filePath);
     }
 
 
