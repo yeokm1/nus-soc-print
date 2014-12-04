@@ -76,7 +76,7 @@ public class PrintFragment extends Fragment {
 
     public void startFileChooser(){
         Intent getContentIntent = FileUtils.createGetContentIntent();
-        Intent intent = Intent.createChooser(getContentIntent, "Select a file");
+        Intent intent = Intent.createChooser(getContentIntent, getString(R.string.print_select_a_document));
         startActivityForResult(intent, REQUEST_CHOOSER);
     }
 
