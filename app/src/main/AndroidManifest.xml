@@ -22,6 +22,24 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <!-- PDF -->
+                <data android:mimeType="application/pdf" />
+                <!-- DOC -->
+                <data android:mimeType="application/msword" />
+                <!-- DOCX -->
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+                <!-- PPT -->
+                <data android:mimeType="application/vnd.ms-powerpoint" />
+                <!-- PPTX -->
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.presentationml.presentation" />
+                <!-- ODT -->
+                <data android:mimeType="application/vnd.oasis.opendocument.text" />
+            </intent-filter>
+
         </activity>
         <activity
             android:name="com.yeokm1.nussocprintandroid.print_activities.StatusActivity"
@@ -37,10 +55,8 @@
             android:label="@string/choose_file" >
             <intent-filter>
                 <action android:name="android.intent.action.GET_CONTENT" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.OPENABLE" />
-
                 <data android:mimeType="*/*" />
             </intent-filter>
         </activity>

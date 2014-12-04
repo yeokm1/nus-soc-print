@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,6 +76,8 @@ public class PrintFragment extends Fragment {
             }
         });
 
+        refreshDocumentPathIntoTextView();
+
         return view;
     }
 
@@ -92,25 +93,20 @@ public class PrintFragment extends Fragment {
         switch (requestCode) {
             case REQUEST_CHOOSER:
                 if (resultCode == Activity.RESULT_OK) {
-
                     Uri uri = data.getData();
-                    String path = FileUtils.getPath(getActivity(), uri);
-                    obtainedDocumentPath(path);
+                    ((MyApplication) getActivity().getApplication()).setCurrentDocumentUri(uri);
+                    refreshDocumentPathIntoTextView();
                 }
                 break;
         }
     }
 
-    public void obtainedDocumentPath(String path){
-        Log.i(TAG, "incoming path " + path);
-        ((MyApplication) getActivity().getApplication()).setCurrentDocumentPath(path);
-        refreshDocumentPathIntoTextView();
-    }
-
 
     private void refreshDocumentPathIntoTextView(){
         String filePath =  ((MyApplication) getActivity().getApplication()).getCurrentDocumentPath();
-        filePathView.setText(filePath);
+        if(filePath != null) {
+            filePathView.setText(filePath);
+        }
     }
 
 

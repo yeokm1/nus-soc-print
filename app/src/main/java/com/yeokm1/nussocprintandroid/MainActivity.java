@@ -1,5 +1,7 @@
 package com.yeokm1.nussocprintandroid;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceScreen;
 import android.support.v4.app.Fragment;
@@ -10,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 
+import com.yeokm1.nussocprintandroid.core.MyApplication;
 import com.yeokm1.nussocprintandroid.fragments.HelpFragment;
 import com.yeokm1.nussocprintandroid.fragments.PreferenceListFragment.OnPreferenceAttachedListener;
 import com.yeokm1.nussocprintandroid.fragments.PrintFragment;
@@ -72,6 +75,13 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                     actionBar.newTab()
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
+        }
+
+        Bundle intentBundle = getIntent().getExtras();
+        if(intentBundle != null) {
+            Uri fileNameUri = (Uri) intentBundle.get(Intent.EXTRA_STREAM);
+            ((MyApplication) getApplication()).setCurrentDocumentUri(fileNameUri);
+
         }
     }
 
