@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -14,7 +13,7 @@ import com.yeokm1.nussocprintandroid.network.ConnectionTask;
 
 import java.util.List;
 
-public class StatusActivity extends Activity {
+public class StatusActivity extends FatDialogActivity {
 
     private RefreshStatusTask refreshTask;
     private DeleteTask deleteTask;
@@ -27,13 +26,7 @@ public class StatusActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_status);
 
-        //To maximise screen width as ICS Holo Dialog is rather "skinny"
-        final int screen_width = getResources().getDisplayMetrics().widthPixels;
-        final int new_window_width = screen_width * 95 / 100;
-        WindowManager.LayoutParams layout = getWindow().getAttributes();
-        layout.width = Math.max(layout.width, new_window_width);
-        getWindow().setAttributes(layout);
-
+        resizeDialogWindow();
 
         outputView = (TextView) findViewById(R.id.status_output);
         outputView.setMovementMethod(new ScrollingMovementMethod());
