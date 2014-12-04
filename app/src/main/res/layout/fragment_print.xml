@@ -29,9 +29,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/print_printer_text"
         android:id="@+id/print_print_text"
-        android:layout_toStartOf="@+id/print_page_range_from"
         android:layout_below="@+id/print_filename_text"
-        android:layout_toLeftOf="@+id/print_page_range_from"
         android:layout_marginTop="30dp" />
 
     <Spinner
@@ -119,10 +117,10 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/print_page_range_from_text"
         android:id="@+id/print_page_range_from"
-        android:layout_toEndOf="@+id/print_page_range_arrow"
-        android:layout_below="@+id/print_page_range_text"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="15dp"/>
+        android:layout_alignTop="@+id/print_page_range_arrow"
+        android:layout_toRightOf="@+id/print_page_range_arrow"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="7dp" />
 
     <TextView
         android:layout_width="wrap_content"
