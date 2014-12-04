@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -22,15 +24,17 @@ import com.yeokm1.nussocprintandroid.print_activities.StatusActivity;
 
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- *
- */
 public class PrintFragment extends Fragment {
 
 
     private Spinner printerSpinner;
     private Spinner pagesPerSheetSpinner;
+
+    private EditText pageRangeStart;
+    private EditText pageRangeEnd;
+
+    private boolean pageRange = false;
+
     private TextView filePathView;
 
     private static final int REQUEST_CHOOSER = 1234;
@@ -45,7 +49,8 @@ public class PrintFragment extends Fragment {
         pagesPerSheetSpinner = (Spinner) view.findViewById(R.id.printer_page_sheet_spinner);
         printerSpinner = (Spinner) view.findViewById(R.id.print_printer_names);
 
-
+        pageRangeStart = (EditText) view.findViewById(R.id.print_page_range_start);
+        pageRangeEnd = (EditText) view.findViewById(R.id.print_page_range_end);
 
         List<String> printerList = Storage.getInstance().getPrinterList();
         ArrayAdapter<String> printerAdapter = new ArrayAdapter<String>(getActivity(), R.layout.item_simple , printerList);
@@ -76,9 +81,33 @@ public class PrintFragment extends Fragment {
             }
         });
 
+
+        RadioGroup pageRangeRadioGroup = (RadioGroup) view.findViewById(R.id.print_page_range_radiogroup);
+        pageRangeRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch(checkedId){
+                    case R.id.print_page_range_all_text: showRangeFields(false);
+                        break;
+                    case R.id.print_page_range_custom_text:
+                        //Fall through
+                    default : showRangeFields(true);
+                }
+
+            }
+        });
+
+        showRangeFields(false);
+
         refreshDocumentPathIntoTextView();
 
         return view;
+    }
+
+    public void showRangeFields(boolean showFields){
+        pageRange = showFields;
+        pageRangeStart.setEnabled(showFields);
+        pageRangeEnd.setEnabled(showFields);
     }
 
     public void startFileChooser(){

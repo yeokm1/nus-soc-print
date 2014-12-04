@@ -1,8 +1,8 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-
+    android:layout_height="fill_parent"
+    android:focusableInTouchMode="true"><!-- This is to prevent the EditText fields from being the first to gain focus -->
     <Button
         android:id="@+id/print_print_button"
         android:layout_width="wrap_content"
