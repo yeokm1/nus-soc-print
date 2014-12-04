@@ -205,7 +205,7 @@
         android:layout_toRightOf="@+id/print_filename_text"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp" />
+        android:layout_marginTop="4dp" />
 
 
 </RelativeLayout>
