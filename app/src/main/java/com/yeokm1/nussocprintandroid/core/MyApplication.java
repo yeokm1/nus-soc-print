@@ -12,10 +12,10 @@ import com.yeokm1.nussocprintandroid.R;
  */
 public class MyApplication extends Application{
 
-    private String currentDocumentPath;
+    private Uri currentDocumentPath;
     private static final String TAG = "MyApplication";
 
-    public String getCurrentDocumentPath() {
+    public Uri getCurrentDocumentPath() {
         return currentDocumentPath;
     }
 
@@ -24,7 +24,7 @@ public class MyApplication extends Application{
         Log.i(TAG, "incoming path " + path);
 
         if(isFileFormatSupported(path)) {
-            this.currentDocumentPath = path;
+            currentDocumentPath = newDocumentUri;
         } else {
             Toast.makeText(this, R.string.print_file_not_supported, Toast.LENGTH_SHORT).show();
         }

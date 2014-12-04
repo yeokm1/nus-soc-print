@@ -132,9 +132,11 @@ public class PrintFragment extends Fragment {
 
 
     private void refreshDocumentPathIntoTextView(){
-        String filePath =  ((MyApplication) getActivity().getApplication()).getCurrentDocumentPath();
+        Uri filePath =  ((MyApplication) getActivity().getApplication()).getCurrentDocumentPath();
         if(filePath != null) {
-            filePathView.setText(filePath);
+
+            String filename = filePath.getLastPathSegment();
+            filePathView.setText(filename);
         }
     }
 
