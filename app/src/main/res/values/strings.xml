@@ -31,6 +31,8 @@
     <string name="print_page_range_arrow_text">↳</string>
     <string name="print_page_range_from_text">From</string>
     <string name="print_page_range_to_text">to</string>
+    <string name="print_no_file_selected_yet">You have to select a document before printing!</string>
+    <string name="print_invalid_page_range">Invalid page range</string>
 
     <!-- Status Activity -->
     <string name="status_title">Status</string>
@@ -74,7 +76,7 @@
     <string name="misc_server">sunfire.comp.nus.edu.sg</string>
     <string name="misc_connecting_to_server">Connecting to server&#8230;</string>
     <string name="misc_no_network">No network connection or server unreachable.</string>
-    <string name="misc_missing_credentials">Username/password not set.</string>
+    <string name="misc_missing_credentials">Username/password not set or missing server URL.</string>
     <string name="misc_wrong_credentials">Username/password incorrect.</string>
     <string-array name="printer_names">
         <item>psts</item>

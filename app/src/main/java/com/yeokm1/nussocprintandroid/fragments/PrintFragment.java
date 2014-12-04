@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ipaulpro.afilechooser.utils.FileUtils;
 import com.yeokm1.nussocprintandroid.R;
@@ -72,6 +73,13 @@ public class PrintFragment extends Fragment {
             }
         });
 
+        Button printButton = (Button) view.findViewById(R.id.print_print_button);
+        printButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startPrinting();
+            }
+        });
 
         Button browseButton = (Button) view.findViewById(R.id.print_browse_button);
         browseButton.setOnClickListener(new View.OnClickListener() {
@@ -148,8 +156,59 @@ public class PrintFragment extends Fragment {
         startActivity(intent);
     }
 
+    public void startPrinting(){
+        Storage storage = Storage.getInstance();
+        String username = storage.getUsername();
+        String password = storage.getPassword();
+        String server = storage.getServer();
+
+        if(username.length() == 0 || password.length() == 0 || server.length() == 0){
+            showToast(R.string.misc_missing_credentials);
+            return;
+        }
+
+        Uri filePathUri =  ((MyApplication) getActivity().getApplication()).getCurrentDocumentPath();
+
+        if(filePathUri == null){
+            showToast(R.string.print_no_file_selected_yet);
+            return;
+        }
+
+        String filePath = filePathUri.getPath();
+
+        String printerName = printerSpinner.getSelectedItem().toString();
+        String pagesPerSheetStr = pagesPerSheetSpinner.getSelectedItem().toString();
+
+        String startRangeStr = pageRangeStart.getText().toString();
+        String endRangeStr = pageRangeEnd.getText().toString();
+
+
+        if(pageRange){
+
+            try {
+                int startNumber = Integer.parseInt(startRangeStr);
+                int endNumber = Integer.parseInt(endRangeStr);
+
+                if(startNumber == 0 || endNumber == 0
+                        || startNumber > endNumber) {
+                    throw new NumberFormatException();
+                }
+
+            } catch(NumberFormatException e){
+                showToast(R.string.print_invalid_page_range);
+            }
+        }
 
 
 
+
+
+
+    }
+
+
+    public void showToast(int stringId){
+        Toast.makeText(getActivity(), stringId, Toast.LENGTH_SHORT).show();
+    }
 
 }
