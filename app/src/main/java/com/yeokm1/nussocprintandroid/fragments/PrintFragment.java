@@ -1,9 +1,12 @@
 package com.yeokm1.nussocprintandroid.fragments;
 
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.ipaulpro.afilechooser.utils.FileUtils;
 import com.yeokm1.nussocprintandroid.R;
 import com.yeokm1.nussocprintandroid.core.Storage;
 import com.yeokm1.nussocprintandroid.print_activities.StatusActivity;
@@ -26,19 +30,13 @@ public class PrintFragment extends Fragment {
 
     private Spinner printerSpinner;
     private Spinner pagesPerSheetSpinner;
+    private static final int REQUEST_CHOOSER = 1234;
+    private static final String TAG = "PrintFragment";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_print, container, false);
-
-        Button statusButton = (Button) view.findViewById(R.id.print_status_button);
-        statusButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startStatusActivity();
-            }
-        });
 
         pagesPerSheetSpinner = (Spinner) view.findViewById(R.id.printer_page_sheet_spinner);
         printerSpinner = (Spinner) view.findViewById(R.id.print_printer_names);
@@ -54,8 +52,54 @@ public class PrintFragment extends Fragment {
                 R.layout.item_simple , pagesArray);
 
         pagesPerSheetSpinner.setAdapter(pagesAdapter);
+
+
+        Button statusButton = (Button) view.findViewById(R.id.print_status_button);
+        statusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startStatusActivity();
+            }
+        });
+
+
+        Button browseButton = (Button) view.findViewById(R.id.print_browse_button);
+        browseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startFileChooser();
+            }
+        });
+
         return view;
     }
+
+    public void startFileChooser(){
+        Intent getContentIntent = FileUtils.createGetContentIntent();
+        Intent intent = Intent.createChooser(getContentIntent, "Select a file");
+        startActivityForResult(intent, REQUEST_CHOOSER);
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_CHOOSER:
+                if (resultCode == Activity.RESULT_OK) {
+
+                    Uri uri = data.getData();
+                    String path = FileUtils.getPath(getActivity(), uri);
+                    obtainedDocumentPath(path);
+                }
+                break;
+        }
+    }
+
+    public void obtainedDocumentPath(String path){
+        Log.i(TAG, "incoming path " + path);
+    }
+
+
 
 
     public void startStatusActivity(){
