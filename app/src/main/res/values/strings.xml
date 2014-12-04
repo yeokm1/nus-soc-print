@@ -18,6 +18,7 @@
     <string name="print_file_browse_button">Browse</string>
     <string name="print_printer_text">Printer:</string>
     <string name="print_pages_sheet_text">Pages per sheet:</string>
+
     <string-array name="printer_page_sheet_options">
         <item>1</item>
         <item>2</item>
@@ -25,6 +26,7 @@
         <item>6</item>
         <item>8</item>
     </string-array>
+
     <string name="print_page_range_text">Page range:</string>
     <string name="print_page_range_all_text">All</string>
     <string name="print_page_range_custom_text">Custom</string>
@@ -39,6 +41,9 @@
     <string name="status_initial">Hit Refresh or Delete to begin</string>
     <string name="status_delete_jobs">Delete pending jobs</string>
     <string name="status_refresh_status">Refresh Status</string>
+
+    <!-- Printing Activity -->
+    <string name="printing_title">Printing</string>
 
     <!-- Quota Fragment -->
     <string name="quota_output_text">Press refresh to get quota</string>
@@ -74,10 +79,11 @@
 
     <!-- Misc -->
     <string name="misc_server">sunfire.comp.nus.edu.sg</string>
-    <string name="misc_connecting_to_server">Connecting to server&#8230;</string>
+    <string name="misc_connecting_to_server">Connecting to server…</string>
     <string name="misc_no_network">No network connection or server unreachable.</string>
     <string name="misc_missing_credentials">Username/password not set or missing server URL.</string>
     <string name="misc_wrong_credentials">Username/password incorrect.</string>
+
     <string-array name="printer_names">
         <item>psts</item>
         <item>psts-sx</item>
@@ -92,7 +98,5 @@
         <item>psc245</item>
         <item>psc245-sx</item>
     </string-array>
-
-
 
 </resources>
