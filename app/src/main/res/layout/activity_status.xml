@@ -35,5 +35,6 @@
         android:layout_alignRight="@+id/status_refresh_button"
         android:layout_alignEnd="@+id/status_refresh_button"
         android:scrollbars = "vertical"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:layout_margin="10dp" />
 </RelativeLayout>
