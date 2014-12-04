@@ -34,6 +34,7 @@
 
     <!-- Status Activity -->
     <string name="status_title">Status</string>
+    <string name="status_initial">Hit Refresh or Delete to begin</string>
     <string name="status_delete_jobs">Delete pending jobs</string>
     <string name="status_refresh_status">Refresh Status</string>
 
