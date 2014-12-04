@@ -73,6 +73,7 @@ public class StatusActivity extends Activity {
     public void stopDeleteTask(){
         if(deleteTask != null){
             deleteTask.cancel(false);
+            deleteTask = null;
 
         }
     }
@@ -80,6 +81,7 @@ public class StatusActivity extends Activity {
     public void stopRefreshTask(){
         if(refreshTask != null){
             refreshTask.cancel(false);
+            refreshTask = null;
         }
     }
 
