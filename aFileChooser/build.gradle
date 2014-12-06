@@ -5,14 +5,14 @@ android {
     buildToolsVersion "21.1.1"
 
     defaultConfig {
-        applicationId "com.ipaulpro.afilechooser"
+      //  applicationId "com.ipaulpro.afilechooser"
         minSdkVersion 7
         targetSdkVersion 21
     }
 
     buildTypes {
         release {
-            runProguard false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
