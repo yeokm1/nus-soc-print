@@ -180,13 +180,22 @@ public class PrintFragment extends Fragment {
         String printerName = printerSpinner.getSelectedItem().toString();
         String pagesPerSheetStr = pagesPerSheetSpinner.getSelectedItem().toString();
 
+        int pagesPerSheet = Integer.parseInt(pagesPerSheetStr);
+
         String startRangeStr = pageRangeStart.getText().toString();
         String endRangeStr = pageRangeEnd.getText().toString();
+
+        Intent intent = new Intent(getActivity(), PrintingActivity.class);
+
+        intent.putExtra(PrintingActivity.INTENT_FILE_PATH, filePath);
+        intent.putExtra(PrintingActivity.INTENT_PRINTER_NAME, printerName);
+        intent.putExtra(PrintingActivity.INTENT_PAGES_PER_SHEET, pagesPerSheet);
 
 
         if(pageRange){
 
             try {
+
                 int startNumber = Integer.parseInt(startRangeStr);
                 int endNumber = Integer.parseInt(endRangeStr);
 
@@ -195,16 +204,17 @@ public class PrintFragment extends Fragment {
                     throw new NumberFormatException();
                 }
 
+                intent.putExtra(PrintingActivity.INTENT_PAGE_START_RANGE, startNumber);
+                intent.putExtra(PrintingActivity.INTENT_PAGE_END_RANGE, endNumber);
+
             } catch(NumberFormatException e){
                 showToast(R.string.print_invalid_page_range);
+                return;
             }
         }
 
 
-        Intent intent = new Intent(getActivity(), PrintingActivity.class);
         startActivity(intent);
-
-
 
     }
 
