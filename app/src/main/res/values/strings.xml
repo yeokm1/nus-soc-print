@@ -58,7 +58,7 @@
     <string name="settings_username_title">UNIX username</string>
     <string name="settings_username_summary">Enter your UNIX username</string>
     <string name="settings_username_hint">Enter your UNIX username</string>
-    <string name="settings_username_key">>username_preference</string>
+    <string name="settings_username_key">username_preference</string>
     <string name="settings_password_title">UNIX password</string>
     <string name="settings_password_summary">Enter your UNIX password</string>
     <string name="settings_password_hint">Enter your UNIX password</string>
@@ -83,7 +83,8 @@
     <string name="misc_server">sunfire.comp.nus.edu.sg</string>
     <string name="misc_connecting_to_server">Connecting to server…</string>
     <string name="misc_no_network">No network connection or server unreachable.</string>
-    <string name="misc_missing_credentials">Username/password not set or missing server URL.</string>
+    <string name="misc_missing_credential">Username/password not set.</string>
+    <string name="misc_missing_server">Server entry cannot be blank</string>
     <string name="misc_wrong_credentials">Username/password incorrect.</string>
 
     <string-array name="printer_names">

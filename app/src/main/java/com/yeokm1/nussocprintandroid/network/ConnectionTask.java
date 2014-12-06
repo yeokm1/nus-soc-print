@@ -24,9 +24,15 @@ public abstract class ConnectionTask extends AsyncTask<String, String, String>{
         String password = storage.getPassword();
         String server = storage.getServer();
 
-        if(username.length() == 0 || password.length() == 0 || server.length() == 0){
-            String missingCredentials = activity.getString(R.string.misc_missing_credentials);
+
+        if(username.length() == 0 || password.length() == 0){
+            String missingCredentials = activity.getString(R.string.misc_missing_credential);
             throw new Exception(missingCredentials);
+        }
+
+        if(server.length() == 0){
+            String missingServer = activity.getString(R.string.misc_missing_server);
+            throw new Exception(missingServer);
         }
 
         connection = new SSHConnectivity(server,username, password, activity);

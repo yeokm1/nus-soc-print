@@ -163,8 +163,13 @@ public class PrintFragment extends Fragment {
         String password = storage.getPassword();
         String server = storage.getServer();
 
-        if(username.length() == 0 || password.length() == 0 || server.length() == 0){
-            showToast(R.string.misc_missing_credentials);
+        if(username.length() == 0 || password.length() == 0){
+            showToast(R.string.misc_missing_credential);
+            return;
+        }
+
+        if(server.length() == 0){
+            showToast(R.string.misc_missing_server);
             return;
         }
 

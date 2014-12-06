@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.yeokm1.nussocprintandroid.R;
 import com.yeokm1.nussocprintandroid.core.Storage;
@@ -72,9 +73,10 @@ public class QuotaFragment extends Fragment {
         String password = storage.getPassword();
 
         if(username.length() == 0 || password.length() == 0){
-            outputTextView.setText(R.string.misc_missing_credentials);
+            Toast.makeText(getActivity(), R.string.misc_missing_credential, Toast.LENGTH_SHORT).show();
             return;
         }
+
         String loginURL = getString(R.string.quota_login_url);
         String quotaPageRelURL = getString(R.string.quota_page_relative_url);
 
