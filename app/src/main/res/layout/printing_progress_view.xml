@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.yeokm1.nussocprintandroid.print_activities.printing.PrintingProgressView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+</com.yeokm1.nussocprintandroid.print_activities.printing.PrintingProgressView>

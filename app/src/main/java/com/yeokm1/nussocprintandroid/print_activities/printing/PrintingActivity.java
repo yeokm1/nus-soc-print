@@ -3,10 +3,14 @@ package com.yeokm1.nussocprintandroid.print_activities.printing;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ListView;
 
 import com.yeokm1.nussocprintandroid.R;
 import com.yeokm1.nussocprintandroid.network.ConnectionTask;
 import com.yeokm1.nussocprintandroid.print_activities.FatDialogActivity;
+
+import java.util.ArrayList;
 
 public class PrintingActivity extends FatDialogActivity {
 
@@ -18,11 +22,19 @@ public class PrintingActivity extends FatDialogActivity {
 
     private static final int INVALID_INTENT_INT = 0;
 
+    private ListView printProgress;
+    private Button finishButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_printing);
         resizeDialogWindow();
+
+        printProgress = (ListView) findViewById(R.id.printing_list);
+        finishButton = (Button) findViewById(R.id.printing_button_finish);
+
+
 
         Intent intent = getIntent();
 
@@ -32,6 +44,18 @@ public class PrintingActivity extends FatDialogActivity {
         int startRange = intent.getIntExtra(INTENT_PAGE_START_RANGE, INVALID_INTENT_INT);
         int endRange = intent.getIntExtra(INTENT_PAGE_END_RANGE, INVALID_INTENT_INT);
 
+
+
+        ArrayList<PrintingProgressItem> items = new ArrayList<PrintingProgressItem>();
+        for (int i = 0; i < 7; i++) {
+            String url = String.format("http://www.google.com/image/%d.png", i);
+            String title = String.format("Item %d", i);
+            String description = String.format("Description of Item %d", i);
+            PrintingProgressItem item = new PrintingProgressItem(url, title, description);
+            items.add(item);
+        }
+
+        printProgress.setAdapter(new PrintingProgressItemAdapter(this, items));
 
     }
 

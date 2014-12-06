@@ -55,13 +55,13 @@ public class PrintFragment extends Fragment {
         pageRangeEnd = (EditText) view.findViewById(R.id.print_page_range_end);
 
         List<String> printerList = Storage.getInstance().getPrinterList();
-        ArrayAdapter<String> printerAdapter = new ArrayAdapter<String>(getActivity(), R.layout.item_simple , printerList);
+        ArrayAdapter<String> printerAdapter = new ArrayAdapter<String>(getActivity(), R.layout.printing_progress_item, printerList);
         printerSpinner.setAdapter(printerAdapter);
 
 
         String[] pagesArray = getResources().getStringArray(R.array.printer_page_sheet_options);
         ArrayAdapter<String> pagesAdapter = new ArrayAdapter<String>(getActivity(),
-                R.layout.item_simple , pagesArray);
+                R.layout.printing_progress_item, pagesArray);
 
         pagesPerSheetSpinner.setAdapter(pagesAdapter);
 
