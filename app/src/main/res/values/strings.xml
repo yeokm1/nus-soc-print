@@ -54,6 +54,7 @@
     <string name="quota_refresh_text">Refreshing Print Quota…</string>
 
     <!-- Settings Fragment -->
+    <string name="settings_category_sunfire">SoC Unix credentials</string>
     <string name="settings_username_title">UNIX username</string>
     <string name="settings_username_summary">Enter your UNIX username</string>
     <string name="settings_username_hint">Enter your UNIX username</string>
@@ -62,6 +63,7 @@
     <string name="settings_password_summary">Enter your UNIX password</string>
     <string name="settings_password_hint">Enter your UNIX password</string>
     <string name="settings_password_key">password_preference</string>
+    <string name="settings_category_optional">Optional</string>
     <string name="settings_printer_title">Custom Printer</string>
     <string name="settings_printer_summary">Use a printer not in app database</string>
     <string name="settings_printer_hint">Enter your custom printer here</string>

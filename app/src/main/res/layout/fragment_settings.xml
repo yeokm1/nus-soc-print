@@ -4,6 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <PreferenceCategory
+        android:title="@string/settings_category_sunfire" />
+
     <EditTextPreference
         android:hint="@string/settings_username_hint"
         android:key="@string/settings_username_key"
@@ -16,6 +19,9 @@
         android:key="@string/settings_password_key"
         android:summary="@string/settings_password_summary"
         android:title="@string/settings_password_title" />
+
+    <PreferenceCategory
+        android:title="@string/settings_category_optional" />
 
     <EditTextPreference
         android:hint="@string/settings_printer_hint"
