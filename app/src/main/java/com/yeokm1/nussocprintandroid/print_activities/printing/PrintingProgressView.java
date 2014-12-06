@@ -4,16 +4,14 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yeokm1.nussocprintandroid.R;
 
 public class PrintingProgressView extends RelativeLayout {
-    private TextView mTitleTextView;
-    private TextView mDescriptionTextView;
-    private ImageView mImageView;
+    private TextView titleTextView;
+    private TextView subtitleTextView;
 
     public static PrintingProgressView inflate(ViewGroup parent) {
         PrintingProgressView itemView = (PrintingProgressView)LayoutInflater.from(parent.getContext())
@@ -36,26 +34,20 @@ public class PrintingProgressView extends RelativeLayout {
     }
 
     private void setupChildren() {
-        mTitleTextView = (TextView) findViewById(R.id.item_titleTextView);
-        mDescriptionTextView = (TextView) findViewById(R.id.item_descriptionTextView);
-        mImageView = (ImageView) findViewById(R.id.item_imageView);
+       titleTextView = (TextView) findViewById(R.id.printing_progress_title);
+       subtitleTextView= (TextView) findViewById(R.id.printing_progress_subtitle);
     }
 
     public void setItem(PrintingProgressItem item) {
-        mTitleTextView.setText(item.getTitle());
-        mDescriptionTextView.setText(item.getDescription());
-        // TODO: set up image URL
-    }
-    
-    public ImageView getImageView () {
-        return mImageView;
+        titleTextView.setText(item.getTitle());
+        subtitleTextView.setText(item.getDescription());
     }
 
     public TextView getTitleTextView() {
-        return mTitleTextView;
+        return titleTextView;
     }
 
     public TextView getDescriptionTextView() {
-        return mDescriptionTextView;
+        return subtitleTextView;
     }
 }

@@ -47,10 +47,10 @@ public class PrintingActivity extends FatDialogActivity {
 
 
         ArrayList<PrintingProgressItem> items = new ArrayList<PrintingProgressItem>();
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 10; i++) {
             String url = String.format("http://www.google.com/image/%d.png", i);
-            String title = String.format("Item %d", i);
-            String description = String.format("Description of Item %d", i);
+            String title = "Uploading DOC converter";
+            String description = "This could take a while...";
             PrintingProgressItem item = new PrintingProgressItem(url, title, description);
             items.add(item);
         }

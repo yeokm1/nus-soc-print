@@ -11,7 +11,7 @@ public abstract class FatDialogActivity extends Activity {
     protected void resizeDialogWindow(){
         //To maximise screen width as ICS Holo Dialog is rather "skinny"
         final int screen_width = getResources().getDisplayMetrics().widthPixels;
-        final int new_window_width = screen_width * 95 / 100;
+        final int new_window_width = screen_width * 98 / 100;
         WindowManager.LayoutParams layout = getWindow().getAttributes();
         layout.width = Math.max(layout.width, new_window_width);
         getWindow().setAttributes(layout);
