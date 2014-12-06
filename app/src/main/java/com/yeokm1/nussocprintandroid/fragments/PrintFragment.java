@@ -21,7 +21,7 @@ import com.ipaulpro.afilechooser.utils.FileUtils;
 import com.yeokm1.nussocprintandroid.R;
 import com.yeokm1.nussocprintandroid.core.MyApplication;
 import com.yeokm1.nussocprintandroid.core.Storage;
-import com.yeokm1.nussocprintandroid.print_activities.PrintingActivity;
+import com.yeokm1.nussocprintandroid.print_activities.printing.PrintingActivity;
 import com.yeokm1.nussocprintandroid.print_activities.StatusActivity;
 
 import java.util.List;

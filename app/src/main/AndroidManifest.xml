@@ -61,7 +61,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.yeokm1.nussocprintandroid.print_activities.PrintingActivity"
+            android:name=".print_activities.printing.PrintingActivity"
             android:label="@string/printing_title"
             android:theme="@style/DialogTheme">
         </activity>
