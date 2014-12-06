@@ -1,38 +1,41 @@
 package com.yeokm1.nussocprintandroid.print_activities.printing;
 
 public class PrintingProgressItem {
-    private String mImageUrl;
-    private String mTitle;
-    private String mDescription;
-    
-    public PrintingProgressItem(String imageUrl, String title, String description) {
+
+    private String title;
+    private String subtitle;
+    private boolean progressIndeterminate;
+    private int progressValue;
+
+    public PrintingProgressItem(String title, String subtitle) {
         super();
-        mImageUrl = imageUrl;
-        mTitle = title;
-        mDescription = description;
+        this.title = title;
+        this.subtitle = subtitle;
+        this.progressIndeterminate = true;
     }
 
-    public String getImageUrl() {
-        return mImageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        mImageUrl = imageUrl;
+    public PrintingProgressItem(String title, String subtitle, int progressValue) {
+        super();
+        this.title = title;
+        this.subtitle = subtitle;
+        this.progressValue = progressValue;
+        this.progressIndeterminate = false;
     }
 
     public String getTitle() {
-        return mTitle;
+        return title;
     }
 
-    public void setTitle(String title) {
-        mTitle = title;
+    public String getSubtitle() {
+        return subtitle;
     }
 
-    public String getDescription() {
-        return mDescription;
+    public boolean isProgressIndeterminate() {
+        return progressIndeterminate;
     }
 
-    public void setDescription(String description) {
-        mDescription = description;
+    public int getProgressValue() {
+        return progressValue;
     }
+
 }
