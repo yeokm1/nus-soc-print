@@ -99,9 +99,8 @@ public class StatusActivity extends FatDialogActivity {
 
 
         final String FORMAT_PRINTER_COMMAND = "lpq -P %s";
-        final String FORMAT_PRINTER_OUTPUT = "%s : %s\n";
-        final String FORMAT_PRINTER_NO_OUTPUT = "%s : No Output\n";
-        final String TEXT_NO_JOB = "Print Queue Empty\n";
+        final String FORMAT_PRINTER_OUTPUT = getString(R.string.status_refresh_format_printer_output);
+        final String TEXT_NO_JOB = getString(R.string.status_refresh_printer_queue_empty);
 
         public RefreshStatusTask(Activity activity){
             super(activity);
@@ -167,8 +166,8 @@ public class StatusActivity extends FatDialogActivity {
     class DeleteTask extends ConnectionTask {
 
         final String FORMAT_PRINTER_COMMAND = "lprm -P %s -";
-        final String FORMAT_DELETION_OUTPUT = "Deletion command sent to %s\n";
-        final String DELETION_COMMAND_SENT_TO_ALL = "Deletion command sent to all printers";
+        final String FORMAT_DELETION_OUTPUT = getString(R.string.status_delete_format_status);
+        final String DELETION_COMMAND_SENT_TO_ALL = getString(R.string.status_delete_finished);
 
         public DeleteTask(Activity activity){
             super(activity);

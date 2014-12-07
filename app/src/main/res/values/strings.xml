@@ -41,6 +41,10 @@
     <string name="status_initial">Hit Refresh or Delete to begin</string>
     <string name="status_delete_jobs">Delete pending jobs</string>
     <string name="status_refresh_status">Refresh Status</string>
+    <string name="status_refresh_format_printer_output" formatted="false">%s : %s\n</string>
+    <string name="status_refresh_printer_queue_empty">Print Queue Empty\n</string>
+    <string name="status_delete_format_status" formatted="false">Deletion command sent to %s\n</string>
+    <string name="status_delete_finished">Deletion command sent to all printers\n</string>
 
     <!-- Printing Activity -->
     <string name="printing_title">Printing</string>
