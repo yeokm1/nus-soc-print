@@ -50,14 +50,14 @@ public class PrintingActivity extends FatDialogActivity {
         for (int i = 0; i < 5; i++) {
             String title = "Uploading DOC converter";
             String description = "This could take a while...";
-            PrintingProgressItem item = new PrintingProgressItem(title, description);
+            PrintingProgressItem item = new PrintingProgressItem(title, description, true, false);
             items.add(item);
         }
 
         for (int i = 0; i < 5; i++) {
             String title = "Uploading PDF converter";
             String description = "This could take a while...";
-            PrintingProgressItem item = new PrintingProgressItem(title, description, 50);
+            PrintingProgressItem item = new PrintingProgressItem(title, description, 50, false, true);
             items.add(item);
         }
 

@@ -3,6 +3,7 @@ package com.yeokm1.nussocprintandroid.print_activities.printing;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -57,6 +58,19 @@ public class PrintingProgressView extends RelativeLayout {
             progressBar.setIndeterminate(false);
             progressBar.setProgress(item.getProgressValue());
         }
+
+        if(item.isShowDoneIcon()){
+            doneIcon.setVisibility(View.VISIBLE);
+        } else {
+            doneIcon.setVisibility(View.INVISIBLE);
+        }
+
+        if(item.isShowErrorIcon()){
+            errorIcon.setVisibility(View.VISIBLE);
+        } else {
+            errorIcon.setVisibility(View.INVISIBLE);
+        }
+
 
     }
 

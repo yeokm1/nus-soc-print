@@ -7,17 +7,20 @@ public class PrintingProgressItem {
     private boolean progressIndeterminate;
     private int progressValue;
 
-    public PrintingProgressItem(String title, String subtitle) {
+    private boolean showDoneIcon;
+    private boolean showErrorIcon;
+
+    public PrintingProgressItem(String title, String subtitle, boolean showDoneIcon, boolean showErrorIcon) {
         super();
         this.title = title;
         this.subtitle = subtitle;
         this.progressIndeterminate = true;
+        this.showDoneIcon = showDoneIcon;
+        this.showErrorIcon = showErrorIcon;
     }
 
-    public PrintingProgressItem(String title, String subtitle, int progressValue) {
-        super();
-        this.title = title;
-        this.subtitle = subtitle;
+    public PrintingProgressItem(String title, String subtitle, int progressValue, boolean showDoneIcon, boolean showErrorIcon) {
+        this(title, subtitle, showDoneIcon, showErrorIcon);
         this.progressValue = progressValue;
         this.progressIndeterminate = false;
     }
@@ -36,6 +39,14 @@ public class PrintingProgressItem {
 
     public int getProgressValue() {
         return progressValue;
+    }
+
+    public boolean isShowDoneIcon() {
+        return showDoneIcon;
+    }
+
+    public boolean isShowErrorIcon() {
+        return showErrorIcon;
     }
 
 }
