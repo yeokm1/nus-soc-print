@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -14,6 +15,9 @@ public class PrintingProgressView extends RelativeLayout {
     private TextView titleTextView;
     private TextView subtitleTextView;
     private ProgressBar progressBar;
+
+    private ImageView doneIcon;
+    private ImageView errorIcon;
 
     public static PrintingProgressView inflate(ViewGroup parent) {
         PrintingProgressView itemView = (PrintingProgressView)LayoutInflater.from(parent.getContext())
@@ -39,6 +43,8 @@ public class PrintingProgressView extends RelativeLayout {
         titleTextView = (TextView) findViewById(R.id.printing_progress_title);
         subtitleTextView= (TextView) findViewById(R.id.printing_progress_subtitle);
         progressBar = (ProgressBar) findViewById(R.id.printing_progress_progressbar);
+        doneIcon = (ImageView) findViewById(R.id.printing_progress_done_icon);
+        errorIcon = (ImageView) findViewById(R.id.printing_progress_error_icon);
     }
 
     public void setItem(PrintingProgressItem item) {
