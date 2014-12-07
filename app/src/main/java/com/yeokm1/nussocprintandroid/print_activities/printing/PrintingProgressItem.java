@@ -10,17 +10,22 @@ public class PrintingProgressItem {
     private boolean showDoneIcon;
     private boolean showErrorIcon;
 
-    public PrintingProgressItem(String title, String subtitle, boolean showDoneIcon, boolean showErrorIcon) {
+    private boolean isProgressBarActive;
+
+    public PrintingProgressItem(String title, String subtitle, boolean isCompleted, boolean showErrorIcon, boolean isProgressBarActive) {
         super();
         this.title = title;
         this.subtitle = subtitle;
         this.progressIndeterminate = true;
-        this.showDoneIcon = showDoneIcon;
+        this.showDoneIcon = isCompleted;
         this.showErrorIcon = showErrorIcon;
+        this.isProgressBarActive = isProgressBarActive;
+
+        this.progressValue = 0;
     }
 
-    public PrintingProgressItem(String title, String subtitle, float progressValue, boolean showDoneIcon, boolean showErrorIcon) {
-        this(title, subtitle, showDoneIcon, showErrorIcon);
+    public PrintingProgressItem(String title, String subtitle, float progressValue, boolean showDoneIcon, boolean showErrorIcon, boolean isProgressBarActive) {
+        this(title, subtitle, showDoneIcon, showErrorIcon, isProgressBarActive);
         this.progressValue = progressValue;
         this.progressIndeterminate = false;
     }
@@ -47,6 +52,10 @@ public class PrintingProgressItem {
 
     public boolean isShowErrorIcon() {
         return showErrorIcon;
+    }
+
+    public boolean isProgressBarActive() {
+        return isProgressBarActive;
     }
 
 }

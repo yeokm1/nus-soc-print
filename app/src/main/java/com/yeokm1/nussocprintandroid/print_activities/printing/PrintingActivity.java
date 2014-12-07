@@ -153,22 +153,26 @@ public class PrintingActivity extends FatDialogActivity {
 
             boolean isThisDone;
             boolean isError;
-
+            boolean isInProgress;
 
             if(currentProgress > row){
                 isThisDone = true;
                 isError = false;
+                isInProgress = false;
             } else if(row == currentProgress){
                 isThisDone = false;
                 if(printingTask == null){
                     //Means the operation has ended on the current progress, show a cross to mean an error
                     isError = true;
+                    isInProgress = false;
                 } else {
                     isError = false;
+                    isInProgress = true;
                 }
             } else {
                 isThisDone = false;
                 isError = false;
+                isInProgress = false;
             }
 
             float progressFraction = 0;
@@ -188,9 +192,9 @@ public class PrintingActivity extends FatDialogActivity {
 
             PrintingProgressItem item;
             if(progressIndeterminate){
-                item = new PrintingProgressItem(title, subtitle, isThisDone, isError);
+                item = new PrintingProgressItem(title, subtitle, isThisDone, isError, isInProgress);
             } else {
-                item = new PrintingProgressItem(title, subtitle, progressFraction, isThisDone, isError);
+                item = new PrintingProgressItem(title, subtitle, progressFraction, isThisDone, isError, isInProgress);
             }
 
 

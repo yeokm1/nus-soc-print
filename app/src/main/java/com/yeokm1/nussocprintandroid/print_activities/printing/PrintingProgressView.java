@@ -54,12 +54,19 @@ public class PrintingProgressView extends RelativeLayout {
         titleTextView.setText(item.getTitle());
         subtitleTextView.setText(item.getSubtitle());
 
-        if(item.isProgressIndeterminate()){
-            progressBar.setIndeterminate(true);
+        if(item.isProgressBarActive()){
+            if(item.isProgressIndeterminate()){
+                progressBar.setIndeterminate(true);
+            } else {
+                progressBar.setIndeterminate(false);
+                progressBar.setProgress((int) (item.getProgressValue() * MAX_PROGRESS_VALUE));
+            }
         } else {
             progressBar.setIndeterminate(false);
             progressBar.setProgress((int) (item.getProgressValue() * MAX_PROGRESS_VALUE));
         }
+
+
 
         if(item.isShowDoneIcon()){
             doneIcon.setVisibility(View.VISIBLE);
