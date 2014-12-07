@@ -202,10 +202,6 @@ public class PrintingActivity extends FatDialogActivity {
             items.add(item);
         }
 
-
-
-
-
         printProgress.setAdapter(new PrintingProgressItemAdapter(this, items));
     }
 
