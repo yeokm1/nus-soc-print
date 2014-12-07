@@ -20,6 +20,8 @@ public class PrintingProgressView extends RelativeLayout {
     private ImageView doneIcon;
     private ImageView errorIcon;
 
+    private int MAX_PROGRESS_VALUE = 100;
+
     public static PrintingProgressView inflate(ViewGroup parent) {
         PrintingProgressView itemView = (PrintingProgressView)LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.printing_progress_view, parent, false);
@@ -56,7 +58,7 @@ public class PrintingProgressView extends RelativeLayout {
             progressBar.setIndeterminate(true);
         } else {
             progressBar.setIndeterminate(false);
-            progressBar.setProgress(item.getProgressValue());
+            progressBar.setProgress((int) (item.getProgressValue() * MAX_PROGRESS_VALUE));
         }
 
         if(item.isShowDoneIcon()){

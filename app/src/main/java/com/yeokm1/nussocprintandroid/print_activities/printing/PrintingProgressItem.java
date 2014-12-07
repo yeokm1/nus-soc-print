@@ -5,7 +5,7 @@ public class PrintingProgressItem {
     private String title;
     private String subtitle;
     private boolean progressIndeterminate;
-    private int progressValue;
+    private float progressValue;
 
     private boolean showDoneIcon;
     private boolean showErrorIcon;
@@ -19,7 +19,7 @@ public class PrintingProgressItem {
         this.showErrorIcon = showErrorIcon;
     }
 
-    public PrintingProgressItem(String title, String subtitle, int progressValue, boolean showDoneIcon, boolean showErrorIcon) {
+    public PrintingProgressItem(String title, String subtitle, float progressValue, boolean showDoneIcon, boolean showErrorIcon) {
         this(title, subtitle, showDoneIcon, showErrorIcon);
         this.progressValue = progressValue;
         this.progressIndeterminate = false;
@@ -37,7 +37,7 @@ public class PrintingProgressItem {
         return progressIndeterminate;
     }
 
-    public int getProgressValue() {
+    public float getProgressValue() {
         return progressValue;
     }
 
