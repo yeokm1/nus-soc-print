@@ -179,15 +179,15 @@ public class PrintingActivity extends FatDialogActivity {
             boolean progressIndeterminate = PROGRESS_INDETERMINATE[row];
 
             if(row == POSITION_UPLOADING_PDF_CONVERTER){
-
                 progressFraction = generateProgressFraction(pdfConvUploaded, pdfConvSize);
                 subtitle = generateProgressString(pdfConvUploaded, pdfConvSize, progressFraction);
             } else if(row == POSITION_UPLOADING_USER_DOC){
-
                 progressFraction = generateProgressFraction(docToPrintUploaded, docToPrintSize);
                 subtitle = generateProgressString(docToPrintUploaded, docToPrintSize, progressFraction);
+            } else if(row == POSITION_CONVERTING_TO_PDF || row == POSITION_TRIM_PDF_TO_PAGE_RANGE || row == POSITION_CONVERTING_TO_POSTSCRIPT){
+                subtitle = SUBTITLE_INDETERMINATE_TEXT;
             } else {
-               subtitle = SUBTITLE_INDETERMINATE_TEXT;
+               subtitle = "";
             }
 
             PrintingProgressItem item;
