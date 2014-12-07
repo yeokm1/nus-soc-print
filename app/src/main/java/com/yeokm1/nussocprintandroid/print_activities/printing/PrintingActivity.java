@@ -138,16 +138,17 @@ public class PrintingActivity extends FatDialogActivity {
             String subtitle;
 
 
+            String headerText = HEADER_TEXT[row];
             if(row == POSITION_UPLOADING_USER_DOC){
-                title = String.format(HEADER_TEXT[row], filename);
+                title = String.format(headerText, filename);
             } else if(row == POSITION_FORMATTING_PDF){
-                title = String.format(HEADER_TEXT[row], pagesPerSheet);
+                title = String.format(headerText, pagesPerSheet);
             } else if(row == POSITION_SENDING_TO_PRINTER){
-                title = String.format(HEADER_TEXT[row], printer);
+                title = String.format(headerText, printer);
             } else if(row == POSITION_TRIM_PDF_TO_PAGE_RANGE){
-                title = String.format(HEADER_TEXT[row], startPageRange, endPageRange);
+                title = String.format(headerText, startPageRange, endPageRange);
             } else {
-                title = HEADER_TEXT[row];
+                title = headerText;
             }
 
             boolean isThisDone;
@@ -175,13 +176,12 @@ public class PrintingActivity extends FatDialogActivity {
 
             if(row == POSITION_UPLOADING_PDF_CONVERTER){
 
-                subtitle = generateProgressString(pdfConvUploaded, pdfConvSize);
                 progressFraction = generateProgressFraction(pdfConvUploaded, pdfConvSize);
-
+                subtitle = generateProgressString(pdfConvUploaded, pdfConvSize, progressFraction);
             } else if(row == POSITION_UPLOADING_USER_DOC){
 
-                subtitle = generateProgressString(docToPrintUploaded, docToPrintSize);
                 progressFraction = generateProgressFraction(docToPrintUploaded, docToPrintSize);
+                subtitle = generateProgressString(docToPrintUploaded, docToPrintSize, progressFraction);
             } else {
                subtitle = SUBTITLE_INDETERMINATE_TEXT;
             }
@@ -205,11 +205,11 @@ public class PrintingActivity extends FatDialogActivity {
         printProgress.setAdapter(new PrintingProgressItemAdapter(this, items));
     }
 
-    private String generateProgressString(long currentSize, long totalSize){
+    private String generateProgressString(long currentSize, long totalSize, float progressFraction){
         String currentSizeStr = humanReadableByteCount(currentSize, true);
         String totalSizeStr = humanReadableByteCount(totalSize, true);
 
-        String progressStr = String.format(SUBTITLE_PROGRESS_TEXT, currentSizeStr, totalSizeStr);
+        String progressStr = String.format(SUBTITLE_PROGRESS_TEXT, currentSizeStr, totalSizeStr, progressFraction * 100);
         return progressStr;
     }
 
@@ -217,7 +217,11 @@ public class PrintingActivity extends FatDialogActivity {
         double currentSizeDbl = currentSize;
         double totalSizeDbl = totalSize;
 
-        float fraction = currentSize / totalSize;
+        float fraction = 0;
+        if(totalSize != 0){
+            fraction = currentSize / totalSize;
+        }
+
         return fraction;
     }
 
