@@ -25,6 +25,45 @@ public class PrintingActivity extends FatDialogActivity {
     private ListView printProgress;
     private Button finishButton;
 
+
+    private String filePath;
+    private String printerName;
+    private int pagesPerSheet;
+    private int startPageRange;
+    private int endPageRange;
+
+    private final int POSITION_CONNECTING = 0;
+    private final int POSITION_HOUSEKEEPING = 1;
+    private final int POSITION_DOWNLOADING_DOC_CONVERTER = 2;
+    private int POSITION_UPLOADING_PDF_CONVERTER = 3;
+    private int POSITION_UPLOADING_USER_DOC = 4;
+    private int POSITION_CONVERTING_TO_PDF = 5;
+    private int POSITION_TRIM_PDF_TO_PAGE_RANGE = 6;
+    private int POSITION_FORMATTING_PDF = 7;
+    private int POSITION_CONVERTING_TO_POSTSCRIPT = 8;
+    private int POSITION_SENDING_TO_PRINTER = 9;
+    private int POSITION_COMPLETED = 10;
+
+    private String[] PROGRESS_TEXT;
+
+    private boolean[] PROGRESS_INDETERMINATE =
+            {true
+                    ,true
+                    ,true
+                    ,false
+                    ,false
+                    ,true
+                    ,true
+                    ,true
+                    ,true
+                    ,true};
+
+
+    boolean needToConvertDocToPDF = true;
+    boolean needToFormatPDF = true;
+    boolean needToTrimPDFToPageRange = false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,17 +73,29 @@ public class PrintingActivity extends FatDialogActivity {
         printProgress = (ListView) findViewById(R.id.printing_list);
         finishButton = (Button) findViewById(R.id.printing_button_finish);
 
-
+        PROGRESS_TEXT = getResources().getStringArray(R.array.status_title_text);
 
         Intent intent = getIntent();
 
-        String filePath = intent.getStringExtra(INTENT_FILE_PATH);
-        String printerName = intent.getStringExtra(INTENT_PRINTER_NAME);
-        int pagesPerSheet = intent.getIntExtra(INTENT_PAGES_PER_SHEET, INVALID_INTENT_INT);
-        int startRange = intent.getIntExtra(INTENT_PAGE_START_RANGE, INVALID_INTENT_INT);
-        int endRange = intent.getIntExtra(INTENT_PAGE_END_RANGE, INVALID_INTENT_INT);
+        filePath = intent.getStringExtra(INTENT_FILE_PATH);
+        printerName = intent.getStringExtra(INTENT_PRINTER_NAME);
+        pagesPerSheet = intent.getIntExtra(INTENT_PAGES_PER_SHEET, INVALID_INTENT_INT);
+        startPageRange = intent.getIntExtra(INTENT_PAGE_START_RANGE, INVALID_INTENT_INT);
+        endPageRange = intent.getIntExtra(INTENT_PAGE_END_RANGE, INVALID_INTENT_INT);
 
 
+        if(pagesPerSheet == 1){
+            needToFormatPDF = false;
+        }
+
+
+        if(isFileAPdf(filePath)){
+            needToConvertDocToPDF = false;
+        }
+
+        if(startPageRange > 0){
+            needToTrimPDFToPageRange = true;
+        }
 
         ArrayList<PrintingProgressItem> items = new ArrayList<PrintingProgressItem>();
         for (int i = 0; i < 5; i++) {
@@ -61,10 +112,31 @@ public class PrintingActivity extends FatDialogActivity {
             items.add(item);
         }
 
-        printProgress.setAdapter(new PrintingProgressItemAdapter(this, items));
-
     }
 
+
+
+    public void refreshList(){
+        ArrayList<PrintingProgressItem> items = new ArrayList<PrintingProgressItem>();
+
+
+
+
+
+
+        printProgress.setAdapter(new PrintingProgressItemAdapter(this, items));
+    }
+
+
+    private boolean isFileAPdf(String path){
+
+        String extension = path.substring(path.lastIndexOf("."));
+        if(extension.equalsIgnoreCase(".pdf")){
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     class PrintingTask extends ConnectionTask {
 

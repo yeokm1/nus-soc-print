@@ -46,6 +46,24 @@
     <string name="status_delete_format_status" formatted="false">Deletion command sent to %s\n</string>
     <string name="status_delete_finished">Deletion command sent to all printers\n</string>
 
+    <string-array name="status_title_text" formatted="false">
+        <item>Connecting to server</item>
+        <item>Some housekeeping</item>
+        <item>Uploading DOC converter</item>
+        <item>Uploading PDF Formatter</item>
+        <item>Uploading %@</item>
+        <item>Converting to PDF</item>
+        <item>Trim PDF to page %d to %d</item>
+        <item>Formatting to %@ pages/sheet</item>
+        <item>Converting to Postscript</item>
+        <item>Sending to %@</item>
+    </string-array>
+
+    <string name="status_progress_value" formatted="false">"%s of %s (%.1f%%)</string>
+    <string name="status_progress_unknown">This could take a while&#8230;</string>
+    <string name="status_button_close">Close</string>
+    <string name="status_button_cancel">Cancel</string>
+
     <!-- Printing Activity -->
     <string name="printing_title">Printing</string>
 
