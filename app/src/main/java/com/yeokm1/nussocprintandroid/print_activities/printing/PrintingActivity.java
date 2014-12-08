@@ -319,14 +319,15 @@ public class PrintingActivity extends FatDialogActivity {
 
                     if(needToUpload){
 
-                        deleteFile(DOC_CONVERTER_FILEPATH); //If don't do this, wget will download to a another filename.
+                        deleteFile(DOC_CONVERTER_FILEPATH); //Unnecessary for wget -N but just in case.
                         String primaryDownloadCommand = "wget -N http://www.comp.nus.edu.sg/~yeokm1/nus-soc-print-tools/docs-to-pdf-converter-1.7.jar -P " + TEMP_DIRECTORY_NO_SLASH;
                         connection.runCommand(primaryDownloadCommand);
 
                         if(doesThisFileNeedToBeUploaded(DOC_CONVERTER_FILEPATH, DOC_CONVERTER_MD5)){
                             nowDownloadingDocConverterFromSecondarySite = true;
                             publishProgress();
-                            deleteFile(DOC_CONVERTER_FILEPATH);
+
+                            deleteFile(DOC_CONVERTER_FILEPATH); //If don't do this, wget will download to a another filename.
                             String secondaryDownloadCommand = "wget --no-check-certificate https://github.com/yeokm1/docs-to-pdf-converter/releases/download/v1.7/docs-to-pdf-converter-1.7.jar -P " + TEMP_DIRECTORY_NO_SLASH;
                             connection.runCommand(secondaryDownloadCommand);
                             boolean stillNeedToBeUploaded = doesThisFileNeedToBeUploaded(DOC_CONVERTER_FILEPATH, DOC_CONVERTER_MD5);
