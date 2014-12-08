@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.yeokm1.nussocprintandroid.R;
+import com.yeokm1.nussocprintandroid.core.HelperFunctions;
 import com.yeokm1.nussocprintandroid.network.ConnectionTask;
 import com.yeokm1.nussocprintandroid.print_activities.FatDialogActivity;
 
@@ -115,6 +116,11 @@ public class PrintingActivity extends FatDialogActivity {
             needToTrimPDFToPageRange = true;
         }
 
+
+
+        printingTask = new PrintingTask(this);
+        printingTask.execute();
+
         refreshList();
     }
 
@@ -184,7 +190,7 @@ public class PrintingActivity extends FatDialogActivity {
             } else if(row == POSITION_UPLOADING_USER_DOC){
                 progressFraction = generateProgressFraction(docToPrintUploaded, docToPrintSize);
                 subtitle = generateProgressString(docToPrintUploaded, docToPrintSize, progressFraction);
-            } else if(row == POSITION_CONVERTING_TO_PDF || row == POSITION_TRIM_PDF_TO_PAGE_RANGE || row == POSITION_CONVERTING_TO_POSTSCRIPT){
+            } else if(row == POSITION_DOWNLOADING_DOC_CONVERTER || row == POSITION_CONVERTING_TO_PDF || row == POSITION_TRIM_PDF_TO_PAGE_RANGE || row == POSITION_CONVERTING_TO_POSTSCRIPT){
                 subtitle = SUBTITLE_INDETERMINATE_TEXT;
             } else {
                subtitle = "";
@@ -249,13 +255,121 @@ public class PrintingActivity extends FatDialogActivity {
 
     class PrintingTask extends ConnectionTask {
 
+        String PDF_CONVERTER_NAME = "nup_pdf";
+        String PDF_CONVERTER_FILENAME = "nup_pdf.jar";
+        String PDF_CONVERTER_FILEPATH = "socPrint/nup_pdf.jar";
+
+        //This converter is for 6 pages/sheet as nup_pdf cannot generate such a file
+        String PDF_CONVERTER_6PAGE_NAME = "Multivalent";
+        String PDF_CONVERTER_6PAGE_FILENAME = "Multivalent.jar";
+        String PDF_CONVERTER_6PAGE_FILEPATH = "socPrint/Multivalent.jar";
+
+        String DOC_CONVERTER_NAME = "docs-to-pdf-converter-1.7";
+        String DOC_CONVERTER_FILENAME = "docs-to-pdf-converter-1.7.jar";
+        String DOC_CONVERTER_FILEPATH = "socPrint/docs-to-pdf-converter-1.7.jar";
+
+        String PDF_CONVERTER_MD5 = "C1F8FF3F9DE7B2D2A2B41FBC0085888B";
+        String PDF_CONVERTER_6PAGE_MD5 = "813BB651A1CC6EA230F28AAC47F78051";
+        String DOC_CONVERTER_MD5 = "1FC140AD8074E333F9082300F4EA38DC";
+
+        String TEMP_DIRECTORY_NO_SLASH = "socPrint";
+        String TEMP_DIRECTORY = "socPrint/";
+
+        String[] ERROR_TITLE_TEXT;
+
         public PrintingTask(Activity activity){
             super(activity);
+            ERROR_TITLE_TEXT = getResources().getStringArray(R.array.printing_progress_error_title);
         }
 
         @Override
         protected String doInBackground(String... params) {
+
+            //Step 0: Connecting to server
+            currentProgress = POSITION_CONNECTING;
+            publishProgress();
+            try {
+                startConnection();
+
+                //Step 1: Housekeeping, creating socPrint folder if not yet, delete all files except converters
+                if(!isCancelled()){
+                    currentProgress = POSITION_HOUSEKEEPING;
+                    publishProgress();
+
+                    createDirectory(TEMP_DIRECTORY);
+
+                    String houseKeepingCommand = "find " + TEMP_DIRECTORY + " -type f \\( \\! -name '" + PDF_CONVERTER_FILENAME + "' \\) \\( \\! -name '" + DOC_CONVERTER_FILENAME + "' \\) \\( \\! -name '" + PDF_CONVERTER_6PAGE_FILENAME + "' \\) -exec rm '{}' \\;";
+
+                    connection.runCommand(houseKeepingCommand);
+                }
+
+                //Step 2 : Uploading DOC converter
+                if(needToConvertDocToPDF && !isCancelled()){
+                    currentProgress = POSITION_DOWNLOADING_DOC_CONVERTER;
+                    publishProgress();
+
+
+                    boolean needToUpload = doesThisFileNeedToBeUploaded(DOC_CONVERTER_FILEPATH, DOC_CONVERTER_MD5);
+
+                    if(needToUpload){
+
+                        String primaryDownloadCommand = "wget -N http://www.comp.nus.edu.sg/~yeokm1/nus-soc-print-tools/docs-to-pdf-converter-1.7.jar -P " + TEMP_DIRECTORY_NO_SLASH;
+                        connection.runCommand(primaryDownloadCommand);
+
+                       if(doesThisFileNeedToBeUploaded(DOC_CONVERTER_FILEPATH, DOC_CONVERTER_MD5)){
+                           String secondaryDownloadCommand = "wget --no-check-certificate https://github.com/yeokm1/docs-to-pdf-converter/releases/download/v1.7/docs-to-pdf-converter-1.7.jar -P " + TEMP_DIRECTORY_NO_SLASH;
+                           connection.runCommand(secondaryDownloadCommand);
+                           boolean stillNeedToBeUploaded = doesThisFileNeedToBeUploaded(DOC_CONVERTER_FILEPATH, DOC_CONVERTER_MD5);
+
+                           if(stillNeedToBeUploaded == true){
+                                String message = getString(R.string.printing_progress_error_message);
+                                throw new Exception(message);
+                           }
+                       }
+                    }
+
+                }
+
+                if(needToFormatPDF && !isCancelled()) {
+                    currentProgress = POSITION_UPLOADING_PDF_CONVERTER;
+                    publishProgress();
+                }
+
+
+
+
+            } catch (Exception e) {
+                publishProgress(e.getMessage());
+            }
+
+            disconnect();
+
+            publishProgress();
             return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(String... progress){
+            if(progress.length > 0){
+                String errorTitle = ERROR_TITLE_TEXT[currentProgress];
+
+                if(currentProgress == POSITION_TRIM_PDF_TO_PAGE_RANGE){
+                    errorTitle = String.format(errorTitle, startPageRange, endPageRange);
+                } else if(currentProgress == POSITION_FORMATTING_PDF){
+                    errorTitle = String.format(errorTitle, pagesPerSheet);
+                }
+
+                HelperFunctions.showAlert(activity, errorTitle, progress[0]);
+            }
+
+            refreshList();
+        }
+
+        @Override
+        protected void onPostExecute(String output){
+            super.onPostExecute(output);
+            printingTask = null;
+            refreshList();
         }
     }
 

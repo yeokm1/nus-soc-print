@@ -56,15 +56,31 @@
         <item>Uploading %s</item>
         <item>Converting to PDF</item>
         <item>Trim PDF to page %d to %d</item>
-        <item>Formatting to %s pages/sheet</item>
+        <item>Formatting to %d pages/sheet</item>
         <item>Converting to Postscript</item>
         <item>Sending to %s</item>
     </string-array>
+
+    <string-array name="printing_progress_error_title" formatted="false">
+        <item>Connection to server failed</item>
+        <item>Housekeeping failed</item>
+        <item>Download of document converter failed</item>
+        <item>Upload of PDF formatter failed</item>
+        <item>Upload of your document failed</item>
+        <item>Converting your document to PDF failed</item>
+        <item>Trim PDF to page %d to %d failed</item>
+        <item>Formatting to %d pages/sheet failed</item>
+        <item>Conversion to Postscript failed</item>
+        <item>Printing command error</item>
+    </string-array>
+
+    <string name="printing_progress_error_message">Failed to download document converter from both primary and secondary sites.</string>
 
     <string name="printing_progress_subtitle_progress" formatted="false">"%s of %s (%.1f%%)</string>
     <string name="printing_progress_subtitle_progress_indeterminate">This could take a while&#8230;</string>
     <string name="printing_progress_button_close">Close</string>
     <string name="printing_progress_button_cancel">Cancel</string>
+
 
 
     <!-- Quota Fragment -->
@@ -108,6 +124,7 @@
     <string name="misc_missing_credential">Username/password not set.</string>
     <string name="misc_missing_server">Server entry cannot be blank</string>
     <string name="misc_wrong_credentials">Username/password incorrect.</string>
+    <string name="misc_ok">OK</string>
 
     <string-array name="printer_names">
         <item>psts</item>

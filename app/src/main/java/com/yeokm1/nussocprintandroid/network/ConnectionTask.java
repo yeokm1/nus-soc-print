@@ -39,6 +39,22 @@ public abstract class ConnectionTask extends AsyncTask<String, String, String>{
         connection.connect();
     }
 
+    protected void createDirectory(String toBeCreated) throws Exception{
+        connection.runCommand("mkdir " + toBeCreated);
+    }
+
+    protected boolean doesThisFileNeedToBeUploaded(String filePath, String md5Value) throws Exception{
+        String command = "md5 " + filePath;
+        String commandOutput = connection.runCommand(command);
+
+        if(commandOutput.startsWith(md5Value)){
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
     protected void disconnect(){
         if(connection != null){
             connection.disconnect();
