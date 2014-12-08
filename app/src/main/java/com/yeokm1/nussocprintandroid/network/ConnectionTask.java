@@ -43,6 +43,10 @@ public abstract class ConnectionTask extends AsyncTask<String, String, String>{
         connection.runCommand("mkdir " + toBeCreated);
     }
 
+    protected void deleteFile(String filePath) throws Exception{
+        connection.runCommand("rm " + filePath);
+    }
+
     protected boolean doesThisFileNeedToBeUploaded(String filePath, String md5Value) throws Exception{
         String command = "md5 " + filePath;
         String commandOutput = connection.runCommand(command);
