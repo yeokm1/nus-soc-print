@@ -50,6 +50,7 @@ public class PrintingActivity extends FatDialogActivity {
     private String[] HEADER_TEXT;
     private String SUBTITLE_PROGRESS_TEXT;
     private String SUBTITLE_INDETERMINATE_TEXT;
+    private String SUBTITLE_DOWNLOAD_DOC_CONVERTER_SEC_SITE;
 
 
     private boolean[] PROGRESS_INDETERMINATE =
@@ -68,6 +69,8 @@ public class PrintingActivity extends FatDialogActivity {
     private boolean needToConvertDocToPDF = true;
     private boolean needToFormatPDF = true;
     private boolean needToTrimPDFToPageRange = false;
+
+    private boolean nowDownloadingDocConverterFromSecondarySite = false;
 
     private int pdfConvSize = 0;
     private int pdfConvUploaded = 0;
@@ -90,6 +93,7 @@ public class PrintingActivity extends FatDialogActivity {
         HEADER_TEXT = getResources().getStringArray(R.array.printing_progress_title_text);
         SUBTITLE_PROGRESS_TEXT = getString(R.string.printing_progress_subtitle_progress);
         SUBTITLE_INDETERMINATE_TEXT = getString(R.string.printing_progress_subtitle_progress_indeterminate);
+        SUBTITLE_DOWNLOAD_DOC_CONVERTER_SEC_SITE = getString(R.string.printing_progress_doc_converter_secondary_site);
 
         Intent intent = getIntent();
 
@@ -187,10 +191,12 @@ public class PrintingActivity extends FatDialogActivity {
             if(row == POSITION_UPLOADING_PDF_CONVERTER){
                 progressFraction = generateProgressFraction(pdfConvUploaded, pdfConvSize);
                 subtitle = generateProgressString(pdfConvUploaded, pdfConvSize, progressFraction);
-            } else if(row == POSITION_UPLOADING_USER_DOC){
+            } else if(row == POSITION_UPLOADING_USER_DOC) {
                 progressFraction = generateProgressFraction(docToPrintUploaded, docToPrintSize);
                 subtitle = generateProgressString(docToPrintUploaded, docToPrintSize, progressFraction);
-            } else if(row == POSITION_DOWNLOADING_DOC_CONVERTER || row == POSITION_CONVERTING_TO_PDF || row == POSITION_TRIM_PDF_TO_PAGE_RANGE || row == POSITION_CONVERTING_TO_POSTSCRIPT){
+            } else if(row == POSITION_DOWNLOADING_DOC_CONVERTER && nowDownloadingDocConverterFromSecondarySite){
+                subtitle = SUBTITLE_DOWNLOAD_DOC_CONVERTER_SEC_SITE;
+            } else if(row == POSITION_CONVERTING_TO_PDF || row == POSITION_TRIM_PDF_TO_PAGE_RANGE || row == POSITION_CONVERTING_TO_POSTSCRIPT){
                 subtitle = SUBTITLE_INDETERMINATE_TEXT;
             } else {
                subtitle = "";
@@ -317,6 +323,8 @@ public class PrintingActivity extends FatDialogActivity {
                         connection.runCommand(primaryDownloadCommand);
 
                        if(doesThisFileNeedToBeUploaded(DOC_CONVERTER_FILEPATH, DOC_CONVERTER_MD5)){
+                           nowDownloadingDocConverterFromSecondarySite = true;
+                           publishProgress();
                            String secondaryDownloadCommand = "wget --no-check-certificate https://github.com/yeokm1/docs-to-pdf-converter/releases/download/v1.7/docs-to-pdf-converter-1.7.jar -P " + TEMP_DIRECTORY_NO_SLASH;
                            connection.runCommand(secondaryDownloadCommand);
                            boolean stillNeedToBeUploaded = doesThisFileNeedToBeUploaded(DOC_CONVERTER_FILEPATH, DOC_CONVERTER_MD5);
