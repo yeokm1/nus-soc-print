@@ -309,7 +309,7 @@ public class PrintingActivity extends FatDialogActivity {
                     connection.runCommand(houseKeepingCommand);
                 }
 
-                //Step 2 : Uploading DOC converter
+                //Step 2 : Downloading DOC converter to server
                 if(needToConvertDocToPDF && !isCancelled()){
                     currentProgress = POSITION_DOWNLOADING_DOC_CONVERTER;
                     publishProgress();
