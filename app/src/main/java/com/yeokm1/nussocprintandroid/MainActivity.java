@@ -80,7 +80,9 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         Bundle intentBundle = getIntent().getExtras();
         if(intentBundle != null) {
             Uri fileNameUri = (Uri) intentBundle.get(Intent.EXTRA_STREAM);
-            ((MyApplication) getApplication()).setCurrentDocumentUri(fileNameUri);
+            if(fileNameUri != null) {
+                ((MyApplication) getApplication()).setCurrentDocumentUri(fileNameUri);
+            }
 
         }
     }
