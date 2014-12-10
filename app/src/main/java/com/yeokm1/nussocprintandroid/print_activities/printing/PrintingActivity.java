@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ListView;
@@ -16,6 +17,7 @@ import com.yeokm1.nussocprintandroid.print_activities.FatDialogActivity;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PrintingActivity extends FatDialogActivity {
 
@@ -84,6 +86,8 @@ public class PrintingActivity extends FatDialogActivity {
     private int currentProgress = 0;
     private PrintingTask printingTask;
 
+    private PrintingProgressItemAdapter itemsAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,12 +132,30 @@ public class PrintingActivity extends FatDialogActivity {
         printingTask = new PrintingTask(this);
         printingTask.execute();
 
-        refreshList();
+
+        itemsAdapter = new PrintingProgressItemAdapter(this, generateItems());
+        printProgress.setAdapter(itemsAdapter);
     }
 
 
 
     public void refreshList(){
+        itemsAdapter.clear();
+        List<PrintingProgressItem> items = generateItems();
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
+            itemsAdapter.addAll(items);
+        } else {
+            for(PrintingProgressItem item : items){
+                itemsAdapter.add(item);
+            }
+        }
+
+
+        itemsAdapter.notifyDataSetChanged();
+    }
+
+    private List<PrintingProgressItem> generateItems(){
         ArrayList<PrintingProgressItem> items = new ArrayList<PrintingProgressItem>();
 
         for(int row = 0; row < HEADER_TEXT.length; row++){
@@ -217,7 +239,7 @@ public class PrintingActivity extends FatDialogActivity {
             items.add(item);
         }
 
-        printProgress.setAdapter(new PrintingProgressItemAdapter(this, items));
+        return items;
     }
 
     private String generateProgressString(long currentSize, long totalSize, float progressFraction){
