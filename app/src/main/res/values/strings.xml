@@ -75,7 +75,8 @@
     </string-array>
 
     <string name="printing_progress_doc_converter_secondary_site">Now downloading from Github. It usually takes about 3 minutes and is only downloaded once and cached.</string>
-    <string name="printing_progress_error_message">Failed to download document converter from both primary and secondary sites.</string>
+    <string name="printing_progress_doc_conv_upload_error_message">Failed to properly download document converter from both primary and secondary sites.</string>
+    <string name="printing_progress_pdf_format_upload_error_message">Uploaded PDF formatter has failed the MD5 verification.</string>
     <string name="printing_progress_subtitle_progress" formatted="false">"%s of %s (%.1f%%)</string>
     <string name="printing_progress_subtitle_progress_indeterminate">This could take a while&#8230;</string>
     <string name="printing_progress_button_close">Close</string>

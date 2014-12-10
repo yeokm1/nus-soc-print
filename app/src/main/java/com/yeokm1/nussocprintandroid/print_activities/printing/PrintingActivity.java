@@ -2,16 +2,19 @@ package com.yeokm1.nussocprintandroid.print_activities.printing;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.jcraft.jsch.SftpProgressMonitor;
 import com.yeokm1.nussocprintandroid.R;
 import com.yeokm1.nussocprintandroid.core.HelperFunctions;
 import com.yeokm1.nussocprintandroid.network.ConnectionTask;
 import com.yeokm1.nussocprintandroid.print_activities.FatDialogActivity;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class PrintingActivity extends FatDialogActivity {
@@ -72,10 +75,10 @@ public class PrintingActivity extends FatDialogActivity {
 
     private boolean nowDownloadingDocConverterFromSecondarySite = false;
 
-    private int pdfConvSize = 0;
-    private int pdfConvUploaded = 0;
+    private long pdfConvSize = 0;
+    private long pdfConvUploaded = 0;
 
-    private int docToPrintSize = 0;
+    private long docToPrintSize = 0;
     private int docToPrintUploaded = 0;
 
     private int currentProgress = 0;
@@ -332,8 +335,8 @@ public class PrintingActivity extends FatDialogActivity {
                             connection.runCommand(secondaryDownloadCommand);
                             boolean stillNeedToBeUploaded = doesThisFileNeedToBeUploaded(DOC_CONVERTER_FILEPATH, DOC_CONVERTER_MD5);
 
-                            if(stillNeedToBeUploaded == true){
-                                String message = getString(R.string.printing_progress_error_message);
+                            if(stillNeedToBeUploaded){
+                                String message = getString(R.string.printing_progress_doc_conv_upload_error_message);
                                 throw new Exception(message);
                             }
                         }
@@ -341,9 +344,70 @@ public class PrintingActivity extends FatDialogActivity {
 
                 }
 
-                if(needToFormatPDF && !isCancelled()) {
+                //Step 3 : Uploading PDF converter
+                if(needToFormatPDF && !isCancelled()){
                     currentProgress = POSITION_UPLOADING_PDF_CONVERTER;
                     publishProgress();
+
+                    String actualFilePath;
+                    String actualMD5;
+                    String actualName;
+
+                    if(pagesPerSheet == 6){
+                        actualFilePath = PDF_CONVERTER_6PAGE_FILEPATH;
+                        actualMD5 = PDF_CONVERTER_6PAGE_MD5;
+                        actualName = PDF_CONVERTER_6PAGE_FILENAME;
+                    } else {
+                        actualFilePath = PDF_CONVERTER_FILEPATH;
+                        actualMD5 = PDF_CONVERTER_MD5;
+                        actualName = PDF_CONVERTER_FILENAME;
+                    }
+
+
+                    boolean needToUpload = doesThisFileNeedToBeUploaded(actualFilePath, actualMD5);
+
+                    AssetManager assetMgr = getAssets();
+                    InputStream pdfConvStream = assetMgr.open(actualName);
+
+                    pdfConvSize = pdfConvStream.available();
+
+
+                    if(needToUpload){
+
+                        connection.uploadFile(pdfConvStream, TEMP_DIRECTORY_NO_SLASH, actualName, new SftpProgressMonitor() {
+                            @Override
+                            public void init(int op, String src, String dest, long max) {
+                            }
+
+                            @Override
+                            public boolean count(long count) {
+                                pdfConvUploaded += count;
+                                publishProgress();
+                                if(isCancelled()){
+                                    return false;
+                                } else {
+                                    return true;
+                                }
+                            }
+
+                            @Override
+                            public void end() {
+                            }
+                        });
+
+                        boolean stillNeedToBeUploaded = doesThisFileNeedToBeUploaded(actualFilePath, actualMD5);
+                        if(stillNeedToBeUploaded){
+                            String message = getString(R.string.printing_progress_pdf_format_upload_error_message);
+                            throw new Exception(message);
+                        }
+
+
+                    } else {
+                        //Already exists, just use existing file
+                        pdfConvUploaded = pdfConvSize;
+                        publishProgress();
+                    }
+
                 }
 
 

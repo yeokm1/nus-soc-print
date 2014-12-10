@@ -5,11 +5,15 @@ import android.util.Log;
 
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
+import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
+import com.jcraft.jsch.SftpException;
+import com.jcraft.jsch.SftpProgressMonitor;
 import com.yeokm1.nussocprintandroid.R;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -88,6 +92,25 @@ public class SSHConnectivity {
 
         Log.i(TAG + " runCommand", command + ", output: " + output);
         return output;
+    }
+
+    public void uploadFile(InputStream toBePrinted, String directory, String filename, SftpProgressMonitor progressMonitor) throws SftpException, JSchException, IOException {
+        if(session== null){
+            throw new JSchException("Connection not set up yet");
+        }
+
+        Channel channel = session.openChannel("sftp");
+
+        channel.connect();
+        ChannelSftp channelSftp = (ChannelSftp)channel;
+
+        try{
+            channelSftp.mkdir(directory);
+        } catch (SftpException e){
+            //If cannot make directory, means directory already created
+        }
+        channelSftp.cd(directory);
+        channelSftp.put(toBePrinted, filename, progressMonitor, ChannelSftp.OVERWRITE);
     }
 
 
