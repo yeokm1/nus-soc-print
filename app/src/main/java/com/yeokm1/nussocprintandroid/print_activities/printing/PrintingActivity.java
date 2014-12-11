@@ -15,6 +15,7 @@ import com.yeokm1.nussocprintandroid.core.HelperFunctions;
 import com.yeokm1.nussocprintandroid.network.ConnectionTask;
 import com.yeokm1.nussocprintandroid.print_activities.FatDialogActivity;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -261,10 +262,13 @@ public class PrintingActivity extends FatDialogActivity {
 
 
 
+    private String getFileExtension(String path){
+        return path.substring(path.lastIndexOf("."));
+    }
 
     private boolean isFileAPdf(String path){
 
-        String extension = path.substring(path.lastIndexOf("."));
+        String extension = getFileExtension(path);
         if(extension.equalsIgnoreCase(".pdf")){
             return true;
         } else {
@@ -300,14 +304,26 @@ public class PrintingActivity extends FatDialogActivity {
         String PDF_CONVERTER_6PAGE_MD5 = "813BB651A1CC6EA230F28AAC47F78051";
         String DOC_CONVERTER_MD5 = "1FC140AD8074E333F9082300F4EA38DC";
 
+        String UPLOAD_FILENAME = "source"; //Add .path extension later
+        String UPLOAD_SOURCE_PDF_FILEPATH = "socPrint/source.pdf";
+        String UPLOAD_PDF_TRIMMED_FILEPATH = "socPrint/source-trimmed.pdf";
+        String UPLOAD_PDF_FORMATTED_TRIMMED_6PAGE_FILEPATH = "socPrint/source-trimmed-up.pdf";
+        String UPLOAD_PDF_FORMATTED_6PAGE_FILEPATH = "socPrint/source-up.pdf";
+        String UPLOAD_PDF_FORMATTED_FILEPATH = "socPrint/formatted.pdf";
+        String UPLOAD_PS_FILEPATH_FORMAT = "socPrint/\"%@.ps\"";
+
+
         String TEMP_DIRECTORY_NO_SLASH = "socPrint";
         String TEMP_DIRECTORY = "socPrint/";
 
         String[] ERROR_TITLE_TEXT;
 
+        String uploadedFilename;
+
         public PrintingTask(Activity activity){
             super(activity);
             ERROR_TITLE_TEXT = getResources().getStringArray(R.array.printing_progress_error_title);
+            uploadedFilename = UPLOAD_FILENAME + getFileExtension(filePath);
         }
 
         @Override
@@ -428,6 +444,42 @@ public class PrintingActivity extends FatDialogActivity {
                     }
 
                 }
+
+
+
+
+                //Step 4 : Uploading document
+
+                if(!isCancelled()){
+                    currentProgress = POSITION_UPLOADING_USER_DOC;
+                    publishProgress();
+
+
+                    FileInputStream docStream = new FileInputStream(filePath);
+                    docToPrintSize = docStream.available();
+
+                    connection.uploadFile(docStream, TEMP_DIRECTORY_NO_SLASH, uploadedFilename, new SftpProgressMonitor() {
+                        @Override
+                        public void init(int op, String src, String dest, long max) {
+                        }
+
+                        @Override
+                        public boolean count(long count) {
+                            docToPrintUploaded += count;
+                            publishProgress();
+                            if(isCancelled()){
+                                return false;
+                            } else {
+                                return true;
+                            }
+                        }
+
+                        @Override
+                        public void end() {
+                        }
+                    });
+                }
+
 
 
 
