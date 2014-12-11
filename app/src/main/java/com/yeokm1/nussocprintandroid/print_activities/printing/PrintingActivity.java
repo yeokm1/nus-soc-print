@@ -497,6 +497,38 @@ public class PrintingActivity extends FatDialogActivity {
                     }
                 }
 
+                String pdfFilepathToFormat;
+
+                //Step 6: Trim PDF to page range if necessary
+                if(!isCancelled()){
+                    if(needToTrimPDFToPageRange){
+                        currentProgress = POSITION_TRIM_PDF_TO_PAGE_RANGE;
+                        publishProgress();
+
+                        String startNumberString = Integer.toString(startPageRange);
+                        String endNumberString = Integer.toString(endPageRange);
+
+                        String trimCommand = "gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER -dFirstPage=" + startNumberString + " -dLastPage=" + endNumberString + " -sOutputFile=" + UPLOAD_PDF_TRIMMED_FILEPATH + " " + UPLOAD_SOURCE_PDF_FILEPATH;
+
+                        String reply = connection.runCommand(trimCommand);
+                        int startIndex = reply.indexOf("Requested FirstPage is greater than the number of pages in the file");
+
+                        //-1 implies no substring found. If we get another value, means the above string exists and there is an error
+                        if(startIndex != -1){
+                            String errorMsg = reply.substring(startIndex);
+                            throw new Exception(errorMsg);
+                        }
+
+
+                        pdfFilepathToFormat = UPLOAD_PDF_TRIMMED_FILEPATH;
+
+                    } else {
+                        pdfFilepathToFormat = UPLOAD_SOURCE_PDF_FILEPATH;
+                    }
+                }
+
+
+
 
 
 
