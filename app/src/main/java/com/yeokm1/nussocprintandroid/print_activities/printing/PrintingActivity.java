@@ -141,19 +141,22 @@ public class PrintingActivity extends FatDialogActivity {
 
 
     public void refreshList(){
-        itemsAdapter.clear();
-        List<PrintingProgressItem> items = generateItems();
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
-            itemsAdapter.addAll(items);
-        } else {
-            for(PrintingProgressItem item : items){
-                itemsAdapter.add(item);
+        if(itemsAdapter != null) {
+            itemsAdapter.clear();
+            List<PrintingProgressItem> items = generateItems();
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                itemsAdapter.addAll(items);
+            } else {
+                for (PrintingProgressItem item : items) {
+                    itemsAdapter.add(item);
+                }
             }
+
+
+            itemsAdapter.notifyDataSetChanged();
         }
-
-
-        itemsAdapter.notifyDataSetChanged();
     }
 
     private List<PrintingProgressItem> generateItems(){
@@ -517,8 +520,9 @@ public class PrintingActivity extends FatDialogActivity {
                 } else if(currentProgress == POSITION_FORMATTING_PDF){
                     errorTitle = String.format(errorTitle, pagesPerSheet);
                 }
-
-                HelperFunctions.showAlert(activity, errorTitle, progress[0]);
+                if(activity != null) {
+                    HelperFunctions.showAlert(activity, errorTitle, progress[0]);
+                }
             }
 
             refreshList();
