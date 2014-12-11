@@ -266,7 +266,8 @@ public class PrintingActivity extends FatDialogActivity {
 
 
     private String getFileExtension(String path){
-        return path.substring(path.lastIndexOf("."));
+        String extension = path.substring(path.lastIndexOf("."));
+        return extension.toLowerCase();
     }
 
     private boolean isFileAPdf(String path){
