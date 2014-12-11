@@ -254,7 +254,7 @@ public class PrintingActivity extends FatDialogActivity {
 
         float fraction = 0;
         if(totalSize != 0){
-            fraction = currentSize / totalSize;
+            fraction = (float) (currentSizeDbl / totalSizeDbl);
         }
 
         return fraction;
