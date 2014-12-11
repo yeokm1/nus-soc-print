@@ -227,14 +227,11 @@ public class PrintingActivity extends FatDialogActivity {
                 subtitle = "";
             }
 
-            PrintingProgressItem item;
-            if(progressIndeterminate){
-                item = new PrintingProgressItem(title, subtitle, isThisDone, isError, isInProgress);
-            } else {
-                item = new PrintingProgressItem(title, subtitle, progressFraction, isThisDone, isError, isInProgress);
+            if(isThisDone && !isError){
+                progressFraction = 1.0f;
             }
 
-
+            PrintingProgressItem item = new PrintingProgressItem(title, subtitle, progressFraction, isThisDone, isError, progressIndeterminate, isInProgress);
 
             items.add(item);
         }

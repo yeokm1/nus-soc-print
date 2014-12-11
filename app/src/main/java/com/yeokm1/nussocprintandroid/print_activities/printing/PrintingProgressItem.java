@@ -12,22 +12,15 @@ public class PrintingProgressItem {
 
     private boolean isProgressBarActive;
 
-    public PrintingProgressItem(String title, String subtitle, boolean isCompleted, boolean showErrorIcon, boolean isProgressBarActive) {
-        super();
+
+    public PrintingProgressItem(String title, String subtitle, float progressValue, boolean showDoneIcon, boolean showErrorIcon, boolean isProgressIndeterminate, boolean isProgressBarActive) {
         this.title = title;
         this.subtitle = subtitle;
-        this.progressIndeterminate = true;
-        this.showDoneIcon = isCompleted;
+        this.showDoneIcon = showDoneIcon;
         this.showErrorIcon = showErrorIcon;
         this.isProgressBarActive = isProgressBarActive;
-
-        this.progressValue = 0;
-    }
-
-    public PrintingProgressItem(String title, String subtitle, float progressValue, boolean showDoneIcon, boolean showErrorIcon, boolean isProgressBarActive) {
-        this(title, subtitle, showDoneIcon, showErrorIcon, isProgressBarActive);
         this.progressValue = progressValue;
-        this.progressIndeterminate = false;
+        this.progressIndeterminate = isProgressIndeterminate;
     }
 
     public String getTitle() {
