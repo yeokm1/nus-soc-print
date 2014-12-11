@@ -111,6 +111,7 @@ public class SSHConnectivity {
         }
         channelSftp.cd(directory);
         channelSftp.put(toBePrinted, filename, progressMonitor, ChannelSftp.OVERWRITE);
+        channelSftp.disconnect();
     }
 
 
