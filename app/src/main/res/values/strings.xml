@@ -125,6 +125,7 @@
     <string name="misc_missing_credential">Username/password not set.</string>
     <string name="misc_missing_server">Server entry cannot be blank</string>
     <string name="misc_wrong_credentials">Username/password incorrect.</string>
+    <string name="misc_connection_not_set_up">Connection not set up yet</string>
     <string name="misc_ok">OK</string>
 
     <string-array name="printer_names">

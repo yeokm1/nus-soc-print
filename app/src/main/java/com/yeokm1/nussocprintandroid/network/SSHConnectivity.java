@@ -96,7 +96,7 @@ public class SSHConnectivity {
 
     public void uploadFile(InputStream toBePrinted, String directory, String filename, SftpProgressMonitor progressMonitor) throws SftpException, JSchException, IOException {
         if(session== null){
-            throw new JSchException("Connection not set up yet");
+            throw new JSchException(context.getString(R.string.misc_connection_not_set_up));
         }
 
         Channel channel = session.openChannel("sftp");
