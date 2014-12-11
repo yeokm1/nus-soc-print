@@ -480,6 +480,19 @@ public class PrintingActivity extends FatDialogActivity {
                     });
                 }
 
+                //Step 5 : Convert document to PDF if necessary
+                if(needToConvertDocToPDF && !isCancelled()){
+                    currentProgress = POSITION_CONVERTING_TO_PDF;
+                    publishProgress();
+
+                    String conversionCommand = "java -jar " + DOC_CONVERTER_FILEPATH + " -i " + TEMP_DIRECTORY + uploadedFilename + " -o " + UPLOAD_SOURCE_PDF_FILEPATH;
+                    String reply = connection.runCommand(conversionCommand);
+
+                    if(reply.length() > 0){
+                        throw new Exception(reply);
+                    }
+                }
+
 
 
 
