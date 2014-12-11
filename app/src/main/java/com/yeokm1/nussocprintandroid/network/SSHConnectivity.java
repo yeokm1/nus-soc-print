@@ -37,7 +37,7 @@ public class SSHConnectivity {
         this.username = username;
         this.password = password;
         this.context = context;
-        jschSSHChannel = new JSch();
+        this.jschSSHChannel = new JSch();
     }
 
 
