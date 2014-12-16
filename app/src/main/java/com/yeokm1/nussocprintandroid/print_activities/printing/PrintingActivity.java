@@ -1,6 +1,7 @@
 package com.yeokm1.nussocprintandroid.print_activities.printing;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.net.Uri;
@@ -159,6 +160,27 @@ public class PrintingActivity extends FatDialogActivity {
     public void onFinishButtonPress(){
         if(printingTask == null){
             finish();
+        } else {
+            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    switch (which){
+                        case DialogInterface.BUTTON_POSITIVE:
+                            if(printingTask != null){
+                                printingTask.cancel(true);
+                                printingTask = null;
+                            }
+                            finish();
+                            break;
+
+                        case DialogInterface.BUTTON_NEGATIVE:
+                            //Do nothing
+                            break;
+                    }
+                }
+            };
+
+            HelperFunctions.showYesNoAlert(this, getString(R.string.printing_progress_premature_cancel_title), null, dialogClickListener);
         }
     }
 
@@ -657,6 +679,16 @@ public class PrintingActivity extends FatDialogActivity {
         @Override
         protected void onPostExecute(String output){
             super.onPostExecute(output);
+            cleanUpTask();
+        }
+
+        @Override
+        protected void onCancelled(){
+            super.onCancelled();
+            cleanUpTask();
+        }
+
+        private void cleanUpTask(){
             printingTask = null;
             setFinishButtonTextToClose();
             refreshList();

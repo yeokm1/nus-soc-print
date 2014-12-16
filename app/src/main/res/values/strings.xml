@@ -81,8 +81,7 @@
     <string name="printing_progress_subtitle_progress_indeterminate">This could take a while&#8230;</string>
     <string name="printing_progress_button_close">Close</string>
     <string name="printing_progress_button_cancel">Cancel</string>
-
-
+    <string name="printing_progress_premature_cancel_title">Are you sure you want to cancel this print operation?</string>
 
     <!-- Quota Fragment -->
     <string name="quota_output_text">Press refresh to get quota</string>
@@ -127,6 +126,8 @@
     <string name="misc_wrong_credentials">Username/password incorrect.</string>
     <string name="misc_connection_not_set_up">Connection not set up yet</string>
     <string name="misc_ok">OK</string>
+    <string name="misc_yes">Yes</string>
+    <string name="misc_no">No</string>
 
     <string-array name="printer_names">
         <item>psts</item>
