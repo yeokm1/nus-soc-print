@@ -6,6 +6,7 @@ import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -97,6 +98,12 @@ public class PrintingActivity extends FatDialogActivity {
 
         printProgress = (ListView) findViewById(R.id.printing_list);
         finishButton = (Button) findViewById(R.id.printing_button_finish);
+        finishButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onFinishButtonPress();
+            }
+        });
 
         HEADER_TEXT = getResources().getStringArray(R.array.printing_progress_title_text);
         SUBTITLE_PROGRESS_TEXT = getString(R.string.printing_progress_subtitle_progress);
@@ -136,6 +143,23 @@ public class PrintingActivity extends FatDialogActivity {
 
         itemsAdapter = new PrintingProgressItemAdapter(this, generateItems());
         printProgress.setAdapter(itemsAdapter);
+    }
+
+    @Override
+    public void onBackPressed(){
+        onFinishButtonPress();
+    }
+
+    public void setFinishButtonTextToClose(){
+        if(finishButton != null){
+            finishButton.setText(R.string.printing_progress_button_close);
+        }
+    }
+
+    public void onFinishButtonPress(){
+        if(printingTask == null){
+            finish();
+        }
     }
 
 
@@ -634,6 +658,7 @@ public class PrintingActivity extends FatDialogActivity {
         protected void onPostExecute(String output){
             super.onPostExecute(output);
             printingTask = null;
+            setFinishButtonTextToClose();
             refreshList();
         }
     }
