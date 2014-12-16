@@ -314,7 +314,7 @@ public class PrintingActivity extends FatDialogActivity {
         String UPLOAD_PDF_FORMATTED_TRIMMED_6PAGE_FILEPATH = "socPrint/source-trimmed-up.pdf";
         String UPLOAD_PDF_FORMATTED_6PAGE_FILEPATH = "socPrint/source-up.pdf";
         String UPLOAD_PDF_FORMATTED_FILEPATH = "socPrint/formatted.pdf";
-        String UPLOAD_PS_FILEPATH_FORMAT = "socPrint/\"%@.ps\"";
+        String UPLOAD_PS_FILEPATH_FORMAT = "socPrint/\"%s.ps\"";
 
 
         String TEMP_DIRECTORY_NO_SLASH = "socPrint";
@@ -528,7 +528,7 @@ public class PrintingActivity extends FatDialogActivity {
                 }
 
                 //Step 7 : Format PDF to required pages per sheet if required
-                String pdfFilepathToConvertToPS;
+                String pdfFilepathToConvertToPS = "";
 
                 if(!isCancelled()){
 
@@ -565,10 +565,40 @@ public class PrintingActivity extends FatDialogActivity {
 
                 }
 
+                //Remove extension
+                String psFileNameNoString = filename.replaceFirst("[.][^.]+$", "");
+
+                String psFilePath = String.format(UPLOAD_PS_FILEPATH_FORMAT, psFileNameNoString);
+
+                //Step 8 : Converting to Postscript
+                if(!isCancelled()){
+                    currentProgress = POSITION_CONVERTING_TO_POSTSCRIPT;
+                    publishProgress();
+
+                    String conversionCommand = "pdftops " + pdfFilepathToConvertToPS + " " + psFilePath;
+                    String reply = connection.runCommand(conversionCommand);
+
+                    if(reply.length() != 0){
+                        throw new Exception(reply);
+                    }
+                }
 
 
+                //Final Step 9 : Send to printer!!!
+                if(!isCancelled()){
+                    currentProgress = POSITION_SENDING_TO_PRINTER;
+                    publishProgress();
 
+                    String printingCommand = "lpr -P " + printer + " " + psFilePath;
+                    String output = connection.runCommand(printingCommand);
+                    if(output.length() != 0){
+                        throw new Exception(output);
+                    }
 
+                }
+
+                currentProgress = POSITION_COMPLETED;
+                publishProgress();
 
 
 
