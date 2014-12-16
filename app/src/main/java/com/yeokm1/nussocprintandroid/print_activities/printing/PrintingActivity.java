@@ -497,7 +497,7 @@ public class PrintingActivity extends FatDialogActivity {
                     }
                 }
 
-                String pdfFilepathToFormat;
+                String pdfFilepathToFormat = "";
 
                 //Step 6: Trim PDF to page range if necessary
                 if(!isCancelled()){
@@ -526,6 +526,45 @@ public class PrintingActivity extends FatDialogActivity {
                         pdfFilepathToFormat = UPLOAD_SOURCE_PDF_FILEPATH;
                     }
                 }
+
+                //Step 7 : Format PDF to required pages per sheet if required
+                String pdfFilepathToConvertToPS;
+
+                if(!isCancelled()){
+
+                    if(needToFormatPDF){
+                        currentProgress = POSITION_FORMATTING_PDF;
+                        publishProgress();
+
+                        String formattingCommand;
+                        if(pagesPerSheet == 6){
+                            formattingCommand = "java -classpath " + PDF_CONVERTER_6PAGE_FILEPATH + " tool.pdf.Impose -paper a4 -nup 6 " + pdfFilepathToFormat;
+
+                            if(needToTrimPDFToPageRange){
+                                pdfFilepathToConvertToPS = UPLOAD_PDF_FORMATTED_TRIMMED_6PAGE_FILEPATH;
+                            } else {
+                                pdfFilepathToConvertToPS = UPLOAD_PDF_FORMATTED_6PAGE_FILEPATH;
+                            }
+
+                        } else {
+                            formattingCommand = "java -jar " + PDF_CONVERTER_FILEPATH + " " + pdfFilepathToFormat + " " + UPLOAD_PDF_FORMATTED_FILEPATH + " " + pagesPerSheet;
+                            pdfFilepathToConvertToPS = UPLOAD_PDF_FORMATTED_FILEPATH;
+                        }
+
+                        connection.runCommand(formattingCommand);
+
+
+                    } else {
+
+                        if(needToTrimPDFToPageRange){
+                            pdfFilepathToConvertToPS = UPLOAD_PDF_TRIMMED_FILEPATH;
+                        } else {
+                            pdfFilepathToConvertToPS = UPLOAD_SOURCE_PDF_FILEPATH;
+                        }
+                    }
+
+                }
+
 
 
 
