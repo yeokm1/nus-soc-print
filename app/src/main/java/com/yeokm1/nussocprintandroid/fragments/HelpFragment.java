@@ -64,7 +64,7 @@ public class HelpFragment extends Fragment {
     }
 
 
-    String generateHelpText(){
+    private String generateHelpText(){
         String textFormat = getString(R.string.help_text);
         String compileTime = getCompileDateTime();
         String packageDetails = getPackageVersion();
@@ -72,7 +72,7 @@ public class HelpFragment extends Fragment {
         return helpText;
     }
 
-    String getCompileDateTime(){
+    private String getCompileDateTime(){
         try{
             ApplicationInfo ai = getActivity().getPackageManager().getApplicationInfo(getActivity().getPackageName(), 0);
             ZipFile zf = new ZipFile(ai.sourceDir);
@@ -88,7 +88,7 @@ public class HelpFragment extends Fragment {
     }
 
 
-    String getPackageVersion(){
+    private String getPackageVersion(){
         GetInfoSummary infoSummary = new GetInfoSummary(getActivity().getApplicationContext());
         return infoSummary.getPackageVersionAndName();
     }
