@@ -8,9 +8,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="470dp"
-        android:text="@string/help_text"
         android:id="@+id/help_textview"
-        android:layout_above="@+id/help_problems_button" />
+        android:layout_above="@+id/help_problems_button"
+        android:textAppearance="@android:style/TextAppearance.Medium" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
