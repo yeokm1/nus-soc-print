@@ -6,6 +6,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ public class HelpFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_help, container, false);
         String helpText = generateHelpText();
         TextView helpTextView = (TextView) view.findViewById(R.id.help_textview);
+        helpTextView.setMovementMethod(new ScrollingMovementMethod());
         helpTextView.setText(helpText);
         return view;
     }
