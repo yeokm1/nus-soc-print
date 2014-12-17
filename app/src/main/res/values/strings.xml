@@ -116,6 +116,8 @@
 
     <!-- Help Fragment -->
     <string name="help_text">Help fragment</string>
+    <string name="help_source_code_button_text">Source code</string>
+    <string name="help_email_button_text">Problems? Email me</string>
 
     <!-- Misc -->
     <string name="misc_server">sunfire.comp.nus.edu.sg</string>
