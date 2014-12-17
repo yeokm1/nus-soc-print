@@ -116,13 +116,14 @@
 
     <!-- Help Fragment -->
     <string name="help_text" formatted="false">
-        Supported formats: PDF, DOC, DOCX, PPT, PPTX and ODT.
-        \n\nFile importing:
+        &lt;&lt;Supported formats&gt;&gt;
+        \nPDF, DOC, DOCX, PPT, PPTX and ODT.
+        \n\n&lt;&lt;File importing&gt;&gt;
         \n1. Via the browse button
         \n2. You can "share" files to this app from other apps.
         \n\nCan get quota but cannot print?
         \nYou probably used your NUSNET credential instead of your SoC Unix one. You can reset your Unix credential using the provided link in Settings.
-        \n\nNUS SOC Print: %s (%s)
+        \n\n%s (%s)
         \n\nCopyright © 2013, 2015, Yeo Kheng Meng under the MIT license.</string>
     <string name="help_source_code_button_text">Source code</string>
     <string name="help_email_button_text">Problems? Email me</string>
