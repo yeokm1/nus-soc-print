@@ -52,6 +52,10 @@ public class HelpFragment extends Fragment {
                 CraftIntentEmail emailIntent = new CraftIntentEmail();
                 emailGen.appendMinimumDetailsToContent();
                 emailGen.appendAppDetailsToContent();
+
+                String emailEndText = getString(R.string.help_support_email_end_text);
+                emailGen.appendContent(emailEndText);
+
                 Intent intent = emailGen.generateIntentWithNewTaskFlag();
                 boolean status = emailGen.sendIntent(getActivity(), intent);
             }
