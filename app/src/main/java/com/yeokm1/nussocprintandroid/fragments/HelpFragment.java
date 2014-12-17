@@ -2,7 +2,6 @@ package com.yeokm1.nussocprintandroid.fragments;
 
 
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,10 +18,10 @@ import com.yeokhengmeng.craftsupportemailintent.GetInfoSummary;
 import com.yeokm1.nussocprintandroid.R;
 
 import java.text.SimpleDateFormat;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 
 public class HelpFragment extends Fragment {
+
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,7 +50,7 @@ public class HelpFragment extends Fragment {
                 CraftSupportEmail emailGen = new CraftSupportEmail(getActivity(), "yeokm1@gmail.com", "NUS SOC Print Android");
                 CraftIntentEmail emailIntent = new CraftIntentEmail();
                 emailGen.appendMinimumDetailsToContent();
-                emailGen.appendAppDetailsToContent();
+                emailGen.appendAppDetailsToContent(dateFormat);
 
                 String emailEndText = getString(R.string.help_support_email_end_text);
                 emailGen.appendContent(emailEndText);
@@ -66,31 +65,15 @@ public class HelpFragment extends Fragment {
 
     private String generateHelpText(){
         String textFormat = getString(R.string.help_text);
-        String compileTime = getCompileDateTime();
-        String packageDetails = getPackageVersion();
-        String helpText = String.format(textFormat, packageDetails, compileTime);
+        GetInfoSummary info = new GetInfoSummary(getActivity());
+        String helpText = String.format(textFormat, info.getPackageVersionAndName(dateFormat));
         return helpText;
-    }
-
-    private String getCompileDateTime(){
-        try{
-            ApplicationInfo ai = getActivity().getPackageManager().getApplicationInfo(getActivity().getPackageName(), 0);
-            ZipFile zf = new ZipFile(ai.sourceDir);
-            ZipEntry ze = zf.getEntry("classes.dex");
-            long time = ze.getTime();
-            String s = new SimpleDateFormat("dd MMM yyyy").format(new java.util.Date(time));
-            zf.close();
-            return s;
-        }catch(Exception e){
-        }
-
-        return "";
     }
 
 
     private String getPackageVersion(){
         GetInfoSummary infoSummary = new GetInfoSummary(getActivity().getApplicationContext());
-        return infoSummary.getPackageVersionAndName();
+        return infoSummary.getPackageVersionAndName(dateFormat);
     }
 
 
