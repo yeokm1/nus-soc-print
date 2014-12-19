@@ -11,9 +11,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.jcraft.jsch.SftpProgressMonitor;
 import com.yeokm1.nussocprintandroid.R;
 import com.yeokm1.nussocprintandroid.core.HelperFunctions;
+import com.yeokm1.nussocprintandroid.core.MyApplication;
 import com.yeokm1.nussocprintandroid.network.ConnectionTask;
 import com.yeokm1.nussocprintandroid.print_activities.FatDialogActivity;
 
@@ -144,6 +146,20 @@ public class PrintingActivity extends FatDialogActivity {
 
         itemsAdapter = new PrintingProgressItemAdapter(this, generateItems());
         printProgress.setAdapter(itemsAdapter);
+
+        ((MyApplication) getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        GoogleAnalytics.getInstance(this).reportActivityStart(this);
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        GoogleAnalytics.getInstance(this).reportActivityStop(this);
     }
 
     @Override

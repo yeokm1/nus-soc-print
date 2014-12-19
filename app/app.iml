@@ -87,6 +87,7 @@
     <orderEntry type="library" exported="" name="support-v4-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="craft-support-email-intent-1.1" level="project" />
+    <orderEntry type="library" exported="" name="play-services-6.5.87" level="project" />
     <orderEntry type="module" module-name="aFileChooser" exported="" />
   </component>
 </module>

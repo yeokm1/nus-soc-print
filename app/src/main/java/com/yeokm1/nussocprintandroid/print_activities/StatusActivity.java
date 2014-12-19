@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.yeokm1.nussocprintandroid.R;
+import com.yeokm1.nussocprintandroid.core.MyApplication;
 import com.yeokm1.nussocprintandroid.core.Storage;
 import com.yeokm1.nussocprintandroid.network.ConnectionTask;
 
@@ -50,7 +52,19 @@ public class StatusActivity extends FatDialogActivity {
             }
         });
 
+        ((MyApplication) getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
+    }
 
+    @Override
+    public void onStart(){
+        super.onStart();
+        GoogleAnalytics.getInstance(this).reportActivityStart(this);
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        GoogleAnalytics.getInstance(this).reportActivityStop(this);
     }
 
     public void startRefreshTask(){

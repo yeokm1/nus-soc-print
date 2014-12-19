@@ -11,7 +11,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name="com.yeokm1.nussocprintandroid.MainActivity"
             android:label="@string/app_name"
@@ -65,6 +65,9 @@
             android:label="@string/printing_title"
             android:theme="@style/DialogTheme">
         </activity>
+        <!-- Google Analytics Version v4 needs this value for easy tracking -->
+        <meta-data android:name="com.google.android.gms.analytics.globalConfigResource"
+            android:resource="@xml/global_tracker" />
     </application>
 
 </manifest>

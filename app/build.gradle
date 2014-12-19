@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.yeokm1.nussocprintandroid"
-        minSdkVersion 7
+        minSdkVersion 9
         targetSdkVersion 21
         versionCode 18
         versionName "1.0.0"
@@ -23,6 +23,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:21+'
     compile 'com.android.support:support-v4:21+'
+    compile 'com.google.android.gms:play-services:6.5.87'
     compile project(':aFileChooser')
     compile files('libs/craft-support-email-intent-1.1.jar')
 }

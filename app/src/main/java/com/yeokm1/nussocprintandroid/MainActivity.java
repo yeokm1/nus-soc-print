@@ -12,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.yeokm1.nussocprintandroid.core.MyApplication;
 import com.yeokm1.nussocprintandroid.fragments.HelpFragment;
 import com.yeokm1.nussocprintandroid.fragments.PreferenceListFragment.OnPreferenceAttachedListener;
@@ -85,6 +86,20 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             }
 
         }
+
+        ((MyApplication) getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        GoogleAnalytics.getInstance(this).reportActivityStart(this);
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        GoogleAnalytics.getInstance(this).reportActivityStop(this);
     }
 
     @Override
