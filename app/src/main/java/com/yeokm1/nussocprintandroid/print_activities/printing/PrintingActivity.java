@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.jcraft.jsch.SftpProgressMonitor;
 import com.yeokm1.nussocprintandroid.R;
 import com.yeokm1.nussocprintandroid.core.HelperFunctions;
@@ -23,6 +25,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class PrintingActivity extends FatDialogActivity {
 
@@ -394,6 +397,32 @@ public class PrintingActivity extends FatDialogActivity {
 
         @Override
         protected String doInBackground(String... params) {
+
+
+            //Step -1: Tell Google Analytics about printing actions
+
+            String fileType = getFileExtension(filePath);
+
+            Tracker tracker =  ((MyApplication) getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
+
+
+            Map<String, String> printerNameEvent = new HitBuilders.EventBuilder().setCategory("printing").setAction("printer").setLabel(printer).build();
+            Map<String, String> pagesPerSheetEvent = new HitBuilders.EventBuilder().setCategory("printing").setAction("pagesPerSheet").setLabel(Integer.toString(pagesPerSheet)).build();
+            Map<String, String> fileTypeEvent = new HitBuilders.EventBuilder().setCategory("printing").setAction("fileType").setLabel(fileType).build();
+
+            if(needToTrimPDFToPageRange){
+                Map<String, String> startPageEvent = new HitBuilders.EventBuilder().setCategory("printing").setAction("startPage").setLabel(Integer.toString(startPageRange)).build();
+                Map<String, String> endPageEvent = new HitBuilders.EventBuilder().setCategory("printing").setAction("endPage").setLabel(Integer.toString(endPageRange)).build();
+
+                tracker.send(startPageEvent);
+                tracker.send(endPageEvent);
+            }
+
+            tracker.send(printerNameEvent);
+            tracker.send(pagesPerSheetEvent);
+            tracker.send(fileTypeEvent);
+
+
 
             //Step 0: Connecting to server
             currentProgress = POSITION_CONNECTING;
