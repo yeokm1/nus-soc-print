@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <PreferenceCategory
+        android:title="@string/settings_category_sunfire" />
+
+    <EditTextPreference
+        android:hint="@string/settings_username_hint"
+        android:key="@string/settings_username_key"
+        android:summary="@string/settings_username_summary"
+        android:title="@string/settings_username_title" />
+
+    <EditTextPreference
+        android:inputType="textPassword"
+        android:hint="@string/settings_password_hint"
+        android:key="@string/settings_password_key"
+        android:summary="@string/settings_password_summary"
+        android:title="@string/settings_password_title" />
+
+    <PreferenceCategory
+        android:title="@string/settings_category_optional" />
+
+    <EditTextPreference
+        android:hint="@string/settings_printer_hint"
+        android:key="@string/settings_printer_key"
+        android:summary="@string/settings_printer_summary"
+        android:title="@string/settings_printer_title" />
+
+    <EditTextPreference
+        android:hint="@string/misc_server"
+        android:key="@string/settings_server_key"
+        android:summary="@string/settings_server_summary"
+        android:title="@string/settings_server_title" />
+
+    <Preference
+        android:key="@string/settings_reset_key"
+        android:summary="@string/settings_reset_summary"
+        android:title="@string/settings_reset_title" />
+
+</PreferenceScreen>

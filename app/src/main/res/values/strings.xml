@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Main -->
+    <string name="app_name">NUS SOC Print</string>
+    <string name="tab_print">Print</string>
+    <string name="tab_quota">Quota</string>
+    <string name="tab_settings">Settings</string>
+    <string name="tab_help">Help</string>
+
+    <!-- Print Fragment -->
+    <string name="print_print_button_text">Print</string>
+    <string name="print_status_button_text">Check Status</string>
+    <string name="print_filename_text">Filename:</string>
+    <string name="print_file_not_selected">Pick a PDF, DOC, DOCX, PPT, PPTX or ODT file</string>
+    <string name="print_file_not_supported">File format not supported</string>
+    <string name="print_select_a_document">Select a document</string>
+    <string name="print_file_browse_button">Browse</string>
+    <string name="print_printer_text">Printer:</string>
+    <string name="print_pages_sheet_text">Pages per sheet:</string>
+
+    <string-array name="printer_page_sheet_options">
+        <item>1</item>
+        <item>2</item>
+        <item>4</item>
+        <item>6</item>
+        <item>8</item>
+    </string-array>
+
+    <string name="print_page_range_text">Page range:</string>
+    <string name="print_page_range_all_text">All</string>
+    <string name="print_page_range_custom_text">Custom</string>
+    <string name="print_page_range_arrow_text">↳</string>
+    <string name="print_page_range_from_text">From</string>
+    <string name="print_page_range_to_text">to</string>
+    <string name="print_no_file_selected_yet">You have to select a document before printing!</string>
+    <string name="print_invalid_page_range">Invalid page range</string>
+
+    <!-- Status Activity -->
+    <string name="status_title">Status</string>
+    <string name="status_initial">Hit Refresh or Delete to begin</string>
+    <string name="status_delete_jobs">Delete pending jobs</string>
+    <string name="status_refresh_status">Refresh Status</string>
+    <string name="status_refresh_format_printer_output" formatted="false">%s : %s\n</string>
+    <string name="status_refresh_printer_queue_empty">Print Queue Empty\n</string>
+    <string name="status_delete_format_status" formatted="false">Deletion command sent to %s\n</string>
+    <string name="status_delete_finished">Deletion command sent to all printers\n</string>
+
+    <!-- Printing Activity -->
+    <string name="printing_title">Printing</string>
+    <string-array name="printing_progress_title_text" formatted="false">
+        <item>Connecting to server</item>
+        <item>Some housekeeping</item>
+        <item>Downloading DOC converter to server</item>
+        <item>Uploading PDF Formatter</item>
+        <item>Uploading %s</item>
+        <item>Converting to PDF</item>
+        <item>Trim PDF to page %d to %d</item>
+        <item>Formatting to %d pages/sheet</item>
+        <item>Converting to Postscript</item>
+        <item>Sending to %s</item>
+    </string-array>
+
+    <string-array name="printing_progress_error_title" formatted="false">
+        <item>Connection to server failed</item>
+        <item>Housekeeping failed</item>
+        <item>Download of document converter failed</item>
+        <item>Upload of PDF formatter failed</item>
+        <item>Upload of your document failed</item>
+        <item>Converting your document to PDF failed</item>
+        <item>Trim PDF to page %d to %d failed</item>
+        <item>Formatting to %d pages/sheet failed</item>
+        <item>Conversion to Postscript failed</item>
+        <item>Printing command error</item>
+    </string-array>
+
+    <string name="printing_progress_doc_converter_secondary_site">Now downloading from Github. It usually takes about 3 minutes and is only downloaded once and cached.</string>
+    <string name="printing_progress_doc_conv_upload_error_message">Failed to properly download document converter from both primary and secondary sites.</string>
+    <string name="printing_progress_pdf_format_upload_error_message">Uploaded PDF formatter has failed the MD5 verification.</string>
+    <string name="printing_progress_subtitle_progress" formatted="false">"%s of %s (%.1f%%)</string>
+    <string name="printing_progress_subtitle_progress_indeterminate">This could take a while&#8230;</string>
+    <string name="printing_progress_button_close">Close</string>
+    <string name="printing_progress_button_cancel">Cancel</string>
+    <string name="printing_progress_premature_cancel_title">Are you sure you want to cancel this print operation?</string>
+
+    <!-- Quota Fragment -->
+    <string name="quota_output_text">Press refresh to get quota</string>
+    <string name="quota_button_text">Refresh Quota</string>
+    <string name="quota_url">https://mysoc.nus.edu.sg/~eprint/forms/quota.php</string>
+    <string name="quota_login_url">https://mysoc.nus.edu.sg/images/LOGIN</string>
+    <string name="quota_page_relative_url">/~eprint/forms/quota.php</string>
+    <string name="quota_refresh_text">Refreshing Print Quota…</string>
+
+    <!-- Settings Fragment -->
+    <string name="settings_category_sunfire">SoC Unix credentials</string>
+    <string name="settings_username_title">UNIX username</string>
+    <string name="settings_username_summary">Enter your UNIX username</string>
+    <string name="settings_username_hint">Enter your UNIX username</string>
+    <string name="settings_username_key">username_preference</string>
+    <string name="settings_password_title">UNIX password</string>
+    <string name="settings_password_summary">Enter your UNIX password</string>
+    <string name="settings_password_hint">Enter your UNIX password</string>
+    <string name="settings_password_key">password_preference</string>
+    <string name="settings_category_optional">Optional</string>
+    <string name="settings_printer_title">Custom Printer</string>
+    <string name="settings_printer_summary">Use a printer not in app database</string>
+    <string name="settings_printer_hint">Enter your custom printer here</string>
+    <string name="settings_printer_key">custom_printer_preference</string>
+    <string name="settings_server_title">Custom Server</string>
+    <string name="settings_server_summary">Specify your own server (overrides Sunfire)</string>
+    <string name="settings_server_key">custom_server_preference</string>
+    <string name="settings_reset_title">Forgot your Unix credentials?</string>
+    <string name="settings_reset_summary">Click here to reset your password. Enter your NUSNET credentials at the site. Then choose Reset Password on the left banner</string>
+    <string name="settings_reset_key">forgot_password_link</string>
+    <string name="settings_reset_link">https://mysoc.nus.edu.sg/~myacct/</string>
+
+    <!-- Help Fragment -->
+    <string name="help_text" formatted="false">
+        &lt;&lt;Supported formats&gt;&gt;
+        \nPDF, DOC, DOCX, PPT, PPTX and ODT.
+        \n\n&lt;&lt;File importing&gt;&gt;
+        \n1. Via the browse button
+        \n2. You can "share" files to this app from other apps.
+        \n\nCan get quota but cannot print?
+        \nYou probably used your NUSNET credential instead of your SoC Unix one. You can reset your Unix credential using the provided link in Settings.
+        \n\n%s
+        \nCopyright © 2013, 2015, Yeo Kheng Meng under the MIT license.</string>
+    <string name="help_source_code_button_text">Source code</string>
+    <string name="help_email_button_text">Problems? Email me</string>
+    <string name="help_support_email_end_text">\nDescribe your issue encountered below and I will try to assist you:\n</string>
+
+    <!-- Misc -->
+    <string name="misc_server">sunfire.comp.nus.edu.sg</string>
+    <string name="misc_connecting_to_server">Connecting to server…</string>
+    <string name="misc_no_network">No network connection or server unreachable.</string>
+    <string name="misc_missing_credential">Username/password not set.</string>
+    <string name="misc_missing_server">Server entry cannot be blank</string>
+    <string name="misc_wrong_credentials">Username/password incorrect.</string>
+    <string name="misc_connection_not_set_up">Connection not set up yet</string>
+    <string name="misc_ok">OK</string>
+    <string name="misc_yes">Yes</string>
+    <string name="misc_no">No</string>
+
+    <string-array name="printer_names">
+        <item>psts</item>
+        <item>psts-sx</item>
+        <item>pstsb</item>
+        <item>pstsb-sx</item>
+        <item>pstsc</item>
+        <item>pstsc-sx</item>
+        <item>psc008</item>
+        <item>psc008-sx</item>
+        <item>psc011</item>
+        <item>psc011-sx</item>
+        <item>psc245</item>
+        <item>psc245-sx</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,220 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:focusableInTouchMode="true"><!-- This is to prevent the EditText fields from being the first to gain focus -->
+    <Button
+        android:id="@+id/print_print_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_toEndOf="@+id/print_status_button"
+        android:layout_toRightOf="@+id/print_status_button"
+        android:text="@string/print_print_button_text" />
+
+    <Button
+        android:id="@+id/print_status_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="@string/print_status_button_text" />
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/print_print_button">
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <TextView
+                android:id="@+id/print_print_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/print_filename_text"
+                android:layout_marginTop="35dp"
+                android:text="@string/print_printer_text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_marginLeft="10dp" />
+
+            <Spinner
+                android:id="@+id/print_printer_names"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_alignLeft="@+id/print_page_range_start"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignStart="@+id/print_page_range_start"
+                android:layout_alignTop="@+id/print_print_text"
+                android:layout_marginLeft="5dp"
+                android:layout_toEndOf="@+id/print_pages_sheet" />
+
+            <TextView
+                android:id="@+id/print_pages_sheet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/print_print_text"
+                android:layout_alignStart="@+id/print_print_text"
+                android:layout_below="@+id/print_print_text"
+                android:layout_marginTop="20dp"
+                android:text="@string/print_pages_sheet_text"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/print_page_range_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/print_pages_sheet"
+                android:layout_alignStart="@+id/print_pages_sheet"
+                android:layout_below="@+id/print_pages_sheet"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@+id/print_page_range_arrow"
+                android:layout_toLeftOf="@+id/printer_page_sheet_spinner"
+                android:layout_toStartOf="@+id/printer_page_sheet_spinner"
+                android:text="@string/print_page_range_text"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <RadioGroup
+                android:id="@+id/print_page_range_radiogroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/print_pages_sheet"
+                android:layout_marginTop="18dp"
+                android:layout_toEndOf="@+id/print_page_range_text"
+                android:layout_toRightOf="@+id/print_page_range_text"
+                android:orientation='horizontal'>
+
+                <RadioButton
+                    android:id="@+id/print_page_range_all_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/print_page_range_all_text"/>
+
+                <RadioButton
+                    android:id="@+id/print_page_range_custom_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:checked="false"
+                    android:text="@string/print_page_range_custom_text" />
+
+
+
+            </RadioGroup>
+
+            <Spinner
+                android:id="@+id/printer_page_sheet_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_alignLeft="@+id/print_printer_names"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignStart="@+id/print_printer_names"
+                android:layout_alignTop="@+id/print_pages_sheet"
+                android:layout_toEndOf="@+id/print_pages_sheet" />
+
+            <TextView
+                android:id="@+id/print_page_range_from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/print_page_range_arrow"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="7dp"
+                android:layout_toRightOf="@+id/print_page_range_arrow"
+                android:text="@string/print_page_range_from_text"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/print_page_range_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/print_page_range_text"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/print_page_range_arrow_text"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+            <EditText
+                android:id="@+id/print_page_range_start"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/print_page_range_from"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/print_pages_sheet"
+                android:layout_toRightOf="@+id/print_pages_sheet"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/print_page_range_to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/print_page_range_start"
+                android:layout_marginLeft="10dp"
+                android:layout_toEndOf="@+id/print_page_range_start"
+                android:layout_toRightOf="@+id/print_page_range_start"
+                android:text="@string/print_page_range_to_text"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/print_page_range_end"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/print_page_range_start"
+                android:layout_alignBottom="@+id/print_page_range_start"
+                android:layout_marginLeft="10dp"
+                android:layout_toEndOf="@+id/print_page_range_to"
+                android:layout_toRightOf="@+id/print_page_range_to"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/print_filename_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/print_print_text"
+                android:layout_alignParentTop="true"
+                android:layout_alignStart="@+id/print_print_text"
+                android:layout_marginTop="20dp"
+                android:text="@string/print_filename_text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_marginLeft="0dp" />
+
+            <Button
+                android:id="@+id/print_browse_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/print_printer_names"
+                android:layout_alignRight="@+id/print_printer_names"
+                android:layout_alignTop="@+id/print_filename_text"
+                android:layout_marginTop="-5dp"
+                android:text="@string/print_file_browse_button" />
+
+            <TextView
+                android:id="@+id/print_filename_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/print_printer_names"
+                android:layout_alignTop="@+id/print_filename_text"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="4dp"
+                android:layout_toEndOf="@+id/print_filename_text"
+                android:layout_toLeftOf="@+id/print_browse_button"
+                android:layout_toRightOf="@+id/print_filename_text"
+                android:layout_toStartOf="@+id/print_browse_button"
+                android:text="@string/print_file_not_selected"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+        </RelativeLayout>
+    </ScrollView>
+
+
+
+</RelativeLayout>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yeokm1.nussocprintandroid" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:name="com.yeokm1.nussocprintandroid.core.MyApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.yeokm1.nussocprintandroid.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <!-- PDF -->
+                <data android:mimeType="application/pdf" />
+                <!-- DOC -->
+                <data android:mimeType="application/msword" />
+                <!-- DOCX -->
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+                <!-- PPT -->
+                <data android:mimeType="application/vnd.ms-powerpoint" />
+                <!-- PPTX -->
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.presentationml.presentation" />
+                <!-- ODT -->
+                <data android:mimeType="application/vnd.oasis.opendocument.text" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.yeokm1.nussocprintandroid.print_activities.StatusActivity"
+            android:label="@string/status_title"
+            android:theme="@style/DialogTheme" >
+        </activity>
+        <activity
+            android:name="com.ipaulpro.afilechooser.FileChooserActivity"
+            android:enabled="@bool/use_activity"
+            android:exported="true"
+            android:icon="@drawable/ic_chooser"
+            android:label="@string/choose_file" >
+            <intent-filter>
+                <action android:name="android.intent.action.GET_CONTENT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.OPENABLE" />
+
+                <data android:mimeType="*/*" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".print_activities.printing.PrintingActivity"
+            android:label="@string/printing_title"
+            android:theme="@style/DialogTheme">
+        </activity>
+        <!-- Google Analytics Version v4 needs this value for easy tracking -->
+        <meta-data android:name="com.google.android.gms.analytics.globalConfigResource"
+            android:resource="@xml/global_tracker" />
+        <meta-data android:name="com.crashlytics.ApiKey" android:value="378cecf7f2dce6ec0029267d0ebebd246b5339e5"/>
+    </application>
+
+</manifest>
