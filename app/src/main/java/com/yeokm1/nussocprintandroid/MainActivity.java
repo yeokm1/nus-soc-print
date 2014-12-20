@@ -13,7 +13,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 
 import com.crashlytics.android.Crashlytics;
-import com.google.android.gms.analytics.GoogleAnalytics;
 import com.yeokm1.nussocprintandroid.core.HelperFunctions;
 import com.yeokm1.nussocprintandroid.core.MyApplication;
 import com.yeokm1.nussocprintandroid.core.Storage;
@@ -92,8 +91,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         }
 
         checkIfCredentialsAreSet();
-
-        ((MyApplication) getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
     }
 
     public void checkIfCredentialsAreSet(){
@@ -109,17 +106,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         }
     }
 
-    @Override
-    public void onStart(){
-        super.onStart();
-        GoogleAnalytics.getInstance(this).reportActivityStart(this);
-    }
-
-    @Override
-    public void onStop(){
-        super.onStop();
-        GoogleAnalytics.getInstance(this).reportActivityStop(this);
-    }
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {

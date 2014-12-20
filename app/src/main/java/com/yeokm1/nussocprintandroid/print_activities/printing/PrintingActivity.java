@@ -11,13 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.jcraft.jsch.SftpProgressMonitor;
 import com.yeokm1.nussocprintandroid.R;
 import com.yeokm1.nussocprintandroid.core.HelperFunctions;
-import com.yeokm1.nussocprintandroid.core.MyApplication;
 import com.yeokm1.nussocprintandroid.network.ConnectionTask;
 import com.yeokm1.nussocprintandroid.print_activities.FatDialogActivity;
 
@@ -25,7 +21,6 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class PrintingActivity extends FatDialogActivity {
 
@@ -120,7 +115,7 @@ public class PrintingActivity extends FatDialogActivity {
 
         filePath = intent.getStringExtra(INTENT_FILE_PATH);
 
-        Uri fileUri =  Uri.parse(filePath);
+        Uri fileUri = Uri.parse(filePath);
         filename = fileUri.getLastPathSegment();
 
 
@@ -129,18 +124,17 @@ public class PrintingActivity extends FatDialogActivity {
         startPageRange = intent.getIntExtra(INTENT_PAGE_START_RANGE, INVALID_INTENT_INT);
         endPageRange = intent.getIntExtra(INTENT_PAGE_END_RANGE, INVALID_INTENT_INT);
 
-        if(pagesPerSheet == 1){
+        if (pagesPerSheet == 1) {
             needToFormatPDF = false;
         }
 
-        if(isFileAPdf(filePath)){
+        if (isFileAPdf(filePath)) {
             needToConvertDocToPDF = false;
         }
 
-        if(startPageRange > 0){
+        if (startPageRange > 0) {
             needToTrimPDFToPageRange = true;
         }
-
 
 
         printingTask = new PrintingTask(this);
@@ -150,19 +144,6 @@ public class PrintingActivity extends FatDialogActivity {
         itemsAdapter = new PrintingProgressItemAdapter(this, generateItems());
         printProgress.setAdapter(itemsAdapter);
 
-        ((MyApplication) getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
-    }
-
-    @Override
-    public void onStart(){
-        super.onStart();
-        GoogleAnalytics.getInstance(this).reportActivityStart(this);
-    }
-
-    @Override
-    public void onStop(){
-        super.onStop();
-        GoogleAnalytics.getInstance(this).reportActivityStop(this);
     }
 
     @Override
@@ -397,31 +378,6 @@ public class PrintingActivity extends FatDialogActivity {
 
         @Override
         protected String doInBackground(String... params) {
-
-
-            //Step -1: Tell Google Analytics about printing actions
-
-            String fileType = getFileExtension(filePath);
-
-            Tracker tracker = ((MyApplication) getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
-
-
-            Map<String, String> printerNameEvent = new HitBuilders.EventBuilder().setCategory("printing").setAction("printer").setLabel(printer).build();
-            Map<String, String> pagesPerSheetEvent = new HitBuilders.EventBuilder().setCategory("printing").setAction("pagesPerSheet").setLabel(Integer.toString(pagesPerSheet)).build();
-            Map<String, String> fileTypeEvent = new HitBuilders.EventBuilder().setCategory("printing").setAction("fileType").setLabel(fileType).build();
-
-            if(needToTrimPDFToPageRange){
-                Map<String, String> startPageEvent = new HitBuilders.EventBuilder().setCategory("printing").setAction("startPage").setLabel(Integer.toString(startPageRange)).build();
-                Map<String, String> endPageEvent = new HitBuilders.EventBuilder().setCategory("printing").setAction("endPage").setLabel(Integer.toString(endPageRange)).build();
-
-                tracker.send(startPageEvent);
-                tracker.send(endPageEvent);
-            }
-
-            tracker.send(printerNameEvent);
-            tracker.send(pagesPerSheetEvent);
-            tracker.send(fileTypeEvent);
-
 
 
             //Step 0: Connecting to server
