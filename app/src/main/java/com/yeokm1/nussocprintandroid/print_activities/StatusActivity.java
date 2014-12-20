@@ -52,7 +52,7 @@ public class StatusActivity extends FatDialogActivity {
             }
         });
 
-        ((MyApplication) getApplication()).getTracker();
+        ((MyApplication) getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
     }
 
     @Override

@@ -93,7 +93,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
         checkIfCredentialsAreSet();
 
-        ((MyApplication) getApplication()).getTracker();
+        ((MyApplication) getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
     }
 
     public void checkIfCredentialsAreSet(){
