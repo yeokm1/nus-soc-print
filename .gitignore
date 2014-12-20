@@ -5,3 +5,5 @@
 .DS_Store
 /build
 /aFileChooser/build
+/app/src/main/assets/crashlytics-build.properties
+/app/src/main/res/values/com_crashlytics_export_strings.xml
