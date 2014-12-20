@@ -9,8 +9,6 @@ import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
 import com.yeokm1.nussocprintandroid.R;
 
-import java.util.HashMap;
-
 /**
  * Created by yeokm1 on 6/10/2014.
  */
@@ -19,30 +17,24 @@ public class MyApplication extends Application{
     private Uri currentDocumentPath;
     private static final String TAG = "MyApplication";
 
-    private static final String PROPERTY_ID = "UA-46031707-1";
-
     public enum TrackerName {
         APP_TRACKER, // Tracker used only in this app.
         GLOBAL_TRACKER, // Tracker used by all the apps from a company. eg: roll-up tracking.
     }
 
-    HashMap<TrackerName, Tracker> mTrackers = new HashMap<TrackerName, Tracker>();
+    private static final String PROPERTY_ID = "UA-46031707-1";
 
 
-    public synchronized Tracker getTracker(TrackerName trackerId) {
-        if (!mTrackers.containsKey(trackerId)) {
 
+    private static Tracker appTracker;
+
+    public synchronized Tracker getTracker() {
+        if(appTracker == null){
             GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
-            Tracker t;
-            if(trackerId == TrackerName.APP_TRACKER){
-                t = analytics.newTracker(R.xml.app_tracker);
-            } else {
-                t =  analytics.newTracker(PROPERTY_ID);
-            }
-            mTrackers.put(trackerId, t);
-
+            appTracker = analytics.newTracker(R.xml.app_tracker);
         }
-        return mTrackers.get(trackerId);
+
+       return appTracker;
     }
 
     public Uri getCurrentDocumentPath() {

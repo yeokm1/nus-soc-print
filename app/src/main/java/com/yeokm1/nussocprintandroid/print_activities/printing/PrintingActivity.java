@@ -150,7 +150,7 @@ public class PrintingActivity extends FatDialogActivity {
         itemsAdapter = new PrintingProgressItemAdapter(this, generateItems());
         printProgress.setAdapter(itemsAdapter);
 
-        ((MyApplication) getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
+        ((MyApplication) getApplication()).getTracker();
     }
 
     @Override
@@ -403,7 +403,7 @@ public class PrintingActivity extends FatDialogActivity {
 
             String fileType = getFileExtension(filePath);
 
-            Tracker tracker =  ((MyApplication) getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
+            Tracker tracker =  ((MyApplication) getApplication()).getTracker();
 
 
             Map<String, String> printerNameEvent = new HitBuilders.EventBuilder().setCategory("printing").setAction("printer").setLabel(printer).build();
