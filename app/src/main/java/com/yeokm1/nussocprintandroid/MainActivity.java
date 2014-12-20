@@ -14,7 +14,9 @@ import android.support.v7.app.ActionBarActivity;
 
 import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.analytics.GoogleAnalytics;
+import com.yeokm1.nussocprintandroid.core.HelperFunctions;
 import com.yeokm1.nussocprintandroid.core.MyApplication;
+import com.yeokm1.nussocprintandroid.core.Storage;
 import com.yeokm1.nussocprintandroid.fragments.HelpFragment;
 import com.yeokm1.nussocprintandroid.fragments.PreferenceListFragment.OnPreferenceAttachedListener;
 import com.yeokm1.nussocprintandroid.fragments.PrintFragment;
@@ -89,7 +91,22 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
         }
 
+        checkIfCredentialsAreSet();
+
         ((MyApplication) getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
+    }
+
+    public void checkIfCredentialsAreSet(){
+        Storage storage = Storage.getInstance();
+        String username = storage.getUsername();
+        String password = storage.getPassword();
+
+        if(username.length() == 0 || password.length() == 0){
+            String dialogTitle = getString(R.string.credential_not_set_title);
+            String dialogMessage = getString(R.string.credential_not_set_message);
+
+            HelperFunctions.showAlert(this, dialogTitle, dialogMessage);
+        }
     }
 
     @Override
