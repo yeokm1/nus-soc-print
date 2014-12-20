@@ -1,93 +1,33 @@
 nus-soc-print
 =============
 
-(I'm in the midst of rewriting this app from the ground up using Android Studio to clean up the code as well as make the UI on par with the [iOS version](https://github.com/yeokm1/nus-soc-print-ios). So just create issues for now. Pull Requests won't be useful since I'm reorganising the project anyway.)
+An Android application that prints office documents and PDF files to Unix printers in NUS School Of Computing via SSH. The iOS version exists [here](https://github.com/yeokm1/nus-soc-print-ios/).
 
-You can download this app from the Play Store here.
+This app has been approved on the [Play Store](https://play.google.com/store/apps/details?id=com.yeokm1.nussocprintandroid).
 
-https://play.google.com/store/apps/details?id=com.yeokm1.nussocprintandroid
-
-This Android application prints Microsoft Office documents (experimental) and PDF files to UNIX printers in NUS School of Computing via the usage of SSH commands. Custom server address and printers can be added.
-
-Warning: This app works even outside the vicinity of the NUS network. So don't be too trigger happy with the print button.
-
-
-<b>Main Features:</b>
-
+##Features
 1. Print PDF, DOC, DOCX, PPT, PPTX and ODT files
-2. Remaining quota check
-3. Print Status Check
-4. Print to custom printer
+2. Page range to be printed
+3. Remaining quota check
+4. Print Status Check
 5. Page formatting for documents
-6. Can share files to this app via file browser applications
+6. Accepts file sharing from other apps
+7. Deleting of existing job in print queue
+8. Runs on Android 2.3 and up for maximum compatibility
 
+##Tools used
+1. Java 8 Update 25 64 bit SDK
+2. Android 5.0.1 SDK
+3. Android Studio 1.0.2
+4. Jsch SSH library (included)
+5. Google Analytics (included)
+6. Crashlytics (included)  
+7. Docs to PDF converter (included). From [another project of mine](https://github.com/yeokm1/docs-to-pdf-converter).
+8. Craft Support Email Intent (included). From [another project of mine](https://github.com/yeokm1/craft-support-email-intent).
 
-<b>Things to take note:</b>
-
-1. Check the printer status first before printing
-
-2. Don't hit multiple actions more than once, every single click corresponds to a new request.
-
-3. Avoid using 3G or unstable connection when printing, the SSH library may go haywire over this. A Wifi network or better yet, the NUS's Wifi network is always preferred.
-
-4. If the force disconnect button does not work, force a closure of the app by removing it from the recent task list. Then open it again.
-
-5. Since this app is still new, bugs are to be expected. Inform me if you do encounter them.
-
-
-A high level write-up can be viewed on my blog here http://yeokhengmeng.com/2013/03/nus-soc-print-android-app
-
-
-<b>Workings: How are things actually done?</b>
-
-1. Document is uploaded via SFTP to a folder called socPrint in your UNIX account
-
-2. Document converted to PDF if necessary via external download of my docs-to-pdf-converter program. (https://github.com/yeokm1/docs-to-pdf-converter)
-
-Method 1:
-
-3a. PDF File converted to PostScript (pdftops)
-
-3b. Postscript file formatted according to requirements (psnup)
-
-Method 2:
-
-3a. PDF formatted using nup-pdf java program from ruby pdf
-
-3b. PDF File converted to PostScript (pdftops)
-
-Method 3:
-
-3a. PDF formatted using Multivalent tools Impose java program
-
-3b. PDF File converted to PostScript (pdftops)
-
-Finally: Send postscript file to print queue (uses the lpr command)
-
-
-<b>Quick Guide and Recommendation:</b>
-
-"Reset Connection" button: Sometimes the SSH connection may throw up some issues, hit this button. It also halts any active connection.
-
-"Clear Server Cache" button: To remove unwanted files in the socPrint folder. 
-
-
-
-<b>Credits to:</b>
-
-ActionBar Sherlock to support older Android versions http://actionbarsherlock.com/
-
-PreferenceListFragment from https://github.com/artiomchi/AndroidExtensions/blob/master/AndroidExtensions/src/main/java/org/flexlabs/androidextensions/preference/PreferenceListFragment.java
-
-Jsch Java SSH2 library http://www.jcraft.com/jsch/
-
-Android File Dialog: http://code.google.com/p/android-file-dialog/
-
-Icons by Jack Cai: http://findicons.com/icon/175958/print
-
-A Stackoverflow user for SSH code: http://stackoverflow.com/questions/2405885/any-good-jsch-examples
-
-nup-pdf http://blog.rubypdf.com/2007/08/24/how-to-make-n-up-pdf-with-free-software/
-
-Multivalent tools http://multivalent.sourceforge.net/Tools/pdf/Impose.html 
-
+##References
+1. [PreferenceListFragment](https://github.com/artiomchi/AndroidExtensions/blob/master/AndroidExtensions/src/main/java/org/flexlabs/androidextensions/preference/PreferenceListFragment.java)
+2. [SSH example code](http://stackoverflow.com/questions/2405885/any-good-jsch-examples)
+3. [nup_pdf PDF formatting library](http://blog.rubypdf.com/2007/08/24/how-to-make-n-up-pdf-with-free-software/)
+4. [Multivalent PDF formatting library](http://multivalent.sourceforge.net/Tools/pdf/Impose.html)
+5. [Merge 2 Git repos](http://blog.caplin.com/2013/09/18/merging-two-git-repositories/)
