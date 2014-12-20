@@ -68,6 +68,7 @@
         <!-- Google Analytics Version v4 needs this value for easy tracking -->
         <meta-data android:name="com.google.android.gms.analytics.globalConfigResource"
             android:resource="@xml/global_tracker" />
+        <meta-data android:name="com.crashlytics.ApiKey" android:value="378cecf7f2dce6ec0029267d0ebebd246b5339e5"/>
     </application>
 
 </manifest>
