@@ -45,9 +45,7 @@ public class PreferenceListFragment extends ListFragment{
     private ListView lv;
     private int xmlId;
     
-    public PreferenceListFragment(int xmlId){
-        this.xmlId = xmlId;
-    }
+
     //must be provided
     public PreferenceListFragment(){
         
