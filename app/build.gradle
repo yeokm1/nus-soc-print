@@ -40,6 +40,5 @@ dependencies {
     compile 'com.android.support:support-v4:21+'
     compile 'com.google.android.gms:play-services-base:6.5.+'
     compile project(':aFileChooser')
-    compile files('libs/craft-support-email-intent-1.1.jar')
     compile 'com.crashlytics.android:crashlytics:1.+'
 }
