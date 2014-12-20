@@ -16,7 +16,6 @@ This app has been approved on the [Play Store](https://play.google.com/store/app
 8. Runs on Android 2.3 and up for maximum compatibility
 
 ##Tools used
-=====
 1. Java 8 Update 25 64 bit SDK
 2. Android 5.0.1 SDK
 3. Android Studio 1.0.2
