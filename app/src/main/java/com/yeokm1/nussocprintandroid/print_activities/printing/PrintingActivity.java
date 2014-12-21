@@ -692,9 +692,9 @@ public class PrintingActivity extends FatDialogActivity {
                 } else if(currentProgress == POSITION_FORMATTING_PDF){
                     errorTitle = String.format(errorTitle, pagesPerSheet);
                 }
-                if(activity != null) {
-                    HelperFunctions.showAlert(activity, errorTitle, progress[0]);
-                }
+
+                HelperFunctions.showAlert(activity, errorTitle, progress[0]);
+
             }
 
             refreshList();

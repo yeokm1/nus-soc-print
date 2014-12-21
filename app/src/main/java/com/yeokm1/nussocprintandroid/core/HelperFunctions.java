@@ -1,7 +1,7 @@
 package com.yeokm1.nussocprintandroid.core;
 
+import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
 
@@ -20,23 +20,27 @@ public class HelperFunctions {
         }
     }
 
-    public static void showAlert(Context context, String title, String message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(title)
-                .setMessage(message)
-                .setCancelable(false)
-                .setPositiveButton(context.getString(R.string.misc_ok), null);
-        AlertDialog alert = builder.create();
-        alert.show();
+    public static void showAlert(Activity activity, String title, String message){
+        if(activity != null && !activity.isFinishing()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            builder.setTitle(title)
+                    .setMessage(message)
+                    .setCancelable(false)
+                    .setPositiveButton(activity.getString(R.string.misc_ok), null);
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
     }
 
-    public static void showYesNoAlert(Context context, String title, String message, DialogInterface.OnClickListener listener){
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(title)
-                .setMessage(message)
-                .setPositiveButton(R.string.misc_yes, listener)
-                .setNegativeButton(R.string.misc_no, listener);
-        AlertDialog alert = builder.create();
-        alert.show();
+    public static void showYesNoAlert(Activity activity, String title, String message, DialogInterface.OnClickListener listener) {
+        if (activity != null && !activity.isFinishing()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            builder.setTitle(title)
+                    .setMessage(message)
+                    .setPositiveButton(R.string.misc_yes, listener)
+                    .setNegativeButton(R.string.misc_no, listener);
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
     }
 }
