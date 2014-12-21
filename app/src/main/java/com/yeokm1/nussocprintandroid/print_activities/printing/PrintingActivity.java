@@ -400,11 +400,7 @@ public class PrintingActivity extends FatDialogActivity {
                 printEventParams.put("sendPage", Integer.toString(endPageRange));
             }
 
-            FlurryAgent.logEvent(FLURRY_PRINT_EVENT, printEventParams);
-
-
-
-
+            FlurryAgent.logEvent(FLURRY_PRINT_EVENT, printEventParams, true);
 
             //Step 0: Connecting to server
             currentProgress = POSITION_CONNECTING;
@@ -673,9 +669,6 @@ public class PrintingActivity extends FatDialogActivity {
                 currentProgress = POSITION_COMPLETED;
                 publishProgress();
 
-                //Only log successful print jobs
-                FlurryAgent.endTimedEvent(FLURRY_PRINT_EVENT);
-
             } catch (Exception e) {
                 publishProgress(e.getMessage());
             }
@@ -720,6 +713,8 @@ public class PrintingActivity extends FatDialogActivity {
             printingTask = null;
             setFinishButtonTextToClose();
             refreshList();
+
+            FlurryAgent.endTimedEvent(FLURRY_PRINT_EVENT);
         }
     }
 
