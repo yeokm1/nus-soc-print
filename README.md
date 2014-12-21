@@ -15,6 +15,20 @@ This app has been approved on the [Play Store](https://play.google.com/store/app
 7. Deleting of existing job in print queue
 8. Runs on Android 2.3 and up for maximum compatibility
 
+##Screenshots
+
+<a href="play-store-stuff/main.png"><img src="play-store-stuff/main.png" align="centre" height="568" width="320" ></a>
+<p></p>
+<a href="play-store-stuff/printing1.png"><img src="play-store-stuff/printing1.png" align="centre" height="568" width="320" ></a>
+<p></p>
+<a href="play-store-stuff/printing2.png"><img src="play-store-stuff/printing2.png" align="centre" height="568" width="320" ></a>
+<p></p>
+<a href="play-store-stuff/status.png"><img src="play-store-stuff/status.png" align="centre" height="568" width="320" ></a>
+<p></p>
+<a href="play-store-stuff/quota.png"><img src="play-store-stuff/quota.png" align="centre" height="568" width="320" ></a>
+<p></p>
+
+
 ##Tools used
 1. Java 8 Update 25 64 bit SDK
 2. Android 5.0.1 SDK
