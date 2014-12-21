@@ -380,9 +380,8 @@ public class PrintingActivity extends FatDialogActivity {
             uploadedFilename = UPLOAD_FILENAME + getFileExtension(filePath);
         }
 
-        @Override
-        protected String doInBackground(String... params) {
-
+        public void onPreExecute(){
+            super.onPreExecute();
             //Step -1: Tell Google Analytics about printing actions
 
             String fileType = getFileExtension(filePath);
@@ -401,6 +400,10 @@ public class PrintingActivity extends FatDialogActivity {
             }
 
             FlurryAgent.logEvent(FLURRY_PRINT_EVENT, printEventParams, true);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
 
             //Step 0: Connecting to server
             currentProgress = POSITION_CONNECTING;
