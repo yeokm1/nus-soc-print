@@ -27,7 +27,7 @@ public class FlurryFunctions {
 
         if(HelperFunctions.isOS10AndAbove()) {
             // configure Flurry
-            FlurryAgent.setLogEnabled(true);
+            FlurryAgent.setLogEnabled(false);
 
             // init Flurry
             FlurryAgent.init(app, FLURRY_APIKEY);
