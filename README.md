@@ -20,7 +20,7 @@ This app has been approved on the [Play Store](https://play.google.com/store/app
 2. Android 5.0.1 SDK
 3. Android Studio 1.0.2
 4. Jsch SSH library (included)
-5. Google Analytics (included)
+5. Flurry Analytics (included)
 6. Crashlytics (included)  
 7. Docs to PDF converter (included). From [another project of mine](https://github.com/yeokm1/docs-to-pdf-converter).
 8. Craft Support Email Intent (included). From [another project of mine](https://github.com/yeokm1/craft-support-email-intent).
