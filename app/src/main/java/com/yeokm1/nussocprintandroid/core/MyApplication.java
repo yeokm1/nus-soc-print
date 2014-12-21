@@ -61,6 +61,7 @@ public class MyApplication extends Application{
 
     public void onCreate(){
         super.onCreate();
+        FlurryFunctions.initFlurry(this);
         new Storage(getApplicationContext());
     }
 

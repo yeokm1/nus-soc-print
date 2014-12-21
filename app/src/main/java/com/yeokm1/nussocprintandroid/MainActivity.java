@@ -13,6 +13,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 
 import com.crashlytics.android.Crashlytics;
+import com.yeokm1.nussocprintandroid.core.FlurryFunctions;
 import com.yeokm1.nussocprintandroid.core.HelperFunctions;
 import com.yeokm1.nussocprintandroid.core.MyApplication;
 import com.yeokm1.nussocprintandroid.core.Storage;
@@ -91,6 +92,18 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         }
 
         checkIfCredentialsAreSet();
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        FlurryFunctions.activityOnStart(this);
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        FlurryFunctions.activityOnStop(this);
     }
 
     public void checkIfCredentialsAreSet(){
