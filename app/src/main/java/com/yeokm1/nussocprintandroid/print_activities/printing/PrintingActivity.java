@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.flurry.android.FlurryAgent;
 import com.jcraft.jsch.SftpProgressMonitor;
 import com.yeokm1.nussocprintandroid.R;
 import com.yeokm1.nussocprintandroid.core.HelperFunctions;
@@ -20,7 +21,9 @@ import com.yeokm1.nussocprintandroid.print_activities.FatDialogActivity;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PrintingActivity extends FatDialogActivity {
 
@@ -337,6 +340,7 @@ public class PrintingActivity extends FatDialogActivity {
 
     class PrintingTask extends ConnectionTask {
 
+        public static final String FLURRY_PRINT_EVENT = "Print Job";
         String PDF_CONVERTER_NAME = "nup_pdf";
         String PDF_CONVERTER_FILENAME = "nup_pdf.jar";
         String PDF_CONVERTER_FILEPATH = "socPrint/nup_pdf.jar";
@@ -378,6 +382,28 @@ public class PrintingActivity extends FatDialogActivity {
 
         @Override
         protected String doInBackground(String... params) {
+
+            //Step -1: Tell Google Analytics about printing actions
+
+            String fileType = getFileExtension(filePath);
+
+
+            // Capture author info & user status
+            Map<String, String> printEventParams = new HashMap<String, String>();
+
+            printEventParams.put("printer", printer);
+            printEventParams.put("pagesPerSheet", Integer.toString(pagesPerSheet));
+            printEventParams.put("fileType",  fileType);
+
+            if(needToTrimPDFToPageRange){
+                printEventParams.put("startPage", Integer.toString(startPageRange));
+                printEventParams.put("sendPage", Integer.toString(endPageRange));
+            }
+
+            FlurryAgent.logEvent(FLURRY_PRINT_EVENT, printEventParams);
+
+
+
 
 
             //Step 0: Connecting to server
@@ -647,7 +673,8 @@ public class PrintingActivity extends FatDialogActivity {
                 currentProgress = POSITION_COMPLETED;
                 publishProgress();
 
-
+                //Only log successful print jobs
+                FlurryAgent.endTimedEvent(FLURRY_PRINT_EVENT);
 
             } catch (Exception e) {
                 publishProgress(e.getMessage());
