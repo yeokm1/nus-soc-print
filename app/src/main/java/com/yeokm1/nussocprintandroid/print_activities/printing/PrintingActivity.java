@@ -11,9 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.flurry.android.FlurryAgent;
 import com.jcraft.jsch.SftpProgressMonitor;
 import com.yeokm1.nussocprintandroid.R;
+import com.yeokm1.nussocprintandroid.core.FlurryFunctions;
 import com.yeokm1.nussocprintandroid.core.HelperFunctions;
 import com.yeokm1.nussocprintandroid.network.ConnectionTask;
 import com.yeokm1.nussocprintandroid.print_activities.FatDialogActivity;
@@ -399,7 +399,7 @@ public class PrintingActivity extends FatDialogActivity {
                 printEventParams.put("sendPage", Integer.toString(endPageRange));
             }
 
-            FlurryAgent.logEvent(FLURRY_PRINT_EVENT, printEventParams, true);
+            FlurryFunctions.logTimedEvent(FLURRY_PRINT_EVENT, printEventParams);
         }
 
         @Override
@@ -717,7 +717,7 @@ public class PrintingActivity extends FatDialogActivity {
             setFinishButtonTextToClose();
             refreshList();
 
-            FlurryAgent.endTimedEvent(FLURRY_PRINT_EVENT);
+            FlurryFunctions.endTimedEvent(FLURRY_PRINT_EVENT);
         }
     }
 
