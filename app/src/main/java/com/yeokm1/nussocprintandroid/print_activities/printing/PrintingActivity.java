@@ -293,8 +293,8 @@ public class PrintingActivity extends FatDialogActivity {
     }
 
     private String generateProgressString(long currentSize, long totalSize, float progressFraction){
-        String currentSizeStr = humanReadableByteCount(currentSize, true);
-        String totalSizeStr = humanReadableByteCount(totalSize, true);
+        String currentSizeStr = humanReadableByteCount(currentSize, false);
+        String totalSizeStr = humanReadableByteCount(totalSize, false);
 
         String progressStr = String.format(SUBTITLE_PROGRESS_TEXT, currentSizeStr, totalSizeStr, progressFraction * 100);
         return progressStr;
