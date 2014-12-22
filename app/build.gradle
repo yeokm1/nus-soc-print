@@ -21,10 +21,10 @@ android {
 
     defaultConfig {
         applicationId "com.yeokm1.nussocprintandroid"
-        minSdkVersion 9
+        minSdkVersion 7
         targetSdkVersion 21
-        versionCode 18
-        versionName "1.0.0"
+        versionCode 17
+        versionName "1.0.1"
     }
     buildTypes {
         release {
