@@ -13,7 +13,7 @@ This app is published on the [Play Store](https://play.google.com/store/apps/det
 5. Page formatting for documents
 6. Accepts file sharing from other apps
 7. Deleting of existing job in print queue
-8. Runs on Android 2.3 and up for maximum compatibility
+8. Runs on Android 2.1 and up for maximum compatibility
 
 ##Screenshots
 
@@ -36,7 +36,7 @@ This app is published on the [Play Store](https://play.google.com/store/apps/det
 
 ##Libraries used
 1. Jsch SSH library
-2. Flurry Analytics
+2. Flurry Analytics (works only for Android 2.3.3 and above)
 3. Crashlytics
 4. [aFileChooser](https://github.com/iPaulPro/aFileChooser)
 5. Docs to PDF converter. From [another project of mine](https://github.com/yeokm1/docs-to-pdf-converter).
