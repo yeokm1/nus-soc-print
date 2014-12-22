@@ -29,15 +29,16 @@ This app is published on the [Play Store](https://play.google.com/store/apps/det
 <p></p>
 
 
-##Tools used
+##Tools/libraries used
 1. Java 8 Update 25 64 bit SDK
 2. Android 5.0.1 SDK
 3. Android Studio 1.0.2
 4. Jsch SSH library (included)
 5. Flurry Analytics (included)
-6. Crashlytics (included)  
-7. Docs to PDF converter (included). From [another project of mine](https://github.com/yeokm1/docs-to-pdf-converter).
-8. Craft Support Email Intent (included). From [another project of mine](https://github.com/yeokm1/craft-support-email-intent).
+6. Crashlytics (included)
+7. [aFileChooser](https://github.com/iPaulPro/aFileChooser) (included)
+8. Docs to PDF converter (included). From [another project of mine](https://github.com/yeokm1/docs-to-pdf-converter).
+9. Craft Support Email Intent (included). From [another project of mine](https://github.com/yeokm1/craft-support-email-intent).
 
 ##References
 1. [PreferenceListFragment](https://github.com/artiomchi/AndroidExtensions/blob/master/AndroidExtensions/src/main/java/org/flexlabs/androidextensions/preference/PreferenceListFragment.java)
