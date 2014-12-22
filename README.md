@@ -29,16 +29,18 @@ This app is published on the [Play Store](https://play.google.com/store/apps/det
 <p></p>
 
 
-##Tools/libraries used
+##Build Tools
 1. Java 8 Update 25 64 bit SDK
 2. Android 5.0.1 SDK
 3. Android Studio 1.0.2
-4. Jsch SSH library (included)
-5. Flurry Analytics (included)
-6. Crashlytics (included)
-7. [aFileChooser](https://github.com/iPaulPro/aFileChooser) (included)
-8. Docs to PDF converter (included). From [another project of mine](https://github.com/yeokm1/docs-to-pdf-converter).
-9. Craft Support Email Intent (included). From [another project of mine](https://github.com/yeokm1/craft-support-email-intent).
+
+##Libraries used
+1. Jsch SSH library
+2. Flurry Analytics
+3. Crashlytics
+4. [aFileChooser](https://github.com/iPaulPro/aFileChooser)
+5. Docs to PDF converter. From [another project of mine](https://github.com/yeokm1/docs-to-pdf-converter).
+6. Craft Support Email Intent. From [another project of mine](https://github.com/yeokm1/craft-support-email-intent).
 
 ##References
 1. [PreferenceListFragment](https://github.com/artiomchi/AndroidExtensions/blob/master/AndroidExtensions/src/main/java/org/flexlabs/androidextensions/preference/PreferenceListFragment.java)
@@ -46,3 +48,5 @@ This app is published on the [Play Store](https://play.google.com/store/apps/det
 3. [nup_pdf PDF formatting library](http://blog.rubypdf.com/2007/08/24/how-to-make-n-up-pdf-with-free-software/)
 4. [Multivalent PDF formatting library](http://multivalent.sourceforge.net/Tools/pdf/Impose.html)
 5. [Merge 2 Git repos](http://blog.caplin.com/2013/09/18/merging-two-git-repositories/)
+6. [Android Asset Studio](http://romannurik.github.io/AndroidAssetStudio/)
+7. [Convert bytes to human readable form](http://stackoverflow.com/questions/3758606/how-to-convert-byte-size-into-human-readable-format-in-java)
