@@ -24,7 +24,7 @@ public class MyApplication extends Application{
         try {
             String path = FileUtils.getPath(this, newDocumentUri);
 
-            if(path != null && isFileFormatSupported(path)) {
+            if(path != null && FileUtils.isLocal(path) && isFileFormatSupported(path)) {
                 currentDocumentPath = path;
             } else {
                 Toast.makeText(this, R.string.print_file_not_supported, Toast.LENGTH_SHORT).show();
