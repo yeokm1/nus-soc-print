@@ -141,10 +141,11 @@ public class PrintFragment extends Fragment {
 
 
     private void refreshDocumentPathIntoTextView(){
-        Uri filePath =  ((MyApplication) getActivity().getApplication()).getCurrentDocumentPath();
+        String filePath = ((MyApplication) getActivity().getApplication()).getCurrentDocumentPath();
+
         if(filePath != null) {
 
-            String filename = filePath.getLastPathSegment();
+            String filename = Uri.parse(filePath).getLastPathSegment();
             filePathView.setText(filename);
         }
     }
@@ -173,14 +174,13 @@ public class PrintFragment extends Fragment {
             return;
         }
 
-        Uri filePathUri =  ((MyApplication) getActivity().getApplication()).getCurrentDocumentPath();
+        String filePath =  ((MyApplication) getActivity().getApplication()).getCurrentDocumentPath();
 
-        if(filePathUri == null){
+        if(filePath == null){
             showToast(R.string.print_no_file_selected_yet);
             return;
         }
 
-        String filePath = filePathUri.getPath();
 
         String printerName = printerSpinner.getSelectedItem().toString();
         String pagesPerSheetStr = pagesPerSheetSpinner.getSelectedItem().toString();

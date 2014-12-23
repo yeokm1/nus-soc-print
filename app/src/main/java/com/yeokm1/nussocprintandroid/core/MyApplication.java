@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.ipaulpro.afilechooser.utils.FileUtils;
 import com.yeokm1.nussocprintandroid.R;
 
 /**
@@ -12,19 +13,19 @@ import com.yeokm1.nussocprintandroid.R;
  */
 public class MyApplication extends Application{
 
-    private Uri currentDocumentPath;
+    private String currentDocumentPath;
     private static final String TAG = "MyApplication";
 
-    public Uri getCurrentDocumentPath() {
+    public String getCurrentDocumentPath() {
         return currentDocumentPath;
     }
 
     public void setCurrentDocumentUri(Uri newDocumentUri) {
-        String path = newDocumentUri.getPath();
+        String path = FileUtils.getPath(this, newDocumentUri);
         Log.i(TAG, "incoming path " + path);
 
         if(isFileFormatSupported(path)) {
-            currentDocumentPath = newDocumentUri;
+            currentDocumentPath = path;
         } else {
             Toast.makeText(this, R.string.print_file_not_supported, Toast.LENGTH_SHORT).show();
         }
