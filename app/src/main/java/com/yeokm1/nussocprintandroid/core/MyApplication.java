@@ -2,7 +2,6 @@ package com.yeokm1.nussocprintandroid.core;
 
 import android.app.Application;
 import android.net.Uri;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.ipaulpro.afilechooser.utils.FileUtils;
@@ -21,16 +20,19 @@ public class MyApplication extends Application{
     }
 
     public void setCurrentDocumentUri(Uri newDocumentUri) {
-        String path = FileUtils.getPath(this, newDocumentUri);
-        Log.i(TAG, "incoming path " + path);
 
-        if(isFileFormatSupported(path)) {
-            currentDocumentPath = path;
-        } else {
+        try {
+            String path = FileUtils.getPath(this, newDocumentUri);
+
+            if(path != null && isFileFormatSupported(path)) {
+                currentDocumentPath = path;
+            } else {
+                Toast.makeText(this, R.string.print_file_not_supported, Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (Exception e){
             Toast.makeText(this, R.string.print_file_not_supported, Toast.LENGTH_SHORT).show();
         }
-
-
     }
 
     private boolean isFileFormatSupported(String path){
