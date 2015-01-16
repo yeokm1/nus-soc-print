@@ -396,7 +396,7 @@ public class PrintingActivity extends FatDialogActivity {
 
             if(needToTrimPDFToPageRange){
                 printEventParams.put("startPage", Integer.toString(startPageRange));
-                printEventParams.put("sendPage", Integer.toString(endPageRange));
+                printEventParams.put("endPage", Integer.toString(endPageRange));
             }
 
             FlurryFunctions.logTimedEvent(FLURRY_PRINT_EVENT, printEventParams);
