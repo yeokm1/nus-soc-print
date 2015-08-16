@@ -36,9 +36,9 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:22.0.+'
-    compile 'com.android.support:support-v4:22.0.+'
-    compile 'com.google.android.gms:play-services-base:6.5.87'
+    compile 'com.android.support:appcompat-v7:22.2.+'
+    compile 'com.android.support:support-v4:22.2.+'
+    compile 'com.google.android.gms:play-services-base:7.8.0'
     compile project(':aFileChooser')
     compile 'com.crashlytics.android:crashlytics:1.+'
     compile files('libs/FlurryAnalytics-5.0.0.jar')
