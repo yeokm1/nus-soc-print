@@ -43,7 +43,7 @@ This app is published on the [Play Store](https://play.google.com/store/apps/det
 6. Craft Support Email Intent. From [another project of mine](https://github.com/yeokm1/craft-support-email-intent).
 
 ##References
-1. [PreferenceListFragment](https://github.com/artiomchi/AndroidExtensions/blob/master/AndroidExtensions/src/main/java/org/flexlabs/androidextensions/preference/PreferenceListFragment.java)
+1. [PreferenceListFragment](https://github.com/artiomchi/AndroidExtensions/blob/master/AndroidExtensions/src/main/java/org/flexlabs/androidextensions/preference/PreferenceListFragment.java) and [Usage](http://blog.fordemobile.com/2012/11/display-preference-fragment-compatible.html)
 2. [SSH example code](http://stackoverflow.com/questions/2405885/any-good-jsch-examples)
 3. [nup_pdf PDF formatting library](http://blog.rubypdf.com/2007/08/24/how-to-make-n-up-pdf-with-free-software/)
 4. [Multivalent PDF formatting library](http://multivalent.sourceforge.net/Tools/pdf/Impose.html)
