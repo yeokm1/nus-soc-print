@@ -1,0 +1,34 @@
+me:actor
+ui : UI
+storage : Storage 
+task : ConnectionTask-AsyncTask
+connection : SSHConnectivity
+
+ui.executeRequest(){
+
+  
+  task.create()
+  task.init(host, username, password, ...)
+  task.execute( ){
+  connection.create()
+  
+  startConnection( ){
+  connection.init(host,username,password)
+  connection.connect( )
+}
+
+  
+  loop(){
+  connection.runCommand(command)
+  ui.updateUI( ){
+  
+  me>showProgress()
+
+}
+  
+}
+  
+}
+  
+  
+}
