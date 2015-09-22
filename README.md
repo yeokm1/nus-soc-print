@@ -30,9 +30,9 @@ This app is published on the [Play Store](https://play.google.com/store/apps/det
 
 
 ##Build Tools
-1. Java 8 Update 25 64 bit SDK
-2. Android 5.0.1 SDK
-3. Android Studio 1.0.2
+1. Java 8 Update 60 64 bit SDK
+2. Android 6.0 SDK
+3. Android Studio 1.3.2
 
 ##Libraries used
 1. Jsch SSH library
